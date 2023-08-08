@@ -6,6 +6,9 @@ export default defineType({
   title: 'Author',
   icon: UserIcon,
   type: 'document',
+  fieldsets: [
+    {name: 'social', title: 'Social media'}
+  ],
   fields: [
     defineField({
       name: 'name',
@@ -27,6 +30,24 @@ export default defineType({
       ],
       options: { hotspot: true },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'bio',
+      title: 'Bio',
+      type: 'text',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      title: 'Twitter',
+      name: 'twitter',
+      type: 'url',
+      fieldset: 'social'
+    }),
+    defineField({
+      title: 'Facebook',
+      name: 'facebook',
+      type: 'url',
+      fieldset: 'social'
     }),
   ],
 })

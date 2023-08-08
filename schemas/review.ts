@@ -1,4 +1,4 @@
-import { BookIcon } from '@sanity/icons'
+import { CircleIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 
@@ -6,9 +6,9 @@ import authorType from './author'
 import gameType from './game'
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
-  icon: BookIcon,
+  name: 'review',
+  title: 'Review',
+  icon: CircleIcon,
   type: 'document',
   fields: [
     defineField({
@@ -44,7 +44,7 @@ export default defineType({
               name: 'caption',
               type: 'string',
               title: 'Image caption',
-              description: 'Caption displayed below the image.'
+              description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
@@ -53,7 +53,7 @@ export default defineType({
               description: 'Important for SEO and accessiblity.',
             },
           ],
-        }
+        },
       ],
     }),
     defineField({
@@ -89,21 +89,21 @@ export default defineType({
       to: [{ type: gameType.name }],
     }),
     defineField({
-      name: "type",
-      title: "Type",
-      type: "string",
-      description: "Tipo de postagem",
+      name: 'type',
+      title: 'Type',
+      type: 'string',
+      description: 'Tipo de postagem',
       options: {
         list: [
-          { title: "Matéria", value: "default" },
-          { title: "Artigos MIL", value: "special" },
-        ]
+          { title: 'Matéria', value: 'default' },
+          { title: 'Artigos MIL', value: 'special' },
+        ],
       },
       validation: (rule) => rule.required(),
     }),
   ],
-  initialValue:{
-    type: 'default'
+  initialValue: {
+    type: 'default',
   },
   preview: {
     select: {

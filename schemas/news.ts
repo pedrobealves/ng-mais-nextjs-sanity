@@ -1,14 +1,14 @@
-import { BookIcon } from '@sanity/icons'
+import { DocumentIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
-import gameType from './game'
+import categoryType from './category'
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
-  icon: BookIcon,
+  name: 'news',
+  title: 'News',
+  icon: DocumentIcon,
   type: 'document',
   fields: [
     defineField({
@@ -44,7 +44,7 @@ export default defineType({
               name: 'caption',
               type: 'string',
               title: 'Image caption',
-              description: 'Caption displayed below the image.'
+              description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
@@ -53,7 +53,7 @@ export default defineType({
               description: 'Important for SEO and accessiblity.',
             },
           ],
-        }
+        },
       ],
     }),
     defineField({
@@ -82,29 +82,20 @@ export default defineType({
       to: [{ type: authorType.name }],
     }),
     defineField({
-      name: 'game',
-      title: 'Game',
-      description: 'Se possui, selecione o jogo que este post pertence',
-      type: 'reference',
-      to: [{ type: gameType.name }],
+      name: 'category',
+      title: 'Category',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: categoryType.name } }],
+      validation: (Rule) => Rule.required().max(1),
     }),
     defineField({
-      name: "type",
-      title: "Type",
-      type: "string",
-      description: "Tipo de postagem",
-      options: {
-        list: [
-          { title: "Matéria", value: "default" },
-          { title: "Artigos MIL", value: "special" },
-        ]
-      },
-      validation: (rule) => rule.required(),
+      name: 'drop',
+      title: 'Mark as Drop',
+      description: 'This will mark the post as a drop.',
+      initialValue: false,
+      type: 'boolean',
     }),
   ],
-  initialValue:{
-    type: 'default'
-  },
   preview: {
     select: {
       title: 'title',

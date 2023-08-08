@@ -12,11 +12,14 @@ import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from 'schemas/author'
 import categoryType from 'schemas/category'
+import gameType from 'schemas/game'
+import newsType from 'schemas/news'
 import postType from 'schemas/post'
+import reviewType from 'schemas/review'
 import settingsType from 'schemas/settings'
+import weeklyType from 'schemas/weekly'
 
-const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
+const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'miltensei studio'
 
 export default defineConfig({
   basePath: '/studio',
@@ -25,7 +28,16 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, categoryType, postType, settingsType],
+    types: [
+      postType,
+      newsType,
+      reviewType,
+      authorType,
+      categoryType,
+      weeklyType,
+      gameType,
+      settingsType,
+    ],
   },
   plugins: [
     deskTool({
