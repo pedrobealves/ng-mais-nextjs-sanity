@@ -48,6 +48,7 @@ export default function PostPage(props: PostPageProps) {
                   coverImage={post.coverImage}
                   date={post.date}
                   author={post.author}
+                  game={post.game}
                 />
                 <PostBody content={post.content} />
               </article>

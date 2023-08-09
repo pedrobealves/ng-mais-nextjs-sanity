@@ -6,12 +6,16 @@ import type { Post } from 'lib/sanity.queries'
 import PostCategory from './PostCategory'
 
 export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'date' | 'author' | 'slug'>,
+  props: Pick<
+    Post,
+    'title' | 'coverImage' | 'excerpt' | 'date' | 'author' | 'slug' | 'game'
+  >,
 ) {
-  const { title, coverImage, date, author, slug } = props
+  const { title, coverImage, date, author, slug, game } = props
   return (
     <>
-      <PostCategory date={date} />
+      {console.log(props)}
+      <PostCategory game={game} date={date} />
       <div className="max-w-2xl">
         <PostTitle>{title}</PostTitle>
       </div>

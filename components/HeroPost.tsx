@@ -7,8 +7,8 @@ import Link from 'next/link'
 export default function HeroPost(
   props: Pick<
     Post,
-    'title' | 'coverImage' | 'date' | 'excerpt' | 'author' | 'slug'
-  >
+    'title' | 'coverImage' | 'date' | 'excerpt' | 'author' | 'slug' | 'game'
+  >,
 ) {
   const { title, coverImage, date, excerpt, author, slug } = props
   return (
