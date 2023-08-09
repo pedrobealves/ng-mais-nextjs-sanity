@@ -36,13 +36,13 @@ export default function PostPage(props: PostPageProps) {
       <PostPageHead settings={settings} post={post} />
 
       <Layout preview={preview} loading={loading}>
-        <Container>
-          <BlogHeader title={title} level={2} />
-          {preview && !post ? (
-            <PostTitle>Loading…</PostTitle>
-          ) : (
-            <>
-              <article>
+        <BlogHeader title={title} level={2} />
+        {preview && !post ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <>
+            <main className="md:pt-40 pt-32 px-4">
+              <article className="flex flex-col items-start max-w-screen-md mx-auto w-full md:gap-11 gap-6">
                 <PostHeader
                   title={post.title}
                   coverImage={post.coverImage}
@@ -53,9 +53,9 @@ export default function PostPage(props: PostPageProps) {
               </article>
               <SectionSeparator />
               {morePosts?.length > 0 && <MoreStories posts={morePosts} />}
-            </>
-          )}
-        </Container>
+            </main>
+          </>
+        )}
       </Layout>
     </>
   )

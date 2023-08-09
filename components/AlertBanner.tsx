@@ -20,7 +20,7 @@ export default function Alert({
         <div className="py-2 text-center text-sm">
           {'Previewing draft content. '}
           <a
-            href="/api/disable-draft"
+            href="/api/exit-preview"
             className="underline transition-colors duration-200 hover:text-cyan"
           >
             Disable draft mode

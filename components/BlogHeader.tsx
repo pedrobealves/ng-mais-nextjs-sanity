@@ -1,6 +1,14 @@
 import { PortableText } from '@portabletext/react'
+import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
+import { IoLogoTiktok } from '@react-icons/all-files/io5/IoLogoTiktok'
+import Image from 'next/image'
 import Link from 'next/link'
 
+import search from './../public/icon/Search.svg'
+import logo from './../public/logo/logo.svg'
+import symbol from './../public/logo/symbol.svg'
 import styles from './BlogHeader.module.css'
 
 export default function BlogHeader({
@@ -29,12 +37,74 @@ export default function BlogHeader({
 
     case 2:
       return (
-        <header>
-          <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
-            <Link href="/" className="hover:underline">
-              {title}
-            </Link>
-          </h2>
+        <header className="bg-white fixed w-full z-20 top-0 left-0 px-4">
+          <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1">
+            <a href="#" className="flex items-center justify-center gap-3.5">
+              <Image priority src={symbol} alt="Symbol" />
+              <Image priority src={logo} alt="Logo" />
+            </a>
+            <ul className="hidden md:flex text-primary-8 font-semibold text-base gap-8">
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-primary-5"
+                  aria-current="page"
+                >
+                  Análises
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-primary-5"
+                  aria-current="page"
+                >
+                  Notícias
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-primary-5"
+                  aria-current="page"
+                >
+                  Matérias
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-primary-5"
+                  aria-current="page"
+                >
+                  Weekly
+                </a>
+              </li>
+            </ul>
+            <div className="hidden md:flex items-center gap-6">
+              <div className="flex gap-3">
+                <a href="" target="_blank">
+                  <FaTwitter className="hover:text-primary-5" />
+                </a>
+                <a href="" target="_blank">
+                  <FaFacebook className="hover:text-primary-5" />
+                </a>
+                <a href="" target="_blank">
+                  <FaInstagram className="hover:text-primary-5" />
+                </a>
+
+                <a href="" target="_blank">
+                  <IoLogoTiktok className="hover:text-primary-5" />
+                </a>
+              </div>
+              <button
+                type="button"
+                className="text-white bg-secundary-4 rounded-3xl p-4"
+              >
+                <Image priority src={search} alt="Search" />
+              </button>
+            </div>
+          </nav>
         </header>
       )
 
@@ -42,7 +112,7 @@ export default function BlogHeader({
       throw new Error(
         `Invalid level: ${
           JSON.stringify(level) || typeof level
-        }, only 1 or 2 are allowed`
+        }, only 1 or 2 are allowed`,
       )
   }
 }

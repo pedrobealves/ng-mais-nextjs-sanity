@@ -1,16 +1,20 @@
 import Avatar from 'components/AuthorAvatar'
 import CoverImage from 'components/CoverImage'
-import Date from 'components/PostDate'
 import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
 
+import PostCategory from './PostCategory'
+
 export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'date' | 'author' | 'slug'>
+  props: Pick<Post, 'title' | 'coverImage' | 'date' | 'author' | 'slug'>,
 ) {
   const { title, coverImage, date, author, slug } = props
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <PostCategory date={date} />
+      <div className="max-w-2xl">
+        <PostTitle>{title}</PostTitle>
+      </div>
       <div className="hidden md:mb-12 md:block">
         {author && <Avatar name={author.name} picture={author.picture} />}
       </div>
@@ -20,9 +24,6 @@ export default function PostHeader(
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 block md:hidden">
           {author && <Avatar name={author.name} picture={author.picture} />}
-        </div>
-        <div className="mb-6 text-lg">
-          <Date dateString={date} />
         </div>
       </div>
     </>
