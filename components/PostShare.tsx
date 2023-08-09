@@ -2,11 +2,11 @@ import { IconContext } from '@react-icons/all-files'
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
 import { FaLink } from '@react-icons/all-files/fa/FaLink'
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { FacebookShareButton } from 'next-share'
+import { FacebookShareButton, TwitterShareButton } from 'next-share'
 
 export default function PostShare({ url }) {
-  {
-    console.log(url)
+  const copylink = (e) => {
+    navigator.clipboard.writeText(url)
   }
 
   return (
@@ -14,21 +14,15 @@ export default function PostShare({ url }) {
       <div className="px-14 py-6 bg-gray-200 rounded-xl flex-col justify-center items-start flex">
         <div className="flex justify-start items-center gap-5 text-primary-8">
           <IconContext.Provider value={{ size: '24' }}>
-            <a href="" target="_blank">
+            <TwitterShareButton url={url}>
               <FaTwitter className="hover:text-primary-5" />
-            </a>
-            <FacebookShareButton
-              url={'https://github.com/next-share'}
-              quote={
-                'next-share is a social share buttons for your next React apps.'
-              }
-              hashtag={'#nextshare'}
-            >
+            </TwitterShareButton>
+            <FacebookShareButton url={url} hashtag={'#miltensei'}>
               <FaFacebook className="hover:text-primary-5" />
             </FacebookShareButton>
-            <a href="" target="_blank">
+            <button onClick={copylink}>
               <FaLink className="hover:text-primary-5" />
-            </a>
+            </button>
           </IconContext.Provider>
         </div>
       </div>
