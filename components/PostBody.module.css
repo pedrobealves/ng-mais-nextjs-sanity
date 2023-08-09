@@ -1,25 +1,53 @@
 .portableText {
-  @apply font-body font-normal text-primary-8 text-lg md:text-1xl leading-7.3 md:leading-9 leading-relaxed;
+  @apply  text-primary-8;
 }
 
 .portableText p,
 .portableText ul,
 .portableText ol,
 .portableText blockquote {
-  @apply mb-6;
+  @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9 leading-relaxed;
+}
+
+.portableText img {
+  @apply object-cover object-center rounded-xl mb-6
+}
+
+.portableText figcaption {
+  @apply md:text-base text-sm text-primary-8 opacity-80 -mt-3 text-center mb-6;
+}
+
+.portableText h1 {
+  @apply mb-4 mt-8 text-6xl font-bold leading-snug;
 }
 
 .portableText h2 {
-  @apply mb-4 mt-12 text-3xl leading-snug;
+  @apply mb-4 mt-12 text-5xl font-bold leading-snug;
 }
 
 .portableText h3 {
-  @apply mb-4 mt-8 text-2xl leading-snug;
+  @apply mb-4 mt-8 text-4xl font-bold leading-snug;
+}
+
+.portableText h4 {
+  @apply mb-4 mt-8 text-3xl font-bold leading-snug;
+}
+
+.portableText h5 {
+  @apply mb-4 mt-8 text-2xl font-bold leading-snug;
+}
+
+.portableText h6 {
+  @apply mb-4 mt-8 text-xl font-bold leading-snug;
+}
+
+.portableText blockquote{
+  @apply border-l-4 border-primary-5 pl-4 mb-6 text-xl italic font-semibold;
 }
 
 .portableText a {
-  @apply text-blue-500 underline;
+  @apply text-primary-5 underline;
 }
 .portableText a:hover {
-  @apply text-blue-800;
+  @apply text-primary-6;
 }
