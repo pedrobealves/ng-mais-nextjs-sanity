@@ -67,7 +67,7 @@ export default function BlogHeader({
     case 2:
       return (
         <header
-          className={`fixed top-0 ${
+          className={`fixed ${
             scrollDirection === 'down' ? '-top-24' : 'top-0'
           } bg-white w-full z-20 left-0 px-4 transition-all duration-500`}
         >
@@ -125,7 +125,6 @@ export default function BlogHeader({
                 <a href="" target="_blank">
                   <FaInstagram className="hover:text-primary-5" />
                 </a>
-
                 <a href="" target="_blank">
                   <IoLogoTiktok className="hover:text-primary-5" />
                 </a>

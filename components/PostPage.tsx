@@ -49,6 +49,8 @@ export default function PostPage(props: PostPageProps) {
                   date={post.date}
                   author={post.author}
                   game={post.game}
+                  excerpt={post.excerpt}
+                  slug={post.slug}
                 />
                 <PostBody content={post.content} />
               </article>
