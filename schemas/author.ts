@@ -6,9 +6,7 @@ export default defineType({
   title: 'Author',
   icon: UserIcon,
   type: 'document',
-  fieldsets: [
-    {name: 'social', title: 'Social media'}
-  ],
+  fieldsets: [{ name: 'social', title: 'Social media' }],
   fields: [
     defineField({
       name: 'name',
@@ -40,14 +38,14 @@ export default defineType({
     defineField({
       title: 'Twitter',
       name: 'twitter',
-      type: 'url',
-      fieldset: 'social'
+      type: 'string',
+      fieldset: 'social',
     }),
     defineField({
       title: 'Facebook',
       name: 'facebook',
-      type: 'url',
-      fieldset: 'social'
+      type: 'string',
+      fieldset: 'social',
     }),
   ],
 })

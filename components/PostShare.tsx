@@ -1,8 +1,8 @@
-import { IconContext } from '@react-icons/all-files'
-import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
-import { FaLink } from '@react-icons/all-files/fa/FaLink'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
 import { FacebookShareButton, TwitterShareButton } from 'next-share'
+import { IconContext } from 'react-icons'
+import { FaLink } from 'react-icons/fa'
+import { FaTwitter } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
 
 export default function PostShare({ url }) {
   const copylink = (e) => {

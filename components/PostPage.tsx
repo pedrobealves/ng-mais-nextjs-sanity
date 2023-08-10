@@ -11,6 +11,8 @@ import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
+import PostAuthorBio from './PostAuthorBio'
+
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
@@ -53,6 +55,13 @@ export default function PostPage(props: PostPageProps) {
                   slug={post.slug}
                 />
                 <PostBody content={post.content} />
+                <PostAuthorBio
+                  name={post.author.name}
+                  picture={post.author.picture}
+                  bio={post.author.bio}
+                  twitter={'https://twitter.com/' + post.author.twitter}
+                  facebook={'https://www.facebook.com/' + post.author.facebook}
+                />
               </article>
               <SectionSeparator />
               {morePosts?.length > 0 && <MoreStories posts={morePosts} />}

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@portabletext/react": "3.0.4",
-    "@react-icons/all-files": "^4.1.0",
     "@sanity/client": "6.4.0",
     "@sanity/image-url": "1.0.2",
     "@sanity/vision": "3.14.5",
@@ -30,6 +29,7 @@
     "next-share": "^0.24.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "sanity": "3.14.5",
     "sanity-plugin-asset-source-unsplash": "1.1.0",
     "suspend-react": "0.1.3",

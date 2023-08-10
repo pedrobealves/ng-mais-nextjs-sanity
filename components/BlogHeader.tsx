@@ -1,11 +1,11 @@
 import { PortableText } from '@portabletext/react'
-import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
-import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { IoLogoTiktok } from '@react-icons/all-files/io5/IoLogoTiktok'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { FaFacebook } from 'react-icons/fa'
+import { FaInstagram } from 'react-icons/fa'
+import { FaTwitter } from 'react-icons/fa'
+import { FaTiktok } from 'react-icons/fa'
 
 import search from './../public/icon/Search.svg'
 import logo from './../public/logo/logo.svg'
@@ -126,7 +126,7 @@ export default function BlogHeader({
                   <FaInstagram className="hover:text-primary-5" />
                 </a>
                 <a href="" target="_blank">
-                  <IoLogoTiktok className="hover:text-primary-5" />
+                  <FaTiktok className="hover:text-primary-5" />
                 </a>
               </div>
               <button

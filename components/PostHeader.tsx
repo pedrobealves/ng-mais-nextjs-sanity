@@ -14,7 +14,7 @@ export default function PostHeader(
     'title' | 'coverImage' | 'excerpt' | 'date' | 'author' | 'slug' | 'game'
   >,
 ) {
-  const { title, coverImage, date, author, slug, game } = props
+  const { title, coverImage, date, author, excerpt, slug, game } = props
 
   const [url, setUrl] = useState('')
 
@@ -27,7 +27,7 @@ export default function PostHeader(
       <PostCategory game={game} date={date} />
       <div className="max-w-2xl">
         <PostTitle>{title}</PostTitle>
-        <PostSubTitle>{props.excerpt}</PostSubTitle>
+        <PostSubTitle>{excerpt}</PostSubTitle>
       </div>
       <div className="flex flex-wrap justify-center items-center gap-8 mx-auto">
         {author && <Avatar name={author.name} picture={author.picture} />}
