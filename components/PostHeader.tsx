@@ -22,6 +22,11 @@ export default function PostHeader(
     setUrl(location.origin)
   }, [slug])
 
+  console.log(
+    'process.env.NEXT_PUBLIC_NEXTJS_SITE_URL' +
+      process.env.NEXT_PUBLIC_NEXTJS_SITE_URL,
+  )
+
   return (
     <>
       <PostCategory game={game} date={date} />
