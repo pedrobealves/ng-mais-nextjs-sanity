@@ -13,6 +13,7 @@ import type { News, Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
 
+import Comments from './Comments'
 import Icon from './Icon'
 import Link from './Link'
 import { Author } from './Post/Author'
@@ -89,14 +90,10 @@ export default function PostPage(props: PostPageProps) {
               <SectionSeparator />
               {news?.length > 0 && <MoreStories posts={morePosts} />}
               <TitleSection>Comentários</TitleSection>
-              <DiscussionEmbed
-                shortname="example"
-                config={{
-                  url: `${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/post/${post.slug}`,
-                  identifier: post._id,
-                  title: post.title,
-                  language: 'pt_BR', //e.g. for Traditional Chinese (Taiwan)
-                }}
+              <Comments
+                slug={post.slug}
+                identifier={post._id}
+                title={post.title}
               />
             </main>
           </>

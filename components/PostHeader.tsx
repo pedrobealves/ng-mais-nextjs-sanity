@@ -31,7 +31,9 @@ export default function PostHeader(
       </div>
       <div className="flex flex-wrap justify-center items-center gap-y-8 mx-auto divide-x-2">
         {author && <Avatar name={author.name} picture={author.picture} />}
-        <PostShare url={`${url}/posts/${slug}`} />
+        <PostShare
+          url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/posts/${slug}`}
+        />
       </div>
       <CoverImage title={title} image={coverImage} priority slug={slug} />
     </>
