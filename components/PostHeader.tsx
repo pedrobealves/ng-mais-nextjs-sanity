@@ -29,9 +29,8 @@ export default function PostHeader(
         <PostTitle>{title}</PostTitle>
         <PostSubTitle>{excerpt}</PostSubTitle>
       </div>
-      <div className="flex flex-wrap justify-center items-center gap-8 mx-auto">
+      <div className="flex flex-wrap justify-center items-center gap-y-8 mx-auto divide-x-2">
         {author && <Avatar name={author.name} picture={author.picture} />}
-        <div className="hidden md:flex h-[72px] w-0.5"></div>
         <PostShare url={`${url}/posts/${slug}`} />
       </div>
       <CoverImage title={title} image={coverImage} priority slug={slug} />

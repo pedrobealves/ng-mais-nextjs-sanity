@@ -5,7 +5,7 @@ import Image from 'next/image'
 export default function AuthorAvatar(props: Author) {
   const { name, picture } = props
   return (
-    <div className="flex justify-start items-center gap-3 md:pr-0 pr-8">
+    <div className="flex justify-start items-center gap-3 pr-8">
       <Image
         src={
           picture?.asset?._ref

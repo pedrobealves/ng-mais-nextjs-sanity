@@ -33,7 +33,6 @@ export default defineType({
       name: 'bio',
       title: 'Bio',
       type: 'text',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       title: 'Twitter',

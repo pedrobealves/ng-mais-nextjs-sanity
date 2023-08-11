@@ -8,8 +8,18 @@ const postFields = groq`
   excerpt,
   coverImage,
   "slug": slug.current,
-  "author": author->{name, picture, bio, twitter, facebook},
   "game": game->{title, "slug": slug.current},
+`
+
+const newsFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  category[0]->{title, "slug": slug.current},
+  "slug": slug.current,
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
@@ -23,10 +33,12 @@ export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
+    "author": author->{name, picture, bio, twitter, facebook},
     ${postFields}
   },
   "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
     content,
+    "author": author->{name, picture, bio, twitter, facebook},
     ${postFields}
   }
 }`
@@ -38,6 +50,12 @@ export const postSlugsQuery = groq`
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
+}
+`
+
+export const newsDropQuery = groq`
+*[_type == "news" && drop == true] | order(date desc, _updatedAt desc) [0...3] {
+  ${newsFields}
 }
 `
 
@@ -63,6 +81,25 @@ export interface Post {
   excerpt?: string
   author?: Author
   game?: Game
+  slug?: string
+  content?: any
+}
+
+export interface Category {
+  title?: string
+  slug?: string
+  description?: string
+}
+
+export interface News {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  category?: Category
   slug?: string
   content?: any
 }
