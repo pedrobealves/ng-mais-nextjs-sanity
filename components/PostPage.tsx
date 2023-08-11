@@ -18,6 +18,7 @@ import Icon from './Icon'
 import Link from './Link'
 import { Author } from './Post/Author'
 import PostAuthorBio from './Post/Author/PostAuthorBio'
+import { Section } from './Sections'
 import TitleSection from './TitleSection'
 
 export interface PostPageProps {
@@ -36,8 +37,6 @@ export default function PostPage(props: PostPageProps) {
   const { title = demo.title } = settings || {}
 
   const slug = post?.slug
-
-  console.log(news)
 
   if (!slug && !preview) {
     notFound()
@@ -87,14 +86,15 @@ export default function PostPage(props: PostPageProps) {
                   </Author.BioContainer>
                 </Author.Root>
               </article>
-              <SectionSeparator />
-              {news?.length > 0 && <MoreStories posts={morePosts} />}
-              <TitleSection>Comentários</TitleSection>
-              <Comments
-                slug={post.slug}
-                identifier={post._id}
-                title={post.title}
-              />
+              {news?.length > 0 && <Section.News news={news} />}
+              <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 pt-12 pb-52">
+                <TitleSection>Comentários</TitleSection>
+                <Comments
+                  slug={post.slug}
+                  identifier={post._id}
+                  title={post.title}
+                />
+              </section>
             </main>
           </>
         )}

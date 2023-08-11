@@ -2,7 +2,6 @@ import Avatar from 'components/AuthorAvatar'
 import CoverImage from 'components/CoverImage'
 import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
-import { useEffect, useState } from 'react'
 
 import PostCategory from './PostCategory'
 import PostShare from './PostShare'
@@ -16,17 +15,6 @@ export default function PostHeader(
 ) {
   const { title, coverImage, date, author, excerpt, slug, game } = props
 
-  const [url, setUrl] = useState('')
-
-  useEffect(() => {
-    setUrl(location.origin)
-  }, [slug])
-
-  console.log(
-    'process.env.NEXT_PUBLIC_NEXTJS_SITE_URL' +
-      process.env.NEXT_PUBLIC_NEXTJS_SITE_URL,
-  )
-
   return (
     <>
       <PostCategory game={game} date={date} />
@@ -36,7 +24,9 @@ export default function PostHeader(
       </div>
       <div className="flex flex-wrap justify-center items-center gap-y-8 mx-auto divide-x-2">
         {author && <Avatar name={author.name} picture={author.picture} />}
-        <PostShare url={`${url}/posts/${slug}`} />
+        <PostShare
+          url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/posts/${slug}`}
+        />
       </div>
       <CoverImage title={title} image={coverImage} priority slug={slug} />
     </>
