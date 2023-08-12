@@ -8,19 +8,15 @@ import {
 import { useLiveQuery } from 'next-sanity/preview'
 
 export default function PreviewPostPage(props: PostPageProps) {
-  const [{ post: postPreview, morePosts }, loadingPost] = useLiveQuery<{
+  const [{ post: postPreview, news }, loadingPost] = useLiveQuery<{
     post: Post
-    morePosts: Post[]
-  }>(
-    { post: props.post, morePosts: props.morePosts },
-    postAndMoreStoriesQuery,
-    {
-      slug: props.post.slug,
-    }
-  )
+    news: Post[]
+  }>({ post: props.post, news: props.news }, postAndMoreStoriesQuery, {
+    slug: props.post.slug,
+  })
   const [settings, loadingSettings] = useLiveQuery<Settings>(
     props.settings,
-    settingsQuery
+    settingsQuery,
   )
 
   return (
@@ -28,7 +24,7 @@ export default function PreviewPostPage(props: PostPageProps) {
       preview
       loading={loadingPost || loadingSettings}
       post={postPreview}
-      morePosts={morePosts}
+      news={news}
       settings={settings}
     />
   )
