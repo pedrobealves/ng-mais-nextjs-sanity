@@ -9,7 +9,7 @@ import PostTitle from 'components/PostTitle'
 import SectionSeparator from 'components/SectionSeparator'
 import { DiscussionEmbed } from 'disqus-react'
 import * as demo from 'lib/demo.data'
-import type { News as NewsType, Post, Settings } from 'lib/sanity.queries'
+import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
 
@@ -25,15 +25,14 @@ export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
-  news: NewsType[]
-  morePosts: Post[]
+  news: Post[]
   settings: Settings
 }
 
-const NO_POSTS: Post[] = []
+const NO_NEWS: Post[] = []
 
 export default function PostPage(props: PostPageProps) {
-  const { preview, loading, morePosts = NO_POSTS, post, settings, news } = props
+  const { preview, loading, post, settings, news = NO_NEWS } = props
   const { title = demo.title } = settings || {}
 
   const slug = post?.slug
@@ -59,7 +58,7 @@ export default function PostPage(props: PostPageProps) {
                   coverImage={post.coverImage}
                   date={post.date}
                   author={post.author}
-                  game={post.game}
+                  category={post.category}
                   excerpt={post.excerpt}
                   slug={post.slug}
                 />

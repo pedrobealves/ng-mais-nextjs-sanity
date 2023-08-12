@@ -2,24 +2,20 @@ import { groq } from 'next-sanity'
 
 const postFields = groq`
   _id,
+  _type,
   title,
   date,
   _updatedAt,
   excerpt,
   coverImage,
   "slug": slug.current,
-  "game": game->{title, "slug": slug.current},
 `
 
-const newsFields = groq`
-  _id,
-  title,
-  date,
-  _updatedAt,
-  excerpt,
-  coverImage,
+const newsDropQuery = groq`
+*[_type == "news" && drop == true] | order(date desc, _updatedAt desc) [0...3] {
   category[0]->{title, "slug": slug.current},
-  "slug": slug.current,
+  ${postFields}
+}
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
@@ -34,28 +30,45 @@ export const postAndMoreStoriesQuery = groq`
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
     "author": author->{name, picture, bio, twitter, facebook},
+    "category": game->{title, "slug": slug.current},
     ${postFields}
   },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+  "newsDrop": ${newsDropQuery}
+}`
+
+export const newsAndMoreStoriesQuery = groq`
+{
+  "news": *[_type == "news" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
     "author": author->{name, picture, bio, twitter, facebook},
+    category[0]->{title, "slug": slug.current},
     ${postFields}
-  }
+  },
+  "newsDrop": ${newsDropQuery}
+}`
+
+export const reviewAndMoreStoriesQuery = groq`
+{
+  "review": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    "author": author->{name, picture, bio, twitter, facebook},
+    "category": game->{title, "slug": slug.current},
+    ${postFields}
+  },
+  "newsDrop": ${newsDropQuery}
 }`
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
 
+export const newsSlugsQuery = groq`
+*[_type == "news" && defined(slug.current)][].slug.current
+`
+
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
-}
-`
-
-export const newsDropQuery = groq`
-*[_type == "news" && drop == true] | order(date desc, _updatedAt desc) [0...3] {
-  ${newsFields}
 }
 `
 
@@ -74,13 +87,14 @@ export interface Game {
 
 export interface Post {
   _id: string
+  _type: string
   title?: string
   coverImage?: any
   date?: string
   _updatedAt?: string
   excerpt?: string
   author?: Author
-  game?: Game
+  category?: Game & Category
   slug?: string
   content?: any
 }
@@ -89,19 +103,6 @@ export interface Category {
   title?: string
   slug?: string
   description?: string
-}
-
-export interface News {
-  _id: string
-  title?: string
-  coverImage?: any
-  date?: string
-  _updatedAt?: string
-  excerpt?: string
-  author?: Author
-  category?: Category
-  slug?: string
-  content?: any
 }
 
 export interface Settings {

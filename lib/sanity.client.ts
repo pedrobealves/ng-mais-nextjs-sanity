@@ -1,8 +1,8 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
   indexQuery,
-  type News,
-  newsDropQuery,
+  newsAndMoreStoriesQuery,
+  newsSlugsQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
@@ -50,6 +50,12 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return slugs.map((slug) => ({ slug }))
 }
 
+export async function getAllNewsSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(newsSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
 export async function getPostBySlug(
   client: SanityClient,
   slug: string,
@@ -57,13 +63,16 @@ export async function getPostBySlug(
   return (await client.fetch(postBySlugQuery, { slug })) || ({} as any)
 }
 
-export async function getNewsDrop(client: SanityClient): Promise<News[]> {
-  return (await client.fetch(newsDropQuery)) || []
-}
-
 export async function getPostAndMoreStories(
   client: SanityClient,
   slug: string,
-): Promise<{ post: Post; morePosts: Post[] }> {
+): Promise<{ post: Post; newsDrop: Post[] }> {
   return await client.fetch(postAndMoreStoriesQuery, { slug })
+}
+
+export async function getNewsAndMoreStories(
+  client: SanityClient,
+  slug: string,
+): Promise<{ news: Post; newsDrop: Post[] }> {
+  return await client.fetch(newsAndMoreStoriesQuery, { slug })
 }
