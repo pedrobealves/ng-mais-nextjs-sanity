@@ -6,7 +6,7 @@ export default function PostCategory({ date, game }) {
       <div className="flex items-center justify-center gap-2.5 rounded-full bg-gray-200 px-3 py-1 text-primary-5">
         <button className="text-sm leading-5">{game.title}</button>
       </div>
-      <p className="text-sm leading-5 text-gray-500 capitalize">
+      <p className="text-sm leading-5 text-gray-500 first-letter:capitalize">
         <Date dateString={date} />
       </p>
     </div>

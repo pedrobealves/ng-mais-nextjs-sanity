@@ -32,6 +32,7 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'array',
+      validation: (rule) => rule.required(),
       of: [
         { type: 'block' },
         {
@@ -60,6 +61,7 @@ export default defineType({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
+      validation: (rule) => rule.required().max(100),
     }),
     defineField({
       name: 'coverImage',

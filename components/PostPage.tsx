@@ -9,23 +9,23 @@ import PostTitle from 'components/PostTitle'
 import SectionSeparator from 'components/SectionSeparator'
 import { DiscussionEmbed } from 'disqus-react'
 import * as demo from 'lib/demo.data'
-import type { News, Post, Settings } from 'lib/sanity.queries'
+import type { News as NewsType, Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
 
 import Comments from './Comments'
 import Icon from './Icon'
 import Link from './Link'
+import { News } from './News'
 import { Author } from './Post/Author'
 import PostAuthorBio from './Post/Author/PostAuthorBio'
-import { Section } from './Sections'
 import TitleSection from './TitleSection'
 
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
-  news: News[]
+  news: NewsType[]
   morePosts: Post[]
   settings: Settings
 }
@@ -86,16 +86,16 @@ export default function PostPage(props: PostPageProps) {
                   </Author.BioContainer>
                 </Author.Root>
               </article>
-              {news?.length > 0 && <Section.News news={news} />}
-              <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 pt-12 pb-52">
-                <TitleSection>Comentários</TitleSection>
-                <Comments
-                  slug={post.slug}
-                  identifier={post._id}
-                  title={post.title}
-                />
-              </section>
             </main>
+            {news?.length > 0 && <News.Section news={news} />}
+            <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-52">
+              <TitleSection>Comentários</TitleSection>
+              <Comments
+                slug={post.slug}
+                identifier={post._id}
+                title={post.title}
+              />
+            </section>
           </>
         )}
       </Layout>
