@@ -1,9 +1,9 @@
 import Container from 'components/BlogContainer'
 import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import HeroPost from 'components/HeroPost'
 import IndexPageHead from 'components/IndexPageHead'
-import MoreStories from 'components/MoreStories'
+import HeroPost from 'features/post/components/HeroPost'
+import MoreStories from 'features/post/components/MoreStories'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 
@@ -34,7 +34,6 @@ export default function IndexPage(props: IndexPageProps) {
               author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
-              game={heroPost.game}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}

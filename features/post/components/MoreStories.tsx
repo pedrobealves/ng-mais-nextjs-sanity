@@ -1,5 +1,6 @@
-import PostPreview from 'components/PostPreview'
 import type { Post } from 'lib/sanity.queries'
+
+import PostPreview from './PostPreview'
 
 export default function MoreStories({ posts }: { posts: Post[] }) {
   return (
@@ -11,6 +12,7 @@ export default function MoreStories({ posts }: { posts: Post[] }) {
         {posts.map((post) => (
           <PostPreview
             key={post._id}
+            _type={post._type}
             title={post.title}
             coverImage={post.coverImage}
             date={post.date}
