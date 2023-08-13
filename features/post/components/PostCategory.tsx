@@ -1,4 +1,4 @@
-import Date from 'components/PostDate'
+import Date from './PostDate'
 
 type CategoryProps = {
   date: string

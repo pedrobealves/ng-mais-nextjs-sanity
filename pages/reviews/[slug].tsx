@@ -2,17 +2,18 @@ import PostPage from 'features/post'
 import PreviewPostPage from 'features/post/components/PreviewPostPage'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllPostsSlugs,
+  getAllNewsSlugs,
   getClient,
-  getPostAndMoreStories,
+  getReviewsAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
+import { Post, Review, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  post: Post
+  review: Post
+  reviewDetails: Review
   newsDrop: Post[]
   settings?: Settings
 }
@@ -22,25 +23,32 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, newsDrop, draftMode } = props
+  const { settings, review, reviewDetails, newsDrop, draftMode } = props
 
   if (draftMode) {
-    return <PreviewPostPage news={newsDrop} post={post} settings={settings} />
+    return <PreviewPostPage news={newsDrop} post={review} settings={settings} />
   }
 
-  return <PostPage post={post} settings={settings} news={newsDrop} />
+  return (
+    <PostPage
+      post={review}
+      reviewDetails={reviewDetails}
+      settings={settings}
+      news={newsDrop}
+    />
+  )
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, { post, newsDrop }] = await Promise.all([
+  const [settings, { review, reviewDetails, newsDrop }] = await Promise.all([
     getSettings(client),
-    getPostAndMoreStories(client, params.slug),
+    getReviewsAndMoreStories(client, params.slug),
   ])
 
-  if (!post) {
+  if (!review) {
     return {
       notFound: true,
     }
@@ -48,7 +56,8 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   return {
     props: {
-      post,
+      review,
+      reviewDetails,
       newsDrop,
       settings,
       draftMode,
@@ -58,10 +67,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs()
+  const slugs = await getAllNewsSlugs()
 
   return {
-    paths: slugs?.map(({ slug }) => `/posts/${slug}`) || [],
+    paths: slugs?.map(({ slug }) => `/reviews/${slug}`) || [],
     fallback: 'blocking',
   }
 }

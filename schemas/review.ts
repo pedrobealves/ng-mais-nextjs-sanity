@@ -60,6 +60,7 @@ export default defineType({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'coverImage',
@@ -68,6 +69,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'date',
@@ -80,6 +82,7 @@ export default defineType({
       title: 'Author',
       type: 'reference',
       to: [{ type: authorType.name }],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'game',
@@ -87,19 +90,32 @@ export default defineType({
       description: 'Se possui, selecione o jogo que este post pertence',
       type: 'reference',
       to: [{ type: gameType.name }],
+      validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'type',
-      title: 'Type',
-      type: 'string',
-      description: 'Tipo de postagem',
-      options: {
-        list: [
-          { title: 'Matéria', value: 'default' },
-          { title: 'Artigos MIL', value: 'special' },
-        ],
-      },
-      validation: (rule) => rule.required(),
+      title: 'Pros',
+      name: 'pros',
+      type: 'array',
+      of: [{ type: 'string' }],
+      validation: (rule) => rule.required().min(1).max(5),
+    }),
+    defineField({
+      title: 'Cons',
+      name: 'cons',
+      type: 'array',
+      of: [{ type: 'string' }],
+      validation: (rule) => rule.required().min(1).max(5),
+    }),
+    defineField({
+      name: 'verdict',
+      title: 'Verdict',
+      type: 'text',
+    }),
+    defineField({
+      title: 'Grade',
+      name: 'grade',
+      type: 'number',
+      validation: (rule) => rule.required().integer().min(0).max(100),
     }),
   ],
   initialValue: {

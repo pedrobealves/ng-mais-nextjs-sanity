@@ -1,12 +1,12 @@
 import TitleSection from 'components/TitleSection'
-import { News } from 'lib/sanity.queries'
+import { Post } from 'lib/sanity.queries'
 
-import { Card } from '../Card'
-import NewsContainer from './NewsContainer'
+import { Card } from './components/Card'
+import Container from './components/Container'
 
-export default function NewsSection({ news }: { news: News[] }) {
+export function NewsDrop({ news }: { news: Post[] }) {
   return (
-    <NewsContainer>
+    <Container>
       <TitleSection>TenseiDrop</TitleSection>
       <div className="grid w-full lg:grid-cols-4 md:grid-cols-3 [&>*:first-child]:lg:col-span-2 grid-cols-1 gap-6">
         {news.map((post) => (
@@ -20,6 +20,6 @@ export default function NewsSection({ news }: { news: News[] }) {
           </Card.Root>
         ))}
       </div>
-    </NewsContainer>
+    </Container>
   )
 }

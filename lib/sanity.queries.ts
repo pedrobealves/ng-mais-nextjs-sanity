@@ -55,6 +55,13 @@ export const reviewAndMoreStoriesQuery = groq`
     "category": game->{title, "slug": slug.current},
     ${postFields}
   },
+  "reviewDetails": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
+    _id,
+    pros,
+    cons,
+    verdict,
+    grade,
+  },
   "newsDrop": ${newsDropQuery}
 }`
 
@@ -64,6 +71,10 @@ export const postSlugsQuery = groq`
 
 export const newsSlugsQuery = groq`
 *[_type == "news" && defined(slug.current)][].slug.current
+`
+
+export const reviewSlugsQuery = groq`
+*[_type == "review" && defined(slug.current)][].slug.current
 `
 
 export const postBySlugQuery = groq`
@@ -97,6 +108,14 @@ export interface Post {
   category?: Game & Category
   slug?: string
   content?: any
+}
+
+export interface Review {
+  _id: string
+  pros: string[]
+  cons: string[]
+  verdict: string
+  grade: number
 }
 
 export interface Category {

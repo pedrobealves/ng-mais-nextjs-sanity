@@ -1,11 +1,11 @@
 import Avatar from 'components/AuthorAvatar'
 import CoverImage from 'components/CoverImage'
-import PostTitle from 'components/PostTitle'
 import type { Post } from 'lib/sanity.queries'
 
 import PostCategory from './PostCategory'
 import PostShare from './PostShare'
 import PostSubTitle from './PostSubTitle'
+import PostTitle from './PostTitle'
 
 export default function PostHeader(
   props: Pick<

@@ -90,9 +90,6 @@ export default defineType({
       title: 'Category',
       type: 'array',
       of: [{ type: 'reference', to: { type: categoryType.name } }],
-      options: {
-        layout: 'tags',
-      },
       validation: (Rule) => Rule.required().max(1),
     }),
     defineField({

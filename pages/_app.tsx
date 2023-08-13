@@ -38,7 +38,6 @@ export default function App({
         ) : (
           <Component {...pageProps} />
         )}
-        <p className="font-body">Teste</p>
       </div>
     </>
   )

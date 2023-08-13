@@ -1,38 +1,44 @@
-import Container from 'components/BlogContainer'
 import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import MoreStories from 'components/MoreStories'
-import PostBody from 'components/PostBody'
-import PostHeader from 'components/PostHeader'
-import PostPageHead from 'components/PostPageHead'
-import PostTitle from 'components/PostTitle'
-import SectionSeparator from 'components/SectionSeparator'
-import { DiscussionEmbed } from 'disqus-react'
+import Comments from 'components/Comments'
+import Icon from 'components/Icon'
+import Link from 'components/Link'
+import TitleSection from 'components/TitleSection'
+import { NewsDrop } from 'features/news-drop'
+import { Author } from 'features/post/components/Author'
+import ReviewDetail from 'features/review'
+import Footer from 'layouts/Footer'
 import * as demo from 'lib/demo.data'
-import type { Post, Settings } from 'lib/sanity.queries'
+import type { Post, Review, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
+import review from 'schemas/review'
 
-import Comments from './Comments'
-import Icon from './Icon'
-import Link from './Link'
-import { News } from './News'
-import { Author } from './Post/Author'
-import PostAuthorBio from './Post/Author/PostAuthorBio'
-import TitleSection from './TitleSection'
+import PostBody from './components/PostBody'
+import PostHeader from './components/PostHeader'
+import PostPageHead from './components/PostPageHead'
+import PostTitle from './components/PostTitle'
 
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
   news: Post[]
+  reviewDetails?: Review
   settings: Settings
 }
 
 const NO_NEWS: Post[] = []
 
 export default function PostPage(props: PostPageProps) {
-  const { preview, loading, post, settings, news = NO_NEWS } = props
+  const {
+    preview,
+    loading,
+    post,
+    settings,
+    reviewDetails,
+    news = NO_NEWS,
+  } = props
   const { title = demo.title } = settings || {}
 
   const slug = post?.slug
@@ -63,6 +69,9 @@ export default function PostPage(props: PostPageProps) {
                   slug={post.slug}
                 />
                 <PostBody content={post.content} />
+                {post._type == 'review' && (
+                  <ReviewDetail review={reviewDetails} />
+                )}
                 <Author.Root>
                   <Author.Avatar
                     picture={post.author.picture}
@@ -86,15 +95,18 @@ export default function PostPage(props: PostPageProps) {
                 </Author.Root>
               </article>
             </main>
-            {news?.length > 0 && <News.Section news={news} />}
-            <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-52">
+            {news?.length > 0 && <NewsDrop news={news} />}
+            <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-24">
               <TitleSection>Comentários</TitleSection>
-              <Comments
-                slug={post.slug}
-                identifier={post._id}
-                title={post.title}
-              />
+              <div className="max-w-screen-md mx-auto w-full">
+                <Comments
+                  slug={post.slug}
+                  identifier={post._id}
+                  title={post.title}
+                />
+              </div>
             </section>
+            <Footer />
           </>
         )}
       </Layout>

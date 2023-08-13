@@ -7,6 +7,9 @@ import {
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
+  type Review,
+  reviewAndMoreStoriesQuery,
+  reviewSlugsQuery,
   type Settings,
   settingsQuery,
 } from 'lib/sanity.queries'
@@ -56,6 +59,12 @@ export async function getAllNewsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return slugs.map((slug) => ({ slug }))
 }
 
+export async function getAllReviewSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(reviewSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
 export async function getPostBySlug(
   client: SanityClient,
   slug: string,
@@ -75,4 +84,11 @@ export async function getNewsAndMoreStories(
   slug: string,
 ): Promise<{ news: Post; newsDrop: Post[] }> {
   return await client.fetch(newsAndMoreStoriesQuery, { slug })
+}
+
+export async function getReviewsAndMoreStories(
+  client: SanityClient,
+  slug: string,
+): Promise<{ review: Post; reviewDetails: Review; newsDrop: Post[] }> {
+  return await client.fetch(reviewAndMoreStoriesQuery, { slug })
 }
