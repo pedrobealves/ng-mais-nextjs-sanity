@@ -83,6 +83,18 @@ export const postBySlugQuery = groq`
 }
 `
 
+export const newsBySlugQuery = groq`
+*[_type == "news" && slug.current == $slug][0] {
+  ${postFields}
+}
+`
+
+export const reviewBySlugQuery = groq`
+*[_type == "review" && slug.current == $slug][0] {
+  ${postFields}
+}
+`
+
 export interface Author {
   name?: string
   picture?: any

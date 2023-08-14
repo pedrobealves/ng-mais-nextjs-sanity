@@ -18,7 +18,7 @@ export default function AuthorAvatar({ name, picture }: AuthorAvatarProps) {
         className="rounded-full bg-cover bg-center"
         height={70}
         width={70}
-        alt={picture.alt ?? name}
+        alt={picture?.alt ?? name}
       />
     </div>
   )

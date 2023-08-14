@@ -1,5 +1,5 @@
 import PostPage from 'features/post'
-import PreviewPostPage from 'features/post/components/PreviewPostPage'
+import PreviewNewsPage from 'features/post/components/PreviewNewsPage'
 import { readToken } from 'lib/sanity.api'
 import {
   getAllNewsSlugs,
@@ -25,7 +25,7 @@ export default function ProjectSlugRoute(props: PageProps) {
   const { settings, news, newsDrop, draftMode } = props
 
   if (draftMode) {
-    return <PreviewPostPage news={newsDrop} post={news} settings={settings} />
+    return <PreviewNewsPage post={news} news={newsDrop} settings={settings} />
   }
 
   return <PostPage post={news} settings={settings} news={newsDrop} />

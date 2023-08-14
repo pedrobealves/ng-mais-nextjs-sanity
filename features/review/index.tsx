@@ -14,7 +14,7 @@ export default function Review({ review }: ReviewProps) {
             cy="96"
             r="80"
             stroke="currentColor"
-            stroke-width="18"
+            strokeWidth="18"
             fill="transparent"
             className="text-primary-6"
           />
@@ -24,11 +24,11 @@ export default function Review({ review }: ReviewProps) {
             cy="96"
             r="80"
             stroke="currentColor"
-            stroke-width="18"
+            strokeWidth="18"
             fill="transparent"
-            stroke-linecap="round"
-            stroke-dasharray="553"
-            stroke-dashoffset="150"
+            strokeLinecap="round"
+            strokeDasharray="553"
+            strokeDashoffset="150"
             className="text-secundary-5"
           />
         </svg>
