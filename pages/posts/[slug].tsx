@@ -1,5 +1,5 @@
 import PostPage from 'features/post'
-import PreviewPostPage from 'features/post/components/PreviewPostPage'
+import { PreviewPostPage } from 'features/preview'
 import { readToken } from 'lib/sanity.api'
 import {
   getAllPostsSlugs,

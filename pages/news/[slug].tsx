@@ -1,5 +1,5 @@
 import PostPage from 'features/post'
-import PreviewNewsPage from 'features/post/components/PreviewNewsPage'
+import { PreviewNewsPage } from 'features/preview'
 import { readToken } from 'lib/sanity.api'
 import {
   getAllNewsSlugs,

@@ -6,7 +6,7 @@ interface CommentsProps {
   title: string
 }
 
-export default function Comments({ slug, identifier, title }: CommentsProps) {
+export function Comments({ slug, identifier, title }: CommentsProps) {
   return (
     <DiscussionEmbed
       shortname="miltensei"

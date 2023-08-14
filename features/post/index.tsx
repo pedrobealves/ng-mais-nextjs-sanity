@@ -1,12 +1,12 @@
 import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import Comments from 'components/Comments'
 import Icon from 'components/Icon'
 import Link from 'components/Link'
 import TitleSection from 'components/TitleSection'
+import { Comments } from 'features/comments'
 import { NewsDrop } from 'features/news-drop'
 import { Author } from 'features/post/components/Author'
-import ReviewDetail from 'features/review'
+import { Review as ReviewSection } from 'features/review'
 import Footer from 'layouts/Footer'
 import * as demo from 'lib/demo.data'
 import type { Post, Review, Settings } from 'lib/sanity.queries'
@@ -23,7 +23,7 @@ export interface PostPageProps {
   preview?: boolean
   loading?: boolean
   post: Post
-  news: Post[]
+  news?: Post[]
   reviewDetails?: Review
   settings: Settings
 }
@@ -70,7 +70,7 @@ export default function PostPage(props: PostPageProps) {
                 />
                 <PostBody content={post.content} />
                 {post._type == 'review' && (
-                  <ReviewDetail review={reviewDetails} />
+                  <ReviewSection review={reviewDetails} />
                 )}
                 <Author.Root>
                   <Author.Avatar
