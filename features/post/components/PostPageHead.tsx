@@ -29,6 +29,10 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
       <meta name="vertical" content="Games" />
       <meta name="category" content={post._type} />
       <meta property="og:title" content={post.title} />
+      <meta
+        property="og:url"
+        content={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/${post._type}/${post.slug}`}
+      />
       <meta property="og:description" content={post.excerpt} />
       <meta property="og:site_name" content={settings.title} />
       <meta property="og:type" content="article" />

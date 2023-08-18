@@ -10,10 +10,18 @@ import PostTitle from './PostTitle'
 export default function PostHeader(
   props: Pick<
     Post,
-    'title' | 'coverImage' | 'excerpt' | 'date' | 'author' | 'slug' | 'category'
+    | 'title'
+    | '_type'
+    | 'coverImage'
+    | 'excerpt'
+    | 'date'
+    | 'author'
+    | 'slug'
+    | 'category'
   >,
 ) {
-  const { title, coverImage, date, author, excerpt, slug, category } = props
+  const { title, _type, coverImage, date, author, excerpt, slug, category } =
+    props
 
   return (
     <>
@@ -25,7 +33,7 @@ export default function PostHeader(
       <div className="flex flex-wrap justify-center items-center gap-y-8 mx-auto divide-x-2">
         <Avatar name={author.name} picture={author.picture} />
         <PostShare
-          url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/posts/${slug}`}
+          url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/${_type}/${slug}`}
         />
       </div>
       <CoverImage title={title} image={coverImage} priority slug={slug} />

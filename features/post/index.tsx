@@ -61,6 +61,7 @@ export default function PostPage(props: PostPageProps) {
               <article className="flex flex-col items-start max-w-screen-md mx-auto w-full md:gap-11 gap-6">
                 <PostHeader
                   title={post.title}
+                  _type={post._type}
                   coverImage={post.coverImage}
                   date={post.date}
                   author={post.author}

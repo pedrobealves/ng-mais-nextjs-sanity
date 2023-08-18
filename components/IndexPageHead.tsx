@@ -36,13 +36,23 @@ export default function IndexPageHead({ settings }: IndexPageHeadProps) {
         }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
       />
       <meta property="og:title" content={title} />
+      <meta
+        property="og:url"
+        content={process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}
+      />
       <meta property="og:description" content={toPlainText(description)} />
       <meta property="og:site_name" content={title} />
       <meta property="og:type" content="article" />
       <meta property="og:locale" content="pt_BR" />
       <meta name="twitter:site" content="@miltensei" />
-      <meta name="twitter:card" content={toPlainText(description)} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@miltensei" />
+      <meta
+        name="twitter:imageUrl"
+        content={`${
+          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
+      />
       <meta
         name="twitter:image"
         content={`${
