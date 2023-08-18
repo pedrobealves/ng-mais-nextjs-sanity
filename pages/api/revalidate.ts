@@ -40,9 +40,9 @@ export default async function revalidate(
 
 type StaleRoute =
   | '/'
-  | `/posts/${string}`
+  | `/post/${string}`
   | `/news/${string}`
-  | `/reviews/${string}`
+  | `/review/${string}`
 
 async function queryStaleRoutes(
   body: Pick<ParseBody['body'], '_type' | '_id' | 'date' | 'slug'>,
@@ -55,7 +55,7 @@ async function queryStaleRoutes(
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`/posts/${(body.slug as any).current}`)
+        staleRoutes.push(`/post/${(body.slug as any).current}`)
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
@@ -103,7 +103,7 @@ async function queryStaleRoutes(
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`/reviews/${(body.slug as any).current}`)
+        staleRoutes.push(`/review/${(body.slug as any).current}`)
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
@@ -147,7 +147,7 @@ async function _queryAllPostRoutes(client: SanityClient): Promise<string[]> {
 async function queryAllPostRoutes(client: SanityClient): Promise<StaleRoute[]> {
   const slugs = await _queryAllPostRoutes(client)
 
-  return ['/', ...slugs.map((slug) => `/posts/${slug}` as StaleRoute)]
+  return ['/', ...slugs.map((slug) => `/post/${slug}` as StaleRoute)]
 }
 
 async function mergeWithMorePostStories(
@@ -176,7 +176,7 @@ async function queryStalePostRoutes(
 
   slugs = await mergeWithMorePostStories(client, slugs)
 
-  return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
+  return ['/', ...slugs.map((slug) => `/post/${slug}`)]
 }
 
 //Review
@@ -190,7 +190,7 @@ async function queryAllReviewRoutes(
 ): Promise<StaleRoute[]> {
   const slugs = await _queryAllReviewRoutes(client)
 
-  return ['/', ...slugs.map((slug) => `/reviews/${slug}` as StaleRoute)]
+  return ['/', ...slugs.map((slug) => `/review/${slug}` as StaleRoute)]
 }
 
 async function mergeWithMoreReviewStories(
@@ -219,7 +219,7 @@ async function queryStaleReviewRoutes(
 
   slugs = await mergeWithMoreReviewStories(client, slugs)
 
-  return ['/', ...slugs.map((slug) => `/reviews/${slug}`)]
+  return ['/', ...slugs.map((slug) => `/review/${slug}`)]
 }
 
 //News
@@ -278,7 +278,7 @@ async function queryStaleAuthorRoutes(
 
   if (slugs.length > 0) {
     slugs = await mergeWithMorePostStories(client, slugs)
-    return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
+    return ['/', ...slugs.map((slug) => `/post/${slug}`)]
   }
 
   return []

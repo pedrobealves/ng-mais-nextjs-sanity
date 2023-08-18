@@ -107,6 +107,7 @@ export default function PostPage(props: PostPageProps) {
               <TitleSection>Comentários</TitleSection>
               <div className="max-w-screen-md mx-auto w-full">
                 <Comments
+                  type={post._type}
                   slug={post.slug}
                   identifier={post._id}
                   title={post.title}

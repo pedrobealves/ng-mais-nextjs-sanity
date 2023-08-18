@@ -17,7 +17,7 @@ import { isValidSecret } from 'sanity-plugin-iframe-pane/is-valid-secret'
 
 function redirectToPreview(
   res: NextApiResponse<string | void>,
-  Location: '/' | `/posts/${string}` | `/reviews/${string}` | `/news/${string}`,
+  Location: '/' | `/post/${string}` | `/review/${string}` | `/news/${string}`,
 ): void {
   // Enable Draft Mode by setting the cookies
   res.setDraftMode({ enable: true })
@@ -63,7 +63,7 @@ async function previewReview(
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  redirectToPreview(res, `/reviews/${review.slug}`)
+  redirectToPreview(res, `/review/${review.slug}`)
 }
 
 async function previewPost(
@@ -82,7 +82,7 @@ async function previewPost(
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  redirectToPreview(res, `/posts/${post.slug}`)
+  redirectToPreview(res, `/post/${post.slug}`)
 }
 
 export default async function preview(
