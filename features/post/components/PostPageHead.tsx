@@ -50,15 +50,19 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
       <meta name="twitter:creator" content="@miltensei" />
       <meta
         name="twitter:imageUrl"
-        content={`${
-          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
+        content={urlForImage(post.coverImage)
+          .width(1200)
+          .height(627)
+          .fit('crop')
+          .url()}
       />
       <meta
         name="twitter:image"
-        content={`${
-          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
+        content={urlForImage(post.coverImage)
+          .width(1200)
+          .height(627)
+          .fit('crop')
+          .url()}
       />
     </Head>
   )
