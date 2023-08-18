@@ -1,13 +1,13 @@
-import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import Icon from 'components/Icon'
-import Link from 'components/Link'
+import { Icon } from 'components/Icon'
+import { LinkAction } from 'components/Link'
 import TitleSection from 'components/TitleSection'
 import { Comments } from 'features/comments'
 import { NewsDrop } from 'features/news-drop'
 import { Author } from 'features/post/components/Author'
 import { Review as ReviewSection } from 'features/review'
 import Footer from 'layouts/Footer'
+import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
 import type { Post, Review, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
@@ -52,7 +52,7 @@ export default function PostPage(props: PostPageProps) {
       <PostPageHead settings={settings} post={post} />
 
       <Layout preview={preview} loading={loading}>
-        <BlogHeader title={title} level={2} />
+        <Header title={title} level={2} />
         {preview && !post ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -81,14 +81,20 @@ export default function PostPage(props: PostPageProps) {
                     <Author.Bio name={post.author.name} bio={post.author.bio} />
                     <Author.Icons>
                       {post.author.facebook && (
-                        <Link url={post.author.facebook}>
+                        <LinkAction
+                          url={
+                            'https://www.facebook.com/' + post.author.facebook
+                          }
+                        >
                           <Icon icon={FaFacebook} />
-                        </Link>
+                        </LinkAction>
                       )}
                       {post.author.twitter && (
-                        <Link url={post.author.twitter}>
+                        <LinkAction
+                          url={'https://twitter.com/' + post.author.twitter}
+                        >
                           <Icon icon={FaTwitter} />
-                        </Link>
+                        </LinkAction>
                       )}
                     </Author.Icons>
                   </Author.BioContainer>

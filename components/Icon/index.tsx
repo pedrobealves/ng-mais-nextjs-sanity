@@ -1,9 +1,21 @@
 import { ElementType } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-interface IconProps {
+export interface IconProps {
+  hoverColor?: string
+  color?: string
+  size?: number
+}
+
+interface IconPropsType extends IconProps {
   icon: ElementType
 }
 
-export default function Icon({ icon: Icon }: IconProps) {
-  return <Icon className="hover:text-primary-5" />
+export function Icon({
+  icon: Icon,
+  color = 'text-primary-8',
+  hoverColor = 'hover:text-primary-5',
+  size = 24,
+}: IconPropsType) {
+  return <Icon className={twMerge(color, hoverColor)} size={size} />
 }

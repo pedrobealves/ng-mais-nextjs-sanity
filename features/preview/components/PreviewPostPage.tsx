@@ -10,7 +10,6 @@ import {
 import { useLiveQuery } from 'next-sanity/preview'
 
 export function PreviewPostPage(props: PostPageProps) {
-  //console.log(props)
   const [{ post: postPreview }, loadingPost] = useLiveQuery<{
     post: Post
   }>({ post: props.post }, postAndMoreStoriesQuery, {

@@ -15,6 +15,7 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
     <Head>
       <title>{post.title ? `${post.title} | ${title}` : title}</title>
       <BlogMeta />
+      <meta key="description" name="description" content={post.excerpt} />
       {post.coverImage?.asset?._ref && (
         <meta
           property="og:image"
@@ -25,6 +26,30 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
             .url()}
         />
       )}
+      <meta name="vertical" content="Games" />
+      <meta name="category" content={post._type} />
+      <meta property="og:title" content={post.title} />
+      <meta property="og:description" content={post.excerpt} />
+      <meta property="og:site_name" content={settings.title} />
+      <meta property="og:type" content="article" />
+      <meta property="og:locale" content="pt_BR" />
+      <meta property="article:published_time" content={post.date} />
+      <meta property="article:publisher" content={post.author.name} />
+      {post.category?.title && (
+        <meta property="article:section" content={post.category.title} />
+      )}
+      {post.category?.title && (
+        <meta property="article:tag" content={post.category.title} />
+      )}
+      <meta name="twitter:site" content="@miltensei" />
+      <meta name="twitter:card" content={post.excerpt} />
+      <meta name="twitter:creator" content="@miltensei" />
+      <meta
+        name="twitter:image"
+        content={`${
+          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+        }/api/og?${new URLSearchParams({ title: post.title })}`}
+      />
     </Head>
   )
 }

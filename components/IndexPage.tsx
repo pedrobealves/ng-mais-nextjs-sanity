@@ -1,9 +1,9 @@
 import Container from 'components/BlogContainer'
-import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
 import IndexPageHead from 'components/IndexPageHead'
 import HeroPost from 'features/post/components/HeroPost'
 import MoreStories from 'features/post/components/MoreStories'
+import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 
@@ -25,7 +25,7 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} description={description} level={1} />
+          <Header title={title} description={description} level={1} />
           {heroPost && (
             <HeroPost
               title={heroPost.title}

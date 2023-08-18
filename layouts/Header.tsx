@@ -1,16 +1,13 @@
 import { PortableText } from '@portabletext/react'
+import { Logo } from 'components/Logo'
+import { Social } from 'components/Social'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { FaFacebook } from 'react-icons/fa'
-import { FaInstagram } from 'react-icons/fa'
-import { FaTwitter } from 'react-icons/fa'
-import { FaTiktok } from 'react-icons/fa'
 
-import search from './../public/icon/Search.svg'
-import logo from './../public/logo/logo.svg'
-import symbol from './../public/logo/symbol.svg'
-import styles from './BlogHeader.module.css'
+import search from '/public/icon/Search.svg'
+
+import styles from './Header.module.css'
 
 function useScrollDirection() {
   const [scrollDirection, setScrollDirection] = useState(null)
@@ -72,10 +69,7 @@ export default function BlogHeader({
           } bg-white w-full z-20 left-0 px-4 transition-all duration-500`}
         >
           <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1">
-            <a href="#" className="flex items-center justify-center gap-3.5">
-              <Image priority src={symbol} alt="Symbol" />
-              <Image priority src={logo} alt="Logo" />
-            </a>
+            <Logo />
             <ul className="hidden md:flex text-primary-8 font-semibold text-base gap-8">
               <li>
                 <a
@@ -115,20 +109,7 @@ export default function BlogHeader({
               </li>
             </ul>
             <div className="hidden md:flex items-center gap-6">
-              <div className="flex gap-3 text-primary-8">
-                <a href="" target="_blank">
-                  <FaTwitter className="hover:text-primary-5" />
-                </a>
-                <a href="" target="_blank">
-                  <FaFacebook className="hover:text-primary-5" />
-                </a>
-                <a href="" target="_blank">
-                  <FaInstagram className="hover:text-primary-5" />
-                </a>
-                <a href="" target="_blank">
-                  <FaTiktok className="hover:text-primary-5" />
-                </a>
-              </div>
+              <Social />
               <button
                 type="button"
                 className="text-white bg-secundary-4 rounded-3xl p-4"
