@@ -46,13 +46,19 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
         <meta property="article:tag" content={post.category.title} />
       )}
       <meta name="twitter:site" content="@miltensei" />
-      <meta name="twitter:card" content={post.excerpt} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@miltensei" />
+      <meta
+        name="twitter:imageUrl"
+        content={`${
+          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
+      />
       <meta
         name="twitter:image"
         content={`${
           process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-        }/api/og?${new URLSearchParams({ title: post.title })}`}
+        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
       />
     </Head>
   )
