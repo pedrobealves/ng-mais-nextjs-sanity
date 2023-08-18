@@ -7,11 +7,15 @@
  * https://portabletext.org/
  *
  */
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+
 import {
   PortableText,
   type PortableTextReactComponents,
 } from '@portabletext/react'
 import { SanityImage } from 'components/SanityImage'
+import getYouTubeId from 'get-youtube-id'
+import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 
 import styles from './PostBody.module.css'
 
@@ -19,6 +23,11 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => {
       return <SanityImage {...value} />
+    },
+    youtube: ({ value }) => {
+      const { url } = value
+      const id = getYouTubeId(url)
+      return <LiteYouTubeEmbed title={url} id={id} />
     },
   },
 }

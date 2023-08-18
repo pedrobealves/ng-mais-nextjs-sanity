@@ -17,6 +17,7 @@ import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import authorType from 'schemas/author'
+import blockContentType from 'schemas/blockContent'
 import categoryType from 'schemas/category'
 import gameType from 'schemas/game'
 import newsType from 'schemas/news'
@@ -24,6 +25,7 @@ import postType from 'schemas/post'
 import reviewType from 'schemas/review'
 import settingsType from 'schemas/settings'
 import weeklyType from 'schemas/weekly'
+import youtubeType from 'schemas/youtube'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -44,6 +46,8 @@ export default defineConfig({
       weeklyType,
       gameType,
       settingsType,
+      blockContentType,
+      youtubeType,
     ],
   },
   plugins: [
