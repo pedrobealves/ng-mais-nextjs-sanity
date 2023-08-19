@@ -6,7 +6,12 @@ export default defineType({
   title: 'Author',
   icon: UserIcon,
   type: 'document',
-  fieldsets: [{ name: 'social', title: 'Social media' }],
+  fieldsets: [
+    {
+      title: 'Social Media',
+      name: 'social',
+    },
+  ],
   fields: [
     defineField({
       name: 'name',
@@ -35,16 +40,44 @@ export default defineType({
       type: 'text',
     }),
     defineField({
-      title: 'Twitter',
-      name: 'twitter',
-      type: 'string',
-      fieldset: 'social',
-    }),
-    defineField({
-      title: 'Facebook',
-      name: 'facebook',
-      type: 'string',
-      fieldset: 'social',
+      name: 'social',
+      type: 'array',
+      title: 'Social Links',
+      description: 'Enter your Social Media URLs',
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              type: 'string',
+              name: 'media',
+              title: 'Choose Social Media',
+              options: {
+                list: [
+                  { title: 'Twitter', value: 'twitter' },
+                  { title: 'Tiktok', value: 'tiktok' },
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'Youtube', value: 'youtube' },
+                ],
+              },
+            },
+            {
+              type: 'url',
+              name: 'url',
+              title: 'Full Profile URL',
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: {
+            select: {
+              title: 'media',
+              subtitle: 'url',
+            },
+          },
+        },
+      ],
     }),
   ],
 })

@@ -20,6 +20,7 @@ import authorType from 'schemas/author'
 import blockContentType from 'schemas/blockContent'
 import categoryType from 'schemas/category'
 import gameType from 'schemas/game'
+import imageEmbedType from 'schemas/imageEmbed'
 import newsType from 'schemas/news'
 import postType from 'schemas/post'
 import reviewType from 'schemas/review'
@@ -48,6 +49,7 @@ export default defineConfig({
       settingsType,
       blockContentType,
       youtubeType,
+      imageEmbedType,
     ],
   },
   plugins: [

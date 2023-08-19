@@ -10,6 +10,12 @@ export default defineType({
   type: 'document',
   icon: CogIcon,
   preview: { select: { title: 'title', subtitle: 'description' } },
+  fieldsets: [
+    {
+      title: 'Social Media',
+      name: 'social',
+    },
+  ],
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
   fields: [
@@ -71,6 +77,46 @@ export default defineType({
           type: 'string',
           initialValue: demo.ogImageTitle,
         }),
+      ],
+    }),
+    defineField({
+      name: 'social',
+      type: 'array',
+      title: 'Social Links',
+      description: 'Enter your Social Media URLs',
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              type: 'string',
+              name: 'media',
+              title: 'Choose Social Media',
+              options: {
+                list: [
+                  { title: 'Twitter', value: 'twitter' },
+                  { title: 'Tiktok', value: 'tiktok' },
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'Youtube', value: 'youtube' },
+                ],
+              },
+            },
+            {
+              type: 'url',
+              name: 'url',
+              title: 'Full Profile URL',
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: {
+            select: {
+              title: 'media',
+              subtitle: 'url',
+            },
+          },
+        },
       ],
     }),
   ],

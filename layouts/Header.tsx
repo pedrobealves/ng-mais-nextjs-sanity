@@ -1,8 +1,11 @@
 import { PortableText } from '@portabletext/react'
+import { Icon, IconProps } from 'components/Icon'
+import { LinkAction } from 'components/Link'
 import { Logo } from 'components/Logo'
 import { Social } from 'components/Social'
+import { socialIconMap } from 'components/SocialIcon'
+import { Media } from 'lib/sanity.queries'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import search from '/public/icon/Search.svg'
@@ -39,13 +42,14 @@ export default function BlogHeader({
   title,
   description,
   level,
+  social,
 }: {
   title: string
   description?: any[]
   level: 1 | 2
+  social: Media[]
 }) {
   const scrollDirection = useScrollDirection()
-
   switch (level) {
     case 1:
       return (
@@ -109,7 +113,13 @@ export default function BlogHeader({
               </li>
             </ul>
             <div className="hidden md:flex items-center gap-6">
-              <Social />
+              <div className="flex gap-3">
+                {social?.map((item) => (
+                  <LinkAction key={item._key} url={item.url}>
+                    <Icon icon={socialIconMap[item.media]} size={16} />
+                  </LinkAction>
+                ))}
+              </div>
               <button
                 type="button"
                 className="text-white bg-secundary-4 rounded-3xl p-4"

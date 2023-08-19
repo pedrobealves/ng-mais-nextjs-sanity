@@ -4,6 +4,7 @@ const config = {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },
       { hostname: 'source.unsplash.com' },
+      { hostname: 'res.cloudinary.com' },
     ],
   },
   typescript: {

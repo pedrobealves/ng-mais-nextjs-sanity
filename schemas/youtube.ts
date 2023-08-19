@@ -12,6 +12,7 @@ export default defineType({
       type: 'url',
       description:
         'Enter the URL to Embed \r\n(eg: https://youtube.com/embed/xxx or https://open.spotify.com/embed/track/xxxx)',
+      validation: (rule) => rule.required(),
     },
   ],
   preview: {

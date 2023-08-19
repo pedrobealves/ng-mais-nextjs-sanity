@@ -29,7 +29,7 @@ export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    "author": author->{name, picture, bio, twitter, facebook},
+    "author": author->{name, picture, bio, social},
     "category": game->{title, "slug": slug.current},
     ${postFields}
   },
@@ -40,7 +40,7 @@ export const newsAndMoreStoriesQuery = groq`
 {
   "news": *[_type == "news" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    "author": author->{name, picture, bio, twitter, facebook},
+    "author": author->{name, picture, bio, social},
     category[0]->{title, "slug": slug.current},
     ${postFields}
   },
@@ -51,7 +51,7 @@ export const reviewAndMoreStoriesQuery = groq`
 {
   "review": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    "author": author->{name, picture, bio, twitter, facebook},
+    "author": author->{name, picture, bio, social},
     "category": game->{title, "slug": slug.current},
     ${postFields}
   },
@@ -99,13 +99,18 @@ export interface Author {
   name?: string
   picture?: any
   bio?: string
-  twitter?: string
-  facebook?: string
+  social?: Media[]
 }
 
 export interface Game {
   title?: string
   slug?: string
+}
+
+export interface Media {
+  _key: string
+  media: string
+  url: string
 }
 
 export interface Post {
@@ -142,4 +147,5 @@ export interface Settings {
   ogImage?: {
     title?: string
   }
+  social?: Media[]
 }

@@ -76,7 +76,7 @@ export default defineType({
 
     {
       type: 'image',
-      title: 'Image',
+      title: 'Image Upload',
       options: {
         hotspot: true,
       },
@@ -92,8 +92,12 @@ export default defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
+          validation: (rule) => rule.required(),
         },
       ],
+    },
+    {
+      type: 'imageEmbed',
     },
     {
       type: 'youtube',

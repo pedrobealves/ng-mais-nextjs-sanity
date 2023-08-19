@@ -13,8 +13,10 @@ import {
   PortableText,
   type PortableTextReactComponents,
 } from '@portabletext/react'
+import { CloudinaryImage } from 'components/CloudinaryImage'
 import { SanityImage } from 'components/SanityImage'
 import getYouTubeId from 'get-youtube-id'
+import Image from 'next/image'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 
 import styles from './PostBody.module.css'
@@ -23,6 +25,9 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => {
       return <SanityImage {...value} />
+    },
+    imageEmbed: ({ value }) => {
+      return <CloudinaryImage {...value} />
     },
     youtube: ({ value }) => {
       const { url } = value

@@ -1,6 +1,7 @@
 import Layout from 'components/BlogLayout'
 import { Icon } from 'components/Icon'
 import { LinkAction } from 'components/Link'
+import { socialIconMap } from 'components/SocialIcon'
 import TitleSection from 'components/TitleSection'
 import { Comments } from 'features/comments'
 import { NewsDrop } from 'features/news-drop'
@@ -11,8 +12,6 @@ import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
 import type { Post, Review, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
-import { FaFacebook, FaTwitter } from 'react-icons/fa'
-import review from 'schemas/review'
 
 import PostBody from './components/PostBody'
 import PostHeader from './components/PostHeader'
@@ -39,7 +38,7 @@ export default function PostPage(props: PostPageProps) {
     reviewDetails,
     news = NO_NEWS,
   } = props
-  const { title = demo.title } = settings || {}
+  const { title = demo.title, social } = settings || {}
 
   const slug = post?.slug
 
@@ -52,7 +51,7 @@ export default function PostPage(props: PostPageProps) {
       <PostPageHead settings={settings} post={post} />
 
       <Layout preview={preview} loading={loading}>
-        <Header title={title} level={2} />
+        <Header title={title} social={social} level={2} />
         {preview && !post ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -81,22 +80,11 @@ export default function PostPage(props: PostPageProps) {
                   <Author.BioContainer>
                     <Author.Bio name={post.author.name} bio={post.author.bio} />
                     <Author.Icons>
-                      {post.author.facebook && (
-                        <LinkAction
-                          url={
-                            'https://www.facebook.com/' + post.author.facebook
-                          }
-                        >
-                          <Icon icon={FaFacebook} />
+                      {post.author.social?.map((social) => (
+                        <LinkAction key={social._key} url={social.url}>
+                          <Icon icon={socialIconMap[social.media]} />
                         </LinkAction>
-                      )}
-                      {post.author.twitter && (
-                        <LinkAction
-                          url={'https://twitter.com/' + post.author.twitter}
-                        >
-                          <Icon icon={FaTwitter} />
-                        </LinkAction>
-                      )}
+                      ))}
                     </Author.Icons>
                   </Author.BioContainer>
                 </Author.Root>
