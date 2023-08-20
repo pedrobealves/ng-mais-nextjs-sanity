@@ -84,6 +84,22 @@ module.exports = {
           'radial-gradient(circle closest-corner at 50% 220%, #8c20f8, #100919)',
         'gradient-footer':
           'linear-gradient(180deg, rgba(90, 24, 154, 1), rgba(60, 9, 108, 1) 16%, rgba(36, 0, 70, 1) 40%, rgba(16, 0, 43, 1))',
+        'gradient-header':
+          'linear-gradient(180deg, #100919 0%, #5A189A 81.35%, #3C096C 92.84%)',
+      },
+      maxWidth: {
+        'col-1': '4.625rem',
+        'col-2': '10.75rem',
+        'col-3': '16.875rem',
+        'col-4': '23rem',
+        'col-5': '29.125rem',
+        'col-6': '35.25rem',
+        'col-7': '41.375rem',
+        'col-8': '47.5rem',
+        'col-9': '53.625rem',
+        'col-10': '59.75rem',
+        'col-11': '65.875rem',
+        'col-12': '72rem',
       },
     },
   },
