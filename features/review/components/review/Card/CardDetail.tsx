@@ -25,7 +25,7 @@ export default function CardContainerGrade({
   return (
     <div className="justify-start items-center gap-2.5 inline-flex">
       <div className={item({ color })}>
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="flex items-center justify-center w-3 h-3">
           <Icon className="text-white" />
         </div>
       </div>

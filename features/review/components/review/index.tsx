@@ -15,7 +15,7 @@ export function Review({ review }: ReviewProps) {
         <Card.Grade grade={review.grade} />
         <Card.ContainerDetail>
           <IconContext.Provider value={{ size: '24' }}>
-            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-9">
+            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
               <Card.DividerDetail color="pros" />
               <div className="flex items-center">
                 <div className="self-stretch flex-col items-start gap-3.5 flex">
@@ -30,7 +30,7 @@ export function Review({ review }: ReviewProps) {
                 </div>
               </div>
             </div>
-            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-9">
+            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
               <Card.DividerDetail color="cons" />
               <div className="flex items-center">
                 <div className="self-stretch flex-col items-start gap-3.5 flex">

@@ -13,7 +13,7 @@ export default function CardContainerGrade({ grade }: CardProps) {
           cy="96"
           r="80"
           stroke="currentColor"
-          strokeWidth="18"
+          strokeWidth="16"
           fill="transparent"
           className="text-primary-6"
         />
@@ -23,7 +23,7 @@ export default function CardContainerGrade({ grade }: CardProps) {
           cy="96"
           r="80"
           stroke="currentColor"
-          strokeWidth="18"
+          strokeWidth="22"
           fill="transparent"
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -31,7 +31,12 @@ export default function CardContainerGrade({ grade }: CardProps) {
           className="text-secundary-5"
         />
       </svg>
-      <span className="absolute text-white text-6xl font-bold">{grade}</span>
+      <div className="absolute flex flex-col justify-center items-center gap-1">
+        <span className=" text-white text-6xl font-bold">{grade}</span>
+        <span className="uppercase text-white opacity-25 text-base">
+          DE 100
+        </span>
+      </div>
     </div>
   )
 }
