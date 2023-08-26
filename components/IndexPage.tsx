@@ -7,6 +7,7 @@ import MoreStories from 'features/post/components/MoreStories'
 import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
+import { useState } from 'react'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -19,6 +20,15 @@ export default function IndexPage(props: IndexPageProps) {
   const { preview, loading, posts, settings } = props
   const [heroPost, ...morePosts] = posts || []
   const { title = demo.title, description = demo.description } = settings || {}
+
+  // State for storing the selected option. Default is "Male"
+  const [selectedOption, setSelectedOption] = useState('game1')
+
+  // Function to handle the change in radio button selection
+  function onValueChange(event) {
+    // Updating the state with the selected radio button's value
+    setSelectedOption(event.target.value)
+  }
 
   return (
     <>
@@ -576,10 +586,7 @@ export default function IndexPage(props: IndexPageProps) {
                     <path d="m256-168-88-88 224-224-224-224 88-88 224 224 224-224 88 88-224 224 224 224-88 88-224-224-224 224Z" />
                   </svg>
                 </button>
-                <div
-                  className="group/open flex px-6 font-bold overflow-hidden text-primary-5 items-center cursor-pointer"
-                  tabindex="1"
-                >
+                <div className="group/open flex px-6 font-bold overflow-hidden text-primary-5 items-center cursor-pointer">
                   <div className="group-focus/open:hidden">Page 1</div>
                   <div className="hidden group-focus/open:flex gap-2">
                     <button className="bg-gray-300 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
@@ -697,10 +704,12 @@ export default function IndexPage(props: IndexPageProps) {
                   <li className="flex flex-col gap-3">
                     <input
                       id="game1"
+                      value="game1"
                       className="peer hidden"
                       type="radio"
                       name="top"
-                      checked
+                      checked={selectedOption === 'game1'}
+                      onChange={onValueChange}
                     />
                     <label
                       htmlFor="game1"
@@ -745,9 +754,12 @@ export default function IndexPage(props: IndexPageProps) {
                   <li className="flex flex-col gap-3">
                     <input
                       id="game2"
+                      value="game2"
                       className="peer hidden"
                       type="radio"
                       name="top"
+                      checked={selectedOption === 'game2'}
+                      onChange={onValueChange}
                     />
                     <label
                       htmlFor="game2"
@@ -792,9 +804,12 @@ export default function IndexPage(props: IndexPageProps) {
                   <li className="flex flex-col gap-3">
                     <input
                       id="game3"
+                      value="game3"
                       className="peer hidden"
                       type="radio"
                       name="top"
+                      checked={selectedOption === 'game3'}
+                      onChange={onValueChange}
                     />
                     <label
                       htmlFor="game3"
