@@ -1,14 +1,16 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
-  indexQuery,
   newsAndMoreStoriesQuery,
+  newsIndexQuery,
   newsSlugsQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
+  postIndexQuery,
   postSlugsQuery,
   type Review,
   reviewAndMoreStoriesQuery,
+  reviewsIndexQuery,
   reviewSlugsQuery,
   type Settings,
   settingsQuery,
@@ -44,7 +46,15 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
 }
 
 export async function getAllPosts(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(indexQuery)) || []
+  return (await client.fetch(postIndexQuery)) || []
+}
+
+export async function getAllNews(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(newsIndexQuery)) || []
+}
+
+export async function getAllReviews(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(reviewsIndexQuery)) || []
 }
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {

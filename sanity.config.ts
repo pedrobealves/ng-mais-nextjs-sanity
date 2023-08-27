@@ -28,8 +28,7 @@ import settingsType from 'schemas/settings'
 import weeklyType from 'schemas/weekly'
 import youtubeType from 'schemas/youtube'
 
-const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
+const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'MILtensei studio'
 
 export default defineConfig({
   basePath: '/studio',

@@ -1,1 +1,1 @@
-export * from './components/review'
+export * from './components/review-info'

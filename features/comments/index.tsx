@@ -1,1 +1,1 @@
-export * from './components/Comments'
+export * from './components/comments-section'

@@ -1,4 +1,4 @@
-import PostPage, { PostPageProps } from 'features/post'
+import { PostPage, PostPageProps } from 'features/post'
 import {
   type Post,
   Review,

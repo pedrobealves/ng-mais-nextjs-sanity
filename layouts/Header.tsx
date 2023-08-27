@@ -43,25 +43,82 @@ export default function BlogHeader({
   description,
   level,
   social,
+  hero,
 }: {
   title: string
   description?: any[]
   level: 1 | 2
   social: Media[]
+  hero?: React.ReactNode
 }) {
   const scrollDirection = useScrollDirection()
   switch (level) {
     case 1:
       return (
-        <header className="mb-10 mt-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
-          <h1 className="text-6xl font-bold leading-tight tracking-tighter md:pr-8 md:text-8xl">
-            {title}
-          </h1>
-          <h4
-            className={`mt-5 text-center text-lg md:pl-8 md:text-left ${styles.portableText}`}
-          >
-            <PortableText value={description} />
-          </h4>
+        <header className="bg-gradient-header w-full px-4 rounded-b-[40px]">
+          <nav className="container flex items-center justify-between mx-auto py-3">
+            <Logo heightSymbol={106} heightLogo={64} isLight />
+
+            <ul className="hidden lg:flex text-white font-semibold text-base gap-8">
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-secundary-4"
+                  aria-current="page"
+                >
+                  Análises
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-secundary-4"
+                  aria-current="page"
+                >
+                  Notícias
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-secundary-4"
+                  aria-current="page"
+                >
+                  Matérias
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block hover:text-secundary-4"
+                  aria-current="page"
+                >
+                  Weekly
+                </a>
+              </li>
+            </ul>
+            <div className="hidden lg:flex items-center gap-6">
+              <div className="flex gap-3">
+                {social?.map((item) => (
+                  <LinkAction key={item._key} url={item.url}>
+                    <Icon
+                      icon={socialIconMap[item.media]}
+                      color="text-white"
+                      hoverColor="hover:text-secundary-5"
+                      size={16}
+                    />
+                  </LinkAction>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="text-white bg-secundary-4 rounded-3xl p-4"
+              >
+                <Image priority src={search} alt="Search" />
+              </button>
+            </div>
+          </nav>
+          {hero}
         </header>
       )
 
