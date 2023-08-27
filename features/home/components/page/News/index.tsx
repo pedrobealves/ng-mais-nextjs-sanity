@@ -5,7 +5,7 @@ type NewsProps = {
   news: Post[]
 }
 
-export function News({ news }: NewsProps) {
+export function NewsSection({ news }: NewsProps) {
   return (
     <section className="flex flex-col gap-10">
       <div className="flex justify-start items-center gap-4">

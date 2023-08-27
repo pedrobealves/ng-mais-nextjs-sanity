@@ -2,13 +2,15 @@ import Container from 'components/BlogContainer'
 import Layout from 'components/BlogLayout'
 import IndexPageHead from 'components/IndexPageHead'
 import { Logo } from 'components/Logo'
+import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { useState } from 'react'
 
 import { Hero } from './Hero'
-import { News } from './News'
+import { NewsSection } from './News'
+import { PostSection } from './Post'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -56,79 +58,8 @@ export function HomePage(props: IndexPageProps) {
         </section>
         <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6 pb-60">
           <section className="flex flex-col w-full max-w-col-9 gap-10">
-            <News news={news} />
-            <section className="flex flex-col gap-10">
-              <div className="flex justify-start items-center gap-4">
-                <div className="w-2 h-9 bg-primary-5 rounded-tr-[5px] rounded-br-[5px]"></div>
-                <div className="text-center text-primary-5 text-2xl font-extrabold leading-loose">
-                  Matérias
-                </div>
-              </div>
-              <div className="grid w-full md:grid-cols-3 [&>*:first-child]:sm:col-span-2 sm:grid-cols-2 grid-cols-1 [&>*:first-child]:md:row-span-2 gap-6">
-                <div className="w-full md:h-72 font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-3xl drop-shadow-xl">
-                  <img
-                    className="absolute inset-0 h-full w-full object-cover"
-                    src="https://image.api.playstation.com/vulcan/ap/rnd/202105/1417/HM9fBpwxGcon3lbajBIpHcWk.png"
-                    alt="Flower and sky"
-                  />
-                  <div className="absolute inset-0 [background-image:linear-gradient(180deg,_rgba(90,_24,_154,_0.00)_0%,_rgba(90,_24,_154,_0.90)_82.96%)]"></div>
-                  <div className="md:absolute relative bottom-0 p-3 flex md:flex-row gap-3 items-end w-full">
-                    <img
-                      src="https://cdn.mobygames.com/covers/10181811-age-of-empires-iv-windows-apps-front-cover.jpg"
-                      className="h-40 rounded-xl border-4 border-white"
-                    />
-                    <div className="flex flex-col bg-white rounded-r-xl rounded-bl-xl p-4 w-full">
-                      <h3 className="text-2xl text-primary-5 font-bold">
-                        Nome da matéria - headline da matéria
-                      </h3>
-                      <p className="text-primary-5 hidden md:block">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full h-auto font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-[20px] drop-shadow-xl">
-                  <img
-                    className="absolute inset-0 h-full w-full object-cover"
-                    src="https://image.api.playstation.com/vulcan/ap/rnd/202105/1417/HM9fBpwxGcon3lbajBIpHcWk.png"
-                    alt="Flower and sky"
-                  />
-                  <div className="absolute inset-0 [background-image:linear-gradient(180deg,_rgba(90,_24,_154,_0.00)_0%,_rgba(90,_24,_154,_0.90)_82.96%)]"></div>
-                  <div className="md:absolute relative bottom-0 p-2 flex md:flex-row gap-3 items-end w-full">
-                    <img
-                      src="https://cdn.mobygames.com/covers/10181811-age-of-empires-iv-windows-apps-front-cover.jpg"
-                      className="h-24 rounded-xl border-2 border-white"
-                    />
-                    <div className="flex flex-col bg-white rounded-r-xl rounded-bl-xl p-2 w-full">
-                      <h3 className="text-base text-primary-5 font-bold">
-                        Nome da matéria - headline da matéria
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full h-auto font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-[20px] drop-shadow-xl">
-                  <img
-                    className="absolute inset-0 h-full w-full object-cover"
-                    src="https://image.api.playstation.com/vulcan/ap/rnd/202105/1417/HM9fBpwxGcon3lbajBIpHcWk.png"
-                    alt="Flower and sky"
-                  />
-                  <div className="absolute inset-0 [background-image:linear-gradient(180deg,_rgba(90,_24,_154,_0.00)_0%,_rgba(90,_24,_154,_0.90)_82.96%)]"></div>
-                  <div className="md:absolute relative bottom-0 p-2 flex md:flex-row gap-3 items-end w-full">
-                    <img
-                      src="https://cdn.mobygames.com/covers/10181811-age-of-empires-iv-windows-apps-front-cover.jpg"
-                      className="h-24 rounded-xl border-2 border-white"
-                    />
-                    <div className="flex flex-col bg-white rounded-r-xl rounded-bl-xl p-2 w-full">
-                      <h3 className="text-base text-primary-5 font-bold">
-                        Nome da matéria - headline da matéria
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              N
-            </section>
+            <NewsSection news={news} />
+            <PostSection posts={posts} />
           </section>
           <aside className="flex lg:flex-col flex-row sm:flex-nowrap flex-wrap lg:max-w-col-3 w-full border-l-2 border-l-gray-100 gap-10">
             <section className="flex flex-col gap-6 w-full">
@@ -318,6 +249,7 @@ export function HomePage(props: IndexPageProps) {
           </aside>
         </section>
       </main>
+      <Footer />
     </>
   )
 }
