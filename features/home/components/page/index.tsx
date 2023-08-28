@@ -2,6 +2,7 @@ import Container from 'components/BlogContainer'
 import Layout from 'components/BlogLayout'
 import IndexPageHead from 'components/IndexPageHead'
 import { Logo } from 'components/Logo'
+import { NewsDrop } from 'features/news-drop'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
@@ -18,11 +19,12 @@ export interface IndexPageProps {
   posts: Post[]
   news: Post[]
   reviews: Post[]
+  newsDrop: Post[]
   settings: Settings
 }
 
 export function HomePage(props: IndexPageProps) {
-  const { preview, loading, news, reviews, posts, settings } = props
+  const { preview, loading, news, reviews, posts, settings, newsDrop } = props
   const [heroPost, ...morePosts] = posts || []
   const { title = demo.title, social } = settings || {}
 
@@ -39,7 +41,7 @@ export function HomePage(props: IndexPageProps) {
     <>
       <IndexPageHead settings={settings} />
       <Header title={title} social={social} hero={<Hero />} level={1} />
-      <main className="w-full mx-auto justify-center -m-10 gap-10 px-4">
+      <main className="w-full mx-auto justify-center -m-10 gap-10 px-4 mb-20">
         <section className="container mx-auto pb-10">
           <form
             action=""
@@ -56,10 +58,11 @@ export function HomePage(props: IndexPageProps) {
             </button>
           </form>
         </section>
-        <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6 pb-60">
+        <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
           <section className="flex flex-col w-full max-w-col-9 gap-10">
             <NewsSection news={news} />
             <PostSection posts={posts} />
+            <NewsDrop news={news} type="home" />
           </section>
           <aside className="flex lg:flex-col flex-row sm:flex-nowrap flex-wrap lg:max-w-col-3 w-full border-l-2 border-l-gray-100 gap-10">
             <section className="flex flex-col gap-6 w-full">

@@ -11,7 +11,7 @@ const postFields = groq`
   "slug": slug.current,
 `
 
-const newsDropQuery = groq`
+export const newsDropQuery = groq`
 *[_type == "news" && drop == true] | order(date desc, _updatedAt desc) [0...3] {
   category[0]->{title, "slug": slug.current},
   ${postFields}
@@ -21,19 +21,19 @@ const newsDropQuery = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const postIndexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc)[0..3] {
+*[_type == "post"] | order(date desc, _updatedAt desc)[0..2] {
   "category": game->{title, "slug": slug.current, cover},
   ${postFields}
 }`
 
 export const newsIndexQuery = groq`
-*[_type == "news"] | order(date desc, _updatedAt desc)[0..6] {
+*[_type == "news"] | order(date desc, _updatedAt desc)[0..5] {
   category[0]->{title, "slug": slug.current},
   ${postFields}
 }`
 
 export const reviewsIndexQuery = groq`
-*[_type == "review"] | order(date desc, _updatedAt desc)[0..3] {
+*[_type == "review"] | order(date desc, _updatedAt desc)[0..2] {
   "category": game->{title, "slug": slug.current},
   ${postFields}
 }`

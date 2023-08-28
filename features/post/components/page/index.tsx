@@ -90,7 +90,11 @@ export function PostPage(props: PostPageProps) {
                 </Author.Root>
               </article>
             </main>
-            {news?.length > 0 && <NewsDrop news={news} />}
+            {news?.length > 0 && (
+              <aside aria-label="Related articles" className="px-4 pt-12">
+                <NewsDrop news={news} type="post" />{' '}
+              </aside>
+            )}
             <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-24">
               <TitleSection>Comentários</TitleSection>
               <div className="max-w-screen-md mx-auto w-full">
