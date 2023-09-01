@@ -14,9 +14,8 @@ type CardProps = {
 const item = tv({
   slots: {
     rootCard:
-      'w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip drop-shadow-xl',
-    sectionCard:
-      'md:absolute relative bottom-0 flex md:flex-row gap-3 items-end w-full',
+      'relative w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip drop-shadow-xl',
+    sectionCard: 'relative bottom-0 flex md:flex-row gap-3 items-end w-full',
     coverGameCard: 'rounded-xl border-white',
     infoSectionCard: 'flex flex-col bg-white rounded-r-xl rounded-bl-xl w-full',
     titleCard: 'text-primary-5 font-bold',
@@ -26,7 +25,7 @@ const item = tv({
     size: {
       small: {
         rootCard: 'h-auto rounded-[20px]',
-        sectionCard: 'p-2',
+        sectionCard: 'lg:absolute p-2',
         coverGameCard: 'h-24 border-2 w-16',
         infoSectionCard: 'p-2',
         titleCard: 'text-base',
@@ -34,7 +33,7 @@ const item = tv({
       },
       big: {
         rootCard: 'md:h-72 rounded-3xl',
-        sectionCard: 'p-3',
+        sectionCard: 'md:absolute p-3',
         coverGameCard: 'h-40 border-4 w-28',
         infoSectionCard: 'p-4',
         titleCard: 'text-2xl',

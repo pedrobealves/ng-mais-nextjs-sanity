@@ -92,7 +92,6 @@ export default defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
-          validation: (rule) => rule.required(),
         },
       ],
     },
