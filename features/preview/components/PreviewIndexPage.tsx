@@ -1,5 +1,6 @@
 import { HomePage, type IndexPageProps } from 'features/home'
 import {
+  newsDropQuery,
   newsIndexQuery,
   type Post,
   postIndexQuery,
@@ -19,6 +20,10 @@ export default function PreviewIndexPage(props: IndexPageProps) {
     props.reviews,
     reviewsIndexQuery,
   )
+  const [newsDrop, loadingNewsDrop] = useLiveQuery<Post[]>(
+    props.newsDrop,
+    newsDropQuery,
+  )
   const [settings, loadingSettings] = useLiveQuery<Settings>(
     props.settings,
     settingsQuery,
@@ -27,8 +32,15 @@ export default function PreviewIndexPage(props: IndexPageProps) {
   return (
     <HomePage
       preview
-      loading={loadingPosts || loadingSettings || loadingNews || loadingReviews}
+      loading={
+        loadingPosts ||
+        loadingSettings ||
+        loadingNews ||
+        loadingReviews ||
+        loadingNewsDrop
+      }
       news={news || []}
+      newsDrop={newsDrop || []}
       reviews={reviews || []}
       posts={posts || []}
       settings={settings || {}}
