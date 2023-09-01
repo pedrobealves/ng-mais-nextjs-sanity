@@ -13,7 +13,7 @@
 <br>
 <br>
 <img src="https://img.shields.io/github/deployments/pedrobealves/mil-tensei-nextjs-sanity/production
-.svg?style=for-the-badge&colorA=gray&logo=vercel&colorB=7651A9&logoColor=F7F7F7&logoWidth=15"/></a>
+.svg?style=for-the-badge&colorA=gray&logo=vercel&colorB=7651A9&logoColor=F7F7F7&logoWidth=15"/>
 
 # miltensei - Entertainment Multiverses Network
 
