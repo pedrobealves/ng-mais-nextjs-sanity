@@ -12,8 +12,8 @@
 <a href="https://www.miltensei.com"><img src="https://img.shields.io/badge/nextjs-homolog-353535.svg?style=for-the-badge&logo=nextdotjs&colorA=gray&logoColor=F7F7F7&logoWidth=25"/></a>
 <br>
 <br>
-<img src="https://img.shields.io/github/deployments/pedrobealves/mil-tensei-nextjs-sanity/production
-.svg?style=for-the-badge&colorA=gray&logo=vercel&colorB=7651A9&logoColor=F7F7F7&logoWidth=15"/>
+<a href=""><img src="https://img.shields.io/github/deployments/pedrobealves/mil-tensei-nextjs-sanity/production
+.svg?style=for-the-badge&colorA=gray&logo=vercel&colorB=7651A9&logoColor=F7F7F7&logoWidth=15"/></a>
 
 # miltensei - Entertainment Multiverses Network
 
