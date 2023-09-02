@@ -14,30 +14,31 @@ type CardProps = {
 const item = tv({
   slots: {
     rootCard:
-      'relative w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip drop-shadow-xl',
-    sectionCard: 'relative bottom-0 flex md:flex-row gap-3 items-end w-full',
-    coverGameCard: 'rounded-xl border-white',
-    infoSectionCard: 'flex flex-col bg-white rounded-r-xl rounded-bl-xl w-full',
-    titleCard: 'text-primary-5 font-bold',
-    subTitleCard: '',
+      'relative rounded-3xl transition duration-30 w-full font-inter grid overflow-clip drop-shadow-xl hover:drop-shadow-2xl',
+    sectionCard: 'mt-24 p-3 relative flex md:flex-row gap-3 items-end w-full',
+    coverGameCard: 'md:block hidden h-40 border-4 w-28 rounded-xl border-white',
+    infoSectionCard:
+      'p-4 flex flex-col bg-white rounded-r-xl rounded-bl-xl w-full',
+    titleCard: 'text-2xl text-primary-5 font-bold break-words',
+    subTitleCard: 'text-primary-5',
   },
   variants: {
     size: {
       small: {
-        rootCard: 'h-auto rounded-[20px]',
-        sectionCard: 'lg:absolute p-2',
-        coverGameCard: 'h-24 border-2 w-16',
-        infoSectionCard: 'p-2',
-        titleCard: 'text-base',
+        rootCard: '',
+        sectionCard: '',
+        coverGameCard: '',
+        infoSectionCard: '',
+        titleCard: '',
         subTitleCard: 'hidden',
       },
       big: {
-        rootCard: 'md:h-72 rounded-3xl',
-        sectionCard: 'md:absolute p-3',
-        coverGameCard: 'h-40 border-4 w-28',
-        infoSectionCard: 'p-4',
-        titleCard: 'text-2xl',
-        subTitleCard: 'text-primary-5 hidden md:block',
+        rootCard: '',
+        sectionCard: '',
+        coverGameCard: '',
+        infoSectionCard: '',
+        titleCard: '',
+        subTitleCard: 'md:block hidden',
       },
     },
   },

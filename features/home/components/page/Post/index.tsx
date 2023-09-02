@@ -15,7 +15,7 @@ export function PostSection({ posts }: PostProps) {
           Matérias
         </div>
       </div>
-      <div className="grid w-full md:grid-cols-3 [&>*:first-child]:sm:col-span-2 sm:grid-cols-2 grid-cols-1 [&>*:first-child]:md:row-span-2 gap-6">
+      <div className="grid w-full [&>*:first-child]:sm:col-span-2 sm:grid-cols-2 grid-cols-1 gap-6 auto-rows-fr">
         {posts.map((post, index) => (
           <Card
             key={post._id}
