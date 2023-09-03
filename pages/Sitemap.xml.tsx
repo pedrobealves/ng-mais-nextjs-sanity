@@ -1,4 +1,10 @@
-import { getAllPosts, getClient } from 'lib/sanity.client'
+import {
+  getAllNews,
+  getAllPosts,
+  getAllReviews,
+  getAllReviewSlugs,
+  getClient,
+} from 'lib/sanity.client'
 
 type SitemapLocation = {
   url: string
@@ -27,7 +33,7 @@ const defaultUrls: SitemapLocation[] = [
 ]
 
 const createSitemap = (locations: SitemapLocation[]) => {
-  const baseUrl = process.env.NEXT_PUBLIC_URL // Make sure to configure this
+  const baseUrl = process.env.NEXT_PUBLIC_NEXTJS_SITE_URL // Make sure to configure this
   return `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${locations
@@ -63,13 +69,38 @@ export async function getServerSideProps({ res }) {
         url: `/post/${post.slug}`,
         priority: 0.5,
         lastmod: new Date(post._updatedAt),
+        changefreq: 'daily',
+      }
+    })
+
+  const [news = []] = await Promise.all([getAllNews(client)])
+  const newsUrls: SitemapLocation[] = news
+    .filter(({ slug = '' }) => slug)
+    .map((news) => {
+      return {
+        url: `/news/${news.slug}`,
+        priority: 0.5,
+        lastmod: new Date(news._updatedAt),
+        changefreq: 'hourly',
+      }
+    })
+
+  const [reviews = []] = await Promise.all([getAllReviews(client)])
+  const reviewsUrls: SitemapLocation[] = reviews
+    .filter(({ slug = '' }) => slug)
+    .map((reviews) => {
+      return {
+        url: `/review/${reviews.slug}`,
+        priority: 0.6,
+        lastmod: new Date(reviews._updatedAt),
+        changefreq: 'weekly',
       }
     })
 
   // ... get more routes here
 
   // Return the default urls, combined with dynamic urls above
-  const locations = [...defaultUrls, ...postUrls]
+  const locations = [...defaultUrls, ...postUrls, ...newsUrls, ...reviewsUrls]
 
   // Set response to XML
   res.setHeader('Content-Type', 'text/xml')
