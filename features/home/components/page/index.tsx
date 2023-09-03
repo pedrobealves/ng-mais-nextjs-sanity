@@ -41,7 +41,12 @@ export function HomePage(props: IndexPageProps) {
     <>
       <IndexPageHead settings={settings} />
       <Layout preview={preview} loading={loading}>
-        <Header title={title} social={social} hero={<Hero />} level={1} />
+        <Header
+          title={title}
+          social={social}
+          hero={<Hero reviews={reviews} />}
+          level={1}
+        />
         <main className="w-full mx-auto justify-center -m-10 gap-10 px-4 mb-20">
           <section className="container mx-auto pb-10">
             <form
