@@ -62,7 +62,7 @@ export function HomePage(props: IndexPageProps) {
           <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
             <section className="flex flex-col w-full max-w-col-9 gap-10">
               <NewsSection news={news} />
-              <PostSection posts={posts} />
+              <PostSection.Default posts={posts} />
               <NewsDrop news={news} type="home" />
             </section>
             <aside className="flex lg:flex-col flex-row sm:flex-nowrap flex-wrap lg:max-w-col-3 w-full border-l-2 border-l-gray-100 gap-10">
@@ -228,28 +228,7 @@ export function HomePage(props: IndexPageProps) {
                   </ul>
                 </div>
               </section>
-              <section className="flex flex-col gap-6 w-full">
-                <div className="flex justify-start items-center gap-4">
-                  <div className="w-2 h-9 bg-primary-5 rounded-tr-[5px] rounded-br-[5px]"></div>
-                  <div className="text-center text-primary-5 text-2xl font-extrabold leading-loose">
-                    Artigos MIL
-                  </div>
-                </div>
-                <ul>
-                  <li className="flex flex-row bg-gray-100 p-2 rounded-r-[20px]">
-                    <div className="flex flex-col gap-2 px-3 justify-center w-full">
-                      <hr className="w-5 h-[2px] border-0 bg-primary-8" />
-                      <h1 className="text-primary-8 font-bold text-base">
-                        Nome do artigo - headline do artigo
-                      </h1>
-                    </div>
-                    <img
-                      src="https://image.api.playstation.com/vulcan/img/cfn/113073qYZHyiDU5-4vu9krqfIPdGCvcGob0VpazrmfyUEbn4qZ64XBJfRKHvwa_tStB4nMD3UDv4Cb9V3iTH6cJymhQ1sJiU.png"
-                      className="min-h-[10rem] w-24 max-h-full object-cover rounded-2xl"
-                    />
-                  </li>
-                </ul>
-              </section>
+              <PostSection.Special posts={posts} />
             </aside>
           </section>
         </main>

@@ -72,8 +72,8 @@ export function Card({
             : 'https://source.unsplash.com/96x96/?face'
         }
         className="absolute inset-0 h-full w-full object-cover"
-        width={564}
-        height={1104}
+        width={858}
+        height={1716}
         alt={picture?.alt ?? title}
       />
       <div className="absolute inset-0 [background-image:linear-gradient(180deg,_rgba(90,_24,_154,_0.00)_0%,_rgba(90,_24,_154,_0.90)_82.96%)]"></div>

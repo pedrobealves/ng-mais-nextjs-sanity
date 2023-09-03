@@ -46,10 +46,6 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
   return (await client.fetch(settingsQuery)) || {}
 }
 
-export async function getAllPosts(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(postIndexQuery)) || []
-}
-
 export async function getAllNews(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(newsIndexQuery)) || []
 }
@@ -92,6 +88,12 @@ export async function getPostAndMoreStories(
   slug: string,
 ): Promise<{ post: Post; newsDrop: Post[] }> {
   return await client.fetch(postAndMoreStoriesQuery, { slug })
+}
+
+export async function getAllPosts(client: SanityClient): Promise<Post[]> {
+  const { defaultPosts, specialPosts } =
+    (await client.fetch(postIndexQuery)) || []
+  return [...defaultPosts, ...specialPosts]
 }
 
 export async function getNewsAndMoreStories(

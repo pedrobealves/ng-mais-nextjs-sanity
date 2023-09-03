@@ -21,10 +21,19 @@ export const newsDropQuery = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const postIndexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc)[0..2] {
+{
+"defaultPosts": *[_type == "post" && type == 'default'] | order(date desc, _updatedAt desc)[0..2] {
+  type,
   "category": game->{title, "slug": slug.current, cover},
   ${postFields}
-}`
+},
+"specialPosts": *[_type == "post" && type == 'special'] | order(date desc, _updatedAt desc)[0..4] {
+  type,
+  "category": game->{title, "slug": slug.current, cover},
+  ${postFields}
+}
+}
+`
 
 export const newsIndexQuery = groq`
 *[_type == "news"] | order(date desc, _updatedAt desc)[0..5] {
@@ -108,6 +117,8 @@ export const reviewBySlugQuery = groq`
 }
 `
 
+type TypePost = 'default' | 'special'
+
 export interface Author {
   name?: string
   picture?: any
@@ -139,6 +150,7 @@ export interface Post {
   category?: Game & Category
   slug?: string
   content?: any
+  type?: TypePost
 }
 
 export interface Review {
