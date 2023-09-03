@@ -15,6 +15,7 @@ import {
   reviewSlugsQuery,
   type Settings,
   settingsQuery,
+  topIndexQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -48,6 +49,10 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
 
 export async function getAllNews(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(newsIndexQuery)) || []
+}
+
+export async function getTop(client: SanityClient): Promise<Review[]> {
+  return (await client.fetch(topIndexQuery)) || []
 }
 
 export async function getAllReviews(client: SanityClient): Promise<Post[]> {

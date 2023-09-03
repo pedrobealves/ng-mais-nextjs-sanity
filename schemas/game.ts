@@ -39,5 +39,21 @@ export default defineType({
       options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'release',
+      title: 'Release',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+    }),
+    defineField({
+      name: 'developer',
+      title: 'Developer',
+      type: 'string',
+    }),
+    defineField({
+      name: 'genre',
+      title: 'Genre',
+      type: 'string',
+    }),
   ],
 })

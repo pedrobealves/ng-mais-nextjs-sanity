@@ -6,12 +6,12 @@ import { NewsDrop } from 'features/news-drop'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
-import type { Post, Settings } from 'lib/sanity.queries'
-import { useState } from 'react'
+import type { Post, Review, Settings } from 'lib/sanity.queries'
 
 import { Hero } from './Hero'
 import { NewsSection } from './News'
 import { PostSection } from './Post'
+import { Top } from './Top'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -20,22 +20,23 @@ export interface IndexPageProps {
   news: Post[]
   reviews: Post[]
   newsDrop: Post[]
+  topGames: Review[]
   settings: Settings
 }
 
 export function HomePage(props: IndexPageProps) {
-  const { preview, loading, news, reviews, posts, settings, newsDrop } = props
+  const {
+    preview,
+    loading,
+    news,
+    reviews,
+    posts,
+    settings,
+    newsDrop,
+    topGames,
+  } = props
   const [heroPost, ...morePosts] = posts || []
   const { title = demo.title, social } = settings || {}
-
-  // State for storing the selected option. Default is "Male"
-  const [selectedOption, setSelectedOption] = useState('game1')
-
-  // Function to handle the change in radio button selection
-  function onValueChange(event) {
-    // Updating the state with the selected radio button's value
-    setSelectedOption(event.target.value)
-  }
 
   return (
     <>
@@ -71,168 +72,7 @@ export function HomePage(props: IndexPageProps) {
               <NewsDrop news={news} type="home" />
             </section>
             <aside className="flex lg:flex-col flex-row sm:flex-nowrap flex-wrap lg:max-w-col-3 w-full border-l-2 border-l-gray-100 gap-10">
-              <section className="flex flex-col gap-6 w-full">
-                <div className="flex justify-start items-center gap-4">
-                  <div className="w-2 h-9 bg-primary-5 rounded-tr-[5px] rounded-br-[5px]"></div>
-                  <div className="text-center text-primary-5 text-2xl font-extrabold leading-loose">
-                    Top Jogos
-                  </div>
-                </div>
-                <div className="pl-6">
-                  <ul className="flex flex-col">
-                    <li className="flex flex-col gap-3">
-                      <input
-                        id="game1"
-                        value="game1"
-                        className="peer hidden"
-                        type="radio"
-                        name="top"
-                        checked={selectedOption === 'game1'}
-                        onChange={onValueChange}
-                      />
-                      <label
-                        htmlFor="game1"
-                        className="flex gap-3 cursor-pointer peer-checked:[&>*:first-child]:text-2xl peer-checked:[&>*:first-child]:font-bold peer-checked:[&>*:first-child]:text-primary-5 peer-checked:[&_small]:block peer-checked:[&_p]:font-bold peer-checked:[&_p]:text-primary-5"
-                      >
-                        <span className="text-base font-normal text-primary-8">
-                          1
-                        </span>
-                        <div className="flex flex-col">
-                          <p className="text-base font-normal text-primary-8">
-                            Sonic Generations 7
-                          </p>
-                          <small className="hidden font-normal text-xs text-neutral-600">
-                            Aventura
-                          </small>
-                        </div>
-                      </label>
-                      <div className="peer-checked:h-40 h-0 transform overflow-hidden transition-all duration-500 ease-in">
-                        <div className="flex gap-5 transition-all duration-500 ease-in-out hover:bg-neutral-200 hover:rounded-xl cursor-pointer">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/pt/2/2f/Sonic_Generations_capa.png"
-                            className="w-24 h-[8.5rem] rounded-xl border-primary-5 border-2"
-                          />
-                          <div className="flex flex-col gap-3">
-                            <div className="flex items-center justify-center text-lg font-extrabold text-white h-12 w-12 bg-primary-5 rounded-full">
-                              100
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Lançamento</span>
-                                <span>01/02/2030</span>
-                              </div>
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Desenvolvedor</span>
-                                <span>Sega</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="flex flex-col gap-3">
-                      <input
-                        id="game2"
-                        value="game2"
-                        className="peer hidden"
-                        type="radio"
-                        name="top"
-                        checked={selectedOption === 'game2'}
-                        onChange={onValueChange}
-                      />
-                      <label
-                        htmlFor="game2"
-                        className="flex gap-3 cursor-pointer peer-checked:[&>*:first-child]:text-2xl peer-checked:[&>*:first-child]:font-bold peer-checked:[&>*:first-child]:text-primary-5 peer-checked:[&_small]:block peer-checked:[&_p]:font-bold peer-checked:[&_p]:text-primary-5"
-                      >
-                        <span className="text-base font-normal text-primary-8">
-                          1
-                        </span>
-                        <div className="flex flex-col">
-                          <p className="text-base font-normal text-primary-8">
-                            Sonic Generations 7
-                          </p>
-                          <small className="hidden font-normal text-xs text-neutral-600">
-                            Aventura
-                          </small>
-                        </div>
-                      </label>
-                      <div className="peer-checked:h-36 h-0 transform overflow-hidden transition-all duration-500 ease-in-out">
-                        <div className="flex gap-5">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/pt/2/2f/Sonic_Generations_capa.png"
-                            className="w-24 h-[8.5rem] rounded-xl border-primary-5 border-2"
-                          />
-                          <div className="flex flex-col gap-3">
-                            <div className="flex items-center justify-center text-lg font-extrabold text-white h-12 w-12 bg-primary-5 rounded-full">
-                              100
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Lançamento</span>
-                                <span>01/02/2030</span>
-                              </div>
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Desenvolvedor</span>
-                                <span>Sega</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="flex flex-col gap-3">
-                      <input
-                        id="game3"
-                        value="game3"
-                        className="peer hidden"
-                        type="radio"
-                        name="top"
-                        checked={selectedOption === 'game3'}
-                        onChange={onValueChange}
-                      />
-                      <label
-                        htmlFor="game3"
-                        className="flex gap-3 cursor-pointer peer-checked:[&>*:first-child]:text-2xl peer-checked:[&>*:first-child]:font-bold peer-checked:[&>*:first-child]:text-primary-5 peer-checked:[&_small]:block peer-checked:[&_p]:font-bold peer-checked:[&_p]:text-primary-5"
-                      >
-                        <span className="text-base font-normal text-primary-8">
-                          1
-                        </span>
-                        <div className="flex flex-col">
-                          <p className="text-base font-normal text-primary-8">
-                            Sonic Generations 7
-                          </p>
-                          <small className="hidden font-normal text-xs text-neutral-600">
-                            Aventura
-                          </small>
-                        </div>
-                      </label>
-                      <div className="peer-checked:h-36 h-0 transform overflow-hidden transition-all duration-500 ease-in-out">
-                        <div className="flex gap-5">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/pt/2/2f/Sonic_Generations_capa.png"
-                            className="w-24 h-[8.5rem] rounded-xl border-primary-5 border-2"
-                          />
-                          <div className="flex flex-col gap-3">
-                            <div className="flex items-center justify-center text-lg font-extrabold text-white h-12 w-12 bg-primary-5 rounded-full">
-                              100
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Lançamento</span>
-                                <span>01/02/2030</span>
-                              </div>
-                              <div className="flex flex-col font-normal text-xs text-neutral-600">
-                                <span>Desenvolvedor</span>
-                                <span>Sega</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </section>
+              <Top games={topGames} />
               <PostSection.Special posts={posts} />
             </aside>
           </section>

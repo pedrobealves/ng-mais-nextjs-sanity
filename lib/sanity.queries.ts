@@ -117,6 +117,14 @@ export const reviewBySlugQuery = groq`
 }
 `
 
+export const topIndexQuery = groq`
+*[_type == "review"] | order(grade desc, _updatedAt desc)[0..2] {
+  grade,
+  "slug": slug.current,
+  game->{title, "slug": slug.current, cover, release, developer, genre},
+}
+`
+
 type TypePost = 'default' | 'special'
 
 export interface Author {
@@ -130,6 +138,9 @@ export interface Game {
   title?: string
   slug?: string
   cover?: any
+  developer?: string
+  release?: string
+  genre?: string
 }
 
 export interface Media {
@@ -159,6 +170,8 @@ export interface Review {
   cons: string[]
   verdict: string
   grade: number
+  slug?: string
+  game?: Game
 }
 
 export interface Category {
