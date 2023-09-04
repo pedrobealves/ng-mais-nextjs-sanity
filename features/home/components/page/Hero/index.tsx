@@ -29,10 +29,10 @@ export function Hero({ reviews }: HeroProps) {
             <div className="absolute bottom-0 py-8 px-8 flex flex-col items-start justify-between self-stretch">
               <div className="flex flex-col items-start justify-end gap-2 self-stretch text-white">
                 <div className="flex flex-col items-start justify-end self-stretch text-left gap-1 max-w-sm">
-                  <p className="text-4xl font-bold">Weekly 2</p>
+                  <p className="text-4xl font-bold">Weekly 1</p>
                   <p className="text-lg leading-6">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor
+                    Resumo semanal com as principais notícias e tópicos mais
+                    pertinentes
                   </p>
                 </div>
               </div>

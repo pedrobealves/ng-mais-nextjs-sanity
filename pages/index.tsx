@@ -2,6 +2,7 @@ import { HomePage } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
 import {
+  getAllCategory,
   getAllNews,
   getAllNewsDrop,
   getAllPosts,
@@ -10,7 +11,7 @@ import {
   getSettings,
   getTop,
 } from 'lib/sanity.client'
-import { Post, Review, Settings } from 'lib/sanity.queries'
+import { Category, Post, Review, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
@@ -21,6 +22,7 @@ interface PageProps extends SharedPageProps {
   newsDrop: Post[]
   top: Review[]
   settings: Settings
+  category: Category[]
 }
 
 interface Query {
@@ -28,7 +30,8 @@ interface Query {
 }
 
 export default function Page(props: PageProps) {
-  const { posts, reviews, news, settings, draftMode, newsDrop, top } = props
+  const { posts, reviews, news, settings, draftMode, newsDrop, top, category } =
+    props
 
   if (draftMode) {
     return (
@@ -39,6 +42,7 @@ export default function Page(props: PageProps) {
         settings={settings}
         newsDrop={newsDrop}
         topGames={top}
+        category={category}
       />
     )
   }
@@ -51,6 +55,7 @@ export default function Page(props: PageProps) {
       settings={settings}
       newsDrop={newsDrop}
       topGames={top}
+      category={category}
     />
   )
 }
@@ -66,6 +71,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     reviews = [],
     newsDrop = [],
     top = [],
+    category = [],
   ] = await Promise.all([
     getSettings(client),
     getAllPosts(client),
@@ -73,6 +79,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     getAllReviews(client),
     getAllNewsDrop(client),
     getTop(client),
+    getAllCategory(client),
   ])
 
   return {
@@ -84,6 +91,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       settings,
       draftMode,
       top,
+      category,
       token: draftMode ? readToken : '',
     },
   }

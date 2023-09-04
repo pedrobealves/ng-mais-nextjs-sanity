@@ -41,6 +41,14 @@ export const newsIndexQuery = groq`
   ${postFields}
 }`
 
+export const categoryIndexQuery = groq`
+*[_type == "category"] | order(date desc, _updatedAt desc)[0..5] {
+  _id,
+  title,
+  "slug": slug.current,
+}
+`
+
 export const reviewsIndexQuery = groq`
 *[_type == "review"] | order(date desc, _updatedAt desc)[0..2] {
   "category": game->{title, "slug": slug.current},

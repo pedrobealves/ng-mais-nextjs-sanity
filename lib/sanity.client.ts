@@ -1,5 +1,7 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  type Category,
+  categoryIndexQuery,
   newsAndMoreStoriesQuery,
   newsDropQuery,
   newsIndexQuery,
@@ -53,6 +55,12 @@ export async function getAllNews(client: SanityClient): Promise<Post[]> {
 
 export async function getTop(client: SanityClient): Promise<Review[]> {
   return (await client.fetch(topIndexQuery)) || []
+}
+
+export async function getAllCategory(
+  client: SanityClient,
+): Promise<Category[]> {
+  return (await client.fetch(categoryIndexQuery)) || []
 }
 
 export async function getAllReviews(client: SanityClient): Promise<Post[]> {

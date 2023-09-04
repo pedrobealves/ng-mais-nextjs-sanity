@@ -1,11 +1,13 @@
 import { Card } from 'components/Card'
-import type { Post } from 'lib/sanity.queries'
+import { ca } from 'date-fns/locale'
+import type { Category, Post } from 'lib/sanity.queries'
 
 type NewsProps = {
   news: Post[]
+  categories: Category[]
 }
 
-export function NewsSection({ news }: NewsProps) {
+export function NewsSection({ news, categories }: NewsProps) {
   return (
     <section className="flex flex-col gap-10">
       <div className="flex justify-start items-center gap-4">
@@ -18,15 +20,14 @@ export function NewsSection({ news }: NewsProps) {
         <button className="px-4 py-3 rounded-full bg-primary-5 font-bold text-white drop-shadow-xl">
           Todas notícias
         </button>
-        <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-lg hover:drop-shadow-none hover:bg-gray-200">
-          Categoria 1
-        </button>
-        <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-lg hover:drop-shadow-none hover:bg-gray-200">
-          Categoria 2
-        </button>
-        <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-lg hover:drop-shadow-none hover:bg-gray-200">
-          Categoria 3
-        </button>
+        {categories?.map((category, index) => (
+          <button
+            key={index}
+            className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-lg hover:drop-shadow-none hover:bg-gray-200"
+          >
+            {category.title}
+          </button>
+        ))}
       </div>
       <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 gap-6">
         {news?.map((item) => (

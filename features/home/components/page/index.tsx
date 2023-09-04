@@ -8,7 +8,7 @@ import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import Sidebar from 'layouts/Sidebar'
 import * as demo from 'lib/demo.data'
-import type { Post, Review, Settings } from 'lib/sanity.queries'
+import type { Category, Post, Review, Settings } from 'lib/sanity.queries'
 
 import { Hero } from './Hero'
 import { NewsSection } from './News'
@@ -24,6 +24,7 @@ export interface IndexPageProps {
   newsDrop: Post[]
   topGames: Review[]
   settings: Settings
+  category: Category[]
 }
 
 export function HomePage(props: IndexPageProps) {
@@ -36,6 +37,7 @@ export function HomePage(props: IndexPageProps) {
     settings,
     newsDrop,
     topGames,
+    category,
   } = props
   const { title = demo.title, social } = settings || {}
 
@@ -53,7 +55,7 @@ export function HomePage(props: IndexPageProps) {
           <InputNewsletter />
           <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
             <section className="flex flex-col w-full max-w-col-9 gap-10">
-              <NewsSection news={news} />
+              <NewsSection news={news} categories={category} />
               <PostSection.Default posts={posts} />
               <NewsDrop news={news} type="home" />
             </section>
