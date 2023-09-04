@@ -5,6 +5,7 @@ import { socialIconMap } from 'components/SocialIcon'
 import TitleSection from 'components/TitleSection'
 import { Comments } from 'features/comments'
 import { NewsDrop } from 'features/news-drop'
+import { SubscribeNewsletter } from 'features/newsletter'
 import { Author } from 'features/post/components/page/Author'
 import { Review as ReviewSection } from 'features/review'
 import Footer from 'layouts/Footer'
@@ -88,6 +89,7 @@ export function PostPage(props: PostPageProps) {
                     </Author.Icons>
                   </Author.BioContainer>
                 </Author.Root>
+                <SubscribeNewsletter />
               </article>
             </main>
             {news?.length > 0 && (

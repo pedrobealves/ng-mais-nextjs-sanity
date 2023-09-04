@@ -26,15 +26,5 @@ export default function CoverImage(props: CoverImageProps) {
     <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />
   )
 
-  return (
-    <div>
-      {slug ? (
-        <Link href={`/post/${slug}`} aria-label={title}>
-          {image}
-        </Link>
-      ) : (
-        image
-      )}
-    </div>
-  )
+  return <div>{image}</div>
 }

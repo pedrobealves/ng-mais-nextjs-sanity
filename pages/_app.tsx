@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { AppProps } from 'next/app'
 import { Inter, Open_Sans } from 'next/font/google'
