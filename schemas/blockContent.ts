@@ -70,10 +70,9 @@ export default defineType({
         ],
       },
     },
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
-
+    {
+      type: 'imageEmbed',
+    },
     {
       type: 'image',
       title: 'Image Upload',
@@ -94,9 +93,6 @@ export default defineType({
           description: 'Important for SEO and accessiblity.',
         },
       ],
-    },
-    {
-      type: 'imageEmbed',
     },
     {
       type: 'youtube',

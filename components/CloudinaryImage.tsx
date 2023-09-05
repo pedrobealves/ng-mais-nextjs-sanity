@@ -17,7 +17,7 @@ export const CloudinaryImage = (props: Props) => {
   return (
     <figure>
       <Image
-        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/fetch/${url}`}
+        src={`${url}`}
         alt={alt}
         width={800}
         height={800}

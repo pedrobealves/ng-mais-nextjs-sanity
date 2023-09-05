@@ -1,16 +1,17 @@
 .portableText {
-  @apply  text-primary-8;
+  @apply text-primary-8;
 }
 
 .portableText p,
 .portableText ul,
 .portableText ol,
 .portableText blockquote {
-  @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9 leading-relaxed;
+  @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9;
 }
 
-.portableText img {
-  @apply object-cover object-center rounded-xl mb-6
+.portableText img,
+.portableText figure {
+  @apply flex flex-col justify-center items-center object-cover object-center rounded-xl mb-6;
 }
 
 .portableText figcaption {
@@ -41,7 +42,7 @@
   @apply mb-4 mt-8 text-xl font-bold leading-snug;
 }
 
-.portableText blockquote{
+.portableText blockquote {
   @apply border-l-4 border-primary-5 pl-4 mb-6 text-xl italic font-semibold;
 }
 

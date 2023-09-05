@@ -17,7 +17,6 @@ export default defineType({
       name: 'alt',
       type: 'string',
       description: 'Enter the Alt Text',
-      validation: (rule) => rule.required(),
     },
     {
       name: 'caption',

@@ -8,12 +8,7 @@ export default function ImagePreview(props) {
   return (
     <div>
       {renderDefault({ ...props, title: 'Image Embed' })}
-      <Image
-        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/fetch/${url}`}
-        width={500}
-        height={500}
-        alt={alt}
-      />
+      <Image src={`${url}`} width={500} height={500} alt={alt} />
     </div>
   )
 }

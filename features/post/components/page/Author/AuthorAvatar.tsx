@@ -8,7 +8,7 @@ interface AuthorAvatarProps {
 
 export default function AuthorAvatar({ name, picture }: AuthorAvatarProps) {
   return (
-    <div className="flex h-full items-start self-stretch py-1">
+    <div className="flex h-full min-w-[70px] items-start self-stretch py-1">
       <Image
         src={
           picture?.asset?._ref
