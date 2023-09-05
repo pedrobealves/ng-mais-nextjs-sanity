@@ -29,7 +29,7 @@ export default function Footer() {
               </h2>
               <ul className="flex flex-col gap-4 text-white font-bold">
                 <li>
-                  <a href="https://flowbite.com" className="hover:underline">
+                  <a href="#" className="hover:underline">
                     Sobre Nós
                   </a>
                 </li>
