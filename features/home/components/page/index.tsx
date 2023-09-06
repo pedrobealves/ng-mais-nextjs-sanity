@@ -57,7 +57,7 @@ export function HomePage(props: IndexPageProps) {
             <section className="flex flex-col w-full max-w-col-9 gap-10">
               <NewsSection news={news} categories={category} />
               <PostSection.Default posts={posts} />
-              <NewsDrop news={news} type="home" />
+              <NewsDrop news={newsDrop} type="home" />
             </section>
             <Sidebar>
               <Top games={topGames} />
