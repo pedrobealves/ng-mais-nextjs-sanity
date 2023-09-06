@@ -19,6 +19,7 @@
     "@sanity/client": "6.4.0",
     "@sanity/image-url": "1.0.2",
     "@sanity/vision": "3.14.5",
+    "@vercel/analytics": "^1.0.2",
     "@vercel/og": "0.5.10",
     "classnames": "2.3.2",
     "date-fns": "^2.30.0",
