@@ -34,10 +34,10 @@ export function Review({ review }: ReviewProps) {
               <Card.DividerDetail color="cons" />
               <div className="flex items-center">
                 <div className="self-stretch flex-col items-start gap-3.5 flex">
-                  {review.pros.map((pro, index) => (
+                  {review.cons.map((con, index) => (
                     <Card.Detail
                       key={index}
-                      text={pro}
+                      text={con}
                       color="cons"
                       icon={FaXmark}
                     />
