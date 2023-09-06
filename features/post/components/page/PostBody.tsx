@@ -13,11 +13,12 @@ import {
   PortableText,
   type PortableTextReactComponents,
 } from '@portabletext/react'
-import { CloudinaryImage } from 'components/CloudinaryImage'
+import { EmbedImage } from 'components/EmbedImage'
 import { SanityImage } from 'components/SanityImage'
 import getYouTubeId from 'get-youtube-id'
 import Image from 'next/image'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
+import { TwitterTweetEmbed } from 'react-twitter-embed'
 
 import styles from './PostBody.module.css'
 
@@ -27,12 +28,29 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       return <SanityImage {...value} />
     },
     imageEmbed: ({ value }) => {
-      return <CloudinaryImage {...value} />
+      return <EmbedImage {...value} />
     },
     youtube: ({ value }) => {
       const { url } = value
       const id = getYouTubeId(url)
       return <LiteYouTubeEmbed title={url} id={id} />
+    },
+    twitter: ({ value }) => {
+      const { id } = value || {}
+
+      if (!id) {
+        return (
+          <div>
+            <p>Tweet-ID mangler</p>
+          </div>
+        )
+      }
+
+      return (
+        <div>
+          <TwitterTweetEmbed options={{ align: 'center' }} tweetId={id} />
+        </div>
+      )
     },
   },
 }

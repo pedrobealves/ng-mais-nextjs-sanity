@@ -25,6 +25,7 @@ import newsType from 'schemas/news'
 import postType from 'schemas/post'
 import reviewType from 'schemas/review'
 import settingsType from 'schemas/settings'
+import twitterType from 'schemas/twitter'
 import weeklyType from 'schemas/weekly'
 import youtubeType from 'schemas/youtube'
 
@@ -49,6 +50,7 @@ export default defineConfig({
       blockContentType,
       youtubeType,
       imageEmbedType,
+      twitterType,
     ],
   },
   plugins: [

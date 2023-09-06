@@ -9,7 +9,7 @@ interface Props {
   caption?: string
 }
 
-export const CloudinaryImage = (props: Props) => {
+export const EmbedImage = (props: Props) => {
   const { url, alt, caption } = props
 
   if (!props) return null
