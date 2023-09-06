@@ -269,6 +269,8 @@ async function queryStaleAuthorRoutes(
   client: SanityClient,
   id: string,
 ): Promise<StaleRoute[]> {
+  let slugs = []
+
   let postSlugs = await client.fetch(
     groq`*[_type == "author" && _id == $id] {
     "slug": *[_type == "post" && references(^._id)].slug.current
@@ -292,18 +294,18 @@ async function queryStaleAuthorRoutes(
 
   if (postSlugs.length > 0) {
     postSlugs = await mergeWithMorePostStories(client, postSlugs)
-    return ['/', ...postSlugs.map((slug) => `/post/${slug}`)]
+    slugs.push(...postSlugs.map((slug) => `/post/${slug}`))
   }
 
   if (newsSlugs.length > 0) {
     newsSlugs = await mergeWithMoreNewsStories(client, newsSlugs)
-    return ['/', ...newsSlugs.map((slug) => `/news/${slug}`)]
+    slugs.push(...newsSlugs.map((slug) => `/news/${slug}`))
   }
 
   if (reviewSlugs.length > 0) {
     reviewSlugs = await mergeWithMoreReviewStories(client, reviewSlugs)
-    return ['/', ...reviewSlugs.map((slug) => `/review/${slug}`)]
+    slugs.push(...reviewSlugs.map((slug) => `/review/${slug}`))
   }
 
-  return []
+  return ['/', ...slugs]
 }
