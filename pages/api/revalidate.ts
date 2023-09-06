@@ -269,16 +269,40 @@ async function queryStaleAuthorRoutes(
   client: SanityClient,
   id: string,
 ): Promise<StaleRoute[]> {
-  let slugs = await client.fetch(
+  let postSlugs = await client.fetch(
     groq`*[_type == "author" && _id == $id] {
     "slug": *[_type == "post" && references(^._id)].slug.current
   }["slug"][]`,
     { id },
   )
 
-  if (slugs.length > 0) {
-    slugs = await mergeWithMorePostStories(client, slugs)
-    return ['/', ...slugs.map((slug) => `/post/${slug}`)]
+  let newsSlugs = await client.fetch(
+    groq`*[_type == "author" && _id == $id] {
+    "slug": *[_type == "news" && references(^._id)].slug.current
+  }["slug"][]`,
+    { id },
+  )
+
+  let reviewSlugs = await client.fetch(
+    groq`*[_type == "author" && _id == $id] {
+    "slug": *[_type == "review" && references(^._id)].slug.current
+  }["slug"][]`,
+    { id },
+  )
+
+  if (postSlugs.length > 0) {
+    postSlugs = await mergeWithMorePostStories(client, postSlugs)
+    return ['/', ...postSlugs.map((slug) => `/post/${slug}`)]
+  }
+
+  if (newsSlugs.length > 0) {
+    newsSlugs = await mergeWithMoreNewsStories(client, newsSlugs)
+    return ['/', ...newsSlugs.map((slug) => `/news/${slug}`)]
+  }
+
+  if (reviewSlugs.length > 0) {
+    reviewSlugs = await mergeWithMoreReviewStories(client, reviewSlugs)
+    return ['/', ...reviewSlugs.map((slug) => `/review/${slug}`)]
   }
 
   return []
