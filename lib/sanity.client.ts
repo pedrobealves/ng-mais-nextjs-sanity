@@ -57,6 +57,11 @@ export async function getTop(client: SanityClient): Promise<Review[]> {
   return (await client.fetch(topIndexQuery)) || []
 }
 
+export async function getFetcher([query, params]) {
+  const client = getClient()
+  return await client.fetch(query, params)
+}
+
 export async function getAllCategory(
   client: SanityClient,
 ): Promise<Category[]> {

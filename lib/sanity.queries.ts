@@ -133,6 +133,16 @@ export const topIndexQuery = groq`
 }
 `
 
+export const searchQuery = groq`
+*[ _type in ["news", "post", "review"] && [title, excerpt] match $query] | 
+score(
+  boost(title match $query, 3),
+  boost(excerpt match $query, 2)
+) {
+  ${postFields}
+}
+`
+
 type TypePost = 'default' | 'special'
 
 export interface Author {

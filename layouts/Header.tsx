@@ -1,16 +1,10 @@
-import { PortableText } from '@portabletext/react'
-import { Icon, IconProps } from 'components/Icon'
+import { Icon } from 'components/Icon'
 import { LinkAction } from 'components/Link'
 import { Logo } from 'components/Logo'
-import { Social } from 'components/Social'
+import { Search } from 'components/Search'
 import { socialIconMap } from 'components/SocialIcon'
 import { Media } from 'lib/sanity.queries'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
-import search from '/public/icon/Search.svg'
-
-import styles from './Header.module.css'
 
 function useScrollDirection() {
   const [scrollDirection, setScrollDirection] = useState(null)
@@ -110,12 +104,7 @@ export default function BlogHeader({
                   </LinkAction>
                 ))}
               </div>
-              <button
-                type="button"
-                className="text-white bg-secundary-4 rounded-3xl p-4"
-              >
-                <Image priority src={search} alt="Search" />
-              </button>
+              <Search level={level} />
             </div>
           </nav>
           {hero}
@@ -177,12 +166,7 @@ export default function BlogHeader({
                   </LinkAction>
                 ))}
               </div>
-              <button
-                type="button"
-                className="text-white bg-secundary-4 rounded-3xl p-4"
-              >
-                <Image priority src={search} alt="Search" />
-              </button>
+              <Search level={level} />
             </div>
           </nav>
         </header>
