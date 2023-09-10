@@ -39,7 +39,7 @@ export default function BlogHeader({
   social,
   hero,
 }: {
-  title: string
+  title?: string
   description?: any[]
   level: 1 | 2
   social: Media[]
