@@ -20,23 +20,24 @@ export const newsDropQuery = groq`
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
-export const postIndexQuery = groq`
-{
-"defaultPosts": *[_type == "post" && type == 'default'] | order(date desc, _updatedAt desc)[0..2] {
-  type,
-  "category": game->{title, "slug": slug.current, cover},
-  ${postFields}
-},
-"specialPosts": *[_type == "post" && type == 'special'] | order(date desc, _updatedAt desc)[0..4] {
+export const defaultPostsQuery = groq`
+*[_type == "post" && type == 'default'] | order(date desc, _updatedAt desc)[$pageIndex...$limitDefault] {
   type,
   "category": game->{title, "slug": slug.current, cover},
   ${postFields}
 }
+`
+
+export const specialPostsQuery = groq`
+*[_type == "post" && type == 'special'] | order(date desc, _updatedAt desc)[$pageIndex...$limitSpecial] {
+  type,
+  "category": game->{title, "slug": slug.current, cover},
+  ${postFields}
 }
 `
 
 export const newsIndexQuery = groq`
-*[_type == "news"] | order(date desc, _updatedAt desc)[0..5] {
+*[_type == "news"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   category[0]->{title, "slug": slug.current},
   ${postFields}
 }`
@@ -50,7 +51,7 @@ export const categoryIndexQuery = groq`
 `
 
 export const reviewsIndexQuery = groq`
-*[_type == "review"] | order(date desc, _updatedAt desc)[0..2] {
+*[_type == "review"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   "category": game->{title, "slug": slug.current},
   ${postFields}
 }`
