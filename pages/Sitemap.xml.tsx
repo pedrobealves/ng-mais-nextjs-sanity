@@ -2,7 +2,6 @@ import {
   getAllNews,
   getAllPosts,
   getAllReviews,
-  getAllReviewSlugs,
   getClient,
 } from 'lib/sanity.client'
 

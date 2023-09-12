@@ -6,9 +6,9 @@ import { CardList } from 'features/pagination'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import { readToken } from 'lib/sanity.api'
-import { getAllNews, getClient, getSettings } from 'lib/sanity.client'
+import { getClient, getNewsPagination, getSettings } from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
-import { newsIndexQuery, Settings } from 'lib/sanity.queries'
+import { newsPaginationQuery, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
@@ -36,7 +36,7 @@ export default function Search(props: PageProps) {
           <CardList
             posts={initialNews}
             type="news"
-            pageQuery={newsIndexQuery}
+            pageQuery={newsPaginationQuery}
           />
         </section>
       </main>
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
   const [initialNews = [], settings] = await Promise.all([
-    getAllNews(client, 0, POSTS_IN_INDEX_PAGE),
+    getNewsPagination(client, 0, POSTS_IN_INDEX_PAGE),
     getSettings(client),
   ])
 

@@ -2,13 +2,14 @@ import { HomePage } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllCategory,
-  getAllNews,
-  getAllNewsDrop,
-  getAllPosts,
-  getAllReviews,
+  getCategoryPagination,
   getClient,
+  getDefaultPostsPagination,
+  getNewsDropPagination,
+  getNewsPagination,
+  getReviewsPagination,
   getSettings,
+  getSpecialPostsPagination,
   getTop,
 } from 'lib/sanity.client'
 import { Category, Post, Review, Settings } from 'lib/sanity.queries'
@@ -16,7 +17,8 @@ import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  posts: Post[]
+  postsSpecial: Post[]
+  postsDefault: Post[]
   news: Post[]
   reviews: Post[]
   newsDrop: Post[]
@@ -30,12 +32,25 @@ interface Query {
 }
 
 export default function Page(props: PageProps) {
-  const { posts, reviews, news, settings, draftMode, newsDrop, top, category } =
-    props
+  const {
+    postsDefault,
+    postsSpecial,
+    reviews,
+    news,
+    settings,
+    draftMode,
+    newsDrop,
+    top,
+    category,
+  } = props
+
+  const posts = [...postsSpecial, ...postsDefault]
 
   if (draftMode) {
     return (
       <PreviewIndexPage
+        postsSpecial={postsSpecial}
+        postsDefault={postsDefault}
         posts={posts}
         reviews={reviews}
         news={news}
@@ -66,7 +81,8 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   const [
     settings,
-    posts = [],
+    postsSpecial = [],
+    postsDefault = [],
     news = [],
     reviews = [],
     newsDrop = [],
@@ -74,17 +90,19 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     category = [],
   ] = await Promise.all([
     getSettings(client),
-    getAllPosts(client, 0, 2, 4),
-    getAllNews(client, 0, 5),
-    getAllReviews(client, 0, 2),
-    getAllNewsDrop(client),
-    getTop(client),
-    getAllCategory(client),
+    getDefaultPostsPagination(client, 0, 2),
+    getSpecialPostsPagination(client, 0, 4),
+    getNewsPagination(client, 0, 5),
+    getReviewsPagination(client, 0, 2),
+    getNewsDropPagination(client, 0, 3),
+    getTop(client, 0, 8),
+    getCategoryPagination(client, 0, 5),
   ])
 
   return {
     props: {
-      posts,
+      postsSpecial,
+      postsDefault,
       news,
       newsDrop,
       reviews,

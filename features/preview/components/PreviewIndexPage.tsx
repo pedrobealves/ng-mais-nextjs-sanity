@@ -1,42 +1,65 @@
 import { HomePage, type IndexPageProps } from 'features/home'
 import {
   type Category,
-  categoryIndexQuery,
+  categoryPaginationQuery,
+  defaultPostsPaginationQuery,
   newsDropQuery,
-  newsIndexQuery,
+  newsPaginationQuery,
   type Post,
-  postIndexQuery,
   type Review,
-  reviewsIndexQuery,
+  reviewsPaginationQuery,
   type Settings,
   settingsQuery,
-  topIndexQuery,
+  specialPostsPaginationQuery,
+  topPaginationQuery,
 } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
 
-export default function PreviewIndexPage(props: IndexPageProps) {
-  const [posts, loadingPosts] = useLiveQuery<Post[]>(
-    props.posts,
-    postIndexQuery,
+interface IndexPreviewPageProps extends IndexPageProps {
+  postsSpecial: Post[]
+  postsDefault: Post[]
+}
+
+export default function PreviewIndexPage(props: IndexPreviewPageProps) {
+  const [postsDefault, loadingDefaultPosts] = useLiveQuery<Post[]>(
+    props.postsDefault,
+    defaultPostsPaginationQuery,
+    { pageIndex: 0, limit: 2 },
   )
-  const [news, loadingNews] = useLiveQuery<Post[]>(props.news, newsIndexQuery)
+
+  const [postsSpecial, loadingSpecialPosts] = useLiveQuery<Post[]>(
+    props.postsSpecial,
+    specialPostsPaginationQuery,
+    { pageIndex: 0, limit: 4 },
+  )
+
+  const [news, loadingNews] = useLiveQuery<Post[]>(
+    props.news,
+    newsPaginationQuery,
+    { pageIndex: 0, limit: 5 },
+  )
+
   const [reviews, loadingReviews] = useLiveQuery<Post[]>(
     props.reviews,
-    reviewsIndexQuery,
+    reviewsPaginationQuery,
+    { pageIndex: 0, limit: 2 },
   )
   const [newsDrop, loadingNewsDrop] = useLiveQuery<Post[]>(
     props.newsDrop,
-    newsDropQuery,
+    newsPaginationQuery,
+    { pageIndex: 0, limit: 3 },
   )
 
   const [category, loadingCategory] = useLiveQuery<Category[]>(
     props.category,
-    categoryIndexQuery,
+    categoryPaginationQuery,
+    { pageIndex: 0, limit: 5 },
   )
 
   const [topGames, loadingTopGames] = useLiveQuery<Review[]>(
     props.topGames,
-    topIndexQuery,
+    topPaginationQuery,
+    { pageIndex: 0, limit: 8 },
   )
 
   const [settings, loadingSettings] = useLiveQuery<Settings>(
@@ -48,7 +71,8 @@ export default function PreviewIndexPage(props: IndexPageProps) {
     <HomePage
       preview
       loading={
-        loadingPosts ||
+        loadingDefaultPosts ||
+        loadingSpecialPosts ||
         loadingSettings ||
         loadingNews ||
         loadingReviews ||
@@ -59,7 +83,7 @@ export default function PreviewIndexPage(props: IndexPageProps) {
       news={news || []}
       newsDrop={newsDrop || []}
       reviews={reviews || []}
-      posts={posts || []}
+      posts={[...postsDefault, ...postsSpecial] || []}
       settings={settings || {}}
       category={category || []}
       topGames={topGames || []}
