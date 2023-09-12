@@ -1,7 +1,12 @@
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient, groq, type SanityClient } from 'next-sanity'
-import { type ParseBody, parseBody } from 'next-sanity/webhook'
+import {
+  createClient,
+  groq,
+  type SanityClient,
+  type SanityDocument,
+} from 'next-sanity'
+import { parseBody, type ParsedBody } from 'next-sanity/webhook'
 
 export { config } from 'next-sanity/webhook'
 
@@ -14,13 +19,13 @@ export default async function revalidate(
       req,
       process.env.SANITY_REVALIDATE_SECRET,
     )
-    if (isValidSignature === false) {
+    if (!isValidSignature) {
       const message = 'Invalid signature'
       console.log(message)
       return res.status(401).send(message)
     }
 
-    if (typeof body._id !== 'string' || !body._id) {
+    if (typeof body?._id !== 'string' || !body._id) {
       const invalidId = 'Invalid _id'
       console.error(invalidId, { body })
       return res.status(400).send(invalidId)
@@ -45,7 +50,10 @@ type StaleRoute =
   | `/review/${string}`
 
 async function queryStaleRoutes(
-  body: Pick<ParseBody['body'], '_type' | '_id' | 'date' | 'slug'>,
+  body: Pick<
+    ParsedBody<SanityDocument>['body'],
+    '_type' | '_id' | 'date' | 'slug'
+  >,
 ): Promise<StaleRoute[]> {
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
 
