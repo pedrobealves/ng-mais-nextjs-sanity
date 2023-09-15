@@ -81,7 +81,7 @@ export default function Search(props: PageProps) {
           </form>
           <section className="mt-12 flex flex-row gap-6 [&>*]:basis-[270px] flex-wrap justify-center">
             {data?.map((item) => (
-              <Card.Root slug={item.slug} key={item._id}>
+              <Card.Root slug={item.slug} type={item._type} key={item._id}>
                 <Card.Cover picture={item.coverImage} title={item.title} />
                 <Card.Section>
                   <div className="flex flex-col gap-3">
