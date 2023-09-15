@@ -31,7 +31,7 @@ export function NewsSection({ news, categories }: NewsProps) {
       </div>
       <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 gap-6">
         {news?.map((item) => (
-          <Card.Root slug={item.slug} key={item._id}>
+          <Card.Root slug={item.slug} type={item._type} key={item._id}>
             <Card.Cover picture={item.coverImage} title={item.title} />
             <Card.Section>
               <div className="flex flex-col gap-3">
