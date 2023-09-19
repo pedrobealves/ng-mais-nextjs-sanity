@@ -92,9 +92,9 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     getSettings(client),
     getDefaultPostsPagination(client, 0, 2),
     getSpecialPostsPagination(client, 0, 4),
-    getNewsPagination(client, 0, 5),
+    getNewsPagination(client, 0, 6),
     getReviewsPagination(client, 0, 2),
-    getNewsDropPagination(client, 0, 3),
+    getNewsDropPagination(client, 0, 5),
     getTop(client, 0, 8),
     getCategoryPagination(client, 0, 5),
   ])
