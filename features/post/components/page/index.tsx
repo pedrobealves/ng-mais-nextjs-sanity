@@ -63,6 +63,7 @@ export function PostPage(props: PostPageProps) {
                   title={post.title}
                   _type={post._type}
                   coverImage={post.coverImage}
+                  showCover={post.showCover}
                   date={post.date}
                   author={post.author}
                   category={post.category}

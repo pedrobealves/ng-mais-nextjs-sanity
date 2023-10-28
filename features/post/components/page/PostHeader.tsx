@@ -13,6 +13,7 @@ export default function PostHeader(
     | 'title'
     | '_type'
     | 'coverImage'
+    | 'showCover'
     | 'excerpt'
     | 'date'
     | 'author'
@@ -20,8 +21,17 @@ export default function PostHeader(
     | 'category'
   >,
 ) {
-  const { title, _type, coverImage, date, author, excerpt, slug, category } =
-    props
+  const {
+    title,
+    _type,
+    coverImage,
+    showCover,
+    date,
+    author,
+    excerpt,
+    slug,
+    category,
+  } = props
 
   return (
     <>
@@ -36,7 +46,9 @@ export default function PostHeader(
           url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/${_type}/${slug}`}
         />
       </div>
-      <CoverImage title={title} image={coverImage} priority slug={slug} />
+      {showCover && (
+        <CoverImage title={title} image={coverImage} priority slug={slug} />
+      )}
     </>
   )
 }

@@ -8,6 +8,7 @@ const postFields = groq`
   _updatedAt,
   excerpt,
   coverImage,
+  showCover,
   "slug": slug.current,
 `
 
@@ -219,6 +220,7 @@ export interface Post {
   _type: string
   title?: string
   coverImage?: any
+  showCover?: boolean
   date?: string
   _updatedAt?: string
   excerpt?: string

@@ -51,6 +51,13 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'showCover',
+      title: 'Show cover image',
+      description: 'This will show the cover image.',
+      initialValue: true,
+      type: 'boolean',
+    }),
+    defineField({
       name: 'date',
       title: 'Date',
       type: 'datetime',

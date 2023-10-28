@@ -12,9 +12,16 @@
 }
 
 .portableText img,
-.portableText figure,
-.bodyHtml div a {
+.portableText figure {
   @apply flex flex-col justify-center items-center object-cover object-center rounded-xl mb-6;
+}
+
+.bodyHtml div a {
+  @apply flex flex-col justify-center items-center;
+}
+
+.bodyHtml div table tbody tr td a img {
+  @apply m-2;
 }
 
 .bodyHtml div a {
@@ -26,12 +33,16 @@
 }
 
 .portableText figcaption,
-.bodyHtml .tr-caption {
-  @apply md:text-base text-sm text-primary-8 opacity-80 -mt-3 text-center mb-6;
+.bodyHtml div table tbody tr:last-child td {
+  @apply md:!text-base !text-sm text-primary-8 opacity-80 -mt-3 text-center mb-6;
 }
 
-.bodyHtml .tr-caption {
-  @apply bg-black;
+.bodyHtml div table tbody tr:last-child td {
+  @apply italic;
+}
+
+.bodyHtml div table {
+  @apply mb-6;
 }
 
 .portableText h1 {
