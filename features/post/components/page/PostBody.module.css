@@ -1,21 +1,37 @@
-.portableText {
+.portableText,
+.bodyHtml {
   @apply text-primary-8;
 }
 
 .portableText p,
 .portableText ul,
 .portableText ol,
-.portableText blockquote {
+.portableText blockquote,
+.bodyHtml div {
   @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9;
 }
 
 .portableText img,
-.portableText figure {
+.portableText figure,
+.bodyHtml div a {
   @apply flex flex-col justify-center items-center object-cover object-center rounded-xl mb-6;
 }
 
-.portableText figcaption {
+.bodyHtml div a {
+  @apply mt-8;
+}
+
+.bodyHtml div br {
+  @apply hidden;
+}
+
+.portableText figcaption,
+.bodyHtml .tr-caption {
   @apply md:text-base text-sm text-primary-8 opacity-80 -mt-3 text-center mb-6;
+}
+
+.bodyHtml .tr-caption {
+  @apply bg-black;
 }
 
 .portableText h1 {

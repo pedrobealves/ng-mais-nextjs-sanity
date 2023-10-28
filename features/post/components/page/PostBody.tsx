@@ -24,6 +24,14 @@ import styles from './PostBody.module.css'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
+    html: ({ value }) => {
+      return (
+        <div
+          className={`${styles.bodyHtml}`}
+          dangerouslySetInnerHTML={{ __html: value.code }}
+        ></div>
+      )
+    },
     image: ({ value }) => {
       return <SanityImage {...value} />
     },

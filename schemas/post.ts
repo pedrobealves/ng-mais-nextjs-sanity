@@ -39,7 +39,7 @@ export default defineType({
       title: 'Excerpt',
       type: 'text',
       rows: 2,
-      validation: (rule) => rule.required().max(100),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'coverImage',

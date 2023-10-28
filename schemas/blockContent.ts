@@ -100,5 +100,14 @@ export default defineType({
     {
       type: 'twitter',
     },
+    {
+      type: 'code',
+      name: 'html',
+      title: 'HTML Embed',
+      options: {
+        language: 'html',
+        languageAlternatives: [{ title: 'HTML', value: 'html' }],
+      },
+    },
   ],
 })
