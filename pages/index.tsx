@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   ] = await Promise.all([
     getSettings(client),
     getDefaultPostsPagination(client, 0, 2),
-    getSpecialPostsPagination(client, 0, 4),
+    getSpecialPostsPagination(client, 0, 10),
     getNewsPagination(client, 0, 6),
     getReviewsPagination(client, 0, 2),
     getNewsDropPagination(client, 0, 5),
