@@ -47,10 +47,10 @@ export default function BlogHeader({
   hero?: React.ReactNode
 }) {
   const menu = [
-    {
+    /*{
       name: 'Notícias',
       slug: '/news',
-    },
+    },*/
     {
       name: 'Matérias',
       slug: '/post',
