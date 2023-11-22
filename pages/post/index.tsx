@@ -39,7 +39,7 @@ export default function Search(props: PageProps) {
           <HeadCard title="Matérias" />
           <CardList
             posts={initialPosts}
-            type="post"
+            type="post/default"
             pageQuery={defaultPostsPaginationQuery}
           />
         </section>

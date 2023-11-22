@@ -48,7 +48,6 @@ export function CardList({ pageQuery, posts: initialPosts, type }: PageProps) {
   }, [pageIndex])
 
   useEffect(() => {
-    console.log('numer posts:' + posts.length)
     setIsLastPage(posts.length < POSTS_PER_PAGE)
   }, [posts])
 

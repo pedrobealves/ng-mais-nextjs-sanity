@@ -39,7 +39,7 @@ export default function Search(props: PageProps) {
           <HeadCard title="Artigos MIL" />
           <CardList
             posts={initialPosts}
-            type="post"
+            type="post/special"
             pageQuery={specialPostsPaginationQuery}
           />
         </section>
