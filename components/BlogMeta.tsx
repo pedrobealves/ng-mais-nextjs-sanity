@@ -29,5 +29,5 @@ export default function BlogMeta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
     </>
-  )
+  );
 }
