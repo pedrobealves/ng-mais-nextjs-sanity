@@ -28,7 +28,9 @@ export function Search({ level }: SearchProps) {
       aria-label="Search Form"
       onSubmit={handleFormSubmit}
       className={twMerge(
-        !toggle ? 'ring-2 ring-secundary-4 bg-white' : 'bg-transparent',
+        !toggle
+          ? `bg-white ${level === 2 ? ' ring-2 ring-secundary-4' : ''}`
+          : 'bg-transparent',
         'flex justify-between',
         level === 1 ? 'rounded-[32px]' : 'rounded-[30px]',
       )}
@@ -54,8 +56,30 @@ export function Search({ level }: SearchProps) {
           'text-white bg-secundary-4 rounded-3xl p-4',
         )}
         onClick={() => setToggle(!toggle)}
+        alt="Search"
       >
-        <Image priority src={search} alt="Search" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+            stroke="white"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M21.0004 20.9999L16.6504 16.6499"
+            stroke="white"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
     </form>
   )

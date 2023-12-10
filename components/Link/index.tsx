@@ -1,15 +1,24 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import Link from 'next/link'
+import type { LinkProps } from 'next/link'
+import { AnchorHTMLAttributes } from 'react'
 
-interface LinkProps {
-  children: React.ReactNode
-  url: string
-  test?: string
+const CustomLink = ({
+  href,
+  ...rest
+}: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  const isInternalLink = href && href.startsWith('/')
+  const isAnchorLink = href && href.startsWith('#')
+
+  if (isInternalLink) {
+    return <Link href={href} {...rest} />
+  }
+
+  if (isAnchorLink) {
+    return <a href={href} {...rest} />
+  }
+
+  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />
 }
 
-export function LinkAction({ children, url, test }: LinkProps) {
-  return (
-    <Link href={url} target="_blank" passHref>
-      {children}
-    </Link>
-  )
-}
+export default CustomLink

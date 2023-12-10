@@ -1,6 +1,6 @@
 import Layout from 'components/BlogLayout'
 import { Icon } from 'components/Icon'
-import { LinkAction } from 'components/Link'
+import Link from 'components/Link'
 import { socialIconMap } from 'components/SocialIcon'
 import TitleSection from 'components/TitleSection'
 import { Comments } from 'features/comments'
@@ -83,9 +83,9 @@ export function PostPage(props: PostPageProps) {
                     <Author.Bio name={post.author.name} bio={post.author.bio} />
                     <Author.Icons>
                       {post.author.social?.map((social) => (
-                        <LinkAction key={social._key} url={social.url}>
+                        <Link key={social._key} href={social.url}>
                           <Icon icon={socialIconMap[social.media]} />
-                        </LinkAction>
+                        </Link>
                       ))}
                     </Author.Icons>
                   </Author.BioContainer>

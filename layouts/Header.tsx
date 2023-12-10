@@ -1,10 +1,5 @@
-import { Icon } from 'components/Icon'
-import { LinkAction } from 'components/Link'
-import { Logo } from 'components/Logo'
-import { Search } from 'components/Search'
-import { socialIconMap } from 'components/SocialIcon'
+import { NavBar } from 'components/NavBar'
 import { Media } from 'lib/sanity.queries'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 function useScrollDirection() {
@@ -46,56 +41,12 @@ export default function BlogHeader({
   social: Media[]
   hero?: React.ReactNode
 }) {
-  const menu = [
-    /*{
-      name: 'Notícias',
-      slug: '/news',
-    },*/
-    {
-      name: 'Matérias',
-      slug: '/post',
-    },
-    {
-      name: 'Análises',
-      slug: '/review',
-    },
-    {
-      name: 'Artigos MIL',
-      slug: '/post/special',
-    },
-  ]
-
   const scrollDirection = useScrollDirection()
   switch (level) {
     case 1:
       return (
         <header className="bg-gradient-header w-full px-4 rounded-b-[40px]">
-          <nav className="container flex items-center justify-between mx-auto py-3">
-            <Logo heightSymbol={106} heightLogo={64} isLight />
-
-            <ul className="hidden lg:flex text-white font-semibold text-base gap-8">
-              {menu?.map((item, index) => (
-                <Link href={item.slug} key={index}>
-                  <li className="block hover:text-secundary-4">{item.name}</li>
-                </Link>
-              ))}
-            </ul>
-            <div className="hidden lg:flex items-center gap-6">
-              <div className="flex gap-3">
-                {social?.map((item) => (
-                  <LinkAction key={item._key} url={item.url}>
-                    <Icon
-                      icon={socialIconMap[item.media]}
-                      color="text-white"
-                      hoverColor="hover:text-secundary-5"
-                      size={16}
-                    />
-                  </LinkAction>
-                ))}
-              </div>
-              <Search level={level} />
-            </div>
-          </nav>
+          <NavBar level={level} social={social} />
           {hero}
         </header>
       )
@@ -107,26 +58,7 @@ export default function BlogHeader({
             scrollDirection === 'down' ? '-top-24' : 'top-0'
           } bg-white w-full z-20 left-0 px-4 transition-all duration-500`}
         >
-          <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1">
-            <Logo />
-            <ul className="hidden md:flex text-primary-8 font-semibold text-base gap-8">
-              {menu?.map((item, index) => (
-                <Link href={item.slug} key={index}>
-                  <li className="block hover:text-primary-5">{item.name}</li>
-                </Link>
-              ))}
-            </ul>
-            <div className="hidden md:flex items-center gap-6">
-              <div className="flex gap-3">
-                {social?.map((item) => (
-                  <LinkAction key={item._key} url={item.url}>
-                    <Icon icon={socialIconMap[item.media]} size={16} />
-                  </LinkAction>
-                ))}
-              </div>
-              <Search level={level} />
-            </div>
-          </nav>
+          <NavBar level={level} social={social} />
         </header>
       )
 
