@@ -4,6 +4,7 @@ import { Logo } from 'components/Logo'
 import { Search } from 'components/Search'
 import { socialIconMap } from 'components/SocialIcon'
 import headerNavLinks from 'data/headerNavLinks'
+import { it } from 'date-fns/locale'
 import { Media } from 'lib/sanity.queries'
 import Image from 'next/image'
 import bars from 'public/icon/bars-2.svg'
@@ -81,7 +82,7 @@ export function NavBar({ level, social }: NavType) {
           {social?.map((item) => (
             <Link key={item._key} href={item.url}>
               <Icon
-                icon={socialIconMap[item.media]}
+                icon={socialIconMap(item.media)}
                 color={IconColor()}
                 hoverColor={IconHoverColor()}
                 size={16}

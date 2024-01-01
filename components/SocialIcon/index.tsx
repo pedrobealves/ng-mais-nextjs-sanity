@@ -1,16 +1,25 @@
-import React from 'react'
 import {
   FaFacebook,
   FaInstagram,
+  FaRegCircle,
   FaTiktok,
   FaTwitter,
   FaYoutube,
 } from 'react-icons/fa'
 
-export const socialIconMap = {
-  facebook: FaFacebook,
-  twitter: FaTwitter,
-  tiktok: FaTiktok,
-  instagram: FaInstagram,
-  youtube: FaYoutube,
+export const socialIconMap = (socialMedia) => {
+  switch (socialMedia) {
+    case 'facebook':
+      return FaFacebook
+    case 'twitter':
+      return FaTwitter
+    case 'tiktok':
+      return FaTiktok
+    case 'instagram':
+      return FaInstagram
+    case 'youtube':
+      return FaYoutube
+    default:
+      return FaRegCircle
+  }
 }

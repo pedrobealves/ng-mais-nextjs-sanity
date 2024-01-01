@@ -84,7 +84,7 @@ export function PostPage(props: PostPageProps) {
                     <Author.Icons>
                       {post.author.social?.map((social) => (
                         <Link key={social._key} href={social.url}>
-                          <Icon icon={socialIconMap[social.media]} />
+                          <Icon icon={socialIconMap(social.media)} />
                         </Link>
                       ))}
                     </Author.Icons>

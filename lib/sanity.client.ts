@@ -1,4 +1,10 @@
-import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
+import {
+  apiVersion,
+  dataset,
+  projectId,
+  studioUrl,
+  useCdn,
+} from 'lib/sanity.api'
 import {
   type Category,
   categoryPaginationQuery,
@@ -35,6 +41,8 @@ export function getClient(preview?: { token: string }): SanityClient {
     apiVersion,
     useCdn,
     perspective: 'published',
+    encodeSourceMap: preview?.token ? true : false,
+    studioUrl,
   })
   if (preview) {
     if (!preview.token) {

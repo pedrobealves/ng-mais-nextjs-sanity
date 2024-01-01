@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
 import { Inter, Open_Sans } from 'next/font/google'
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,6 +24,7 @@ export interface SharedPageProps {
 }
 
 const PreviewProvider = lazy(() => import('components/PreviewProvider'))
+const VisualEditing = lazy(() => import('components/VisualEditing'))
 
 export default function App({
   Component,
@@ -39,6 +40,11 @@ export default function App({
           </PreviewProvider>
         ) : (
           <Component {...pageProps} />
+        )}
+        {draftMode && (
+          <Suspense>
+            <VisualEditing />
+          </Suspense>
         )}
         <Analytics />
       </div>

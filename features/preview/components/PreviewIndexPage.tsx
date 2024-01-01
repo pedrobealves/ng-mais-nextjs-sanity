@@ -66,7 +66,6 @@ export default function PreviewIndexPage(props: IndexPreviewPageProps) {
     props.settings,
     settingsQuery,
   )
-
   return (
     <HomePage
       preview
