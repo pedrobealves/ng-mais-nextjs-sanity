@@ -29,7 +29,9 @@ export function NewsDrop({ news, type }: NewsDrop) {
           <Link href={`/news/${post.slug}`} key={post._id}>
             <Card.Root>
               <Card.Cover picture={post.coverImage} title={post.title} />
-              <Card.Category category={post.category.title} />
+              {post.category && (
+                <Card.Category category={post.category.title} />
+              )}
               <Card.InfoContainer>
                 <Card.Title
                   index={index}

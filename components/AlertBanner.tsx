@@ -1,35 +1,35 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import Container from "components/BlogContainer";
-import { useSyncExternalStore } from "react";
+import Container from 'components/BlogContainer'
+import { useSyncExternalStore } from 'react'
 
-const subscribe = () => () => {};
+const subscribe = () => () => {}
 
 export default function Alert({
   preview,
   loading,
 }: {
-  preview?: boolean;
-  loading?: boolean;
+  preview?: boolean
+  loading?: boolean
 }) {
   const shouldShow = useSyncExternalStore(
     subscribe,
     () => window.top === window,
     () => false,
-  );
+  )
 
-  if (!shouldShow || !preview) return null;
+  if (!shouldShow || !preview) return null
 
   return (
     <div
       className={`${
-        loading ? "animate-pulse" : ""
+        loading ? 'animate-pulse' : ''
       } z-50 absolute border-b w-full border-accent-7 bg-accent-7 text-white`}
     >
       <Container>
         <div className="py-2 text-center text-sm">
-          {"Previewing drafts. "}
+          {'Previewing drafts. '}
           <a
-            href="/api/exit-preview"
+            href="/api/edisable-draft"
             className="underline transition-colors duration-200 hover:text-cyan"
           >
             Back to published
@@ -37,5 +37,5 @@ export default function Alert({
         </div>
       </Container>
     </div>
-  );
+  )
 }
