@@ -29,7 +29,7 @@ export default function Alert({
         <div className="py-2 text-center text-sm">
           {'Previewing drafts. '}
           <a
-            href="/api/edisable-draft"
+            href="/api/disable-draft"
             className="underline transition-colors duration-200 hover:text-cyan"
           >
             Back to published
