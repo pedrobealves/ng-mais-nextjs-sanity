@@ -6,6 +6,7 @@ import {
   useCdn,
 } from 'lib/sanity.api'
 import {
+  type Category,
   categoryPaginationQuery,
   categoryQuery,
   defaultPostsPaginationQuery,
@@ -17,21 +18,20 @@ import {
   newsPaginationQuery,
   newsQuery,
   newsSlugsQuery,
+  type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
+  type Review,
   reviewAndMoreStoriesQuery,
   reviewSlugsQuery,
   reviewsPaginationQuery,
   reviewsQuery,
+  type Settings,
   settingsQuery,
   specialPostsPaginationQuery,
   specialPostsQuery,
   topPaginationQuery,
-  type Category,
-  type Post,
-  type Review,
-  type Settings,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 

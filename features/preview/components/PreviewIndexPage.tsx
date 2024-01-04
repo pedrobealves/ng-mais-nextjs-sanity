@@ -1,7 +1,7 @@
 import { HomePage } from 'features/home'
 import {
-  indexQuery,
   type Category,
+  indexQuery,
   type Post,
   type Review,
   type Settings,

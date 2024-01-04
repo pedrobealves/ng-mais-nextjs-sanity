@@ -52,7 +52,7 @@ export default function Footer() {
         <hr className="h-[2px] text-white opacity-10 sm:mx-auto" />
         <div className="pt-8 pb-11 flex items-center justify-center">
           <span className="text-sm text-white text-center opacity-60">
-            © 2023
+            &copy; {new Date().getFullYear()}
             <a href="https://miltensei.com" className="hover:underline pl-1">
               Miltensei
             </a>
