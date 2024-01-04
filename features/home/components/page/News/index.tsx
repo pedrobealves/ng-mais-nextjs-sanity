@@ -1,5 +1,4 @@
 import { Card } from 'components/Card'
-import { ca } from 'date-fns/locale'
 import type { Category, Post } from 'lib/sanity.queries'
 
 type NewsProps = {
@@ -35,10 +34,12 @@ export function NewsSection({ news, categories }: NewsProps) {
             <Card.Cover picture={item.coverImage} title={item.title} />
             <Card.Section>
               <div className="flex flex-col gap-3">
-                <Card.Category
-                  category={item.category.title}
-                  dateString={item.date}
-                />
+                {item.category && (
+                  <Card.Category
+                    category={item.category.title}
+                    dateString={item.date}
+                  />
+                )}
                 <Card.Title title={item.title} />
               </div>
               <Card.ReadMore />

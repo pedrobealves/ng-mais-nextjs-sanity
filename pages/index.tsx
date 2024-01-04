@@ -1,24 +1,14 @@
 import { HomePage } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
-import {
-  getCategoryPagination,
-  getClient,
-  getDefaultPostsPagination,
-  getNewsDropPagination,
-  getNewsPagination,
-  getReviewsPagination,
-  getSettings,
-  getSpecialPostsPagination,
-  getTop,
-} from 'lib/sanity.client'
+import { getClient, getIndexInfo } from 'lib/sanity.client'
 import { Category, Post, Review, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  postsSpecial: Post[]
-  postsDefault: Post[]
+  specialPosts: Post[]
+  defaultPosts: Post[]
   news: Post[]
   reviews: Post[]
   newsDrop: Post[]
@@ -33,8 +23,8 @@ interface Query {
 
 export default function Page(props: PageProps) {
   const {
-    postsDefault,
-    postsSpecial,
+    defaultPosts,
+    specialPosts,
     reviews,
     news,
     settings,
@@ -44,19 +34,18 @@ export default function Page(props: PageProps) {
     category,
   } = props
 
-  const posts = [...postsSpecial, ...postsDefault]
+  const posts = [...specialPosts, ...defaultPosts]
 
   if (draftMode) {
     return (
       <PreviewIndexPage
-        postsSpecial={postsSpecial}
-        postsDefault={postsDefault}
-        posts={posts}
+        specialPosts={specialPosts}
+        defaultPosts={defaultPosts}
         reviews={reviews}
         news={news}
         settings={settings}
         newsDrop={newsDrop}
-        topGames={top}
+        top={top}
         category={category}
       />
     )
@@ -66,7 +55,7 @@ export default function Page(props: PageProps) {
     <HomePage
       posts={posts}
       reviews={reviews}
-      news={news}
+      news={specialPosts}
       settings={settings}
       newsDrop={newsDrop}
       topGames={top}
@@ -80,29 +69,22 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
   const [
-    settings,
-    postsSpecial = [],
-    postsDefault = [],
-    news = [],
-    reviews = [],
-    newsDrop = [],
-    top = [],
-    category = [],
-  ] = await Promise.all([
-    getSettings(client),
-    getDefaultPostsPagination(client, 0, 2),
-    getSpecialPostsPagination(client, 0, 5),
-    getNewsPagination(client, 0, 6),
-    getReviewsPagination(client, 0, 2),
-    getNewsDropPagination(client, 0, 5),
-    getTop(client, 0, 8),
-    getCategoryPagination(client, 0, 5),
-  ])
+    {
+      newsDrop = [],
+      news = [],
+      reviews = [],
+      defaultPosts = [],
+      specialPosts = [],
+      settings,
+      category,
+      top,
+    },
+  ] = await Promise.all([getIndexInfo(client, 0, 6)])
 
   return {
     props: {
-      postsSpecial,
-      postsDefault,
+      specialPosts,
+      defaultPosts,
       news,
       newsDrop,
       reviews,

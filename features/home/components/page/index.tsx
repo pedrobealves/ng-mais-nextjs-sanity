@@ -1,7 +1,5 @@
-import Container from 'components/BlogContainer'
 import Layout from 'components/BlogLayout'
 import IndexPageHead from 'components/IndexPageHead'
-import { Logo } from 'components/Logo'
 import { NewsDrop } from 'features/news-drop'
 import { InputNewsletter } from 'features/newsletter'
 import Footer from 'layouts/Footer'
@@ -55,7 +53,7 @@ export function HomePage(props: IndexPageProps) {
           <InputNewsletter />
           <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
             <section className="flex flex-col w-full max-w-col-9 gap-10">
-              {/*<NewsSection news={news} categories={category} />*/}
+              <NewsSection news={news} categories={category} />
               <PostSection.Default posts={posts} />
               <NewsDrop news={newsDrop} type="home" />
             </section>

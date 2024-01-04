@@ -86,8 +86,8 @@ export const locate: DocumentLocationResolver = (params, context) => {
         return {
           locations: [
             {
-              title: doc.title || 'Untitled',
-              href: `/review/${doc.slug.current}`,
+              title: doc?.title || 'Untitled',
+              href: `/review/${doc?.slug.current}`,
             },
             {
               title: 'Home',

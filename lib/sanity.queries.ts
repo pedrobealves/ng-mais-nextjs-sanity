@@ -191,6 +191,20 @@ export const reviewBySlugQuery = groq`
 }
 `
 
+//index
+
+export const indexQuery = groq`
+{
+  "newsDrop": ${newsDropQuery},
+  "news": ${newsPaginationQuery},
+  "reviews": ${reviewsPaginationQuery},
+  "defaultPosts": ${defaultPostsQuery},
+  "specialPosts": ${specialPostsPaginationQuery},
+  "settings": ${settingsQuery},
+  "category": ${categoryQuery},
+  "top": ${topPaginationQuery}
+}`
+
 type TypePost = 'default' | 'special'
 
 export interface Author {

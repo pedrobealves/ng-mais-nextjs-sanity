@@ -42,12 +42,12 @@ export function Top({ games }: TopProps) {
                 />
               }
               index={index}
-              title={item.game.title}
-              cover={item.game.cover}
+              title={item.game?.title}
+              cover={item.game?.cover}
               grade={item.grade}
-              developer={item.game.developer}
-              release={item.game.release}
-              genre={item.game.genre}
+              developer={item.game?.developer}
+              release={item.game?.release}
+              genre={item.game?.genre}
               slug={item.slug}
             />
           ))}

@@ -6,10 +6,13 @@ type CardProps = {
 }
 
 export function CardCategory({ category, dateString }: CardProps) {
+  const truncate = (input) =>
+    input?.length > 10 ? `${input.substring(0, 10)}...` : input
+
   return (
     <div className="flex justify-between items-center">
       <button className="bg-white rounded-full text-xs font-extrabold px-2 py-1 drop-shadow-lg uppercase text-primary-5">
-        {category}
+        {truncate(category)}
       </button>
       <div className="flex items-center gap-1 text-neutral-900 text-center font-semibold opacity-40">
         <div className="h-3.5 w-[13px]">

@@ -6,31 +6,32 @@ import {
   useCdn,
 } from 'lib/sanity.api'
 import {
-  type Category,
   categoryPaginationQuery,
   categoryQuery,
   defaultPostsPaginationQuery,
   defaultPostsQuery,
+  indexQuery,
   newsAndMoreStoriesQuery,
   newsDropPaginationQuery,
   newsDropQuery,
   newsPaginationQuery,
   newsQuery,
   newsSlugsQuery,
-  type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
-  type Review,
   reviewAndMoreStoriesQuery,
   reviewSlugsQuery,
   reviewsPaginationQuery,
   reviewsQuery,
-  type Settings,
   settingsQuery,
   specialPostsPaginationQuery,
   specialPostsQuery,
   topPaginationQuery,
+  type Category,
+  type Post,
+  type Review,
+  type Settings,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -209,4 +210,24 @@ export async function getSpecialPostsPagination(
       limit,
     })) || []
   )
+}
+
+export async function getIndexInfo(
+  client: SanityClient,
+  pageIndex: number = 0,
+  limit: number,
+): Promise<{
+  newsDrop: Post[]
+  news: Post[]
+  reviews: Post[]
+  defaultPosts: Post[]
+  specialPosts: Post[]
+  settings: Settings
+  category: Category[]
+  top: Review[]
+}> {
+  return await client.fetch(indexQuery, {
+    pageIndex,
+    limit,
+  })
 }

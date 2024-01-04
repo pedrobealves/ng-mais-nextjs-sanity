@@ -104,9 +104,6 @@ export default defineType({
       validation: (rule) => rule.required().integer().min(0).max(100),
     }),
   ],
-  initialValue: {
-    type: 'default',
-  },
   preview: {
     select: {
       title: 'title',
