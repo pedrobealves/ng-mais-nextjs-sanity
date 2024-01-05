@@ -1,5 +1,5 @@
 import { Post } from 'lib/sanity.queries'
-import post from 'schemas/post'
+import Image from 'next/image'
 
 import { Section } from './Section'
 
@@ -19,10 +19,11 @@ export function Hero({ reviews }: HeroProps) {
         </div>
         <div className="flex sm:flex-row flex-col gap-6">
           <div className="w-full font-inter h-[22rem] flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg">
-            <img
-              className="absolute inset-0 h-full w-full object-cover"
-              src="https://cdn2.tfx.company/images/clickwallpapers-elden-ring-game-wallpaper-in-4k-img1.jpg"
-              alt="Flower and sky"
+            <Image
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihJTwSuR94bVtXoG7DzOcyO32kWpj3BbxMT4r7vbdohMFj3PP64IzoOg13HVb4YXYQXDPWUXMPHBWGi4SyHxyZYpPZwYMpKWBUeXL1QLujPnqwiLGToEI_3d-GvZa8ZqQGsq7CsVKNtRdY38ZMaBttQ6Vd_Po6sPmrHpba9UYjtSWESp5_ahSqpZaN9Us/s3840/clickwallpapers-elden-ring-game-wallpaper-in-4k-img1.jpg"
+              alt="tensei-weekly"
+              fill={true}
+              sizes="(max-width: 564px) 100vw, 33vw"
             />
             <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>
             <div className="absolute inset-0 [background:linear-gradient(180deg,_rgba(0,_0,_0,_0.00)_0%,_rgba(0,_0,_0,_0.90)_100%)]"></div>

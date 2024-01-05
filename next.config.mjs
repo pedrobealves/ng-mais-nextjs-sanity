@@ -5,6 +5,7 @@ const config = {
       { hostname: 'cdn.sanity.io' },
       { hostname: 'source.unsplash.com' },
       { hostname: '1.bp.blogspot.com' },
+      { hostname: 'blogger.googleusercontent.com' },
     ],
   },
   typescript: {
