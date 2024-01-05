@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity'
 
+import { SpoilerDecorator, SpoilerIcon } from './previews/spoiler'
+
 export default defineType({
   title: 'Block Content',
   name: 'blockContent',
@@ -36,6 +38,12 @@ export default defineType({
           { title: 'Code', value: 'code' },
           { title: 'Underline', value: 'underline' },
           { title: 'Strike', value: 'strike-through' },
+          {
+            title: 'Spoiler',
+            value: 'spoiler',
+            icon: SpoilerIcon,
+            component: SpoilerDecorator,
+          },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [

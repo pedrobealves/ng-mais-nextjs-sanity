@@ -16,13 +16,18 @@ import {
 import { EmbedImage } from 'components/EmbedImage'
 import { SanityImage } from 'components/SanityImage'
 import getYouTubeId from 'get-youtube-id'
-import Image from 'next/image'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 
 import styles from './PostBody.module.css'
+import { SpoilerButton } from './SpoilerButton'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
+  marks: {
+    spoiler: ({ children }) => {
+      return <SpoilerButton>{children}</SpoilerButton>
+    },
+  },
   types: {
     html: ({ value }) => {
       return (
