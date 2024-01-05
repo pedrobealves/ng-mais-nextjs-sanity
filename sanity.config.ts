@@ -13,9 +13,9 @@ import { locate } from 'plugins/locate'
 import { previewDocumentNode } from 'plugins/previewPane'
 import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { deskTool } from 'sanity/desk'
 import { presentationTool } from 'sanity/presentation'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from 'schemas/author'
 import blockContentType from 'schemas/blockContent'
 import categoryType from 'schemas/category'
@@ -36,6 +36,11 @@ export default defineConfig({
   projectId,
   dataset,
   title,
+  document: {
+    unstable_comments: {
+      enabled: true,
+    },
+  },
   schema: {
     // If you want more content types, you can add them to this array
     types: [
