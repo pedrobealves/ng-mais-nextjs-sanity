@@ -23,6 +23,7 @@ export function Hero({ reviews }: HeroProps) {
               src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihJTwSuR94bVtXoG7DzOcyO32kWpj3BbxMT4r7vbdohMFj3PP64IzoOg13HVb4YXYQXDPWUXMPHBWGi4SyHxyZYpPZwYMpKWBUeXL1QLujPnqwiLGToEI_3d-GvZa8ZqQGsq7CsVKNtRdY38ZMaBttQ6Vd_Po6sPmrHpba9UYjtSWESp5_ahSqpZaN9Us/s3840/clickwallpapers-elden-ring-game-wallpaper-in-4k-img1.jpg"
               alt="tensei-weekly"
               fill={true}
+              priority={true}
               sizes="(max-width: 564px) 100vw, 33vw"
             />
             <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>
