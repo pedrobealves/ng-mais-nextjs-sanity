@@ -25,6 +25,7 @@ import newsType from 'schemas/news'
 import postType from 'schemas/post'
 import reviewType from 'schemas/review'
 import settingsType from 'schemas/settings'
+import spoilerType from 'schemas/spoiler'
 import twitterType from 'schemas/twitter'
 import weeklyType from 'schemas/weekly'
 import youtubeType from 'schemas/youtube'
@@ -56,6 +57,7 @@ export default defineConfig({
       youtubeType,
       imageEmbedType,
       twitterType,
+      spoilerType,
     ],
   },
   plugins: [

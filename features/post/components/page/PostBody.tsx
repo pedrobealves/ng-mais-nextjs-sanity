@@ -23,11 +23,6 @@ import styles from './PostBody.module.css'
 import { SpoilerButton } from './SpoilerButton'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
-  marks: {
-    spoiler: ({ children }) => {
-      return <SpoilerButton>{children}</SpoilerButton>
-    },
-  },
   types: {
     html: ({ value }) => {
       return (
@@ -35,6 +30,16 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
           className={`${styles.bodyHtml}`}
           dangerouslySetInnerHTML={{ __html: value.code }}
         ></div>
+      )
+    },
+    spoilerContent: ({ value }) => {
+      return (
+        <SpoilerButton>
+          <PortableText
+            value={value.content}
+            components={myPortableTextComponents}
+          />
+        </SpoilerButton>
       )
     },
     image: ({ value }) => {

@@ -1,5 +1,10 @@
-export const SpoilerIcon = () => <span style={{ fontWeight: 'bold' }}>S</span>
+import {
+  PortableText,
+  type PortableTextReactComponents,
+} from '@portabletext/react'
 
-export const SpoilerDecorator = (props) => (
-  <span style={{ backgroundColor: 'red' }}>{props.children}</span>
-)
+export default function Preview(props) {
+  const { content } = props || {}
+
+  return <div>{content}</div>
+}
