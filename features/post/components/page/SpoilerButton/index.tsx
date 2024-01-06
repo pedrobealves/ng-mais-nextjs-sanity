@@ -19,7 +19,7 @@ export function SpoilerButton({ children }: SpoilerButtonType) {
         onClick={toggleSpoiler}
         type="button"
       >
-        Spoiler
+        Clique para ver o spoiler
       </button>
       <span className={`spoiler ${showSpoiler ? 'block' : 'hidden'}`}>
         {children}
