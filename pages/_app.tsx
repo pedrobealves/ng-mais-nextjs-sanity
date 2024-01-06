@@ -2,6 +2,7 @@ import 'tailwindcss/tailwind.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { AppProps } from 'next/app'
 import { Inter, Open_Sans } from 'next/font/google'
 import { lazy, Suspense } from 'react'
@@ -47,6 +48,7 @@ export default function App({
           </Suspense>
         )}
         <Analytics />
+        <SpeedInsights />
       </div>
     </>
   )
