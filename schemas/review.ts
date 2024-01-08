@@ -103,6 +103,13 @@ export default defineType({
       type: 'number',
       validation: (rule) => rule.required().integer().min(0).max(100),
     }),
+    defineField({
+      name: 'drop',
+      title: 'Mark as Drop',
+      description: 'This will mark the post as a drop.',
+      initialValue: false,
+      type: 'boolean',
+    }),
   ],
   preview: {
     select: {

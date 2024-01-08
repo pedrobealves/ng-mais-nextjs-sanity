@@ -90,6 +90,13 @@ export default defineType({
       },
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'drop',
+      title: 'Mark as Drop',
+      description: 'This will mark the post as a drop.',
+      initialValue: false,
+      type: 'boolean',
+    }),
   ],
   initialValue: {
     type: 'default',

@@ -49,14 +49,14 @@ export const categoryQuery = groq`
 `
 
 export const newsDropPaginationQuery = groq`
-*[_type == "news" && drop == true] | order(date desc, _updatedAt desc) [$pageIndex...$limit] {
+*[_type in ["news", "post", "review"] && drop == true] | order(date desc, _updatedAt desc) [$pageIndex...$limit] {
   category[0]->{title, "slug": slug.current},
   ${postFields}
 }
 `
 
 export const newsDropQuery = groq`
-*[_type == "news" && drop == true] | order(date desc, _updatedAt desc)[0...3] {
+*[_type in ["news", "post", "review"] && drop == true] | order(date desc, _updatedAt desc)[0...3] {
   category[0]->{title, "slug": slug.current},
   ${postFields}
 }
