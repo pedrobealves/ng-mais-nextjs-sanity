@@ -24,7 +24,7 @@ const item = tv({
         CardTitle: 'text-xl',
         CardSubtitle: 'hidden',
       },
-      weekly: {
+      post: {
         CardInfoSection: 'py-8 px-8',
         CardTitle: 'text-4xl',
         CardSubtitle: '',
@@ -49,9 +49,10 @@ export function Card({ type, title, subtitle, picture, slug }: CardProps) {
             ? urlForImage(picture).fit('crop').url()
             : 'https://source.unsplash.com/96x96/?face'
         }
-        className="absolute inset-0 h-full w-full object-cover"
-        width={858}
-        height={1716}
+        className="object-cover"
+        fill={true}
+        priority={true}
+        sizes="(max-width: 564px) 100vw, 33vw"
         alt={picture?.alt ?? title}
       />
       <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>

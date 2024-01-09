@@ -46,7 +46,7 @@ export function HomePage(props: IndexPageProps) {
         <Header
           title={title}
           social={social}
-          hero={<Hero reviews={reviews} />}
+          hero={<Hero posts={posts} reviews={reviews} />}
           level={1}
         />
         <main className="w-full mx-auto justify-center -m-10 gap-10 px-4 mb-20">
