@@ -1,3 +1,5 @@
+import './Header.css'
+
 import { NavBar } from 'components/NavBar'
 import { Media } from 'lib/sanity.queries'
 import { useEffect, useState } from 'react'
@@ -45,7 +47,7 @@ export default function BlogHeader({
   switch (level) {
     case 1:
       return (
-        <header className="bg-gradient-header w-full px-4 rounded-b-[40px]">
+        <header className="background-grad  w-full px-4 rounded-b-[40px]">
           <NavBar level={level} social={social} />
           {hero}
         </header>
