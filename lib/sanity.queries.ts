@@ -57,7 +57,7 @@ export const newsDropPaginationQuery = groq`
 
 export const newsDropQuery = groq`
 *[_type in ["news", "post", "review"] && drop == true] | order(date desc, _updatedAt desc)[0...3] {
-  category[0]->{title, "slug": slug.current},
+  "category": game->{title, "slug": slug.current},
   ${postFields}
 }
 `

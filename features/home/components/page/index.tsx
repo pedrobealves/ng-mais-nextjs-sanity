@@ -38,7 +38,6 @@ export function HomePage(props: IndexPageProps) {
     category,
   } = props
   const { title = demo.title, social } = settings || {}
-
   return (
     <>
       <IndexPageHead settings={settings} />

@@ -26,7 +26,7 @@ export function NewsDrop({ news, type }: NewsDrop) {
       <TitleSection>TenseiDrop</TitleSection>
       <div className={item({ type })}>
         {news.map((post, index) => (
-          <Link href={`/news/${post.slug}`} key={post._id}>
+          <Link href={`/${post._type}/${post.slug}`} key={post._id}>
             <Card.Root>
               <Card.Cover picture={post.coverImage} title={post.title} />
               {post.category && (

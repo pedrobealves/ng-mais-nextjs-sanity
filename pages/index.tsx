@@ -80,7 +80,6 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       top,
     },
   ] = await Promise.all([getIndexInfo(client, 0, 6)])
-
   return {
     props: {
       specialPosts,
