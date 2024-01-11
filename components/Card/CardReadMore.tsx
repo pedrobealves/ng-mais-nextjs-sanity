@@ -1,7 +1,7 @@
 export function CardReadMore() {
   return (
     <div className="flex items-center">
-      <span className="underline font-bold text-primary-8 opacity-40 group-hover:opacity-100 transition duration-500 ease-out">
+      <span className="underline underline-offset-[3px] font-bold text-primary-8 opacity-40 group-hover:opacity-100 transition duration-500 ease-out">
         Leia Agora
       </span>
       <div className="pl-16 scale-x-50 transition duration-500 opaease-out group-hover:translate-x-14 group-hover:opacity-100 opacity-0 group-hover:scale-x-100">

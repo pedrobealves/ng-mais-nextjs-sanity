@@ -21,7 +21,7 @@ const item = tv({
   slots: {
     Nav: '',
     Menu: '',
-    MenuList: '',
+    MenuList: 'block py-2 px-2 rounded-md',
     IconColor: '',
     IconHoverColor: '',
     LogoHeight: '',
@@ -31,8 +31,9 @@ const item = tv({
     level: {
       1: {
         Nav: 'container flex items-center justify-between mx-auto py-3',
-        Menu: 'hidden lg:flex text-white font-semibold text-base gap-8',
-        MenuList: 'block hover:text-secundary-4',
+        Menu: 'hidden lg:flex text-white font-semibold text-base gap-4',
+        MenuList:
+          'hover:bg-white/5 decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
         IconColor: 'text-white',
         IconHoverColor: 'hover:text-secundary-5',
         LogoHeight: '64',
@@ -40,8 +41,9 @@ const item = tv({
       },
       2: {
         Nav: 'max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1',
-        Menu: 'hidden lg:flex text-primary-8 font-semibold text-base gap-8',
-        MenuList: 'block hover:text-primary-5',
+        Menu: 'hidden lg:flex text-primary-8 font-semibold text-base gap-4',
+        MenuList:
+          'hover:bg-primary-8/10 decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
         IconColor: 'text-primary-8',
         IconHoverColor: 'hover:text-primary-5',
       },
