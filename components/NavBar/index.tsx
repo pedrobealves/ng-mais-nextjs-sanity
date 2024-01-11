@@ -33,7 +33,7 @@ const item = tv({
         Nav: 'container flex items-center justify-between mx-auto py-3',
         Menu: 'hidden lg:flex text-white font-semibold text-base gap-4',
         MenuList:
-          'hover:bg-white/5 decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
+          'decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
         IconColor: 'text-white',
         IconHoverColor: 'hover:text-secundary-5',
         LogoHeight: '64',
@@ -43,7 +43,7 @@ const item = tv({
         Nav: 'max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1',
         Menu: 'hidden lg:flex text-primary-8 font-semibold text-base gap-4',
         MenuList:
-          'hover:bg-primary-8/10 decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
+          'decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
         IconColor: 'text-primary-8',
         IconHoverColor: 'hover:text-primary-5',
       },
