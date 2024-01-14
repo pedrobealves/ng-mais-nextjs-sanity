@@ -41,16 +41,16 @@ export default defineType({
               name: 'caption',
               type: 'string',
               title: 'Image caption',
-              description: 'Caption displayed below the image.'
+              description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
               type: 'string',
               title: 'Alternative text',
-              description: 'Important for SEO and accessiblity.',
+              description: 'Important for SEO and accessibility.',
             },
           ],
-        }
+        },
       ],
     }),
     defineField({
@@ -71,7 +71,7 @@ export default defineType({
       title: 'Date',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
-    })
+    }),
   ],
   preview: {
     select: {

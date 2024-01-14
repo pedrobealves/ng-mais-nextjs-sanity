@@ -12,6 +12,7 @@ type CardProps = {
 
 const item = tv({
   slots: {
+    CardLink: '',
     CardInfoSection:
       'absolute bottom-0 flex flex-col items-start justify-between self-stretch',
     CardTitle: 'font-bold',
@@ -20,11 +21,14 @@ const item = tv({
   variants: {
     type: {
       review: {
+        CardLink:
+          'w-full font-inter h-[22rem] flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg',
         CardInfoSection: 'py-3 px-4',
         CardTitle: 'text-xl',
         CardSubtitle: 'hidden',
       },
       post: {
+        CardLink: '',
         CardInfoSection: 'py-8 px-8',
         CardTitle: 'text-4xl',
         CardSubtitle: '',
@@ -34,23 +38,21 @@ const item = tv({
 })
 
 export function Card({ type, title, subtitle, picture, slug }: CardProps) {
-  const { CardInfoSection, CardTitle, CardSubtitle } = item({
+  const { CardInfoSection, CardTitle, CardSubtitle, CardLink } = item({
     type,
   })
 
   return (
-    <Link
-      href={`/${type}/${slug}`}
-      className="w-full font-inter h-[22rem] flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg"
-    >
+    <Link href={`/${type}/${slug}`} className={CardLink()}>
       <Image
         src={
           picture?.asset?._ref
             ? urlForImage(picture).fit('crop').url()
             : 'https://source.unsplash.com/96x96/?face'
         }
-        className="object-cover"
-        fill={true}
+        className="object-cover w-full h-full"
+        width={564}
+        height={376}
         priority={true}
         sizes="(max-width: 564px) 100vw, 33vw"
         alt={picture?.alt ?? title}
