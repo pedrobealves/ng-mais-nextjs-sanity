@@ -22,7 +22,7 @@ export function NewsSection({ news, categories }: NewsProps) {
         {categories?.map((category, index) => (
           <button
             key={index}
-            className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-lg hover:drop-shadow-none hover:bg-gray-200"
+            className="px-4 py-3 rounded-full bg-white font-bold text-primary-5 drop-shadow-xl hover:drop-shadow-none hover:bg-gray-200"
           >
             {category.title}
           </button>
