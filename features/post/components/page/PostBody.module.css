@@ -46,27 +46,27 @@
 }
 
 .portableText h1 {
-  @apply mb-4 mt-8 text-6xl font-bold leading-snug;
+  @apply mb-4 mt-8 md:text-6xl text-4xl  font-bold leading-snug break-words;
 }
 
 .portableText h2 {
-  @apply mb-4 mt-12 text-5xl font-bold leading-snug;
+  @apply mb-4 mt-12 md:text-5xl text-3xl font-bold leading-snug break-words;
 }
 
 .portableText h3 {
-  @apply mb-4 mt-8 text-4xl font-bold leading-snug;
+  @apply mb-4 mt-8 md:text-4xl text-2xl font-bold leading-snug break-words;
 }
 
 .portableText h4 {
-  @apply mb-4 mt-8 text-3xl font-bold leading-snug;
+  @apply mb-4 mt-8 md:text-3xl text-1xl font-bold leading-snug break-words;
 }
 
 .portableText h5 {
-  @apply mb-4 mt-8 text-2xl font-bold leading-snug;
+  @apply mb-4 mt-8 md:text-2xl text-xl font-bold leading-snug break-words;
 }
 
 .portableText h6 {
-  @apply mb-4 mt-8 text-xl font-bold leading-snug;
+  @apply mb-4 mt-8 text-xl font-bold leading-snug break-words;
 }
 
 .portableText blockquote {

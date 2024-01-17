@@ -12,9 +12,9 @@ export function SpoilerButton({ children }: SpoilerButtonType) {
   }
 
   return (
-    <span className="group flex flex-col items-center">
+    <span className="group flex flex-col items-center justify-center">
       <button
-        className={`hide border-2 border-secundary-5 font-medium	 px-4 py-1 uppercase text-secundary-5 text-1xl ${
+        className={`rounded-[16px] hide border-2 border-secundary-5 font-medium	mx-4 px-4 py-1 uppercase text-secundary-5 text-1xl ${
           showSpoiler ? 'hidden' : 'block'
         }`}
         onClick={toggleSpoiler}

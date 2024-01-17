@@ -15,7 +15,7 @@ export default function CardContainerGrade({ grade }: CardProps) {
           stroke="currentColor"
           strokeWidth="16"
           fill="transparent"
-          className="text-primary-6"
+          className="text-gray-200"
         />
 
         <circle
@@ -32,10 +32,8 @@ export default function CardContainerGrade({ grade }: CardProps) {
         />
       </svg>
       <div className="absolute flex flex-col justify-center items-center gap-1">
-        <span className=" text-white text-6xl font-bold">{grade}</span>
-        <span className="uppercase text-white opacity-25 text-base">
-          DE 100
-        </span>
+        <span className=" text-primary-7 text-6xl font-bold">{grade}</span>
+        <span className="uppercase text-gray-400 text-base">DE 100</span>
       </div>
     </div>
   )

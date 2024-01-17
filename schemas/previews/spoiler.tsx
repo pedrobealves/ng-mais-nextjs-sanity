@@ -6,5 +6,5 @@ import {
 export default function Preview(props) {
   const { content } = props || {}
 
-  return <div>{content}</div>
+  return <span>Spoiler</span>
 }

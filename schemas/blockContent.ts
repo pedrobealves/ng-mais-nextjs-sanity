@@ -74,9 +74,6 @@ export default defineType({
       },
     },
     {
-      type: 'imageEmbed',
-    },
-    {
       type: 'image',
       title: 'Image Upload',
       options: {
@@ -96,6 +93,9 @@ export default defineType({
           description: 'Important for SEO and accessiblity.',
         },
       ],
+    },
+    {
+      type: 'imageEmbed',
     },
     {
       type: 'youtube',

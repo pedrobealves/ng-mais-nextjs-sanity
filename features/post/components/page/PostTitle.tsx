@@ -4,7 +4,7 @@ interface PostTitleProps {
 
 export default function PostTitle({ children }: PostTitleProps) {
   return (
-    <h1 className="text-4xl md:text-6xl font-bold text-primary-8 mb-6">
+    <h1 className="text-4xl md:text-6xl font-bold text-primary-8 mb-6 break-words">
       {children}
     </h1>
   )

@@ -29,7 +29,7 @@ export default function CardContainerGrade({
           <Icon className="text-white" />
         </div>
       </div>
-      <div className="text-white md:text-xl text-lg font-normal leading-7">
+      <div className="text-primary-8 md:text-xl text-lg font-normal leading-7">
         {text}
       </div>
     </div>

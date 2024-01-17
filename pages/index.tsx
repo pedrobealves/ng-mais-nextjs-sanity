@@ -55,7 +55,7 @@ export default function Page(props: PageProps) {
     <HomePage
       posts={posts}
       reviews={reviews}
-      news={specialPosts}
+      news={news}
       settings={settings}
       newsDrop={newsDrop}
       topGames={top}

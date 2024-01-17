@@ -47,7 +47,6 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'showCover',
@@ -82,14 +81,14 @@ export default defineType({
       name: 'pros',
       type: 'array',
       of: [{ type: 'string' }],
-      validation: (rule) => rule.required().min(1).max(5),
+      validation: (rule) => rule.max(5),
     }),
     defineField({
       title: 'Cons',
       name: 'cons',
       type: 'array',
       of: [{ type: 'string' }],
-      validation: (rule) => rule.required().min(1).max(5),
+      validation: (rule) => rule.max(5),
     }),
     defineField({
       name: 'verdict',
@@ -101,7 +100,7 @@ export default defineType({
       title: 'Grade',
       name: 'grade',
       type: 'number',
-      validation: (rule) => rule.required().integer().min(0).max(100),
+      validation: (rule) => rule.integer().min(0).max(100),
     }),
     defineField({
       name: 'drop',
