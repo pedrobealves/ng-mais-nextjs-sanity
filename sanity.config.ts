@@ -30,7 +30,7 @@ import twitterType from 'schemas/twitter'
 import weeklyType from 'schemas/weekly'
 import youtubeType from 'schemas/youtube'
 
-const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'MILtensei studio'
+const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'ng+ studio'
 
 export default defineConfig({
   basePath: '/studio',

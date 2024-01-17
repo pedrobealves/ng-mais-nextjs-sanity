@@ -1,8 +1,8 @@
 const headerNavLinks = [
-  /*{
-      name: 'Notícias',
-      slug: '/news',
-    },*/
+  {
+    name: 'Notícias',
+    slug: '/news',
+  },
   {
     name: 'Matérias',
     slug: '/post',

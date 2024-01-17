@@ -14,7 +14,7 @@ export default function PostShare({ url }) {
           <TwitterShareButton url={url}>
             <Icon icon={FaTwitter} />
           </TwitterShareButton>
-          <FacebookShareButton url={url} hashtag={'#miltensei'}>
+          <FacebookShareButton url={url} hashtag={'#ng+'}>
             <Icon icon={FaFacebook} />
           </FacebookShareButton>
           <button onClick={copylink}>

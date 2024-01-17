@@ -54,7 +54,7 @@ export default function Footer() {
           <span className="text-sm text-white text-center opacity-60">
             &copy; {new Date().getFullYear()}
             <a href="https://miltensei.com" className="hover:underline pl-1">
-              Miltensei
+              ng+
             </a>
             . All Rights Reserved.
           </span>
