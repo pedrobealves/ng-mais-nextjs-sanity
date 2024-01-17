@@ -48,22 +48,26 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
       <meta name="twitter:site" content="@miltensei" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@miltensei" />
-      <meta
-        name="twitter:imageUrl"
-        content={urlForImage(post.coverImage)
-          .width(1200)
-          .height(627)
-          .fit('crop')
-          .url()}
-      />
-      <meta
-        name="twitter:image"
-        content={urlForImage(post.coverImage)
-          .width(1200)
-          .height(627)
-          .fit('crop')
-          .url()}
-      />
+      {post.coverImage && (
+        <meta
+          name="twitter:imageUrl"
+          content={urlForImage(post.coverImage)
+            .width(1200)
+            .height(627)
+            .fit('crop')
+            .url()}
+        />
+      )}
+      {post.coverImage && (
+        <meta
+          name="twitter:image"
+          content={urlForImage(post.coverImage)
+            .width(1200)
+            .height(627)
+            .fit('crop')
+            .url()}
+        />
+      )}
     </Head>
   )
 }

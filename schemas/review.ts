@@ -74,7 +74,6 @@ export default defineType({
       description: 'Se possui, selecione o jogo que este post pertence',
       type: 'reference',
       to: [{ type: gameType.name }],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       title: 'Pros',

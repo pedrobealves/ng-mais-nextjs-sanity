@@ -12,42 +12,46 @@ export function Review({ review }: ReviewProps) {
   return (
     <>
       <Card.Root>
-        <Card.Grade grade={review.grade} />
+        {review.grade && <Card.Grade grade={review.grade} />}
         <Card.ContainerDetail>
           <IconContext.Provider value={{ size: '24' }}>
-            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
-              <Card.DividerDetail color="pros" />
-              <div className="flex items-center">
-                <div className="self-stretch flex-col items-start gap-3.5 flex">
-                  {review.pros.map((pro, index) => (
-                    <Card.Detail
-                      key={index}
-                      text={pro}
-                      color="pros"
-                      icon={FaCheck}
-                    />
-                  ))}
+            {review.pros && (
+              <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
+                <Card.DividerDetail color="pros" />
+                <div className="flex items-center">
+                  <div className="self-stretch flex-col items-start gap-3.5 flex">
+                    {review.pros?.map((pro, index) => (
+                      <Card.Detail
+                        key={index}
+                        text={pro}
+                        color="pros"
+                        icon={FaCheck}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
-              <Card.DividerDetail color="cons" />
-              <div className="flex items-center">
-                <div className="self-stretch flex-col items-start gap-3.5 flex">
-                  {review.cons.map((con, index) => (
-                    <Card.Detail
-                      key={index}
-                      text={con}
-                      color="cons"
-                      icon={FaXmark}
-                    />
-                  ))}
+            )}
+            {review.cons && (
+              <div className="flex flex-1 self-stretch flex-col justify-start items-center gap-7">
+                <Card.DividerDetail color="cons" />
+                <div className="flex items-center">
+                  <div className="self-stretch flex-col items-start gap-3.5 flex">
+                    {review.cons?.map((con, index) => (
+                      <Card.Detail
+                        key={index}
+                        text={con}
+                        color="cons"
+                        icon={FaXmark}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </IconContext.Provider>
         </Card.ContainerDetail>
-        <Card.Verdict verdict={review.verdict} />
+        {review.verdict && <Card.Verdict verdict={review.verdict} />}
       </Card.Root>
     </>
   )
