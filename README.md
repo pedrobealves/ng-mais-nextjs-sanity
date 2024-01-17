@@ -15,7 +15,7 @@
 <a href=""><img src="https://img.shields.io/github/deployments/pedrobealves/mil-tensei-nextjs-sanity/production.svg?style=for-the-badge&colorA=gray&logo=vercel&colorB=7651A9&logoColor=F7F7F7&logoWidth=15"/></a>
 </p>
 
-# miltensei - Entertainment Multiverses Network
+# NG+ - NewGameMais: Entertainment Multiverses Network
 
 <p align="justify">Your analytical and informative point of the world of games.</p>
 
