@@ -74,22 +74,27 @@ export function PostPage(props: PostPageProps) {
                 {post._type == 'review' && (
                   <ReviewSection review={reviewDetails} />
                 )}
-                <Author.Root>
-                  <Author.Avatar
-                    picture={post.author.picture}
-                    name={post.author.name}
-                  />
-                  <Author.BioContainer>
-                    <Author.Bio name={post.author.name} bio={post.author.bio} />
-                    <Author.Icons>
-                      {post.author.social?.map((social) => (
-                        <Link key={social._key} href={social.url}>
-                          <Icon icon={socialIconMap(social.media)} />
-                        </Link>
-                      ))}
-                    </Author.Icons>
-                  </Author.BioContainer>
-                </Author.Root>
+                {post.author && (
+                  <Author.Root>
+                    <Author.Avatar
+                      picture={post.author.picture}
+                      name={post.author.name}
+                    />
+                    <Author.BioContainer>
+                      <Author.Bio
+                        name={post.author.name}
+                        bio={post.author.bio}
+                      />
+                      <Author.Icons>
+                        {post.author.social?.map((social) => (
+                          <Link key={social._key} href={social.url}>
+                            <Icon icon={socialIconMap(social.media)} />
+                          </Link>
+                        ))}
+                      </Author.Icons>
+                    </Author.BioContainer>
+                  </Author.Root>
+                )}
                 <SubscribeNewsletter />
               </article>
             </main>

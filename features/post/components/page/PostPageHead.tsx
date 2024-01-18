@@ -38,7 +38,9 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
       <meta property="og:type" content="article" />
       <meta property="og:locale" content="pt_BR" />
       <meta property="article:published_time" content={post.date} />
-      <meta property="article:publisher" content={post.author.name} />
+      {post.author && (
+        <meta property="article:publisher" content={post.author.name} />
+      )}
       {post.category?.title && (
         <meta property="article:section" content={post.category.title} />
       )}

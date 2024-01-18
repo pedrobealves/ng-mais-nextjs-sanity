@@ -41,7 +41,7 @@ export default function PostHeader(
         <PostSubTitle>{excerpt}</PostSubTitle>
       </div>
       <div className="flex flex-wrap justify-center items-center gap-y-8 mx-auto divide-x-2">
-        <Avatar name={author.name} picture={author.picture} />
+        {author && <Avatar name={author.name} picture={author.picture} />}
         <PostShare
           url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/${_type}/${slug}`}
         />

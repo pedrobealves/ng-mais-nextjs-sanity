@@ -34,16 +34,18 @@ export function Hero({ reviews, posts }: HeroProps) {
         </Carousel>
       </Section>
       <Section title="Análises">
-        {reviews?.map((post) => (
-          <Card
-            key={post.slug}
-            type="review"
-            title={post.title}
-            subtitle={post.excerpt}
-            picture={post.coverImage}
-            slug={post.slug}
-          />
-        ))}
+        {reviews
+          ?.slice(0, 3)
+          .map((post) => (
+            <Card
+              key={post.slug}
+              type="review"
+              title={post.category?.title}
+              subtitle={post.excerpt}
+              picture={post.coverImage}
+              slug={post.slug}
+            />
+          ))}
       </Section>
     </section>
   )

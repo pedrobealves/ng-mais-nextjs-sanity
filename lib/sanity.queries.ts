@@ -15,7 +15,7 @@ const postFields = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const topPaginationQuery = groq`
-*[_type == "review"] | order(grade desc, _updatedAt desc)[$pageIndex...$limit] {
+*[_type == "review" && game != null]| order(grade desc, _updatedAt desc)[$pageIndex...$limit] {
   grade,
   "slug": slug.current,
   game->{title, "slug": slug.current, cover, release, developer, genre},
