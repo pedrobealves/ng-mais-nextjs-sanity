@@ -54,7 +54,7 @@ export function Card({
                   ? urlForImage(cover).fit('crop').url()
                   : 'https://source.unsplash.com/96x96/?face'
               }
-              className="w-24 h-[8.5rem] rounded-xl border-primary-5 border-2"
+              className="max-h-full object-cover w-24 h-[8.5rem] rounded-xl  border-primary-5 border-2"
               width={192}
               height={272}
               alt={cover?.alt ?? title}

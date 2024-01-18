@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="pt-8 pb-11 flex items-center justify-center">
           <span className="text-sm text-white text-center opacity-60">
             &copy; {new Date().getFullYear()}
-            <a href="https://miltensei.com" className="hover:underline pl-1">
+            <a href="https://newgamemais.com" className="hover:underline pl-1">
               ng+
             </a>
             . All Rights Reserved.

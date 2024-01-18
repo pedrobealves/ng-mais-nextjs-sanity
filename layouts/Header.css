@@ -1,23 +1,49 @@
-@property --a{
+@property --a {
   syntax: '<color>'; /* its type */
   inherits: false;
-  initial-value: #5A189A; /* the initial value */
+  initial-value: #5a189a; /* the initial value */
 }
 
-@property --b{
+@property --b {
   syntax: '<color>'; /* its type */
   inherits: false;
   initial-value: #100919; /* the initial value */
 }
 
 .background-grad {
-  background: linear-gradient(180deg, var(--b) 0%, var(--a) 81.35%, #3C096C 92.84%);
+  background: linear-gradient(
+    180deg,
+    var(--b) 0%,
+    var(--a) 81.35%,
+    #3c096c 92.84%
+  );
   background-size: 100% 100%;
   animation: AnimationName 10s ease infinite;
 }
 
+/* Estilos específicos para o Firefox usando uma media query */
+@-moz-document url-prefix() {
+  .background-grad {
+    background: linear-gradient(
+      180deg,
+      #100919 0%,
+      #5a189a 81.35%,
+      #3c096c 92.84%
+    );
+  }
+}
+
 @keyframes AnimationName {
-  0%{--a:#5A189A; --b:#100919;}
-  50%{--a:#24123b; --b:#0b0611;}
-  100%{--a:#5A189A; --b:#100919;}
+  0% {
+    --a: #5a189a;
+    --b: #100919;
+  }
+  50% {
+    --a: #24123b;
+    --b: #0b0611;
+  }
+  100% {
+    --a: #5a189a;
+    --b: #100919;
+  }
 }
