@@ -8,6 +8,7 @@
  *
  */
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+import 'react-medium-image-zoom/dist/styles.css'
 
 import {
   PortableText,
@@ -17,6 +18,7 @@ import { EmbedImage } from 'components/EmbedImage'
 import { SanityImage } from 'components/SanityImage'
 import getYouTubeId from 'get-youtube-id'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
+import Zoom from 'react-medium-image-zoom'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 
 import styles from './PostBody.module.css'
@@ -43,10 +45,18 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       )
     },
     image: ({ value }) => {
-      return <SanityImage {...value} />
+      return (
+        <Zoom>
+          <SanityImage {...value} />
+        </Zoom>
+      )
     },
     imageEmbed: ({ value }) => {
-      return <EmbedImage {...value} />
+      return (
+        <Zoom>
+          <EmbedImage {...value} />
+        </Zoom>
+      )
     },
     youtube: ({ value }) => {
       const { url } = value
