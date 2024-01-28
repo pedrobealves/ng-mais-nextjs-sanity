@@ -11,8 +11,8 @@ type HeroProps = {
 
 export function Hero({ reviews, posts }: HeroProps) {
   return (
-    <section className="container flex-col lg:flex-row mx-auto flex w-full pt-12 pb-32 gap-6">
-      <Section title="Matérias">
+    <section className="container flex-col lg:flex-row mx-auto flex w-full pt-8 pb-12 gap-4 px-4">
+      <Section>
         <Carousel className="">
           <CarouselContent>
             {posts
@@ -33,7 +33,7 @@ export function Hero({ reviews, posts }: HeroProps) {
           </CarouselContent>
         </Carousel>
       </Section>
-      <Section title="Análises">
+      <Section>
         {reviews
           ?.slice(0, 3)
           .map((post) => (

@@ -19,33 +19,30 @@ type NavType = {
 
 const item = tv({
   slots: {
-    Nav: '',
-    Menu: '',
-    MenuList: 'block py-2 px-2 rounded-md',
-    IconColor: '',
-    IconHoverColor: '',
+    Nav: 'flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3',
+    Menu: 'hidden lg:flex text-primary-8 font-bold text-base gap-4',
+    MenuList:
+      'block py-2 px-2 rounded-md decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
+    IconColor: 'text-primary-8',
+    IconHoverColor: 'hover:text-secundary-5',
     LogoHeight: '',
     SymbolHeight: '',
   },
   variants: {
     level: {
       1: {
-        Nav: 'container flex items-center justify-between mx-auto py-3',
-        Menu: 'hidden lg:flex text-white font-semibold text-base gap-4',
-        MenuList:
-          'decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
-        IconColor: 'text-white',
-        IconHoverColor: 'hover:text-secundary-5',
-        LogoHeight: '64',
-        SymbolHeight: '106',
+        Nav: 'container',
+        Menu: '',
+        MenuList: '',
+        IconColor: '',
+        IconHoverColor: '',
       },
       2: {
-        Nav: 'max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1',
-        Menu: 'hidden lg:flex text-primary-8 font-semibold text-base gap-4',
-        MenuList:
-          'decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
-        IconColor: 'text-primary-8',
-        IconHoverColor: 'hover:text-primary-5',
+        Nav: 'max-w-screen-xl',
+        Menu: '',
+        MenuList: '',
+        IconColor: '',
+        IconHoverColor: '',
       },
     },
   },
@@ -66,12 +63,7 @@ export function NavBar({ level, social }: NavType) {
 
   return (
     <nav className={Nav()}>
-      <Logo
-        heightSymbol={Number(SymbolHeight())}
-        heightLogo={Number(LogoHeight())}
-        isLight={level == 1}
-      />
-
+      <Logo />
       <ul className={Menu()}>
         {headerNavLinks?.map((item, index) => (
           <Link href={item.slug} key={index}>

@@ -12,7 +12,7 @@ type CardProps = {
 
 const item = tv({
   slots: {
-    CardLink: '',
+    CardLink: 'h-80',
     CardInfoSection:
       'absolute bottom-0 flex flex-col items-start justify-between self-stretch',
     CardTitle: 'font-bold',
@@ -22,7 +22,7 @@ const item = tv({
     type: {
       review: {
         CardLink:
-          'w-full font-inter h-[22rem] flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg',
+          'w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg',
         CardInfoSection: 'py-3 px-4',
         CardTitle: 'text-xl',
         CardSubtitle: 'hidden',
@@ -51,10 +51,10 @@ export function Card({ type, title, subtitle, picture, slug }: CardProps) {
             : 'https://source.unsplash.com/96x96/?face'
         }
         className="object-cover w-full h-full"
-        width={564}
-        height={376}
+        width={560}
+        height={320}
         priority={true}
-        sizes="(max-width: 564px) 100vw, 33vw"
+        sizes="(max-width: 56,px) 100vw, 33vw"
         alt={picture?.alt ?? title}
       />
       <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>

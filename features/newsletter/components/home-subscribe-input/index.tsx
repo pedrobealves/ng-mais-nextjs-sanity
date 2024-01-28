@@ -69,7 +69,7 @@ export function InputNewsletter() {
         id="email-form"
         aria-label="Email Form"
         onSubmit={handleFormSubmit}
-        className="focus-within:ring-2 focus-within:ring-secundary-4 w-full flex justify-between rounded-full drop-shadow-xl bg-white border max-w-col-6"
+        className="w-full flex justify-between rounded-full bg-white border-gray-200 border-[16px] max-w-col-6"
       >
         <input
           type="email"

@@ -48,7 +48,7 @@ export function HomePage(props: IndexPageProps) {
           hero={<Hero posts={posts} reviews={reviews} />}
           level={1}
         />
-        <main className="w-full mx-auto justify-center -m-10 gap-10 px-4 mb-20">
+        <main className="w-full mx-auto justify-center -m-14 gap-10 px-4 mb-20">
           <InputNewsletter />
           <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
             <section className="flex flex-col w-full max-w-col-9 gap-10">
