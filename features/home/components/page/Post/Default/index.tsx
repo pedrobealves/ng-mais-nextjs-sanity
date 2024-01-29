@@ -17,7 +17,7 @@ export function DefaultPostSection({ posts }: PostProps) {
       </div>
       <div className="grid w-full [&>*:first-child]:sm:col-span-2 sm:grid-cols-2 grid-cols-1 gap-6 auto-rows-fr">
         {posts
-          .filter((post) => post.type === 'default')
+          .filter((post) => post.category.title === 'Artigo')
           .map((post, index) => (
             <Card
               key={post._id}

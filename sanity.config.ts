@@ -2,6 +2,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
 import { codeInput } from '@sanity/code-input'
+import { scheduledPublishing } from '@sanity/scheduled-publishing'
 import { visionTool } from '@sanity/vision'
 import {
   apiVersion,
@@ -26,6 +27,7 @@ import postType from 'schemas/post'
 import reviewType from 'schemas/review'
 import settingsType from 'schemas/settings'
 import spoilerType from 'schemas/spoiler'
+import tagType from 'schemas/tag'
 import twitterType from 'schemas/twitter'
 import weeklyType from 'schemas/weekly'
 import youtubeType from 'schemas/youtube'
@@ -58,6 +60,7 @@ export default defineConfig({
       imageEmbedType,
       twitterType,
       spoilerType,
+      tagType,
     ],
   },
   plugins: [
@@ -82,5 +85,6 @@ export default defineConfig({
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
+    scheduledPublishing(),
   ],
 })

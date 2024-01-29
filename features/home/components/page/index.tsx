@@ -1,6 +1,6 @@
 import Layout from 'components/BlogLayout'
 import IndexPageHead from 'components/IndexPageHead'
-import { NewsDrop } from 'features/news-drop'
+import { MinimalGrid } from 'features/grid'
 import { InputNewsletter } from 'features/newsletter'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
@@ -48,17 +48,19 @@ export function HomePage(props: IndexPageProps) {
           hero={<Hero posts={posts} reviews={reviews} />}
           level={1}
         />
-        <main className="w-full mx-auto justify-center -m-14 gap-10 px-4 mb-20">
+        <main className="w-full mx-auto justify-center -m-14 gap-10 mb-20">
           <InputNewsletter />
-          <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-6">
-            <section className="flex flex-col w-full max-w-col-9 gap-10">
+          <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-4">
+            <section className="flex flex-col w-full max-w-[55rem] gap-4">
               <NewsSection news={news} categories={category} />
-              <PostSection.Default posts={posts} />
-              <NewsDrop news={newsDrop} type="home" />
+              {
+                // <PostSection.Default posts={posts} />
+              }{' '}
+              <MinimalGrid title="Artigos" news={posts} type="home" />
             </section>
             <Sidebar>
               <Top games={topGames} />
-              <PostSection.Special posts={posts} />
+              <PostSection.Extras posts={posts} />
             </Sidebar>
           </section>
         </main>

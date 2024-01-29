@@ -11,6 +11,7 @@ import { useLiveQuery } from 'next-sanity/preview'
 interface PageProps {
   specialPosts: Post[]
   defaultPosts: Post[]
+  extraPosts: Post[]
   news: Post[]
   reviews: Post[]
   newsDrop: Post[]
@@ -26,6 +27,7 @@ export default function PreviewIndexPage(props: PageProps) {
     reviews: Post[]
     defaultPosts: Post[]
     specialPosts: Post[]
+    extraPosts: Post[]
     settings: Settings
     category: Category[]
     top: Review[]
@@ -37,6 +39,7 @@ export default function PreviewIndexPage(props: PageProps) {
     reviews,
     defaultPosts,
     specialPosts,
+    extraPosts,
     settings,
     category,
     top,
@@ -49,7 +52,7 @@ export default function PreviewIndexPage(props: PageProps) {
       news={news || []}
       newsDrop={newsDrop || []}
       reviews={reviews || []}
-      posts={[...defaultPosts, ...specialPosts] || []}
+      posts={[...defaultPosts, ...specialPosts, ...extraPosts] || []}
       settings={settings || {}}
       category={category || []}
       topGames={top || []}

@@ -222,6 +222,7 @@ export async function getIndexInfo(
   reviews: Post[]
   defaultPosts: Post[]
   specialPosts: Post[]
+  extraPosts: Post[]
   settings: Settings
   category: Category[]
   top: Review[]

@@ -31,7 +31,7 @@ export function Card({
       {input}
       <label
         htmlFor={'game' + index}
-        className="flex gap-3 cursor-pointer peer-checked:[&>*:first-child]:text-2xl peer-checked:[&>*:first-child]:font-bold peer-checked:[&>*:first-child]:text-primary-5 peer-checked:[&_small]:block peer-checked:[&_p]:font-bold peer-checked:[&_p]:text-primary-5"
+        className="flex gap-3 cursor-pointer peer-checked:[&>*:first-child]:text-2xl peer-checked:[&>*:first-child]:font-bold peer-checked:[&>*:first-child]:text-primary-8 peer-checked:[&_small]:block peer-checked:[&_p]:font-bold peer-checked:[&_p]:text-primary-8"
       >
         <span className="text-base font-normal text-primary-8">
           {index + 1}
@@ -54,13 +54,13 @@ export function Card({
                   ? urlForImage(cover).fit('crop').url()
                   : 'https://source.unsplash.com/96x96/?face'
               }
-              className="max-h-full object-cover w-24 h-[8.5rem] rounded-xl  border-primary-5 border-2"
+              className="max-h-full object-cover w-24 h-[8.5rem] rounded-xl  border-primary-8 border-2"
               width={192}
               height={272}
               alt={cover?.alt ?? title}
             />
             <div className="flex flex-col gap-3">
-              <div className="flex items-center justify-center text-lg font-extrabold text-white h-12 w-12 bg-primary-5 rounded-full">
+              <div className="flex items-center justify-center text-lg font-extrabold text-white h-12 w-12 bg-primary-8 rounded-full">
                 {grade}
               </div>
               <div className="flex flex-col gap-1">

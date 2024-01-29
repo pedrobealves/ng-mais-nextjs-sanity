@@ -33,7 +33,7 @@ score(
 `
 
 export const categoryPaginationQuery = groq`
-*[_type == "category"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+*[_type == "tag"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   _id,
   title,
   "slug": slug.current,
@@ -41,7 +41,7 @@ export const categoryPaginationQuery = groq`
 `
 
 export const categoryQuery = groq`
-*[_type == "category"] | order(date desc, _updatedAt desc) {
+*[_type == "tag"] | order(date desc, _updatedAt desc) {
   _id,
   title,
   "slug": slug.current,
@@ -65,32 +65,42 @@ export const newsDropQuery = groq`
 //Posts
 
 export const defaultPostsQuery = groq`
-*[_type == "post" && type == 'default'] | order(date desc, _updatedAt desc) {
-  type,
-  "category": game->{title, "slug": slug.current, cover},
+*[_type == "post" && category->title == 'Artigo'] | order(date desc, _updatedAt desc) {
+  "category": category->{title},
   ${postFields}
 }
 `
 export const defaultPostsPaginationQuery = groq`
-*[_type == "post" && type == 'default'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  type,
-  "category": game->{title, "slug": slug.current, cover},
+*[_type == "post" && category->title == 'Artigo'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  "category": category->{title},
   ${postFields}
 }
 `
 
 export const specialPostsPaginationQuery = groq`
-*[_type == "post" && type == 'special'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  type,
-  "category": game->{title, "slug": slug.current, cover},
+*[_type == "post" && category->title == 'Especial'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  "category": category->{title},
   ${postFields}
 }
 `
 
 export const specialPostsQuery = groq`
-*[_type == "post" && type == 'special'] | order(date desc, _updatedAt desc) {
-  type,
-  "category": game->{title, "slug": slug.current, cover},
+*[_type == "post" && category->title == 'Especial'] | order(date desc, _updatedAt desc) {
+  "category": category->{title},
+  ${postFields}
+}
+`
+
+export const extraPostsPaginationQuery = groq`
+*[_type == "post" && category->title == 'Extra'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  "category": category->{title},
+  ${postFields}
+}
+`
+
+export const extraPostsQuery = groq`
+*[_type == "post" && category->title == 'Extra'] | order(date desc, _updatedAt desc) {
+  "category": category->{title},
   ${postFields}
 }
 `
@@ -119,13 +129,13 @@ export const postBySlugQuery = groq`
 
 export const newsQuery = groq`
 *[_type == "news"] | order(date desc, _updatedAt desc) {
-  category[0]->{title, "slug": slug.current},
+  "category": tag[0]->{title, "slug": slug.current},
   ${postFields}
 }`
 
 export const newsPaginationQuery = groq`
 *[_type == "news"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  category[0]->{title, "slug": slug.current},
+  "category": tag[0]->{title, "slug": slug.current},
   ${postFields}
 }`
 
@@ -134,7 +144,7 @@ export const newsAndMoreStoriesQuery = groq`
   "news": *[_type == "news" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
     "author": author->{name, picture, bio, social},
-    category[0]->{title, "slug": slug.current},
+    "category": tag[0]->{title, "slug": slug.current},
     ${postFields}
   },
   "newsDrop": ${newsDropQuery}
@@ -200,6 +210,7 @@ export const indexQuery = groq`
   "reviews": ${reviewsPaginationQuery},
   "defaultPosts": ${defaultPostsQuery},
   "specialPosts": ${specialPostsPaginationQuery},
+  "extraPosts": ${extraPostsPaginationQuery},
   "settings": ${settingsQuery},
   "category": ${categoryQuery},
   "top": ${topPaginationQuery}

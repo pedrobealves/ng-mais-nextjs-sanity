@@ -1,7 +1,7 @@
 import { DefaultPostSection } from './Default'
-import { SpecialPostSection } from './Special'
+import { ExtraPostSection } from './Extra'
 
 export const PostSection = {
   Default: DefaultPostSection,
-  Special: SpecialPostSection,
+  Extras: ExtraPostSection,
 }

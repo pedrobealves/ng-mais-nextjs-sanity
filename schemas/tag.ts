@@ -1,10 +1,10 @@
-import { ThLargeIcon } from '@sanity/icons'
+import { TagIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'category',
-  title: 'Category',
-  icon: ThLargeIcon,
+  name: 'tag',
+  title: 'Tag',
+  icon: TagIcon,
   type: 'document',
   fields: [
     defineField({

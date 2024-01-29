@@ -9,6 +9,7 @@ import type { SharedPageProps } from 'pages/_app'
 interface PageProps extends SharedPageProps {
   specialPosts: Post[]
   defaultPosts: Post[]
+  extraPosts: Post[]
   news: Post[]
   reviews: Post[]
   newsDrop: Post[]
@@ -25,6 +26,7 @@ export default function Page(props: PageProps) {
   const {
     defaultPosts,
     specialPosts,
+    extraPosts,
     reviews,
     news,
     settings,
@@ -34,13 +36,14 @@ export default function Page(props: PageProps) {
     category,
   } = props
 
-  const posts = [...specialPosts, ...defaultPosts]
+  const posts = [...specialPosts, ...defaultPosts, ...extraPosts]
 
   if (draftMode) {
     return (
       <PreviewIndexPage
         specialPosts={specialPosts}
         defaultPosts={defaultPosts}
+        extraPosts={extraPosts}
         reviews={reviews}
         news={news}
         settings={settings}
@@ -75,15 +78,18 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       reviews = [],
       defaultPosts = [],
       specialPosts = [],
+      extraPosts = [],
       settings,
       category,
       top,
     },
   ] = await Promise.all([getIndexInfo(client, 0, 6)])
+
   return {
     props: {
       specialPosts,
       defaultPosts,
+      extraPosts,
       news,
       newsDrop,
       reviews,

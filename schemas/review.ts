@@ -102,11 +102,20 @@ export default defineType({
       validation: (rule) => rule.integer().min(0).max(100),
     }),
     defineField({
+      title: 'Category',
+      name: 'category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+      initialValue: { _ref: 'aa385b46-ef54-4519-8172-06c8a1dbdfbf' },
+      hidden: true,
+    }),
+    defineField({
       name: 'drop',
       title: 'Mark as Drop',
       description: 'This will mark the post as a drop.',
       initialValue: false,
       type: 'boolean',
+      hidden: true,
     }),
   ],
   preview: {

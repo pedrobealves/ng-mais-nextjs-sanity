@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
+import categoryType from './category'
 import gameType from './game'
 import youtube from './youtube'
 
@@ -78,16 +79,11 @@ export default defineType({
       to: [{ type: gameType.name }],
     }),
     defineField({
-      name: 'type',
-      title: 'Type',
-      type: 'string',
-      description: 'Tipo de postagem',
-      options: {
-        list: [
-          { title: 'Matéria', value: 'default' },
-          { title: 'Artigos MIL', value: 'special' },
-        ],
-      },
+      title: 'Category',
+      name: 'category',
+      type: 'reference',
+      to: [{ type: categoryType.name }],
+      initialValue: { _ref: '5e8e3954-6232-447b-ad1a-9b23fceed265' },
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -96,6 +92,7 @@ export default defineType({
       description: 'This will mark the post as a drop.',
       initialValue: false,
       type: 'boolean',
+      hidden: true,
     }),
   ],
   initialValue: {

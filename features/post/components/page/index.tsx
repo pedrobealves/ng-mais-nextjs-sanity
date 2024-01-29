@@ -1,10 +1,10 @@
 import Layout from 'components/BlogLayout'
 import { Icon } from 'components/Icon'
 import Link from 'components/Link'
+import { Section } from 'components/Section'
 import { socialIconMap } from 'components/SocialIcon'
-import TitleSection from 'components/TitleSection'
 import { Comments } from 'features/comments'
-import { NewsDrop } from 'features/news-drop'
+import { MinimalGrid } from 'features/grid'
 import { SubscribeNewsletter } from 'features/newsletter'
 import { Author } from 'features/post/components/page/Author'
 import { Review as ReviewSection } from 'features/review'
@@ -100,11 +100,11 @@ export function PostPage(props: PostPageProps) {
             </main>
             {news?.length > 0 && (
               <aside aria-label="Related articles" className="px-4 pt-12">
-                <NewsDrop news={news} type="post" />{' '}
+                <MinimalGrid title="Relacionados" news={news} type="post" />
               </aside>
             )}
             <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-24">
-              <TitleSection>Comentários</TitleSection>
+              <Section.Title>Comentários</Section.Title>
               <div className="max-w-screen-md mx-auto w-full">
                 <Comments
                   type={post._type}

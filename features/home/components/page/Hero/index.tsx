@@ -16,7 +16,7 @@ export function Hero({ reviews, posts }: HeroProps) {
         <Carousel className="">
           <CarouselContent>
             {posts
-              .filter((post) => post.type === 'default')
+              .filter((post) => post.category.title === 'Artigo')
               .slice(0, 3)
               .map((post, index) => (
                 <CarouselItem key={post._id}>

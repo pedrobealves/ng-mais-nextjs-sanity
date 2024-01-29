@@ -1,6 +1,6 @@
 import { DocumentIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import authorType from './author'
 import categoryType from './category'
@@ -69,11 +69,26 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
+      title: 'Tags',
+      name: 'tag',
       type: 'array',
-      of: [{ type: 'reference', to: { type: categoryType.name } }],
-      validation: (Rule) => Rule.required().max(1),
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }],
+        },
+      ],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
+      title: 'Category',
+      name: 'category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+      initialValue: { _ref: 'aa385b46-ef54-4519-8172-06c8a1dbdfbf' },
+      hidden: true,
     }),
     defineField({
       name: 'drop',
@@ -81,6 +96,7 @@ export default defineType({
       description: 'This will mark the post as a drop.',
       initialValue: false,
       type: 'boolean',
+      hidden: true,
     }),
   ],
   preview: {

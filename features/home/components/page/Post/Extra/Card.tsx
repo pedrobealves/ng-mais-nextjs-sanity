@@ -11,7 +11,7 @@ type CardProps = {
 export function Card({ title, picture, slug }: CardProps) {
   return (
     <Link href={`/post/${slug}`}>
-      <li className="flex flex-row bg-gray-100 p-2 rounded-r-[20px] mb-3">
+      <li className="flex flex-row bg-gray-100 p-2 rounded-[20px] mb-3">
         <div className="flex flex-col gap-2 px-3 justify-center w-full">
           <hr className="w-5 h-[2px] border-0 bg-primary-8" />
           <h1 className="text-primary-8 font-bold text-base">{title}</h1>

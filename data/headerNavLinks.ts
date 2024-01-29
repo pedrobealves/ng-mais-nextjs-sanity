@@ -12,7 +12,7 @@ const headerNavLinks = [
     slug: '/review',
   },
   {
-    name: 'Artigos MIL',
+    name: 'Artigos',
     slug: '/post/special',
   },
 ]
