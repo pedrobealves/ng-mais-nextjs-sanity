@@ -79,12 +79,27 @@ export default defineType({
       to: [{ type: gameType.name }],
     }),
     defineField({
+      title: 'Tags',
+      name: 'tag',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }],
+        },
+      ],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
       title: 'Category',
       name: 'category',
       type: 'reference',
       to: [{ type: categoryType.name }],
       initialValue: { _ref: '5e8e3954-6232-447b-ad1a-9b23fceed265' },
       validation: (rule) => rule.required(),
+      hidden: true,
     }),
     defineField({
       name: 'drop',
@@ -95,9 +110,6 @@ export default defineType({
       hidden: true,
     }),
   ],
-  initialValue: {
-    type: 'default',
-  },
   preview: {
     select: {
       title: 'title',

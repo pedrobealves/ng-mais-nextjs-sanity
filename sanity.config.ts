@@ -50,8 +50,8 @@ export default defineConfig({
       postType,
       newsType,
       reviewType,
+      tagType,
       authorType,
-      categoryType,
       weeklyType,
       gameType,
       settingsType,
@@ -60,7 +60,7 @@ export default defineConfig({
       imageEmbedType,
       twitterType,
       spoilerType,
-      tagType,
+      categoryType,
     ],
   },
   plugins: [

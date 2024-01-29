@@ -8,7 +8,7 @@ type TopProps = {
   games: Review[]
 }
 
-export function Top({ games }: TopProps) {
+export function HomeTopList({ games }: TopProps) {
   // State for storing the selected option. Default is "Male"
   const [selectedOption, setSelectedOption] = useState('game0')
 

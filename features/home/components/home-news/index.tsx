@@ -7,7 +7,7 @@ type NewsProps = {
   categories: Category[]
 }
 
-export function NewsSection({ news, categories }: NewsProps) {
+export function HomeNews({ news, categories }: NewsProps) {
   return (
     <Section.Root>
       <Section.Title>Notícias</Section.Title>
@@ -16,14 +16,18 @@ export function NewsSection({ news, categories }: NewsProps) {
           <button className="px-4 py-3 rounded-full bg-primary-8 font-bold text-white">
             Todas notícias
           </button>
-          {categories?.map((category, index) => (
-            <button
-              key={index}
-              className="px-4 py-3 rounded-full bg-white font-bold text-primary-8 hover:bg-primary-8 hover:text-white"
-            >
-              {category.title}
-            </button>
-          ))}
+          {categories
+            ?.filter(
+              (category, index, self) =>
+                index === self.findIndex((c) => c.title === category.title),
+            )
+            .map((category, index) => (
+              <a key={index} href="#">
+                <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-8 hover:bg-primary-8 hover:text-white">
+                  {category.title}
+                </button>
+              </a>
+            ))}
         </div>
         <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 gap-4">
           {news?.map((item) => (

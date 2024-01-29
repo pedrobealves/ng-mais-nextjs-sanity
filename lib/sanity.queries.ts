@@ -41,11 +41,7 @@ export const categoryPaginationQuery = groq`
 `
 
 export const categoryQuery = groq`
-*[_type == "tag"] | order(date desc, _updatedAt desc) {
-  _id,
-  title,
-  "slug": slug.current,
-}
+*[_type == "news" && tag[0]._ref in *[_type=="tag"]._id].tag[]->{_id, title, slug}
 `
 
 export const newsDropPaginationQuery = groq`
@@ -64,46 +60,15 @@ export const newsDropQuery = groq`
 
 //Posts
 
-export const defaultPostsQuery = groq`
-*[_type == "post" && category->title == 'Artigo'] | order(date desc, _updatedAt desc) {
-  "category": category->{title},
+export const postsByTagPaginationQuery = (tag: string) => groq`
+*[_type == "post" && "${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
-}
-`
-export const defaultPostsPaginationQuery = groq`
-*[_type == "post" && category->title == 'Artigo'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  "category": category->{title},
-  ${postFields}
-}
-`
+}`
 
-export const specialPostsPaginationQuery = groq`
-*[_type == "post" && category->title == 'Especial'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  "category": category->{title},
+export const postsPaginationQuery = groq`
+*[_type == "post" && tag == null] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
-}
-`
-
-export const specialPostsQuery = groq`
-*[_type == "post" && category->title == 'Especial'] | order(date desc, _updatedAt desc) {
-  "category": category->{title},
-  ${postFields}
-}
-`
-
-export const extraPostsPaginationQuery = groq`
-*[_type == "post" && category->title == 'Extra'] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  "category": category->{title},
-  ${postFields}
-}
-`
-
-export const extraPostsQuery = groq`
-*[_type == "post" && category->title == 'Extra'] | order(date desc, _updatedAt desc) {
-  "category": category->{title},
-  ${postFields}
-}
-`
+}`
 
 export const postAndMoreStoriesQuery = groq`
 {
@@ -208,15 +173,13 @@ export const indexQuery = groq`
   "newsDrop": ${newsDropQuery},
   "news": ${newsPaginationQuery},
   "reviews": ${reviewsPaginationQuery},
-  "defaultPosts": ${defaultPostsQuery},
-  "specialPosts": ${specialPostsPaginationQuery},
-  "extraPosts": ${extraPostsPaginationQuery},
+  "defaultPosts": ${postsPaginationQuery},
+  "specialPosts": ${postsByTagPaginationQuery('special')},
+  "extraPosts": ${postsByTagPaginationQuery('extra')},
   "settings": ${settingsQuery},
   "category": ${categoryQuery},
   "top": ${topPaginationQuery}
 }`
-
-type TypePost = 'default' | 'special'
 
 export interface Author {
   name?: string
@@ -251,9 +214,9 @@ export interface Post {
   excerpt?: string
   author?: Author
   category?: Game & Category
+  tag?: Tag[]
   slug?: string
   content?: any
-  type?: TypePost
 }
 
 export interface Review {
@@ -267,6 +230,12 @@ export interface Review {
 }
 
 export interface Category {
+  title?: string
+  slug?: string
+  description?: string
+}
+
+export interface Tag {
   title?: string
   slug?: string
   description?: string

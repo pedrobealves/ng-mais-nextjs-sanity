@@ -9,8 +9,6 @@ import {
   type Category,
   categoryPaginationQuery,
   categoryQuery,
-  defaultPostsPaginationQuery,
-  defaultPostsQuery,
   indexQuery,
   newsAndMoreStoriesQuery,
   newsDropPaginationQuery,
@@ -22,6 +20,7 @@ import {
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
+  postsPaginationQuery,
   type Review,
   reviewAndMoreStoriesQuery,
   reviewSlugsQuery,
@@ -29,8 +28,6 @@ import {
   reviewsQuery,
   type Settings,
   settingsQuery,
-  specialPostsPaginationQuery,
-  specialPostsQuery,
   topPaginationQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
@@ -134,6 +131,19 @@ export async function getAllNewsDrop(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(newsDropQuery)) || []
 }
 
+export async function getPostsPagination(
+  client: SanityClient,
+  pageIndex: number = 0,
+  limit: number,
+): Promise<Post[]> {
+  return (
+    (await client.fetch(postsPaginationQuery, {
+      pageIndex,
+      limit,
+    })) || []
+  )
+}
+
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
   const slugs = (await client.fetch<string[]>(postSlugsQuery)) || []
@@ -166,12 +176,6 @@ export async function getPostAndMoreStories(
   return await client.fetch(postAndMoreStoriesQuery, { slug })
 }
 
-export async function getAllPosts(client: SanityClient): Promise<Post[]> {
-  const specialPosts = (await client.fetch(specialPostsQuery)) || []
-  const defaultPosts = (await client.fetch(defaultPostsQuery)) || []
-  return [...defaultPosts, ...specialPosts]
-}
-
 export async function getNewsAndMoreStories(
   client: SanityClient,
   slug: string,
@@ -184,32 +188,6 @@ export async function getReviewsAndMoreStories(
   slug: string,
 ): Promise<{ review: Post; reviewDetails: Review; newsDrop: Post[] }> {
   return await client.fetch(reviewAndMoreStoriesQuery, { slug })
-}
-
-export async function getDefaultPostsPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (
-    (await client.fetch(defaultPostsPaginationQuery, {
-      pageIndex,
-      limit,
-    })) || []
-  )
-}
-
-export async function getSpecialPostsPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (
-    (await client.fetch(specialPostsPaginationQuery, {
-      pageIndex,
-      limit,
-    })) || []
-  )
 }
 
 export async function getIndexInfo(

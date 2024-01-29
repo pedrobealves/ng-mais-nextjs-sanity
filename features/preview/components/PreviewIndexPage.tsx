@@ -1,4 +1,11 @@
-import { HomePage } from 'features/home'
+import { MinimalGrid } from 'features/grid'
+import {
+  HomeExtraList,
+  HomeHero,
+  HomeLayout,
+  HomeNews,
+  HomeTopList,
+} from 'features/home'
 import {
   type Category,
   indexQuery,
@@ -46,16 +53,21 @@ export default function PreviewIndexPage(props: PageProps) {
   } = indexInfo
 
   return (
-    <HomePage
-      preview
-      loading={loadingIndexInfo}
-      news={news || []}
-      newsDrop={newsDrop || []}
-      reviews={reviews || []}
-      posts={[...defaultPosts, ...specialPosts, ...extraPosts] || []}
-      settings={settings || {}}
-      category={category || []}
-      topGames={top || []}
+    <HomeLayout
+      settings={settings}
+      hero={<HomeHero posts={specialPosts || []} reviews={reviews || []} />}
+      main={
+        <>
+          <HomeNews news={news || []} categories={category} />
+          <MinimalGrid title="Artigos" news={defaultPosts || []} type="home" />
+        </>
+      }
+      sidebar={
+        <>
+          <HomeTopList games={top || []} />
+          <HomeExtraList posts={extraPosts || []} />
+        </>
+      }
     />
   )
 }

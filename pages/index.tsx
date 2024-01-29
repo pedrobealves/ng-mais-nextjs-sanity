@@ -1,4 +1,11 @@
-import { HomePage } from 'features/home'
+import { MinimalGrid } from 'features/grid'
+import {
+  HomeExtraList,
+  HomeHero,
+  HomeLayout,
+  HomeNews,
+  HomeTopList,
+} from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getIndexInfo } from 'lib/sanity.client'
@@ -55,14 +62,21 @@ export default function Page(props: PageProps) {
   }
 
   return (
-    <HomePage
-      posts={posts}
-      reviews={reviews}
-      news={news}
+    <HomeLayout
       settings={settings}
-      newsDrop={newsDrop}
-      topGames={top}
-      category={category}
+      hero={<HomeHero posts={posts} reviews={reviews} />}
+      main={
+        <>
+          <HomeNews news={news} categories={category} />
+          <MinimalGrid title="Artigos" news={specialPosts} type="home" />
+        </>
+      }
+      sidebar={
+        <>
+          <HomeTopList games={top} />
+          <HomeExtraList posts={extraPosts} />
+        </>
+      }
     />
   )
 }

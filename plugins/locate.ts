@@ -29,7 +29,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
           locations: [
             {
               title: doc?.title || 'Untitled',
-              href: `/post/${doc.slug.current}`,
+              href: `/post/${doc?.slug.current}`,
             },
             {
               title: 'Home',
@@ -116,8 +116,8 @@ export const locate: DocumentLocationResolver = (params, context) => {
       map((docs) => {
         return {
           locations: docs?.map((doc) => ({
-            title: doc.title || 'Untitled',
-            href: `/post/${doc.slug.current}`,
+            title: doc?.title || 'Untitled',
+            href: `/post/${doc?.slug.current}`,
           })),
         }
       }),

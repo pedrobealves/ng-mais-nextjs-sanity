@@ -16,19 +16,17 @@ export function DefaultPostSection({ posts }: PostProps) {
         </div>
       </div>
       <div className="grid w-full [&>*:first-child]:sm:col-span-2 sm:grid-cols-2 grid-cols-1 gap-6 auto-rows-fr">
-        {posts
-          .filter((post) => post.category.title === 'Artigo')
-          .map((post, index) => (
-            <Card
-              key={post._id}
-              slug={post.slug}
-              title={post.title}
-              subtitle={post.excerpt}
-              picture={post.coverImage}
-              coverGame={post.category?.cover}
-              size={index == 0 ? 'big' : 'small'}
-            />
-          ))}
+        {posts.map((post, index) => (
+          <Card
+            key={post._id}
+            slug={post.slug}
+            title={post.title}
+            subtitle={post.excerpt}
+            picture={post.coverImage}
+            coverGame={post.category?.cover}
+            size={index == 0 ? 'big' : 'small'}
+          />
+        ))}
       </div>
     </section>
   )
