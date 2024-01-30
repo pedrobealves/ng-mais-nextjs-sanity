@@ -7,12 +7,10 @@ import {
 } from 'lib/sanity.api'
 import {
   type Category,
-  categoryPaginationQuery,
   categoryQuery,
   indexQuery,
   newsAndMoreStoriesQuery,
   newsDropPaginationQuery,
-  newsDropQuery,
   newsPaginationQuery,
   newsQuery,
   newsSlugsQuery,
@@ -87,16 +85,6 @@ export async function getFetcher([query, params]) {
   return await client.fetch(query, params)
 }
 
-export async function getCategoryPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Category[]> {
-  return (
-    (await client.fetch(categoryPaginationQuery, { pageIndex, limit })) || []
-  )
-}
-
 export async function getAllCategory(
   client: SanityClient,
 ): Promise<Category[]> {
@@ -125,10 +113,6 @@ export async function getNewsDropPagination(
   return (
     (await client.fetch(newsDropPaginationQuery, { pageIndex, limit })) || []
   )
-}
-
-export async function getAllNewsDrop(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(newsDropQuery)) || []
 }
 
 export async function getPostsPagination(
@@ -172,21 +156,21 @@ export async function getPostBySlug(
 export async function getPostAndMoreStories(
   client: SanityClient,
   slug: string,
-): Promise<{ post: Post; newsDrop: Post[] }> {
+): Promise<{ post: Post }> {
   return await client.fetch(postAndMoreStoriesQuery, { slug })
 }
 
 export async function getNewsAndMoreStories(
   client: SanityClient,
   slug: string,
-): Promise<{ news: Post; newsDrop: Post[] }> {
+): Promise<{ news: Post }> {
   return await client.fetch(newsAndMoreStoriesQuery, { slug })
 }
 
 export async function getReviewsAndMoreStories(
   client: SanityClient,
   slug: string,
-): Promise<{ review: Post; reviewDetails: Review; newsDrop: Post[] }> {
+): Promise<{ review: Post; reviewDetails: Review }> {
   return await client.fetch(reviewAndMoreStoriesQuery, { slug })
 }
 
@@ -195,7 +179,6 @@ export async function getIndexInfo(
   pageIndex: number = 0,
   limit: number,
 ): Promise<{
-  newsDrop: Post[]
   news: Post[]
   reviews: Post[]
   defaultPosts: Post[]

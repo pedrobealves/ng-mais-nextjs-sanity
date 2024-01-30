@@ -13,7 +13,6 @@ import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
   post: Post
-  newsDrop: Post[]
   settings?: Settings
 }
 
@@ -22,20 +21,22 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, newsDrop, draftMode } = props
+  const { settings, post, draftMode } = props
 
   if (draftMode) {
-    return <PreviewPostPage news={newsDrop} post={post} settings={settings} />
+    return (
+      <PreviewPostPage news={post.related} post={post} settings={settings} />
+    )
   }
 
-  return <PostPage post={post} settings={settings} news={newsDrop} />
+  return <PostPage post={post} settings={settings} news={post.related} />
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, { post, newsDrop }] = await Promise.all([
+  const [settings, { post }] = await Promise.all([
     getSettings(client),
     getPostAndMoreStories(client, params.slug),
   ])
@@ -49,7 +50,6 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   return {
     props: {
       post,
-      newsDrop,
       settings,
       draftMode,
       token: draftMode ? readToken : '',

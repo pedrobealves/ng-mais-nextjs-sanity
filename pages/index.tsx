@@ -19,7 +19,6 @@ interface PageProps extends SharedPageProps {
   extraPosts: Post[]
   news: Post[]
   reviews: Post[]
-  newsDrop: Post[]
   top: Review[]
   settings: Settings
   category: Category[]
@@ -38,7 +37,6 @@ export default function Page(props: PageProps) {
     news,
     settings,
     draftMode,
-    newsDrop,
     top,
     category,
   } = props
@@ -54,7 +52,6 @@ export default function Page(props: PageProps) {
         reviews={reviews}
         news={news}
         settings={settings}
-        newsDrop={newsDrop}
         top={top}
         category={category}
       />
@@ -87,7 +84,6 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   const [
     {
-      newsDrop = [],
       news = [],
       reviews = [],
       defaultPosts = [],
@@ -105,7 +101,6 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       defaultPosts,
       extraPosts,
       news,
-      newsDrop,
       reviews,
       settings,
       draftMode,

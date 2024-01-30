@@ -14,6 +14,20 @@ const postFields = groq`
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
+const related = (type: string, filter: string) => groq`
+"related": *[_type == "${type}" && ${filter} && slug.current != ^.slug.current] | order(publishedAt desc, _createdAt desc) [0..2] {
+  category[0]->{title, "slug": slug.current},
+  ${postFields}
+}
+`
+export const relatedByTag = (type: string) => groq`
+  ${related(type, 'count(tag[@._ref in ^.^.tag[]._ref]) > 0')}
+`
+
+export const relatedByCategory = (type: string) => groq`
+  ${related(type, 'category._ref == ^.category._ref')}
+`
+
 export const topPaginationQuery = groq`
 *[_type == "review" && game != null]| order(grade desc, _updatedAt desc)[$pageIndex...$limit] {
   grade,
@@ -32,14 +46,6 @@ score(
 }
 `
 
-export const categoryPaginationQuery = groq`
-*[_type == "tag"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  _id,
-  title,
-  "slug": slug.current,
-}
-`
-
 export const categoryQuery = groq`
 *[_type == "news" && tag[0]._ref in *[_type=="tag"]._id].tag[]->{_id, title, slug}
 `
@@ -47,13 +53,6 @@ export const categoryQuery = groq`
 export const newsDropPaginationQuery = groq`
 *[_type in ["news", "post", "review"] && drop == true] | order(date desc, _updatedAt desc) [$pageIndex...$limit] {
   category[0]->{title, "slug": slug.current},
-  ${postFields}
-}
-`
-
-export const newsDropQuery = groq`
-*[_type in ["news", "post", "review"] && drop == true] | order(date desc, _updatedAt desc)[0...3] {
-  "category": game->{title, "slug": slug.current},
   ${postFields}
 }
 `
@@ -77,8 +76,8 @@ export const postAndMoreStoriesQuery = groq`
     "author": author->{name, picture, bio, social},
     "category": game->{title, "slug": slug.current},
     ${postFields}
-  },
-  "newsDrop": ${newsDropQuery}
+    ${relatedByTag('post')}
+  }
 }`
 
 export const postSlugsQuery = groq`
@@ -111,8 +110,8 @@ export const newsAndMoreStoriesQuery = groq`
     "author": author->{name, picture, bio, social},
     "category": tag[0]->{title, "slug": slug.current},
     ${postFields}
-  },
-  "newsDrop": ${newsDropQuery}
+    ${relatedByTag('news')}
+  }
 }`
 
 export const newsSlugsQuery = groq`
@@ -145,6 +144,7 @@ export const reviewAndMoreStoriesQuery = groq`
     "author": author->{name, picture, bio, social},
     "category": game->{title, "slug": slug.current},
     ${postFields}
+    ${relatedByCategory('review')}
   },
   "reviewDetails": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
     _id,
@@ -153,7 +153,6 @@ export const reviewAndMoreStoriesQuery = groq`
     verdict,
     grade,
   },
-  "newsDrop": ${newsDropQuery}
 }`
 
 export const reviewSlugsQuery = groq`
@@ -170,7 +169,6 @@ export const reviewBySlugQuery = groq`
 
 export const indexQuery = groq`
 {
-  "newsDrop": ${newsDropQuery},
   "news": ${newsPaginationQuery},
   "reviews": ${reviewsPaginationQuery},
   "defaultPosts": ${postsPaginationQuery},
@@ -217,6 +215,7 @@ export interface Post {
   tag?: Tag[]
   slug?: string
   content?: any
+  related?: Post[]
 }
 
 export interface Review {

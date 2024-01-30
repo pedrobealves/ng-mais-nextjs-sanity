@@ -21,7 +21,6 @@ interface PageProps {
   extraPosts: Post[]
   news: Post[]
   reviews: Post[]
-  newsDrop: Post[]
   top: Review[]
   settings: Settings
   category: Category[]
@@ -29,7 +28,6 @@ interface PageProps {
 
 export default function PreviewIndexPage(props: PageProps) {
   const [indexInfo, loadingIndexInfo] = useLiveQuery<{
-    newsDrop: Post[]
     news: Post[]
     reviews: Post[]
     defaultPosts: Post[]
@@ -41,7 +39,6 @@ export default function PreviewIndexPage(props: PageProps) {
   }>(props, indexQuery, { pageIndex: 0, limit: 6 })
 
   const {
-    newsDrop,
     news,
     reviews,
     defaultPosts,
