@@ -1,7 +1,7 @@
 import { PostPage, PostPageProps } from 'features/post'
 import {
-  newsAndMoreStoriesQuery,
   type Post,
+  postAndMoreStoriesQuery,
   Settings,
   settingsQuery,
 } from 'lib/sanity.queries'
@@ -10,7 +10,7 @@ import { useLiveQuery } from 'next-sanity/preview'
 export function PreviewNewsPage(props: PostPageProps) {
   const [{ news: postPreview }, loadingPost] = useLiveQuery<{
     news: Post
-  }>({ news: props.post }, newsAndMoreStoriesQuery, {
+  }>({ news: props.post }, postAndMoreStoriesQuery('news'), {
     slug: props.post.slug,
   })
 

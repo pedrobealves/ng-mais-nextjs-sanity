@@ -19,6 +19,7 @@ export default function PostHeader(
     | 'author'
     | 'slug'
     | 'category'
+    | 'tag'
   >,
 ) {
   const {
@@ -31,11 +32,12 @@ export default function PostHeader(
     excerpt,
     slug,
     category,
+    tag,
   } = props
 
   return (
     <>
-      <PostCategory category={category} date={date} />
+      <PostCategory category={tag ? tag[0] : category} date={date} />
       <div className="max-w-2xl">
         <PostTitle>{title}</PostTitle>
         <PostSubTitle>{excerpt}</PostSubTitle>

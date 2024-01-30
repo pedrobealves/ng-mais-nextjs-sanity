@@ -11,7 +11,7 @@ import { Review as ReviewSection } from 'features/review'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import * as demo from 'lib/demo.data'
-import type { Post, Review, Settings } from 'lib/sanity.queries'
+import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 
 import PostBody from './PostBody'
@@ -24,7 +24,7 @@ export interface PostPageProps {
   loading?: boolean
   post: Post
   news?: Post[]
-  reviewDetails?: Review
+  reviewDetails?: Post
   settings: Settings
 }
 
@@ -69,6 +69,7 @@ export function PostPage(props: PostPageProps) {
                   category={post.category}
                   excerpt={post.excerpt}
                   slug={post.slug}
+                  tag={post.tag}
                 />
                 <PostBody content={post.content} />
                 {post._type == 'review' && (

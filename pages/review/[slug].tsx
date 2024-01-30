@@ -2,18 +2,17 @@ import { PostPage } from 'features/post'
 import { PreviewReviewPage } from 'features/preview'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllNewsSlugs,
+  getAllPostsSlugs,
   getClient,
-  getReviewsAndMoreStories,
+  getPostAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
-import { Post, Review, Settings } from 'lib/sanity.queries'
+import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  review: Post
-  reviewDetails: Review
+  post: Post
   settings?: Settings
 }
 
@@ -22,14 +21,14 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, review, reviewDetails, draftMode } = props
+  const { settings, post, draftMode } = props
 
   if (draftMode) {
     return (
       <PreviewReviewPage
-        news={review.related}
-        reviewDetails={reviewDetails}
-        post={review}
+        news={post.related}
+        reviewDetails={post}
+        post={post}
         settings={settings}
       />
     )
@@ -37,10 +36,10 @@ export default function ProjectSlugRoute(props: PageProps) {
 
   return (
     <PostPage
-      post={review}
-      reviewDetails={reviewDetails}
+      post={post}
+      reviewDetails={post}
       settings={settings}
-      news={review.related}
+      news={post.related}
     />
   )
 }
@@ -49,12 +48,12 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, { review, reviewDetails }] = await Promise.all([
+  const [settings, { post }] = await Promise.all([
     getSettings(client),
-    getReviewsAndMoreStories(client, params.slug),
+    getPostAndMoreStories(client, params.slug, 'review'),
   ])
 
-  if (!review) {
+  if (!post) {
     return {
       notFound: true,
     }
@@ -62,8 +61,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   return {
     props: {
-      review,
-      reviewDetails,
+      post,
       settings,
       draftMode,
       token: draftMode ? readToken : '',
@@ -72,7 +70,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllNewsSlugs()
+  const slugs = await getAllPostsSlugs('review')
 
   return {
     paths: slugs?.map(({ slug }) => `/review/${slug}`) || [],

@@ -9,7 +9,7 @@ import {
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getIndexInfo } from 'lib/sanity.client'
-import { Category, Post, Review, Settings } from 'lib/sanity.queries'
+import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
@@ -19,7 +19,7 @@ interface PageProps extends SharedPageProps {
   extraPosts: Post[]
   news: Post[]
   reviews: Post[]
-  top: Review[]
+  top: Post[]
   settings: Settings
   category: Category[]
 }

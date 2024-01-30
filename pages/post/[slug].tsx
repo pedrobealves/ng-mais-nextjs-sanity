@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   const [settings, { post }] = await Promise.all([
     getSettings(client),
-    getPostAndMoreStories(client, params.slug),
+    getPostAndMoreStories(client, params.slug, 'post'),
   ])
 
   if (!post) {
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs()
+  const slugs = await getAllPostsSlugs('post')
 
   return {
     paths: slugs?.map(({ slug }) => `/post/${slug}`) || [],

@@ -36,7 +36,7 @@ export default function Search(props: PageProps) {
           <CardList
             posts={initialPosts}
             type="post/default"
-            pageQuery={postsPaginationQuery}
+            pageQuery={postsPaginationQuery('post')}
           />
         </section>
       </main>
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
   const [initialPosts = [], settings] = await Promise.all([
-    getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE),
+    getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE, 'post'),
     getSettings(client),
   ])
 

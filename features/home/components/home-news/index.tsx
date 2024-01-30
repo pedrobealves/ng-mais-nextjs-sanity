@@ -35,9 +35,9 @@ export function HomeNews({ news, categories }: NewsProps) {
               <Card.Cover picture={item.coverImage} title={item.title} />
               <Card.Section>
                 <div className="flex flex-col gap-3">
-                  {item.category && (
+                  {item.tag && (
                     <Card.Category
-                      category={item.category.title}
+                      category={item.tag[0].title}
                       dateString={item.date}
                     />
                   )}

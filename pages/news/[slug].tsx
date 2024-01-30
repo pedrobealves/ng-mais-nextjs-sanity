@@ -2,9 +2,9 @@ import { PostPage } from 'features/post'
 import { PreviewNewsPage } from 'features/preview'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllNewsSlugs,
+  getAllPostsSlugs,
   getClient,
-  getNewsAndMoreStories,
+  getPostAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
@@ -12,7 +12,7 @@ import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  news: Post
+  post: Post
   settings?: Settings
 }
 
@@ -21,27 +21,27 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, news, draftMode } = props
+  const { settings, post, draftMode } = props
 
   if (draftMode) {
     return (
-      <PreviewNewsPage post={news} news={news.related} settings={settings} />
+      <PreviewNewsPage post={post} news={post.related} settings={settings} />
     )
   }
 
-  return <PostPage post={news} settings={settings} news={news.related} />
+  return <PostPage post={post} settings={settings} news={post.related} />
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, { news }] = await Promise.all([
+  const [settings, { post }] = await Promise.all([
     getSettings(client),
-    getNewsAndMoreStories(client, params.slug),
+    getPostAndMoreStories(client, params.slug, 'news'),
   ])
 
-  if (!news) {
+  if (!post) {
     return {
       notFound: true,
     }
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   return {
     props: {
-      news,
+      post,
       settings,
       draftMode,
       token: draftMode ? readToken : '',
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllNewsSlugs()
+  const slugs = await getAllPostsSlugs('news')
 
   return {
     paths: slugs?.map(({ slug }) => `/news/${slug}`) || [],

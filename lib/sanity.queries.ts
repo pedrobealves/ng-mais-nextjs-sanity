@@ -9,6 +9,9 @@ const postFields = groq`
   excerpt,
   coverImage,
   showCover,
+  game->{title, "slug": slug.current, cover, release, developer, genre},
+  category->{title, "slug": slug.current},
+  tag[]->{title, "slug": slug.current},
   "slug": slug.current,
 `
 
@@ -59,121 +62,52 @@ export const newsDropPaginationQuery = groq`
 
 //Posts
 
-export const postsByTagPaginationQuery = (tag: string) => groq`
-*[_type == "post" && "${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+export const postsByTagPaginationQuery = (type: string, tag: string) => groq`
+*[_type == "${type}" && "${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
 }`
 
-export const postsPaginationQuery = groq`
-*[_type == "post" && tag == null] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+export const postsPaginationQuery = (type: string) => groq`
+*[_type == "${type}"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
 }`
 
-export const postAndMoreStoriesQuery = groq`
+export const postAndMoreStoriesQuery = (type: string) => groq`
 {
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
+  "post": *[_type == "${type}" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
     "author": author->{name, picture, bio, social},
-    "category": game->{title, "slug": slug.current},
     ${postFields}
-    ${relatedByTag('post')}
+    ${type == 'review' ? reviewDetails : ''}
+    ${type == 'review' ? relatedByCategory(type) : relatedByTag(type)}
   }
 }`
 
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+export const postSlugsQuery = (type: string) => groq`
+*[_type == "${type}" && defined(slug.current)][].slug.current
 `
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
+export const postBySlugQuery = (type: string) => groq`
+*[_type == "${type}" && slug.current == $slug][0] {
   ${postFields}
 }
 `
 
-//news
-
-export const newsQuery = groq`
-*[_type == "news"] | order(date desc, _updatedAt desc) {
-  "category": tag[0]->{title, "slug": slug.current},
-  ${postFields}
-}`
-
-export const newsPaginationQuery = groq`
-*[_type == "news"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  "category": tag[0]->{title, "slug": slug.current},
-  ${postFields}
-}`
-
-export const newsAndMoreStoriesQuery = groq`
-{
-  "news": *[_type == "news" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    "author": author->{name, picture, bio, social},
-    "category": tag[0]->{title, "slug": slug.current},
-    ${postFields}
-    ${relatedByTag('news')}
-  }
-}`
-
-export const newsSlugsQuery = groq`
-*[_type == "news" && defined(slug.current)][].slug.current
-`
-export const newsBySlugQuery = groq`
-*[_type == "news" && slug.current == $slug][0] {
-  ${postFields}
-}
-`
-
-//review
-
-export const reviewsPaginationQuery = groq`
-*[_type == "review"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  "category": game->{title, "slug": slug.current},
-  ${postFields}
-}`
-
-export const reviewsQuery = groq`
-*[_type == "review"] | order(date desc, _updatedAt desc) {
-  "category": game->{title, "slug": slug.current},
-  ${postFields}
-}`
-
-export const reviewAndMoreStoriesQuery = groq`
-{
-  "review": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    "author": author->{name, picture, bio, social},
-    "category": game->{title, "slug": slug.current},
-    ${postFields}
-    ${relatedByCategory('review')}
-  },
-  "reviewDetails": *[_type == "review" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    _id,
+const reviewDetails = groq`
     pros,
     cons,
     verdict,
     grade,
-  },
-}`
-
-export const reviewSlugsQuery = groq`
-*[_type == "review" && defined(slug.current)][].slug.current
-`
-
-export const reviewBySlugQuery = groq`
-*[_type == "review" && slug.current == $slug][0] {
-  ${postFields}
-}
 `
 
 //index
 
 export const indexQuery = groq`
 {
-  "news": ${newsPaginationQuery},
-  "reviews": ${reviewsPaginationQuery},
-  "defaultPosts": ${postsPaginationQuery},
-  "specialPosts": ${postsByTagPaginationQuery('special')},
-  "extraPosts": ${postsByTagPaginationQuery('extra')},
+  "news": ${postsPaginationQuery('news')},
+  "reviews": ${postsPaginationQuery('review')},
+  "defaultPosts": ${postsPaginationQuery('post')},
+  "specialPosts": ${postsByTagPaginationQuery('post', 'special')},
+  "extraPosts": ${postsByTagPaginationQuery('post', 'extra')},
   "settings": ${settingsQuery},
   "category": ${categoryQuery},
   "top": ${topPaginationQuery}
@@ -211,20 +145,15 @@ export interface Post {
   _updatedAt?: string
   excerpt?: string
   author?: Author
-  category?: Game & Category
+  category?: Category
   tag?: Tag[]
   slug?: string
   content?: any
   related?: Post[]
-}
-
-export interface Review {
-  _id: string
-  pros: string[]
-  cons: string[]
-  verdict: string
-  grade: number
-  slug?: string
+  pros?: string[]
+  cons?: string[]
+  verdict?: string
+  grade?: number
   game?: Game
 }
 

@@ -9,21 +9,12 @@ import {
   type Category,
   categoryQuery,
   indexQuery,
-  newsAndMoreStoriesQuery,
   newsDropPaginationQuery,
-  newsPaginationQuery,
-  newsQuery,
-  newsSlugsQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
   postsPaginationQuery,
-  type Review,
-  reviewAndMoreStoriesQuery,
-  reviewSlugsQuery,
-  reviewsPaginationQuery,
-  reviewsQuery,
   type Settings,
   settingsQuery,
   topPaginationQuery,
@@ -60,23 +51,11 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
   return (await client.fetch(settingsQuery)) || {}
 }
 
-export async function getAllNews(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(newsQuery)) || []
-}
-
-export async function getNewsPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (await client.fetch(newsPaginationQuery, { pageIndex, limit })) || []
-}
-
 export async function getTop(
   client: SanityClient,
   pageIndex: number = 0,
   limit: number,
-): Promise<Review[]> {
+): Promise<Post[]> {
   return (await client.fetch(topPaginationQuery, { pageIndex, limit })) || []
 }
 
@@ -91,87 +70,42 @@ export async function getAllCategory(
   return (await client.fetch(categoryQuery)) || []
 }
 
-export async function getAllReviews(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(reviewsQuery)) || []
-}
-
-export async function getReviewsPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (
-    (await client.fetch(reviewsPaginationQuery, { pageIndex, limit })) || []
-  )
-}
-
-export async function getNewsDropPagination(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (
-    (await client.fetch(newsDropPaginationQuery, { pageIndex, limit })) || []
-  )
-}
-
 export async function getPostsPagination(
   client: SanityClient,
   pageIndex: number = 0,
   limit: number,
+  type: string,
 ): Promise<Post[]> {
   return (
-    (await client.fetch(postsPaginationQuery, {
+    (await client.fetch(postsPaginationQuery(type), {
       pageIndex,
       limit,
     })) || []
   )
 }
 
-export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
+export async function getAllPostsSlugs(
+  type: string,
+): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
-  const slugs = (await client.fetch<string[]>(postSlugsQuery)) || []
-  return slugs.map((slug) => ({ slug }))
-}
-
-export async function getAllNewsSlugs(): Promise<Pick<Post, 'slug'>[]> {
-  const client = getClient()
-  const slugs = (await client.fetch<string[]>(newsSlugsQuery)) || []
-  return slugs.map((slug) => ({ slug }))
-}
-
-export async function getAllReviewSlugs(): Promise<Pick<Post, 'slug'>[]> {
-  const client = getClient()
-  const slugs = (await client.fetch<string[]>(reviewSlugsQuery)) || []
+  const slugs = (await client.fetch<string[]>(postSlugsQuery(type))) || []
   return slugs.map((slug) => ({ slug }))
 }
 
 export async function getPostBySlug(
   client: SanityClient,
   slug: string,
+  type: string,
 ): Promise<Post> {
-  return (await client.fetch(postBySlugQuery, { slug })) || ({} as any)
+  return (await client.fetch(postBySlugQuery(type), { slug })) || ({} as any)
 }
 
 export async function getPostAndMoreStories(
   client: SanityClient,
   slug: string,
+  type: string,
 ): Promise<{ post: Post }> {
-  return await client.fetch(postAndMoreStoriesQuery, { slug })
-}
-
-export async function getNewsAndMoreStories(
-  client: SanityClient,
-  slug: string,
-): Promise<{ news: Post }> {
-  return await client.fetch(newsAndMoreStoriesQuery, { slug })
-}
-
-export async function getReviewsAndMoreStories(
-  client: SanityClient,
-  slug: string,
-): Promise<{ review: Post; reviewDetails: Review }> {
-  return await client.fetch(reviewAndMoreStoriesQuery, { slug })
+  return await client.fetch(postAndMoreStoriesQuery(type), { slug })
 }
 
 export async function getIndexInfo(
@@ -186,7 +120,7 @@ export async function getIndexInfo(
   extraPosts: Post[]
   settings: Settings
   category: Category[]
-  top: Review[]
+  top: Post[]
 }> {
   return await client.fetch(indexQuery, {
     pageIndex,

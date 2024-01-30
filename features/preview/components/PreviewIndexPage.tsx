@@ -10,7 +10,6 @@ import {
   type Category,
   indexQuery,
   type Post,
-  type Review,
   type Settings,
 } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
@@ -21,7 +20,7 @@ interface PageProps {
   extraPosts: Post[]
   news: Post[]
   reviews: Post[]
-  top: Review[]
+  top: Post[]
   settings: Settings
   category: Category[]
 }
@@ -35,7 +34,7 @@ export default function PreviewIndexPage(props: PageProps) {
     extraPosts: Post[]
     settings: Settings
     category: Category[]
-    top: Review[]
+    top: Post[]
   }>(props, indexQuery, { pageIndex: 0, limit: 6 })
 
   const {
