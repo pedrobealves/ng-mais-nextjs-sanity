@@ -1,65 +1,31 @@
 'use client'
-
-import { HeadCard } from 'components/HeadCard'
-import IndexPageHead from 'components/IndexPageHead'
-import { CardList } from 'features/pagination'
-import Footer from 'layouts/Footer'
-import Header from 'layouts/Header'
+import {
+  getClientWithToken,
+  getPostsAndSettings,
+  Page,
+  PageProps,
+  Query,
+} from 'features/post'
 import { readToken } from 'lib/sanity.api'
-import { getClient, getPostsPagination, getSettings } from 'lib/sanity.client'
-import { Post } from 'lib/sanity.queries'
-import { postsPaginationQuery, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
-import type { SharedPageProps } from 'pages/_app'
 
-interface PageProps extends SharedPageProps {
-  settings: Settings
-  initialReviews: Post[]
-}
-
-interface Query {
-  [key: string]: string
-}
-
-const POSTS_IN_INDEX_PAGE = 8
-
-export default function Search(props: PageProps) {
-  const { settings, initialReviews } = props
-
-  return (
-    <>
-      <IndexPageHead settings={settings} />
-      <Header social={settings.social} level={2} />
-      <main className="w-full md:pt-40 pt-32 px-4 mb-14">
-        <section className="max-w-col-12 mx-auto">
-          <HeadCard title="Análises" />
-          <CardList
-            posts={initialReviews}
-            type="review"
-            pageQuery={postsPaginationQuery('review')}
-          />
-        </section>
-      </main>
-      <Footer />
-    </>
-  )
-}
+export default Page
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
-  const { draftMode = false } = ctx
-  const client = getClient(draftMode ? { token: readToken } : undefined)
+  const type = 'review'
 
-  const [initialReviews = [], settings] = await Promise.all([
-    getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE, 'review'),
-    getSettings(client),
-  ])
+  const client = getClientWithToken(ctx)
+  const [initialPosts = [], settings] = await getPostsAndSettings(client, type)
 
   return {
     props: {
-      initialReviews,
+      initialPosts,
       settings,
-      draftMode,
-      token: draftMode ? readToken : '',
+      type,
+      title: 'Análises',
+      filter: '',
+      draftMode: ctx.draftMode || false,
+      token: ctx.draftMode ? readToken : '',
     },
   }
 }

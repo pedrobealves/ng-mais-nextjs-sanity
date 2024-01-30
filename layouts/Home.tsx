@@ -17,7 +17,7 @@ export interface HomePageProps {
   sidebar: React.ReactNode
 }
 
-export function HomeLayout({
+export function Home({
   preview,
   loading,
   settings,

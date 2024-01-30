@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 
 import logo from '/public/logo/logo.svg'
+import logoMobile from '/public/logo/logo-mobile.svg'
 
 type LogoProps = {
   height?: number
@@ -15,7 +16,20 @@ export function Logo({ height = 47, justify = 'justify-center' }: LogoProps) {
       href="/"
       className={twMerge('flex items-center justify-center gap-3.5', justify)}
     >
-      <Image height={height} priority src={logo} alt="Logo" />
+      <Image
+        height={height}
+        priority
+        src={logo}
+        alt="Logo"
+        className="hidden md:block"
+      />
+      <Image
+        height={height}
+        priority
+        src={logoMobile}
+        alt="Logo"
+        className="block md:hidden"
+      />
     </Link>
   )
 }

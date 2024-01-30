@@ -1,12 +1,7 @@
 import { MinimalGrid } from 'features/grid'
-import {
-  HomeExtraList,
-  HomeHero,
-  HomeLayout,
-  HomeNews,
-  HomeTopList,
-} from 'features/home'
+import { HomeExtraList, HomeHero, HomeNews, HomeTopList } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
+import { Home } from 'layouts/Home'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getIndexInfo } from 'lib/sanity.client'
 import { Category, Post, Settings } from 'lib/sanity.queries'
@@ -43,13 +38,6 @@ export default function Page(props: PageProps) {
     category,
   } = props
 
-  const posts = [
-    ...specialPosts,
-    ...defaultPosts,
-    ...extraPosts,
-    ...chronologyPosts,
-  ]
-
   if (draftMode) {
     return (
       <PreviewIndexPage
@@ -67,9 +55,9 @@ export default function Page(props: PageProps) {
   }
 
   return (
-    <HomeLayout
+    <Home
       settings={settings}
-      hero={<HomeHero posts={posts} reviews={reviews} />}
+      hero={<HomeHero posts={defaultPosts} reviews={reviews} />}
       main={
         <>
           <HomeNews news={news} categories={category} />

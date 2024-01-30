@@ -34,7 +34,7 @@ export function NavMobile({ level }: NavType) {
           viewBox="0 0 32 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={level === 1 ? 'fill-white' : 'fill-primary-8'}
+          className="fill-primary-8"
         >
           <g clipPath="url(#clip0_1145_2232)">
             <path d="M32 13.7143C32 14.9786 30.9786 16 29.7143 16H2.28571C1.02143 16 0 14.9786 0 13.7143C0 12.45 1.02143 11.4286 2.28571 11.4286H29.7143C30.9786 11.4286 32 12.45 32 13.7143Z" />

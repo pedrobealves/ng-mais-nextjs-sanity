@@ -56,7 +56,7 @@ export default function BlogHeader({
         <header
           className={`fixed ${
             scrollDirection === 'down' ? '-top-24' : 'top-0'
-          } bg-white w-full z-20 left-0 px-4 transition-all duration-500`}
+          } bg-white w-full z-20 left-0 lg:px-4 transition-all duration-500`}
         >
           <NavBar level={level} social={social} />
         </header>
