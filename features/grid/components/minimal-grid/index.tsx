@@ -31,7 +31,7 @@ export function MinimalGrid({ title, news, type }: MinimalGridProps) {
             <Link href={`/${post._type}/${post.slug}`} key={post._id}>
               <Card.Root>
                 <Card.Cover picture={post.coverImage} title={post.title} />
-                {post.tag[0] ? (
+                {post.tag ? (
                   <Card.Category category={post.tag[0].title} />
                 ) : (
                   <Card.Category category={post.category.title} />
