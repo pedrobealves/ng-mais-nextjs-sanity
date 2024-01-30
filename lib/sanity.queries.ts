@@ -67,8 +67,8 @@ export const postsByTagPaginationQuery = (type: string, tag: string) => groq`
   ${postFields}
 }`
 
-export const postsPaginationQuery = (type: string) => groq`
-*[_type == "${type}"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+export const postsPaginationQuery = (type: string, filter: string = '') => groq`
+*[_type == "${type}" ${filter}] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
 }`
 
@@ -105,9 +105,10 @@ export const indexQuery = groq`
 {
   "news": ${postsPaginationQuery('news')},
   "reviews": ${postsPaginationQuery('review')},
-  "defaultPosts": ${postsPaginationQuery('post')},
+  "defaultPosts": ${postsPaginationQuery('post', '&& tag == null')},
   "specialPosts": ${postsByTagPaginationQuery('post', 'special')},
   "extraPosts": ${postsByTagPaginationQuery('post', 'extra')},
+  "chronologyPosts": ${postsByTagPaginationQuery('post', 'chronology')},
   "settings": ${settingsQuery},
   "category": ${categoryQuery},
   "top": ${topPaginationQuery}

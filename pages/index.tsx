@@ -16,6 +16,7 @@ import type { SharedPageProps } from 'pages/_app'
 interface PageProps extends SharedPageProps {
   specialPosts: Post[]
   defaultPosts: Post[]
+  chronologyPosts: Post[]
   extraPosts: Post[]
   news: Post[]
   reviews: Post[]
@@ -32,6 +33,7 @@ export default function Page(props: PageProps) {
   const {
     defaultPosts,
     specialPosts,
+    chronologyPosts,
     extraPosts,
     reviews,
     news,
@@ -41,13 +43,19 @@ export default function Page(props: PageProps) {
     category,
   } = props
 
-  const posts = [...specialPosts, ...defaultPosts, ...extraPosts]
+  const posts = [
+    ...specialPosts,
+    ...defaultPosts,
+    ...extraPosts,
+    ...chronologyPosts,
+  ]
 
   if (draftMode) {
     return (
       <PreviewIndexPage
         specialPosts={specialPosts}
         defaultPosts={defaultPosts}
+        chronologyPosts={chronologyPosts}
         extraPosts={extraPosts}
         reviews={reviews}
         news={news}
@@ -65,7 +73,8 @@ export default function Page(props: PageProps) {
       main={
         <>
           <HomeNews news={news} categories={category} />
-          <MinimalGrid title="Artigos" news={specialPosts} type="home" />
+          <MinimalGrid title="Especiais" news={specialPosts} type="home" />
+          <MinimalGrid title="Cronologia" news={chronologyPosts} type="home" />
         </>
       }
       sidebar={
@@ -88,6 +97,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       reviews = [],
       defaultPosts = [],
       specialPosts = [],
+      chronologyPosts = [],
       extraPosts = [],
       settings,
       category,
@@ -99,6 +109,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     props: {
       specialPosts,
       defaultPosts,
+      chronologyPosts,
       extraPosts,
       news,
       reviews,

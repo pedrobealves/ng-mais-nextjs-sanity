@@ -118,6 +118,7 @@ export async function getIndexInfo(
   defaultPosts: Post[]
   specialPosts: Post[]
   extraPosts: Post[]
+  chronologyPosts: Post[]
   settings: Settings
   category: Category[]
   top: Post[]
