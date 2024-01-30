@@ -50,7 +50,7 @@ score(
 `
 
 export const tagQuery = (filter: string = '') => groq`
-*[tag[0]._ref in *[_type=="tag"]._id ${filter}].tag[]->{_id, title, slug}
+*[tag[0]._ref in *[_type=="tag"]._id ${filter}].tag[]->{_id, title, "slug": slug.current}
 `
 
 export const newsDropPaginationQuery = groq`

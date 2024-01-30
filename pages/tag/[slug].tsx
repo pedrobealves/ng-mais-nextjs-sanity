@@ -5,7 +5,7 @@ import {
   Page,
   PageProps,
   Query,
-} from 'features/post'
+} from 'features/pagination'
 import { readToken } from 'lib/sanity.api'
 import { getAllPostsSlugs } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
 export const getStaticPaths = async () => {
   const slugs = await getAllPostsSlugs('tag')
-
   return {
     paths: slugs?.map(({ slug }) => `/tag/${slug}`) || [],
     fallback: 'blocking',

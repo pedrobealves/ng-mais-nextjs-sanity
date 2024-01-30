@@ -1,4 +1,5 @@
 import { Card } from 'components/Card'
+import Link from 'components/Link'
 import { Section } from 'components/Section'
 import type { Category, Post } from 'lib/sanity.queries'
 
@@ -13,20 +14,22 @@ export function HomeNews({ news, categories }: NewsProps) {
       <Section.Title>Notícias</Section.Title>
       <Section.Container>
         <div className="flex flex-wrap gap-2 py-4">
-          <button className="px-4 py-3 rounded-full bg-primary-8 font-bold text-white">
-            Todas notícias
-          </button>
+          <Link href="/news">
+            <button className="px-4 py-3 rounded-full bg-primary-8 font-bold text-white">
+              Todas notícias
+            </button>
+          </Link>
           {categories
             ?.filter(
               (category, index, self) =>
                 index === self.findIndex((c) => c.title === category.title),
             )
             .map((category, index) => (
-              <a key={index} href="#">
+              <Link key={index} href={`/tag/${category.slug}`}>
                 <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-8 hover:bg-primary-8 hover:text-white">
                   {category.title}
                 </button>
-              </a>
+              </Link>
             ))}
         </div>
         <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 gap-4">

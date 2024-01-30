@@ -5,7 +5,7 @@ import {
   Page,
   PageProps,
   Query,
-} from 'features/post'
+} from 'features/pagination'
 import { readToken } from 'lib/sanity.api'
 import { getAllPostsSlugs } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
