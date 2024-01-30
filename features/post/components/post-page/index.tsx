@@ -8,7 +8,7 @@ import Header from 'layouts/Header'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getPostsPagination, getSettings } from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
-import { postsPaginationQuery, Settings } from 'lib/sanity.queries'
+import { postsPaginationFilterQuery, Settings } from 'lib/sanity.queries'
 import type { SharedPageProps } from 'pages/_app'
 
 export interface PageProps extends SharedPageProps {
@@ -17,7 +17,7 @@ export interface PageProps extends SharedPageProps {
   type: string
   title: string
   filter: string
-  tag?: string
+  sub?: string
 }
 
 export interface Query {
@@ -27,7 +27,7 @@ export interface Query {
 const POSTS_IN_INDEX_PAGE = 8
 
 export function Page(props: PageProps) {
-  const { settings, initialPosts, type, title, filter, tag = '' } = props
+  const { settings, initialPosts, type, title, filter, sub = '' } = props
 
   return (
     <>
@@ -38,8 +38,8 @@ export function Page(props: PageProps) {
           <HeadCard title={title} />
           <CardList
             posts={initialPosts}
-            type={`${type}${tag}`}
-            pageQuery={postsPaginationQuery(type, filter)}
+            type={`${sub}${type}`}
+            pageQuery={postsPaginationFilterQuery(filter)}
           />
         </section>
       </main>
@@ -55,9 +55,10 @@ export function getClientWithToken(ctx: any) {
 }
 
 // Função para obter posts e configurações
-export async function getPostsAndSettings(client: any, type: string) {
+export async function getPostsAndSettings(client: any, type: string, ctx: any) {
+  const { params = {} } = ctx
   return await Promise.all([
-    getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE, type),
+    getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE, type, params.slug),
     getSettings(client),
   ])
 }

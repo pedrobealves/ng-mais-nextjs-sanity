@@ -5,7 +5,7 @@ const headerNavLinks = [
   },
   {
     name: 'Artigos',
-    slug: '/post',
+    slug: '/article',
   },
   {
     name: 'Análises',
@@ -13,7 +13,7 @@ const headerNavLinks = [
   },
   {
     name: 'Especiais',
-    slug: '/post/special',
+    slug: '/special',
   },
 ]
 

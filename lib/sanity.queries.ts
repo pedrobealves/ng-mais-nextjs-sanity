@@ -49,8 +49,8 @@ score(
 }
 `
 
-export const categoryQuery = groq`
-*[_type == "news" && tag[0]._ref in *[_type=="tag"]._id].tag[]->{_id, title, slug}
+export const tagQuery = (filter: string = '') => groq`
+*[tag[0]._ref in *[_type=="tag"]._id ${filter}].tag[]->{_id, title, slug}
 `
 
 export const newsDropPaginationQuery = groq`
@@ -67,13 +67,23 @@ export const postQuery = (type: string) => groq`
   ${postFields}
 }`
 
-export const postsByTagPaginationQuery = (type: string, tag: string) => groq`
-*[_type == "${type}" && "${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+export const postsByTagPaginationQuery = (tag: string) => groq`
+*["${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
 }`
 
-export const postsPaginationQuery = (type: string, filter: string = '') => groq`
-*[_type == "${type}" ${filter}] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+export const postsByCategoryPaginationQuery = (category: string) => groq`
+*["${category}" == category->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  ${postFields}
+}`
+
+export const postsPaginationQuery = (type: string) => groq`
+*[_type == "${type}"] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  ${postFields}
+}`
+
+export const postsPaginationFilterQuery = (filter: string) => groq`
+*[${filter}] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}
 }`
 
@@ -84,7 +94,7 @@ export const postAndMoreStoriesQuery = (type: string) => groq`
     "author": author->{name, picture, bio, social},
     ${postFields}
     ${type == 'review' ? reviewDetails : ''}
-    ${type == 'review' ? relatedByCategory(type) : relatedByTag(type)}
+    ${type == 'news' ? relatedByTag(type) : relatedByCategory(type)}
   }
 }`
 
@@ -110,12 +120,12 @@ export const indexQuery = groq`
 {
   "news": ${postsPaginationQuery('news')},
   "reviews": ${postsPaginationQuery('review')},
-  "defaultPosts": ${postsPaginationQuery('post', '&& tag == null')},
-  "specialPosts": ${postsByTagPaginationQuery('post', 'special')},
-  "extraPosts": ${postsByTagPaginationQuery('post', 'extra')},
-  "chronologyPosts": ${postsByTagPaginationQuery('post', 'chronology')},
+  "defaultPosts": ${postsByCategoryPaginationQuery('article')},
+  "specialPosts": ${postsByCategoryPaginationQuery('special')},
+  "extraPosts": ${postsByCategoryPaginationQuery('extra')},
+  "chronologyPosts": ${postsByCategoryPaginationQuery('chronology')},
   "settings": ${settingsQuery},
-  "category": ${categoryQuery},
+  "category": ${tagQuery('&&  _type == "news"')},
   "top": ${topPaginationQuery}
 }`
 

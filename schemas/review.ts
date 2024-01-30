@@ -102,6 +102,20 @@ export default defineType({
       validation: (rule) => rule.integer().min(0).max(100),
     }),
     defineField({
+      title: 'Tags',
+      name: 'tag',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }],
+        },
+      ],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
       title: 'Category',
       name: 'category',
       type: 'reference',
