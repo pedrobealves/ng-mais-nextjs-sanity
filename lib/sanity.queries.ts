@@ -62,6 +62,11 @@ export const newsDropPaginationQuery = groq`
 
 //Posts
 
+export const postQuery = (type: string) => groq`
+*[_type == "${type}"] | order(date desc, _updatedAt desc) {
+  ${postFields}
+}`
+
 export const postsByTagPaginationQuery = (type: string, tag: string) => groq`
 *[_type == "${type}" && "${tag}" in tag[]->slug.current ] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
   ${postFields}

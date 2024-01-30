@@ -9,10 +9,10 @@ import {
   type Category,
   categoryQuery,
   indexQuery,
-  newsDropPaginationQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
+  postQuery,
   postSlugsQuery,
   postsPaginationQuery,
   type Settings,
@@ -68,6 +68,13 @@ export async function getAllCategory(
   client: SanityClient,
 ): Promise<Category[]> {
   return (await client.fetch(categoryQuery)) || []
+}
+
+export async function getAllPosts(
+  client: SanityClient,
+  type: string,
+): Promise<Post[]> {
+  return (await client.fetch(postQuery(type))) || []
 }
 
 export async function getPostsPagination(

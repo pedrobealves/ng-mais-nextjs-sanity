@@ -1,9 +1,4 @@
-import {
-  getAllNews,
-  getAllPosts,
-  getAllReviews,
-  getClient,
-} from 'lib/sanity.client'
+import { getAllPosts, getClient } from 'lib/sanity.client'
 
 type SitemapLocation = {
   url: string
@@ -60,7 +55,7 @@ export async function getServerSideProps({ res }) {
   const client = getClient()
 
   // Get list of Post urls
-  const [posts = []] = await Promise.all([getAllPosts(client)])
+  const [posts = []] = await Promise.all([getAllPosts(client, 'post')])
   const postUrls: SitemapLocation[] = posts
     .filter(({ slug = '' }) => slug)
     .map((post) => {
@@ -72,7 +67,7 @@ export async function getServerSideProps({ res }) {
       }
     })
 
-  const [news = []] = await Promise.all([getAllNews(client)])
+  const [news = []] = await Promise.all([getAllPosts(client, 'news')])
   const newsUrls: SitemapLocation[] = news
     .filter(({ slug = '' }) => slug)
     .map((news) => {
@@ -84,7 +79,7 @@ export async function getServerSideProps({ res }) {
       }
     })
 
-  const [reviews = []] = await Promise.all([getAllReviews(client)])
+  const [reviews = []] = await Promise.all([getAllPosts(client, 'reviews')])
   const reviewsUrls: SitemapLocation[] = reviews
     .filter(({ slug = '' }) => slug)
     .map((reviews) => {
