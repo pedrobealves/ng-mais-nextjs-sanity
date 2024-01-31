@@ -45,14 +45,16 @@ export default async function revalidate(
 
 type StaleRoute =
   | '/'
+  | `/${string}`
   | `/post/${string}`
   | `/news/${string}`
   | `/review/${string}`
+  | `/tag/${string}`
 
 async function queryStaleRoutes(
   body: Pick<
     ParsedBody<SanityDocument>['body'],
-    '_type' | '_id' | 'date' | 'slug'
+    '_type' | '_id' | 'date' | 'slug' | 'category' | 'tag'
   >,
 ): Promise<StaleRoute[]> {
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })

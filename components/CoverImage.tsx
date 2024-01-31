@@ -12,11 +12,11 @@ export default function CoverImage(props: CoverImageProps) {
   const { title, slug, image: source, priority } = props
   const image = source?.asset?._ref ? (
     <Image
-      className="object-cover object-center rounded-xl h-80"
+      className="rounded-xl"
       width={2000}
       height={1000}
       alt={`Cover Image for ${title}`}
-      src={urlForImage(source).height(1000).width(2000).url()}
+      src={urlForImage(source).url()}
       sizes="100vw"
       priority={priority}
     />

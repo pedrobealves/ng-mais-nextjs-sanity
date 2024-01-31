@@ -35,6 +35,10 @@ export const locate: DocumentLocationResolver = (params, context) => {
               title: 'Home',
               href: `/`,
             },
+            {
+              title: 'Posts',
+              href: `/post`,
+            },
           ],
         }
       }),
@@ -64,6 +68,10 @@ export const locate: DocumentLocationResolver = (params, context) => {
               title: 'Home',
               href: `/`,
             },
+            {
+              title: 'News',
+              href: `/news`,
+            },
           ],
         }
       }),
@@ -92,6 +100,10 @@ export const locate: DocumentLocationResolver = (params, context) => {
             {
               title: 'Home',
               href: `/`,
+            },
+            {
+              title: 'Reviews',
+              href: `/review`,
             },
           ],
         }
