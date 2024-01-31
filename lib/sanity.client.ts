@@ -16,6 +16,7 @@ import {
   postsByTagPaginationQuery,
   postSlugsQuery,
   postsPaginationQuery,
+  postTitleBySlugQuery,
   type Settings,
   settingsQuery,
   tagQuery,
@@ -66,10 +67,6 @@ export async function getFetcher([query, params]) {
   return await client.fetch(query, params)
 }
 
-export async function getAllTags(client: SanityClient): Promise<Category[]> {
-  return (await client.fetch(tagQuery())) || []
-}
-
 export async function getPostsPagination(
   client: SanityClient,
   pageIndex: number = 0,
@@ -102,6 +99,13 @@ export async function getAllPostsSlugs(
   const client = getClient()
   const slugs = (await client.fetch<string[]>(postSlugsQuery(type))) || []
   return slugs.map((slug) => ({ slug }))
+}
+
+export async function getTitleBySlugs(
+  client: SanityClient,
+  slug: string,
+): Promise<string> {
+  return (await client.fetch(postTitleBySlugQuery(), { slug })) || ({} as any)
 }
 
 export async function getAllPosts(

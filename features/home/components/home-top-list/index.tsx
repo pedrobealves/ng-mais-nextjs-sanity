@@ -22,7 +22,7 @@ export function HomeTopList({ games }: TopProps) {
     <Section.Root>
       <Section.Title>Top Jogos</Section.Title>
       <Section.Container>
-        <div className="bg-white rounded-[20px] pl-5 pt-4">
+        <div className="bg-white rounded-[20px] pl-5 pr-4 pt-4">
           <ul className="flex flex-col">
             {games.map((item, index) => (
               <Card

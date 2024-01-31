@@ -7,7 +7,7 @@ import {
   Query,
 } from 'features/pagination'
 import { readToken } from 'lib/sanity.api'
-import { getAllPostsSlugs } from 'lib/sanity.client'
+import { getAllPostsSlugs, getTitleBySlugs } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
 
 export default Page
@@ -31,12 +31,14 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
     }
   }
 
+  const title = await getTitleBySlugs(client, category)
+
   return {
     props: {
       initialPosts,
       settings,
       type: category,
-      title: 'categoria',
+      title,
       filter: `"${category}" == category->slug.current`,
       draftMode: ctx.draftMode || false,
       token: ctx.draftMode ? readToken : '',

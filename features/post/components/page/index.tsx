@@ -104,9 +104,10 @@ export function PostPage(props: PostPageProps) {
                 <MinimalGrid title="Relacionados" news={news} type="post" />
               </aside>
             )}
-            <section className="flex flex-col justify-start max-w-screen-xl mx-auto w-full gap-10 px-4 pt-12 pb-24">
+            <Section.Root className="items-start max-w-screen-xl mx-auto w-full pt-12 pb-24">
               <Section.Title>Comentários</Section.Title>
-              <div className="max-w-screen-md mx-auto w-full">
+              <hr className="h-4 bg-gray-200 w-full rounded-bl-3xl rounded-r-3xl" />
+              <div className="max-w-screen-md mx-auto w-full pt-12">
                 <Comments
                   type={post._type}
                   slug={post.slug}
@@ -114,7 +115,7 @@ export function PostPage(props: PostPageProps) {
                   title={post.title}
                 />
               </div>
-            </section>
+            </Section.Root>
             <Footer />
           </>
         )}

@@ -99,8 +99,11 @@ export const postAndMoreStoriesQuery = (type: string) => groq`
 }`
 
 export const postSlugsQuery = (type: string) => groq`
-*[_type == "${type}" && defined(slug.current)][].slug.current
-`
+*[_type == "${type}" && defined(slug.current)][].slug.current`
+
+export const postTitleBySlugQuery = () => groq`
+*[slug.current == $slug && defined(slug.current)][0].title`
+
 export const postBySlugQuery = (type: string) => groq`
 *[_type == "${type}" && slug.current == $slug][0] {
   ${postFields}
