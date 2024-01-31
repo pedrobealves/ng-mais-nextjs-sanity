@@ -1,11 +1,11 @@
 import { Section } from 'components/Section'
-import { Review } from 'lib/sanity.queries'
+import { Post } from 'lib/sanity.queries'
 import { useState } from 'react'
 
 import { Card } from './Card'
 
 type TopProps = {
-  games: Review[]
+  games: Post[]
 }
 
 export function HomeTopList({ games }: TopProps) {

@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
+import style from './Section.module.css'
+
 export function InputNewsletter() {
   const [emailInput, setEmailInput] = useState('')
   const [buttonLoading, setButtonLoading] = useState(false)
@@ -69,7 +71,7 @@ export function InputNewsletter() {
         id="email-form"
         aria-label="Email Form"
         onSubmit={handleFormSubmit}
-        className="w-full flex justify-between rounded-full bg-white border-gray-200 border-[16px] max-w-col-6"
+        className={`w-full flex justify-between rounded-full bg-white border-gray-200 border-[16px] max-w-col-6 ${style.section} `}
       >
         <input
           type="email"
