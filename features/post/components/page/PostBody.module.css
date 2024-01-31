@@ -8,7 +8,11 @@
 .portableText ol,
 .portableText blockquote,
 .bodyHtml div {
-  @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9;
+  @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9 ;
+}
+
+.portableText p {
+  word-break: break-word;
 }
 
 .portableText img,
