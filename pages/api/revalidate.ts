@@ -196,8 +196,8 @@ async function queryStalePostRoutes(
   return [
     '/',
     `/${category.slug}`,
-    ...slugs.map((slug) => `/${type}/${slug}`),
-    ...tagSlugs.map((tag) => `/tag/${tag.slug}`),
+    ...slugs?.map((slug) => `/${type}/${slug}`),
+    ...tagSlugs?.map((tag) => `/tag/${tag.slug}`),
   ]
 }
 
