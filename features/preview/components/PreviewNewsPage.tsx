@@ -8,9 +8,9 @@ import {
 import { useLiveQuery } from 'next-sanity/preview'
 
 export function PreviewNewsPage(props: PostPageProps) {
-  const [{ news: postPreview }, loadingPost] = useLiveQuery<{
-    news: Post
-  }>({ news: props.post }, postAndMoreStoriesQuery('news'), {
+  const [{ post: postPreview }, loadingPost] = useLiveQuery<{
+    post: Post
+  }>({ post: props.post }, postAndMoreStoriesQuery('news'), {
     slug: props.post.slug,
   })
 

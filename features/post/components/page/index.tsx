@@ -39,6 +39,7 @@ export function PostPage(props: PostPageProps) {
     reviewDetails,
     news = NO_NEWS,
   } = props
+
   const { title = demo.title, social } = settings || {}
 
   const slug = post?.slug

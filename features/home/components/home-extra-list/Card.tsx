@@ -10,8 +10,11 @@ type CardProps = {
 
 export function Card({ title, picture, slug }: CardProps) {
   return (
-    <Link href={`/post/${slug}`}>
-      <li className="flex flex-row bg-white p-2 rounded-[20px]">
+    <li>
+      <Link
+        href={`/post/${slug}`}
+        className="flex flex-row bg-white p-2 rounded-[20px]"
+      >
         <div className="flex flex-col gap-2 px-3 justify-center w-full">
           <hr className="w-5 h-[2px] border-0 bg-primary-8" />
           <h1 className="text-primary-8 font-bold text-base">{title}</h1>
@@ -27,7 +30,7 @@ export function Card({ title, picture, slug }: CardProps) {
           height={196}
           alt={picture?.alt ?? title}
         />
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }

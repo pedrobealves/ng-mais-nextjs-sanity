@@ -12,7 +12,7 @@ export function HomeExtraList({ posts }: PostProps) {
     <Section.Root>
       <Section.Title>Extras</Section.Title>
       <Section.Container>
-        <ul>
+        <ul className="flex flex-col gap-4">
           {posts.map((post) => (
             <Card
               key={post._id}
