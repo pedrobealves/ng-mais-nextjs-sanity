@@ -191,14 +191,18 @@ async function queryStalePostRoutes(
     { id },
   )
 
-  slugs = await mergeWithMorePostStories(client, slugs, type)
+  if (slugs.length > 0) {
+    slugs = await mergeWithMorePostStories(client, slugs, type)
 
-  return [
-    '/',
-    `/${category.slug}`,
-    ...slugs?.map((slug) => `/${type}/${slug}`),
-    ...tagSlugs?.map((tag) => `/tag/${tag.slug}`),
-  ]
+    return [
+      '/',
+      ...(category ? [`/${category.slug}`] : []),
+      ...slugs.map((slug) => `/${type}/${slug}`),
+      ...(tagSlugs ? tagSlugs.map((tag) => `/tag/${tag.slug}`) : []),
+    ]
+  }
+
+  return []
 }
 
 function getSlugsByType(
