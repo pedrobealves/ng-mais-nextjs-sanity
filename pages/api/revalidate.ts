@@ -56,7 +56,7 @@ type StaleRoute =
 async function queryStaleRoutes(
   body: Pick<
     ParsedBody<SanityDocument>['body'],
-    '_type' | '_id' | 'date' | 'slug' | 'category' | 'tag'
+    '_type' | '_id' | 'date' | 'slug'
   >,
 ): Promise<StaleRoute[]> {
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
