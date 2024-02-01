@@ -56,7 +56,7 @@ type StaleRoute =
 async function queryStaleRoutes(
   body: Pick<
     ParsedBody<SanityDocument>['body'],
-    '_type' | '_id' | 'date' | 'slug'
+    '_type' | '_id' | 'date' | 'slug' | 'category' | 'tag'
   >,
 ): Promise<StaleRoute[]> {
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
@@ -92,7 +92,7 @@ async function queryStaleRoutes(
 
   switch (body._type) {
     case 'author':
-      return await queryStaleAuthorRoutes(client, body._id)
+      return await queryStaleCategoryRoutes(client, body._id, 'author')
     case 'post':
       return await queryStalePostRoutes(client, body._id, 'post')
     case 'news':
@@ -101,6 +101,8 @@ async function queryStaleRoutes(
       return await queryStalePostRoutes(client, body._id, 'review')
     case 'settings':
       return await queryAllRoutes(client, TYPES)
+    case 'category':
+      return await queryStaleCategoryRoutes(client, body._id, 'author')
     default:
       throw new TypeError(`Unknown type: ${body._type}`)
   }
@@ -186,11 +188,12 @@ async function queryStalePostRoutes(
 function getSlugsByType(
   client: SanityClient,
   id: string,
+  category: string,
   type: string,
 ): Promise<string[]> {
   return client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "post" && references(^._id)].slug.current
+    groq`*[_type == "${category}" && _id == $id] {
+    "slug": *[_type == "${type}" && references(^._id)].slug.current
   }["slug"][]`,
     { id },
   )
@@ -198,14 +201,15 @@ function getSlugsByType(
 
 //Author
 
-async function queryStaleAuthorRoutes(
+async function queryStaleCategoryRoutes(
   client: SanityClient,
   id: string,
+  category: string,
 ): Promise<StaleRoute[]> {
   let slugs = []
 
   for (const type of TYPES) {
-    let slugs = await getSlugsByType(client, id, type)
+    let slugs = await getSlugsByType(client, id, category, type)
 
     if (slugs.length > 0) {
       slugs = await mergeWithMorePostStories(client, slugs, type)
