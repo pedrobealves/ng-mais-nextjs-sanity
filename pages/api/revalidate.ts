@@ -102,7 +102,7 @@ async function queryStaleRoutes(
     case 'settings':
       return await queryAllRoutes(client, TYPES)
     case 'category':
-      return await queryStaleCategoryRoutes(client, body._id, 'author')
+      return await queryStaleCategoryRoutes(client, body._id, 'category')
     default:
       throw new TypeError(`Unknown type: ${body._type}`)
   }
@@ -206,16 +206,16 @@ async function queryStaleCategoryRoutes(
   id: string,
   category: string,
 ): Promise<StaleRoute[]> {
-  let slugs = []
+  let slugsRoute = []
 
-  for (const type of TYPES) {
+  for (let type of TYPES) {
     let slugs = await getSlugsByType(client, id, category, type)
 
     if (slugs.length > 0) {
       slugs = await mergeWithMorePostStories(client, slugs, type)
-      slugs.push(...slugs.map((slug) => `/${type}/${slug}`))
+      slugsRoute.push(...slugs.map((slug) => `/${type}/${slug}`))
     }
   }
 
-  return ['/', ...slugs]
+  return ['/', ...slugsRoute]
 }
