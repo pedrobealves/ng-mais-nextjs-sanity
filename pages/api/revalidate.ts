@@ -10,6 +10,8 @@ import { parseBody, type ParsedBody } from 'next-sanity/webhook'
 
 export { config } from 'next-sanity/webhook'
 
+const TYPES = ['post', 'news', 'review']
+
 export default async function revalidate(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -60,72 +62,28 @@ async function queryStaleRoutes(
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
 
   // Handle possible deletions
-  if (body._type === 'post') {
+  if (body._type in TYPES) {
+    let type = body._type as (typeof TYPES)[number]
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`/post/${(body.slug as any).current}`)
+        staleRoutes.push(`/${type}/${(body.slug as any).current}`)
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
         groq`count(
-          *[_type == "post"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
+          *[_type == "${type}"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
         )`,
         { date: body.date },
       )
       // If there's less than 3 posts with a newer date, we need to revalidate everything
       if (moreStories < 3) {
         return [
-          ...new Set([...(await queryAllPostRoutes(client)), ...staleRoutes]),
-        ]
-      }
-      return staleRoutes
-    }
-  }
-
-  if (body._type === 'news') {
-    const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
-    if (!exists) {
-      let staleRoutes: StaleRoute[] = ['/']
-      if ((body.slug as any)?.current) {
-        staleRoutes.push(`/news/${(body.slug as any).current}`)
-      }
-      // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
-      const moreStories = await client.fetch(
-        groq`count(
-          *[_type == "news"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
-        )`,
-        { date: body.date },
-      )
-      // If there's less than 3 posts with a newer date, we need to revalidate everything
-      if (moreStories < 3) {
-        return [
-          ...new Set([...(await queryAllNewsRoutes(client)), ...staleRoutes]),
-        ]
-      }
-      return staleRoutes
-    }
-  }
-
-  if (body._type === 'review') {
-    const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
-    if (!exists) {
-      let staleRoutes: StaleRoute[] = ['/']
-      if ((body.slug as any)?.current) {
-        staleRoutes.push(`/review/${(body.slug as any).current}`)
-      }
-      // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
-      const moreStories = await client.fetch(
-        groq`count(
-          *[_type == "review"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
-        )`,
-        { date: body.date },
-      )
-      // If there's less than 3 posts with a newer date, we need to revalidate everything
-      if (moreStories < 3) {
-        return [
-          ...new Set([...(await queryAllReviewRoutes(client)), ...staleRoutes]),
+          ...new Set([
+            ...(await queryAllPostRoutes(client, type)),
+            ...staleRoutes,
+          ]),
         ]
       }
       return staleRoutes
@@ -136,13 +94,13 @@ async function queryStaleRoutes(
     case 'author':
       return await queryStaleAuthorRoutes(client, body._id)
     case 'post':
-      return await queryStalePostRoutes(client, body._id)
+      return await queryStalePostRoutes(client, body._id, 'post')
     case 'news':
-      return await queryStaleNewsRoutes(client, body._id)
+      return await queryStalePostRoutes(client, body._id, 'news')
     case 'review':
-      return await queryStaleReviewRoutes(client, body._id)
+      return await queryStalePostRoutes(client, body._id, 'review')
     case 'settings':
-      return await queryAllPostRoutes(client)
+      return await queryAllRoutes(client, TYPES)
     default:
       throw new TypeError(`Unknown type: ${body._type}`)
   }
@@ -150,25 +108,49 @@ async function queryStaleRoutes(
 
 // Post
 
-async function _queryAllPostRoutes(client: SanityClient): Promise<string[]> {
-  return await client.fetch(groq`*[_type == "post"].slug.current`)
+async function _queryAllPostRoutes(
+  client: SanityClient,
+  type: string,
+): Promise<string[]> {
+  return await client.fetch(groq`*[_type == "${type}"].slug.current`)
 }
 
-async function queryAllPostRoutes(client: SanityClient): Promise<StaleRoute[]> {
-  const slugs = await _queryAllPostRoutes(client)
+async function queryAllRoutes(
+  client: SanityClient,
+  types: string[],
+): Promise<StaleRoute[]> {
+  let slugs: StaleRoute[] = []
 
-  return ['/', ...slugs.map((slug) => `/post/${slug}` as StaleRoute)]
+  for (const type of types) {
+    const slugsType = await _queryAllPostRoutes(client, type)
+    const mappedSlugs = slugsType.map(
+      (slug) => `/${type}/${slug}` as StaleRoute,
+    )
+    slugs = [...slugs, ...mappedSlugs]
+  }
+
+  return ['/', ...slugs]
+}
+
+async function queryAllPostRoutes(
+  client: SanityClient,
+  type: string,
+): Promise<StaleRoute[]> {
+  const slugs = await _queryAllPostRoutes(client, type)
+
+  return ['/', ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute)]
 }
 
 async function mergeWithMorePostStories(
   client,
   slugs: string[],
+  type: string,
 ): Promise<string[]> {
   const moreStories = await client.fetch(
-    groq`*[_type == "post"] | order(date desc, _updatedAt desc) [0...3].slug.current`,
+    groq`*[_type == "${type}"] | order(date desc, _updatedAt desc) [0...3].slug.current`,
   )
   if (slugs.some((slug) => moreStories.includes(slug))) {
-    const allSlugs = await _queryAllPostRoutes(client)
+    const allSlugs = await _queryAllPostRoutes(client, type)
     return [...new Set([...slugs, ...allSlugs])]
   }
 
@@ -178,99 +160,40 @@ async function mergeWithMorePostStories(
 async function queryStalePostRoutes(
   client: SanityClient,
   id: string,
+  type: string,
 ): Promise<StaleRoute[]> {
   let slugs = await client.fetch(
-    groq`*[_type == "post" && _id == $id].slug.current`,
+    groq`*[_type == "${type}" && _id == $id].slug.current`,
     { id },
   )
 
-  slugs = await mergeWithMorePostStories(client, slugs)
-
-  return ['/', ...slugs.map((slug) => `/post/${slug}`)]
-}
-
-//Review
-
-async function _queryAllReviewRoutes(client: SanityClient): Promise<string[]> {
-  return await client.fetch(groq`*[_type == "review"].slug.current`)
-}
-
-async function queryAllReviewRoutes(
-  client: SanityClient,
-): Promise<StaleRoute[]> {
-  const slugs = await _queryAllReviewRoutes(client)
-
-  return ['/', ...slugs.map((slug) => `/review/${slug}` as StaleRoute)]
-}
-
-async function mergeWithMoreReviewStories(
-  client,
-  slugs: string[],
-): Promise<string[]> {
-  const moreStories = await client.fetch(
-    groq`*[_type == "review"] | order(date desc, _updatedAt desc) [0...3].slug.current`,
+  let category = await client.fetch(
+    groq`
+  *[_type == "${type}" && _id == $id] {
+    category->{
+      "slug": slug.current
+    }
+}[0]["category"]
+`,
+    { id },
   )
-  if (slugs.some((slug) => moreStories.includes(slug))) {
-    const allSlugs = await _queryAllReviewRoutes(client)
-    return [...new Set([...slugs, ...allSlugs])]
-  }
 
-  return slugs
+  slugs = await mergeWithMorePostStories(client, slugs, type)
+
+  return ['/', `/${category.slug}`, ...slugs.map((slug) => `/${type}/${slug}`)]
 }
 
-async function queryStaleReviewRoutes(
+function getSlugsByType(
   client: SanityClient,
   id: string,
-): Promise<StaleRoute[]> {
-  let slugs = await client.fetch(
-    groq`*[_type == "review" && _id == $id].slug.current`,
-    { id },
-  )
-
-  slugs = await mergeWithMoreReviewStories(client, slugs)
-
-  return ['/', ...slugs.map((slug) => `/review/${slug}`)]
-}
-
-//News
-
-async function _queryAllNewsRoutes(client: SanityClient): Promise<string[]> {
-  return await client.fetch(groq`*[_type == "news"].slug.current`)
-}
-
-async function queryAllNewsRoutes(client: SanityClient): Promise<StaleRoute[]> {
-  const slugs = await _queryAllNewsRoutes(client)
-
-  return ['/', ...slugs.map((slug) => `/news/${slug}` as StaleRoute)]
-}
-
-async function mergeWithMoreNewsStories(
-  client,
-  slugs: string[],
+  type: string,
 ): Promise<string[]> {
-  const moreStories = await client.fetch(
-    groq`*[_type == "news"] | order(date desc, _updatedAt desc) [0...3].slug.current`,
-  )
-  if (slugs.some((slug) => moreStories.includes(slug))) {
-    const allSlugs = await _queryAllNewsRoutes(client)
-    return [...new Set([...slugs, ...allSlugs])]
-  }
-
-  return slugs
-}
-
-async function queryStaleNewsRoutes(
-  client: SanityClient,
-  id: string,
-): Promise<StaleRoute[]> {
-  let slugs = await client.fetch(
-    groq`*[_type == "news" && _id == $id].slug.current`,
+  return client.fetch(
+    groq`*[_type == "author" && _id == $id] {
+    "slug": *[_type == "post" && references(^._id)].slug.current
+  }["slug"][]`,
     { id },
   )
-
-  slugs = await mergeWithMoreNewsStories(client, slugs)
-
-  return ['/', ...slugs.map((slug) => `/news/${slug}`)]
 }
 
 //Author
@@ -281,40 +204,13 @@ async function queryStaleAuthorRoutes(
 ): Promise<StaleRoute[]> {
   let slugs = []
 
-  let postSlugs = await client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "post" && references(^._id)].slug.current
-  }["slug"][]`,
-    { id },
-  )
+  for (const type of TYPES) {
+    let slugs = await getSlugsByType(client, id, type)
 
-  let newsSlugs = await client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "news" && references(^._id)].slug.current
-  }["slug"][]`,
-    { id },
-  )
-
-  let reviewSlugs = await client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "review" && references(^._id)].slug.current
-  }["slug"][]`,
-    { id },
-  )
-
-  if (postSlugs.length > 0) {
-    postSlugs = await mergeWithMorePostStories(client, postSlugs)
-    slugs.push(...postSlugs.map((slug) => `/post/${slug}`))
-  }
-
-  if (newsSlugs.length > 0) {
-    newsSlugs = await mergeWithMoreNewsStories(client, newsSlugs)
-    slugs.push(...newsSlugs.map((slug) => `/news/${slug}`))
-  }
-
-  if (reviewSlugs.length > 0) {
-    reviewSlugs = await mergeWithMoreReviewStories(client, reviewSlugs)
-    slugs.push(...reviewSlugs.map((slug) => `/review/${slug}`))
+    if (slugs.length > 0) {
+      slugs = await mergeWithMorePostStories(client, slugs, type)
+      slugs.push(...slugs.map((slug) => `/${type}/${slug}`))
+    }
   }
 
   return ['/', ...slugs]
