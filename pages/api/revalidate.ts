@@ -180,9 +180,25 @@ async function queryStalePostRoutes(
     { id },
   )
 
+  let tagSlugs = await client.fetch(
+    groq`
+  *[_type == "${type}" && _id == $id] {
+    tag[]->{
+      "slug": slug.current
+    }
+  }[0]["tag"]
+`,
+    { id },
+  )
+
   slugs = await mergeWithMorePostStories(client, slugs, type)
 
-  return ['/', `/${category.slug}`, ...slugs.map((slug) => `/${type}/${slug}`)]
+  return [
+    '/',
+    `/${category.slug}`,
+    ...slugs.map((slug) => `/${type}/${slug}`),
+    ...tagSlugs.map((tag) => `/tag/${tag.slug}`),
+  ]
 }
 
 function getSlugsByType(

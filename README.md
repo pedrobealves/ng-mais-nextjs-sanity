@@ -21,5 +21,5 @@
 
 [Projeto no Figma](https://www.figma.com/file/fr4gUuM5qMkkA7v0gxhIEv/MILtensei?type=design&node-id=208%3A588&mode=design&t=0Ml7AeRLKy7YX20o-1)
 
-![Desktop](./style/../doc/HomeDesktop.png)
-![Desktop](./style/../doc/ReviewDesktop.png)
+![Desktop](./style/../doc/Home - Desktop.png)
+![Desktop](./style/../doc/Article - Desktop.png)
