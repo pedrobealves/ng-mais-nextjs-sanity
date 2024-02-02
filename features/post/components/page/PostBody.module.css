@@ -11,8 +11,13 @@
   @apply font-body font-normal mb-6 text-lg md:text-1xl leading-7.3 md:leading-9 ;
 }
 
-.portableText p {
+.portableText p,
+.bodyHtml div {
   word-break: break-word;
+}
+
+.portableText iframe {
+  @apply w-full;
 }
 
 .portableText img,
@@ -49,28 +54,32 @@
   @apply mb-6;
 }
 
+.portableText h1, .portableText h2, .portableText h3, .portableText h4, .portableText h5, .portableText h6 {
+  @apply mb-4 mt-8 font-bold leading-snug sm:break-normal break-words break-all;
+}
+
 .portableText h1 {
-  @apply mb-4 mt-8 md:text-6xl text-4xl  font-bold leading-snug break-words;
+  @apply md:text-6xl text-4xl;
 }
 
 .portableText h2 {
-  @apply mb-4 mt-12 md:text-5xl text-3xl font-bold leading-snug break-words;
+  @apply md:text-5xl text-3xl;
 }
 
 .portableText h3 {
-  @apply mb-4 mt-8 md:text-4xl text-2xl font-bold leading-snug break-words;
+  @apply md:text-4xl text-2xl;
 }
 
 .portableText h4 {
-  @apply mb-4 mt-8 md:text-3xl text-1xl font-bold leading-snug break-words;
+  @apply md:text-3xl text-1xl;
 }
 
 .portableText h5 {
-  @apply mb-4 mt-8 md:text-2xl text-xl font-bold leading-snug break-words;
+  @apply md:text-2xl text-xl;
 }
 
 .portableText h6 {
-  @apply mb-4 mt-8 text-xl font-bold leading-snug break-words;
+  @apply text-xl;
 }
 
 .portableText blockquote {
