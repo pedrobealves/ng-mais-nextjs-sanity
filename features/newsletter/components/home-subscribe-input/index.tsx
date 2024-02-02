@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { IoSend } from 'react-icons/io5'
 import { toast, ToastContainer } from 'react-toastify'
 
 import style from './Section.module.css'
@@ -71,7 +72,7 @@ export function InputNewsletter() {
         id="email-form"
         aria-label="Email Form"
         onSubmit={handleFormSubmit}
-        className={`w-full flex justify-between rounded-full bg-white border-gray-200 border-[16px] max-w-col-6 ${style.section} `}
+        className={`w-full flex justify-between rounded-full bg-white border-gray-200 border-[16px] max-w-[624px] ${style.section} `}
       >
         <input
           type="email"
@@ -84,7 +85,9 @@ export function InputNewsletter() {
         />
         <button className="bg-secundary-4 text-white font-bold sm:px-9 px-5 py-5 rounded-full hover:bg-secundary-5 m-2">
           <p className="sm:block hidden">Inscreva-se</p>
-          <p className="sm:hidden block">Ic</p>
+          <p className="sm:hidden block">
+            <IoSend size={24} />
+          </p>
         </button>
       </form>
       <ToastContainer />

@@ -14,11 +14,11 @@ export function Pagination({
   pageIndex,
 }: PaginationProps) {
   return (
-    <div className="flex bg-gray-200 h-16 rounded-lg drop-shadow-xl">
+    <div className="flex bg-white h-16 rounded-lg overflow-clip">
       <button
         disabled={isFirstPage}
         onClick={handlePrevPage}
-        className="flex items-center justify-center w-11 fill-primary-5 bg-gray-100"
+        className="flex items-center justify-center w-11 fill-primary-8 bg-gray-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,23 +39,23 @@ export function Pagination({
           <path d="m256-168-88-88 224-224-224-224 88-88 224 224 224-224 88 88-224 224 224 224-88 88-224-224-224 224Z" />
         </svg>
       </button>
-      <div className="flex px-6 font-bold overflow-hidden text-primary-5 items-center cursor-pointer">
+      <div className="flex px-6 font-bold overflow-hidden text-primary-8 items-center cursor-pointer">
         <div className="">Página {pageIndex}</div>
         <div className="hidden gap-2">
-          <button className="bg-gray-300 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
+          <button className="bg-gray-300 px-[10px] py-1 text-primary-8 font-bold rounded-lg">
             1
           </button>
-          <button className="bg-gray-100 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
+          <button className="bg-gray-100 px-[10px] py-1 text-primary-8 font-bold rounded-lg">
             2
           </button>
-          <button className="bg-gray-100 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
+          <button className="bg-gray-100 px-[10px] py-1 text-primary-8 font-bold rounded-lg">
             3
           </button>
-          <button className="bg-gray-100 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
+          <button className="bg-gray-100 px-[10px] py-1 text-primary-8 font-bold rounded-lg">
             4
           </button>
           <span>...</span>
-          <button className="bg-gray-100 px-[10px] py-1 text-primary-5 font-bold rounded-lg">
+          <button className="bg-gray-100 px-[10px] py-1 text-primary-8 font-bold rounded-lg">
             6
           </button>
         </div>
@@ -63,7 +63,7 @@ export function Pagination({
       <button
         onClick={handleNextPage}
         disabled={isLastPage}
-        className="flex items-center justify-center w-11 fill-primary-5 bg-gray-100"
+        className="flex items-center justify-center w-11 fill-primary-8 bg-gray-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

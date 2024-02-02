@@ -6,8 +6,8 @@
 .section:after {
   content: '';
   position: absolute;
-  top: 40px;
-  right: -38px;
+  top: 32px;
+  right: -37px;
   width: 24px;
   height: 24px;
   background: transparent;
@@ -18,8 +18,8 @@
 .section::before {
   content: '';
   position: absolute;
-  top: 40px;
-  left: -38px;
+  top: 32px;
+  left: -35px;
   width: 24px;
   height: 24px;
   background: transparent;

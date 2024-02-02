@@ -4,7 +4,7 @@ export function CardReadMore() {
       <span className="underline underline-offset-[3px] font-bold text-primary-8 opacity-40 group-hover:opacity-100 transition duration-500 ease-out">
         Leia Agora
       </span>
-      <div className="pl-16 scale-x-50 transition duration-500 opaease-out group-hover:translate-x-14 group-hover:opacity-100 opacity-0 group-hover:scale-x-100">
+      <div className="pl-20 scale-x-50 transition duration-500 opaease-out group-hover:translate-x-14 group-hover:opacity-100 opacity-0 group-hover:scale-x-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="1.2em"

@@ -16,7 +16,7 @@ type NavType = {
 
 const item = tv({
   slots: {
-    Nav: 'flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3',
+    Nav: 'flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3 z-40',
     Menu: 'hidden lg:flex text-primary-8 font-bold text-base gap-4',
     MenuList:
       'block py-2 px-2 rounded-md decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',

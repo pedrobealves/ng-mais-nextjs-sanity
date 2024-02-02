@@ -9,7 +9,7 @@ type PostProps = {
 
 export function HomeExtraList({ posts }: PostProps) {
   return (
-    <Section.Root>
+    <Section.Root className="md:basis-1/2 lg:basis-auto">
       <Section.Title>Extras</Section.Title>
       <Section.Container>
         <ul className="flex flex-col gap-4">

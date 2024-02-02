@@ -11,8 +11,8 @@ const postFields = groq`
   showCover,
   "author": author->{name, picture, bio, social},
   game->{title, "slug": slug.current, cover, release, developer, genre},
-  category->{title, "slug": slug.current},
-  tag[]->{title, "slug": slug.current},
+  category->{title, "slug": slug.current, _type},
+  tag[]->{title, "slug": slug.current, _type},
   "slug": slug.current,
 `
 
@@ -180,12 +180,14 @@ export interface Category {
   title?: string
   slug?: string
   description?: string
+  _type: string
 }
 
 export interface Tag {
   title?: string
   slug?: string
   description?: string
+  _type: string
 }
 
 export interface Settings {

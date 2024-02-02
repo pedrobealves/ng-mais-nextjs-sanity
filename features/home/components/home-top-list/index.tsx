@@ -19,7 +19,7 @@ export function HomeTopList({ games }: TopProps) {
   }
 
   return (
-    <Section.Root>
+    <Section.Root className="md:basis-1/2 lg:basis-auto">
       <Section.Title>Top Jogos</Section.Title>
       <Section.Container>
         <div className="bg-white rounded-[20px] pl-5 pr-4 pt-4">

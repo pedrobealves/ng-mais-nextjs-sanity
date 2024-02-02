@@ -20,7 +20,7 @@ module.exports = {
       lg: '1024px',
       // => @media (min-width: 1024px) { ... }
 
-      xl: '1168px',
+      xl: '1232px',
       // => @media (min-width: 1280px) { ... }
     },
     extend: {
@@ -86,20 +86,6 @@ module.exports = {
           'linear-gradient(180deg, rgba(90, 24, 154, 1), rgba(60, 9, 108, 1) 16%, rgba(36, 0, 70, 1) 40%, rgba(16, 0, 43, 1))',
         'gradient-header':
           'linear-gradient(180deg, #100919 0%, #5A189A 81.35%, #3C096C 92.84%)',
-      },
-      maxWidth: {
-        'col-1': '5rem',
-        'col-2': '11.5rem',
-        'col-3': '18rem',
-        'col-4': '24.5rem',
-        'col-5': '31rem',
-        'col-6': '37.5rem',
-        'col-7': '44rem',
-        'col-8': '50.5rem',
-        'col-9': '57rem',
-        'col-10': '63.5rem',
-        'col-11': '70rem',
-        'col-12': '76.5rem',
       },
     },
   },

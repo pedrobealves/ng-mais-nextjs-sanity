@@ -1,9 +1,9 @@
 'use client'
-
 import { Card } from 'components/Card'
 import { HeadCard } from 'components/HeadCard'
 import { Icon } from 'components/Icon'
 import IndexPageHead from 'components/IndexPageHead'
+import { ItemCard } from 'components/ItemCard'
 import { set } from 'date-fns'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
@@ -49,15 +49,15 @@ export default function Search(props: PageProps) {
     <>
       <IndexPageHead settings={settings} />
       <Header social={settings.social} level={2} />
-      <main className="w-full md:pt-40 pt-32 px-4 mb-14">
-        <section className="max-w-col-12 mx-auto">
+      <main className="w-full md:pt-28 pt-32 px-4 mb-14">
+        <section className="max-w-screen-xl mx-auto bg-gray-200 rounded-[36px]">
           <HeadCard title="Pesquisa" />
           <form
             name="search-form"
             data-name="search Form"
             id="search-form"
             aria-label="search Form"
-            className="-mt-9 flex justify-between rounded-3xl shadow-2xl bg-white border max-w-col-6 mx-auto"
+            className="-mt-9 flex justify-between rounded-3xl shadow-2xl bg-white border max-w-xl mx-auto"
             onSubmit={handleFormSubmit}
           >
             <div className="py-6 px-4 opacity-70">
@@ -79,17 +79,16 @@ export default function Search(props: PageProps) {
               required
             />
           </form>
-          <section className="mt-12 flex flex-row gap-6 [&>*]:basis-[270px] flex-wrap justify-center">
+          <section className="mt-12 flex flex-row gap-6 [&>*]:basis-[270px] flex-wrap justify-center pb-12">
             {data?.map((item) => (
-              <Card.Root slug={item.slug} type={item._type} key={item._id}>
-                <Card.Cover picture={item.coverImage} title={item.title} />
-                <Card.Section>
-                  <div className="flex flex-col gap-3">
-                    <Card.Title title={item.title} />
-                  </div>
-                  <Card.ReadMore />
-                </Card.Section>
-              </Card.Root>
+              <ItemCard.Root slug={item.slug} type={item._type} key={item._id}>
+                <ItemCard.Cover picture={item.coverImage} title={item.title} />
+                <div className="flex flex-col items-center gap-3 px-6 pb-6">
+                  <ItemCard.Category category={item.category.title} />
+                  <ItemCard.Title title={item.title} />
+                  <ItemCard.Author author={item.author.name} />
+                </div>
+              </ItemCard.Root>
             ))}
           </section>
         </section>

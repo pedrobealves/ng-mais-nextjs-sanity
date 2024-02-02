@@ -4,7 +4,7 @@ import { Social } from 'components/Social'
 export default function Footer() {
   return (
     <footer className="bg-gray-200 px-4">
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto px-4 max-w-screen-xl">
         <div className="md:flex md:justify-between items-center py-20">
           <div className="max-w-[23rem] flex flex-col gap-9 justify-start sm:mb-6 mb-9 md:mb-0">
             <div className="flex flex-col gap-4">

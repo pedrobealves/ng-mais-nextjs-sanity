@@ -37,7 +37,7 @@ export default function PostHeader(
 
   return (
     <>
-      <PostCategory category={tag ? tag[0] : category} date={date} />
+      <PostCategory text={category.title} slug={category.slug} date={date} />
       <div className="max-w-2xl">
         <PostTitle>{title}</PostTitle>
         <PostSubTitle>{excerpt}</PostSubTitle>

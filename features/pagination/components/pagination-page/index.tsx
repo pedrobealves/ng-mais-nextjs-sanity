@@ -33,7 +33,7 @@ export function Page(props: PageProps) {
       <IndexPageHead settings={settings} />
       <Header social={settings.social} level={2} />
       <main className="w-full md:pt-28 pt-32 px-4 mb-14">
-        <section className="max-w-col-12 mx-auto">
+        <section className="max-w-screen-xl mx-auto rounded-3xl bg-gray-200">
           <HeadCard title={title} />
           <CardList
             posts={initialPosts}

@@ -18,6 +18,7 @@ import PostBody from './PostBody'
 import PostHeader from './PostHeader'
 import PostPageHead from './PostPageHead'
 import PostTitle from './PostTitle'
+import { Tag } from './Tag'
 
 export interface PostPageProps {
   preview?: boolean
@@ -75,6 +76,17 @@ export function PostPage(props: PostPageProps) {
                 <PostBody content={post.content} />
                 {post._type == 'review' && (
                   <ReviewSection review={reviewDetails} />
+                )}
+                {post.tag && (
+                  <Tag.Root>
+                    {post.tag?.map((tag, index) => (
+                      <Tag.Link
+                        key={tag.slug}
+                        text={`${tag.title}${index == post.tag.length - 1 ? '' : ', '}`}
+                        slug={tag.slug}
+                      />
+                    ))}
+                  </Tag.Root>
                 )}
                 {post.author && (
                   <Author.Root>

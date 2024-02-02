@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from 'components/Card'
+import { ItemCard } from 'components/ItemCard'
 import { Pagination } from 'components/Pagination'
 import { getFetcher } from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
@@ -61,24 +61,23 @@ export function CardList({ pageQuery, posts: initialPosts, type }: PageProps) {
 
   return (
     <>
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-8 p-4">
         {posts && posts?.length === 0 && (
           <div className="flex h-40 items-center justify-center">
             <span className="text-lg text-gray-500">End of the result!</span>
           </div>
         )}
         {posts && (
-          <div className="mt-12 flex flex-row gap-6 [&>*]:basis-[270px] flex-wrap justify-center">
+          <div className="mt-12 flex flex-row gap-4 [&>*]:basis-[285.83px] flex-wrap justify-center">
             {posts?.map((item) => (
-              <Card.Root slug={item.slug} type={item._type} key={item._id}>
-                <Card.Cover picture={item.coverImage} title={item.title} />
-                <Card.Section>
-                  <div className="flex flex-col gap-3">
-                    <Card.Title title={item.title} />
-                  </div>
-                  <Card.ReadMore />
-                </Card.Section>
-              </Card.Root>
+              <ItemCard.Root slug={item.slug} type={item._type} key={item._id}>
+                <ItemCard.Cover picture={item.coverImage} title={item.title} />
+                <div className="flex flex-col items-center gap-3 px-6 pb-6">
+                  <ItemCard.Category category={item.category.title} />
+                  <ItemCard.Title title={item.title} />
+                  <ItemCard.Author author={item.author.name} />
+                </div>
+              </ItemCard.Root>
             ))}
           </div>
         )}

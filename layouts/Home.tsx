@@ -31,10 +31,10 @@ export function Home({
       <IndexPageHead settings={settings} />
       <Layout preview={preview} loading={loading}>
         <Header title={title} social={social} hero={hero} level={1} />
-        <main className="w-full mx-auto justify-center -m-14 gap-10 mb-20">
+        <main className="w-full p-2 mx-auto justify-center -m-14 gap-10 mb-20">
           <InputNewsletter />
-          <section className="container flex justify-center lg:flex-nowrap flex-wrap mx-auto gap-4">
-            <section className="flex flex-col w-full max-w-[55rem] gap-4">
+          <section className="container grid-cols-12 grid justify-center lg:flex-nowrap flex-wrap mx-auto gap-4">
+            <section className="flex flex-col w-full gap-4 lg:col-span-9 col-span-full ">
               {main}
             </section>
             <Sidebar>{sidebar}</Sidebar>

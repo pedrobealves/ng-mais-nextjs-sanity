@@ -12,7 +12,7 @@ export default function News({ title, subtitle, index }: NewsProps) {
       <h3 className="text-2xl font-[700] leading-8">{title}</h3>
       <p className="text-sm font-[400] leading-5">
         {title.length > 40 && index > 0
-          ? subtitle.substring(0, 20) + '...'
+          ? subtitle.substring(0, 30) + '...'
           : subtitle}
       </p>
     </div>
