@@ -101,14 +101,17 @@ export function PostPage(props: PostPageProps) {
               </article>
             </main>
             {news?.length > 0 && (
-              <aside aria-label="Related articles" className="px-4 pt-12">
+              <aside
+                aria-label="Related articles"
+                className="max-w-screen-xl mx-auto pt-12"
+              >
                 <MinimalGrid title="Relacionados" news={news} type="post" />
               </aside>
             )}
-            <Section.Root className="items-start max-w-screen-xl mx-auto w-full pt-12 pb-24">
+            <Section.Root className="items-start max-w-screen-xl mx-auto w-full pt-12 pb-24 px-4">
               <Section.Title>Comentários</Section.Title>
               <hr className="h-4 bg-gray-200 w-full rounded-bl-3xl rounded-r-3xl" />
-              <div className="max-w-screen-md mx-auto w-full pt-12">
+              <div className="max-w-screen-md mx-auto w-full md:pt-12 pt-4">
                 <Comments
                   type={post._type}
                   slug={post.slug}

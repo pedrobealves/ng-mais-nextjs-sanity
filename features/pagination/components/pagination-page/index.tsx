@@ -28,7 +28,6 @@ const POSTS_IN_INDEX_PAGE = 8
 
 export function Page(props: PageProps) {
   const { settings, initialPosts, type, title, filter, sub = '' } = props
-
   return (
     <>
       <IndexPageHead settings={settings} />

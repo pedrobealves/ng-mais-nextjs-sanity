@@ -1,4 +1,4 @@
-import { MinimalGrid } from 'features/grid'
+import { CompleteGrid, MinimalGrid } from 'features/grid'
 import { HomeExtraList, HomeHero, HomeNews, HomeTopList } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { Home } from 'layouts/Home'
@@ -61,7 +61,7 @@ export default function Page(props: PageProps) {
       main={
         <>
           <HomeNews news={news} categories={category} />
-          <MinimalGrid title="Especiais" news={specialPosts} type="home" />
+          <CompleteGrid title="Especiais" news={specialPosts} type="home" />
           <MinimalGrid title="Cronologia" news={chronologyPosts} type="home" />
         </>
       }

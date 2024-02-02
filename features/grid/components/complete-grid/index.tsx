@@ -12,7 +12,7 @@ type MinimalGridProps = {
 } & VariantProps<typeof item>
 
 const item = tv({
-  base: 'grid w-full [&>*:first-child]:lg:col-span-2 grid-cols-1 gap-4',
+  base: 'grid w-full [&>*:first-child]:lg:col-span-2 [&>*:last-child]:lg:col-span-2 grid-cols-1 gap-4',
   variants: {
     type: {
       post: 'lg:grid-cols-4 md:grid-cols-3',
@@ -21,28 +21,31 @@ const item = tv({
   },
 })
 
-export function MinimalGrid({ title, news, type }: MinimalGridProps) {
+export function CompleteGrid({ title, news, type }: MinimalGridProps) {
   return (
     <Section.Root>
       <Section.Title>{title}</Section.Title>
       <Section.Container>
         <div className={item({ type })}>
-          {news.slice(0, 5).map((post, index) => (
+          {news.slice(0, 4).map((post, index) => (
             <Link href={`/${post._type}/${post.slug}`} key={post._id}>
               <Card.Root>
                 <Card.Cover picture={post.coverImage} title={post.title} />
-                {post.tag ? (
-                  <Card.Category category={post.tag[0].title} />
-                ) : (
-                  <Card.Category category={post.category.title} />
-                )}
                 <Card.InfoContainer>
+                  {post.tag ? (
+                    <Card.Category category={post.tag[0].title} />
+                  ) : (
+                    <Card.Category category={post.category.title} />
+                  )}
                   <Card.Title
                     index={index}
                     title={post.title}
                     subtitle={post.excerpt}
                   />
-                  <Card.Date dateString={post.date} />
+                  <Card.BottomContainer>
+                    <Card.Author author={post.author?.name} />
+                    <Card.Date dateString={post.date} />
+                  </Card.BottomContainer>
                 </Card.InfoContainer>
               </Card.Root>
             </Link>

@@ -9,6 +9,7 @@ const postFields = groq`
   excerpt,
   coverImage,
   showCover,
+  "author": author->{name, picture, bio, social},
   game->{title, "slug": slug.current, cover, release, developer, genre},
   category->{title, "slug": slug.current},
   tag[]->{title, "slug": slug.current},
@@ -91,7 +92,6 @@ export const postAndMoreStoriesQuery = (type: string) => groq`
 {
   "post": *[_type == "${type}" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    "author": author->{name, picture, bio, social},
     ${postFields}
     ${type == 'review' ? reviewDetails : ''}
     ${type == 'news' ? relatedByTag(type) : relatedByCategory(type)}

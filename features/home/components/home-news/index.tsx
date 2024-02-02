@@ -13,9 +13,9 @@ export function HomeNews({ news, categories }: NewsProps) {
     <Section.Root>
       <Section.Title>Notícias</Section.Title>
       <Section.Container>
-        <div className="flex flex-wrap gap-2 py-4">
+        <div className="flex flex-wrap md:gap-2 gap-1  py-4 md:text-base text-sm">
           <Link href="/news">
-            <button className="px-4 py-3 rounded-full bg-primary-8 font-bold text-white">
+            <button className="md:px-4 px-3 md:py-3 py-2 rounded-full bg-primary-8 font-bold text-white">
               Todas notícias
             </button>
           </Link>
@@ -26,7 +26,7 @@ export function HomeNews({ news, categories }: NewsProps) {
             )
             .map((category, index) => (
               <Link key={index} href={`/tag/${category.slug}`}>
-                <button className="px-4 py-3 rounded-full bg-white font-bold text-primary-8 hover:bg-primary-8 hover:text-white">
+                <button className="md:px-4 px-3 md:py-3 py-2 rounded-full bg-white font-bold text-primary-8 hover:bg-primary-8 hover:text-white">
                   {category.title}
                 </button>
               </Link>

@@ -11,7 +11,7 @@ type HeroProps = {
 
 export function HomeHero({ reviews, posts }: HeroProps) {
   return (
-    <section className="container flex-col lg:flex-row mx-auto flex w-full pt-8 pb-12 gap-4 px-4">
+    <section className="container flex-col lg:flex-row mx-auto flex w-full pt-8 pb-12 gap-4 md:px-4">
       <Section>
         <Carousel className="">
           <CarouselContent>

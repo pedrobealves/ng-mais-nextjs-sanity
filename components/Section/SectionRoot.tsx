@@ -4,5 +4,9 @@ type SectionRootProps = {
 }
 
 export function SectionRoot({ className = '', children }: SectionRootProps) {
-  return <section className={`flex flex-col ${className}`}>{children}</section>
+  return (
+    <section className={`flex flex-col items-start m-2 ${className}`}>
+      {children}
+    </section>
+  )
 }

@@ -1,0 +1,30 @@
+.sectionBottom, .sectionTop {
+  position: relative;
+}
+
+.sectionBottom:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -24px;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: -10px -10px 0 #fff;
+}
+
+.sectionTop:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -24px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -10px 10px 0 #fff;
+}
+
+
+

@@ -2,6 +2,7 @@
   position: relative;
 }
 
+@screen md {
 .section:after {
   content: '';
   position: absolute;
@@ -24,4 +25,5 @@
   background: transparent;
   border-radius: 50%;
   box-shadow: 10px -10px 0 #e5e7eb;
+}
 }
