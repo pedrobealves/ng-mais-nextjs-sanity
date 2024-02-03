@@ -1,7 +1,15 @@
+import { Icon } from 'components/Icon'
+import Link from 'components/Link'
 import { Logo } from 'components/Logo'
 import { Social } from 'components/Social'
+import { socialIconMap } from 'components/SocialIcon'
+import type { Settings } from 'lib/sanity.queries'
 
-export default function Footer() {
+type FooterProps = {
+  settings: Settings
+}
+
+export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="bg-gray-200 px-4">
       <div className="mx-auto px-4 max-w-screen-xl">
@@ -13,11 +21,17 @@ export default function Footer() {
                 Seu ponto analítico e informativo do mundo dos games.
               </p>
             </div>
-            <div className="flex gap-4 sm:mt-0">
-              <Social
-                color="text-primary-8"
-                hoverColor="hover:text-secundary-5"
-              />
+            <div className="flex gap-3 sm:mt-0">
+              {settings.social?.map((item) => (
+                <Link key={item._key} href={item.url}>
+                  <Icon
+                    icon={socialIconMap(item.media)}
+                    color="text-primary-8"
+                    hoverColor="hover:text-secundary-5"
+                    size={16}
+                  />
+                </Link>
+              ))}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 max-w-[23rem] w-full">

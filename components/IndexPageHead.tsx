@@ -6,9 +6,10 @@ import Head from 'next/head'
 
 export interface IndexPageHeadProps {
   settings: Settings
+  text?: string
 }
 
-export default function IndexPageHead({ settings }: IndexPageHeadProps) {
+export default function IndexPageHead({ settings, text }: IndexPageHeadProps) {
   const {
     title = demo.title,
     description = demo.description,
@@ -18,7 +19,7 @@ export default function IndexPageHead({ settings }: IndexPageHeadProps) {
 
   return (
     <Head>
-      <title>{title}</title>
+      <title>{text ? `${text.toLowerCase()} | ${title}` : title}</title>
       <BlogMeta />
       <meta
         key="description"
@@ -42,11 +43,11 @@ export default function IndexPageHead({ settings }: IndexPageHeadProps) {
       />
       <meta property="og:description" content={toPlainText(description)} />
       <meta property="og:site_name" content={title} />
-      <meta property="og:type" content="article" />
+      <meta property="og:type" content="website" />
       <meta property="og:locale" content="pt_BR" />
-      <meta name="twitter:site" content="@miltensei" />
+      <meta name="twitter:site" content="@newgame_mais" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content="@miltensei" />
+      <meta name="twitter:creator" content="@newgame_mais" />
       <meta
         name="twitter:imageUrl"
         content={`${

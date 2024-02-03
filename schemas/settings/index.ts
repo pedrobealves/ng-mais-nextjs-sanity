@@ -119,5 +119,36 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'linktree',
+      type: 'array',
+      title: 'Links linktree',
+      description: 'Enter your buttons for linktree',
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              type: 'string',
+              name: 'title',
+              title: 'Choose title',
+            },
+            {
+              type: 'url',
+              name: 'url',
+              title: 'Full URL',
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'url',
+            },
+          },
+        },
+      ],
+    }),
   ],
 })

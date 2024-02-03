@@ -190,6 +190,12 @@ export interface Tag {
   _type: string
 }
 
+interface LinkTree {
+  _key: string
+  title: string
+  url: string
+}
+
 export interface Settings {
   title?: string
   description?: any[]
@@ -197,4 +203,5 @@ export interface Settings {
     title?: string
   }
   social?: Media[]
+  linktree?: LinkTree[]
 }

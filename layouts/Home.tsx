@@ -40,7 +40,7 @@ export function Home({
             <Sidebar>{sidebar}</Sidebar>
           </section>
         </main>
-        <Footer />
+        <Footer settings={settings} />
       </Layout>
     </>
   )

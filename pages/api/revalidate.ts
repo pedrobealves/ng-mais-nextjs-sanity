@@ -131,7 +131,7 @@ async function queryAllRoutes(
     slugs = [...slugs, ...mappedSlugs]
   }
 
-  return ['/', ...slugs]
+  return ['/', '/linktree', ...slugs]
 }
 
 async function queryAllPostRoutes(

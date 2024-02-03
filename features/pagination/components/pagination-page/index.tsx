@@ -30,7 +30,7 @@ export function Page(props: PageProps) {
   const { settings, initialPosts, type, title, filter, sub = '' } = props
   return (
     <>
-      <IndexPageHead settings={settings} />
+      <IndexPageHead settings={settings} text={title} />
       <Header social={settings.social} level={2} />
       <main className="w-full md:pt-28 pt-32 px-4 mb-14">
         <section className="max-w-screen-xl mx-auto rounded-3xl bg-gray-200">
