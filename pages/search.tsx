@@ -93,7 +93,7 @@ export default function Search(props: PageProps) {
           </section>
         </section>
       </main>
-      <Footer />
+      <Footer settings={settings} />
     </>
   )
 }

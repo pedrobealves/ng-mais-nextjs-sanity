@@ -132,7 +132,7 @@ export function PostPage(props: PostPageProps) {
                 />
               </div>
             </Section.Root>
-            <Footer />
+            <Footer settings={settings} />
           </>
         )}
       </Layout>

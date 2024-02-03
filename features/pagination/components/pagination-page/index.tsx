@@ -42,7 +42,7 @@ export function Page(props: PageProps) {
           />
         </section>
       </main>
-      <Footer />
+      <Footer settings={settings} />
     </>
   )
 }
