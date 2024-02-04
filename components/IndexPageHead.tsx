@@ -19,7 +19,7 @@ export default function IndexPageHead({ settings, text }: IndexPageHeadProps) {
 
   return (
     <Head>
-      <title>{text ? `${text.toLowerCase()} | ${title}` : title}</title>
+      <title>{text ? `${text} | ${title}` : title}</title>
       <BlogMeta />
       <meta
         key="description"
