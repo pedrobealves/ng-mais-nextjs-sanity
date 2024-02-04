@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       initialPosts,
       settings,
       type: category,
-      title,
+      title: `${title.charAt(0) + title.slice(1).toLowerCase()}`,
       filter: `"${category}" == category->slug.current`,
       draftMode: ctx.draftMode || false,
       token: ctx.draftMode ? readToken : '',
