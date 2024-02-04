@@ -37,19 +37,35 @@ export default function PostPageHead({ settings, post }: PostPageHeadProps) {
       <meta property="og:site_name" content={settings.title} />
       <meta property="og:type" content="article" />
       <meta property="og:locale" content="pt_BR" />
+      <meta property="og:image:width" content="1280" />
+      <meta property="og:image:height" content="720" />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta
+        property="og:image"
+        content={urlForImage(post.coverImage)
+          .width(1280)
+          .height(720)
+          .fit('crop')
+          .url()}
+      />
       <meta property="article:published_time" content={post.date} />
+      <meta
+        property="article:modified_time"
+        content={post._updatedAt ? post._updatedAt : post.date}
+      />
+      <meta property="article:publisher" content={settings.title} />
       {post.author && (
-        <meta property="article:publisher" content={post.author.name} />
+        <meta property="article:author" content={post.author.name} />
       )}
       {post.category?.title && (
         <meta property="article:section" content={post.category.title} />
       )}
-      {post.category?.title && (
-        <meta property="article:tag" content={post.category.title} />
-      )}
-      <meta name="twitter:site" content="@miltensei" />
+      {post.tag?.map((tag, index) => (
+        <meta property="article:tag" content={tag.title} key={index} />
+      ))}
+      <meta name="twitter:site" content="@newgame_mais" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content="@miltensei" />
+      <meta name="twitter:creator" content="@newgame_mais" />
       {post.coverImage && (
         <meta
           name="twitter:imageUrl"

@@ -5,7 +5,10 @@
 export default function BlogMeta() {
   return (
     <>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+      <meta
+        name="robots"
+        content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -29,5 +32,5 @@ export default function BlogMeta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
     </>
-  );
+  )
 }
