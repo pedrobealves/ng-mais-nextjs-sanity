@@ -64,7 +64,7 @@ export const newsDropPaginationQuery = groq`
 //Posts
 
 export const typeQuery = (type: string) => groq`
-*[_type == "${type}"] | order(date desc, _updatedAt desc) {
+*[_type == "${type}"] | order(date desc, _updatedAt desc)[0...9] {
   ...,
   "slug": slug.current,
   tag[]->{title, "slug": slug.current, _type},
