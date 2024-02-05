@@ -50,7 +50,7 @@ score(
 }
 `
 
-export const tagQuery = (filter: string = '') => groq`
+const tagQuery = (filter: string = '') => groq`
 *[tag[0]._ref in *[_type=="tag"]._id ${filter}].tag[]->{_id, title, "slug": slug.current}
 `
 
@@ -63,9 +63,12 @@ export const newsDropPaginationQuery = groq`
 
 //Posts
 
-export const postQuery = (type: string) => groq`
+export const typeQuery = (type: string) => groq`
 *[_type == "${type}"] | order(date desc, _updatedAt desc) {
-  ${postFields}
+  ...,
+  "slug": slug.current,
+  tag[]->{title, "slug": slug.current, _type},
+  coverImage
 }`
 
 export const postsByTagPaginationQuery = (tag: string) => groq`
@@ -104,9 +107,9 @@ export const postSlugsQuery = (type: string) => groq`
 export const postTitleBySlugQuery = () => groq`
 *[slug.current == $slug && defined(slug.current)][0].title`
 
-export const postBySlugQuery = (type: string) => groq`
+export const typeBySlugQuery = (type: string) => groq`
 *[_type == "${type}" && slug.current == $slug][0] {
-  ${postFields}
+  ...
 }
 `
 
@@ -181,6 +184,7 @@ export interface Category {
   slug?: string
   description?: string
   _type: string
+  _updatedAt?: string
 }
 
 export interface Tag {
@@ -188,6 +192,7 @@ export interface Tag {
   slug?: string
   description?: string
   _type: string
+  _updatedAt?: string
 }
 
 interface LinkTree {

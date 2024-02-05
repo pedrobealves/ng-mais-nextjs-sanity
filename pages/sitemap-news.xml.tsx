@@ -1,4 +1,6 @@
-import { getAllPosts, getClient } from 'lib/sanity.client'
+import { getAll, getClient } from 'lib/sanity.client'
+import { urlSimpleForImage } from 'lib/sanity.image'
+import { Post, Tag } from 'lib/sanity.queries'
 
 type SitemapLocation = {
   url: string
@@ -12,24 +14,19 @@ type SitemapLocation = {
     | 'never'
   priority: number
   lastmod?: Date
+  publication_date?: Date
+  title?: string
+  tags?: Tag[]
+  image?: string
 }
-
-// Use this to manually add routes to the sitemap
-const defaultUrls: SitemapLocation[] = [
-  {
-    url: '/',
-    changefreq: 'daily',
-    priority: 1,
-    lastmod: new Date(), // or custom date: '2023-06-12T00:00:00.000Z',
-  },
-  //   { url: '/about', priority: 0.5 },
-  //   { url: '/blog', changefreq: 'weekly', priority: 0.7 },
-]
 
 const createSitemap = (locations: SitemapLocation[]) => {
   const baseUrl = process.env.NEXT_PUBLIC_NEXTJS_SITE_URL // Make sure to configure this
   return `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+          xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+          xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  >
       ${locations
         .map((location) => {
           return `<url>
@@ -40,6 +37,18 @@ const createSitemap = (locations: SitemapLocation[]) => {
                         ? `<lastmod>${location.lastmod.toISOString()}</lastmod>`
                         : ''
                     }
+                    <news:news>
+                      <news:publication>
+                        <news:name>ng+</news:name>
+                        <news:language>pt-BR</news:language>
+                      </news:publication>
+                      <news:publication_date>${location.publication_date.toISOString()}</news:publication_date>
+                      <news:title>${location.title}</news:title>
+                      <news:keywords>${location.tags?.map((tag) => tag.title).join(', ')}</news:keywords>
+                    </news:news>
+                    <image:image>
+                      <image:loc>${location.image}</image:loc>
+                    </image:image>
                   </url>`
         })
         .join('')}
@@ -55,46 +64,25 @@ export async function getServerSideProps({ res }) {
   const client = getClient()
 
   // Get list of Post urls
-  const [posts = []] = await Promise.all([getAllPosts(client, 'post')])
+  const [posts = []] = await Promise.all([getAll<Post>(client, 'news')])
   const postUrls: SitemapLocation[] = posts
     .filter(({ slug = '' }) => slug)
     .map((post) => {
       return {
-        url: `/post/${post.slug}`,
-        priority: 0.5,
+        url: `/news/${post.slug}`,
+        priority: 0.7,
         lastmod: new Date(post._updatedAt),
-        changefreq: 'daily',
-      }
-    })
-
-  const [news = []] = await Promise.all([getAllPosts(client, 'news')])
-  const newsUrls: SitemapLocation[] = news
-    .filter(({ slug = '' }) => slug)
-    .map((news) => {
-      return {
-        url: `/news/${news.slug}`,
-        priority: 0.5,
-        lastmod: new Date(news._updatedAt),
-        changefreq: 'hourly',
-      }
-    })
-
-  const [reviews = []] = await Promise.all([getAllPosts(client, 'reviews')])
-  const reviewsUrls: SitemapLocation[] = reviews
-    .filter(({ slug = '' }) => slug)
-    .map((reviews) => {
-      return {
-        url: `/review/${reviews.slug}`,
-        priority: 0.6,
-        lastmod: new Date(reviews._updatedAt),
-        changefreq: 'weekly',
+        publication_date: new Date(post.date),
+        title: post.title,
+        tags: post.tag,
+        image: urlSimpleForImage(post.coverImage).url(),
       }
     })
 
   // ... get more routes here
 
   // Return the default urls, combined with dynamic urls above
-  const locations = [...defaultUrls, ...postUrls, ...newsUrls, ...reviewsUrls]
+  const locations = [...postUrls]
 
   // Set response to XML
   res.setHeader('Content-Type', 'text/xml')

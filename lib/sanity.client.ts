@@ -10,8 +10,6 @@ import {
   indexQuery,
   type Post,
   postAndMoreStoriesQuery,
-  postBySlugQuery,
-  postQuery,
   postsByCategoryPaginationQuery,
   postsByTagPaginationQuery,
   postSlugsQuery,
@@ -19,8 +17,9 @@ import {
   postTitleBySlugQuery,
   type Settings,
   settingsQuery,
-  tagQuery,
   topPaginationQuery,
+  typeBySlugQuery,
+  typeQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -54,14 +53,6 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
   return (await client.fetch(settingsQuery)) || {}
 }
 
-export async function getTop(
-  client: SanityClient,
-  pageIndex: number = 0,
-  limit: number,
-): Promise<Post[]> {
-  return (await client.fetch(topPaginationQuery, { pageIndex, limit })) || []
-}
-
 export async function getFetcher([query, params]) {
   const client = getClient()
   return await client.fetch(query, params)
@@ -81,6 +72,9 @@ export async function getPostsPagination(
       break
     case 'category':
       query = postsByCategoryPaginationQuery(value)
+      break
+    case 'top':
+      query = topPaginationQuery
       break
     default:
       query = postsPaginationQuery(type)
@@ -108,19 +102,19 @@ export async function getTitleBySlugs(
   return (await client.fetch(postTitleBySlugQuery(), { slug })) || ({} as any)
 }
 
-export async function getAllPosts(
+export async function getAll<T>(
   client: SanityClient,
   type: string,
-): Promise<Post[]> {
-  return (await client.fetch(postQuery(type))) || []
+): Promise<T[]> {
+  return (await client.fetch(typeQuery(type))) || []
 }
 
-export async function getPostBySlug(
+export async function getBySlug<T>(
   client: SanityClient,
   slug: string,
   type: string,
-): Promise<Post> {
-  return (await client.fetch(postBySlugQuery(type), { slug })) || ({} as any)
+): Promise<T> {
+  return (await client.fetch(typeBySlugQuery(type), { slug })) || ({} as any)
 }
 
 export async function getPostAndMoreStories(
