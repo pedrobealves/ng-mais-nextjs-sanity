@@ -26,7 +26,7 @@ const createSitemap = (locations: Sitemap[]) => {
     .map((location) => {
       return `
         <sitemap>
-          <loc>${location.url}</loc>
+          <loc>${baseUrl}${location.url}</loc>
         </sitemap>
         `
     })
