@@ -60,6 +60,11 @@ export default function IndexPageHead({ settings, text }: IndexPageHeadProps) {
           process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
         }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
       />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        href={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/feed`}
+      />
     </Head>
   )
 }

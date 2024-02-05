@@ -68,7 +68,8 @@ export const typeQuery = (type: string) => groq`
   ...,
   "slug": slug.current,
   tag[]->{title, "slug": slug.current, _type},
-  coverImage
+  coverImage,
+  "author": author->{name, picture, bio, social},
 }`
 
 export const postsByTagPaginationQuery = (tag: string) => groq`
@@ -164,6 +165,7 @@ export interface Post {
   coverImage?: any
   showCover?: boolean
   date?: string
+  _createdAt?: string
   _updatedAt?: string
   excerpt?: string
   author?: Author
