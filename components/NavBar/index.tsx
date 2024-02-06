@@ -63,15 +63,19 @@ export function NavBar({ level, social }: NavType) {
       <Logo />
       <ul className={Menu()}>
         {headerNavLinks?.map((item, index) => (
-          <Link href={item.slug} key={index}>
-            <li className={MenuList()}>{item.name}</li>
-          </Link>
+          <li key={index} className={MenuList()}>
+            <Link href={item.slug}>{item.name}</Link>
+          </li>
         ))}
       </ul>
       <div className="hidden lg:flex items-center gap-6">
         <div className="flex gap-3">
           {social?.map((item) => (
-            <Link key={item._key} href={item.url}>
+            <Link
+              key={item._key}
+              href={item.url}
+              aria-label={`Ir ao ${item.media} do website`}
+            >
               <Icon
                 icon={socialIconMap(item.media)}
                 color={IconColor()}

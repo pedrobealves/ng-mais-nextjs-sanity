@@ -50,6 +50,7 @@ export function Search({ level }: SearchProps) {
       />
       <button
         type="button"
+        aria-label="Procurar"
         className="text-white bg-secundary-4 rounded-3xl p-4"
         onClick={() => setToggle(!toggle)}
       >

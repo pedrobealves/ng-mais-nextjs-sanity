@@ -153,6 +153,7 @@ const Carousel = React.forwardRef<
           <div className="flex bottom-6 absolute right-4">
             {scrollSnaps.map((_, index) => (
               <button
+                aria-label={`Vá para o slide ${index + 1}`}
                 key={index}
                 onClick={() => scrollTo(index)}
                 className={`w-4 h-4 opacity-50 mx-1 rounded-[50%] outline-none text-center leading-[16px] text-xs indent-[-999em] transition-[box-shadow_0.3s_ease] ${

@@ -28,7 +28,7 @@ export function Card({ title, picture, slug }: CardProps) {
           className="min-h-[10rem] w-24 max-h-full object-cover rounded-2xl"
           width={392}
           height={196}
-          alt={picture?.alt ?? title}
+          alt={`Imagem de ${picture?.alt ?? title}`}
         />
       </Link>
     </li>

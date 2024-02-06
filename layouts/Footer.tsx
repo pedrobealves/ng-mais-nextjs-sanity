@@ -23,7 +23,11 @@ export default function Footer({ settings }: FooterProps) {
             </div>
             <div className="flex gap-3 sm:mt-0">
               {settings?.social?.map((item) => (
-                <Link key={item._key} href={item.url}>
+                <Link
+                  key={item._key}
+                  href={item.url}
+                  aria-label={`Ir ao ${item.media} do website`}
+                >
                   <Icon
                     icon={socialIconMap(item.media)}
                     color="text-primary-8"

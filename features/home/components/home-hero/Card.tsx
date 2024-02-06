@@ -55,7 +55,7 @@ export function Card({ type, title, subtitle, picture, slug }: CardProps) {
         height={320}
         priority={true}
         sizes="(max-width: 56,px) 100vw, 33vw"
-        alt={picture?.alt ?? title}
+        alt={`Imagem de ${picture?.alt ?? title}`}
       />
       <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>
       <div className="absolute inset-0 [background:linear-gradient(180deg,_rgba(0,_0,_0,_0.00)_0%,_rgba(0,_0,_0,_0.90)_100%)]"></div>
