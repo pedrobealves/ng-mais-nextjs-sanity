@@ -82,10 +82,6 @@ module.exports = {
       backgroundImage: {
         'gradient-newsletter':
           'radial-gradient(circle closest-corner at 50% 220%, #8c20f8, #100919)',
-        'gradient-footer':
-          'linear-gradient(180deg, rgba(90, 24, 154, 1), rgba(60, 9, 108, 1) 16%, rgba(36, 0, 70, 1) 40%, rgba(16, 0, 43, 1))',
-        'gradient-header':
-          'linear-gradient(180deg, #100919 0%, #5A189A 81.35%, #3C096C 92.84%)',
       },
     },
   },

@@ -17,7 +17,7 @@ export default function Alert({
     () => false,
   )
 
-  if (!shouldShow || !preview) return null
+  if (!preview) return null
 
   return (
     <div

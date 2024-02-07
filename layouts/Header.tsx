@@ -1,3 +1,5 @@
+'use client'
+
 import { NavBar } from 'components/NavBar'
 import { Media } from 'lib/sanity.queries'
 import { useEffect, useState } from 'react'

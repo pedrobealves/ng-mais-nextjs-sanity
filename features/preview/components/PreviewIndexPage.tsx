@@ -48,6 +48,7 @@ export default function PreviewIndexPage(props: PageProps) {
 
   return (
     <Home
+      preview
       settings={settings}
       hero={<HomeHero posts={specialPosts || []} reviews={reviews || []} />}
       main={
