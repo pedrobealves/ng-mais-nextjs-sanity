@@ -63,13 +63,22 @@ export const newsDropPaginationQuery = groq`
 
 //Posts
 
-export const typeQuery = (type: string) => groq`
-*[_type == "${type}"] | order(date desc, _updatedAt desc)[0...9] {
+const typeFields = groq`
   ...,
   "slug": slug.current,
   tag[]->{title, "slug": slug.current, _type},
   coverImage,
   "author": author->{name, picture, bio, social},
+`
+
+export const typeQuery = (type: string) => groq`
+*[_type == "${type}" && !(_id in path('drafts.**')) ] | order(date desc, _updatedAt desc) {
+  ${typeFields}
+}`
+
+export const typesQuery = (types: string[]) => groq`
+*[_type in ${JSON.stringify(types)} && !(_id in path('drafts.**'))] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  ${typeFields}
 }`
 
 export const postsByTagPaginationQuery = (tag: string) => groq`

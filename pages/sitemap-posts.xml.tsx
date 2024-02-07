@@ -1,4 +1,4 @@
-import { getAll, getClient } from 'lib/sanity.client'
+import { getAllByType, getClient } from 'lib/sanity.client'
 import { urlSimpleForImage } from 'lib/sanity.image'
 import { Post } from 'lib/sanity.queries'
 
@@ -52,7 +52,7 @@ async function getUrls<T extends { slug?: string; _updatedAt?: string }>(
   },
 ) {
   const [items = []] = await Promise.all([
-    getAll<Post>(client, contentType.type),
+    getAllByType<Post>(client, contentType.type),
   ])
   return items
     .filter(({ slug = '' }) => slug)

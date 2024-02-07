@@ -12,7 +12,7 @@ type MinimalGridProps = {
 } & VariantProps<typeof item>
 
 const item = tv({
-  base: 'grid w-full [&>*:first-child]:lg:col-span-2 grid-cols-1 gap-4',
+  base: 'grid w-full [&>*:first-child]:lg:col-span-2 grid-cols-1 sm:gap-4 gap-2',
   variants: {
     type: {
       post: 'lg:grid-cols-4 md:grid-cols-3',

@@ -12,7 +12,7 @@ type CardProps = {
 
 const item = tv({
   slots: {
-    CardLink: 'h-80',
+    CardLink: 'sm:h-80 h-44',
     CardInfoSection:
       'absolute bottom-0 flex flex-col items-start justify-between self-stretch',
     CardTitle: 'font-bold',
@@ -30,8 +30,8 @@ const item = tv({
       post: {
         CardLink: '',
         CardInfoSection: 'py-8 px-8',
-        CardTitle: 'text-4xl',
-        CardSubtitle: '',
+        CardTitle: 'sm:text-4xl sm:pb-0 text-2xl pb-5',
+        CardSubtitle: 'sm:block hidden',
       },
     },
   },

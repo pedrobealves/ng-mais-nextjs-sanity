@@ -45,7 +45,7 @@ export default function BlogHeader({
   switch (level) {
     case 1:
       return (
-        <header className="bg-gray-200 w-full px-4 py-4 rounded-b-[40px]">
+        <header className="bg-gray-200 w-full sm:px-4 px-2 py-4 rounded-b-[40px]">
           <NavBar level={level} social={social} />
           {hero}
         </header>

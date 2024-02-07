@@ -1,5 +1,5 @@
 import { Feed, FeedOptions, Item } from 'feed'
-import { getAll, getClient, getSettings } from 'lib/sanity.client'
+import { getAllByTypes, getClient, getSettings } from 'lib/sanity.client'
 import { urlSimpleForImage } from 'lib/sanity.image'
 import { Post, Settings } from 'lib/sanity.queries'
 import { toHtml, toPlainText } from 'lib/utils'
@@ -35,7 +35,7 @@ const generateRssFeed = (posts: Post[], settings: Settings) => {
       description: post.excerpt,
       date: new Date(post._createdAt),
       content: toHtml(post.content),
-      author: [{ name: post.author.name }],
+      author: [{ name: post.author?.name }],
       category: post.tag?.map((item) => {
         return { name: `<![CDATA[ ${item.title} ]]>` }
       }),
@@ -55,10 +55,9 @@ export async function getServerSideProps({ res }) {
   // Return the default urls, combined with dynamic urls above
   const postsLocations = []
 
-  for (const contentType of contentTypes) {
-    const posts = await getAll<Post>(client, contentType)
-    postsLocations.push(...posts)
-  }
+  const posts = await getAllByTypes<Post>(client, contentTypes, 0, 9)
+
+  postsLocations.push(...posts)
 
   const settings = await getSettings(client)
 

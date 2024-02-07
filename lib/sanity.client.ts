@@ -20,6 +20,7 @@ import {
   topPaginationQuery,
   typeBySlugQuery,
   typeQuery,
+  typesQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -102,11 +103,20 @@ export async function getTitleBySlugs(
   return (await client.fetch(postTitleBySlugQuery(), { slug })) || ({} as any)
 }
 
-export async function getAll<T>(
+export async function getAllByType<T>(
   client: SanityClient,
   type: string,
 ): Promise<T[]> {
   return (await client.fetch(typeQuery(type))) || []
+}
+
+export async function getAllByTypes<T>(
+  client: SanityClient,
+  types: string[],
+  pageIndex: number = 0,
+  limit: number,
+): Promise<T[]> {
+  return (await client.fetch(typesQuery(types), { pageIndex, limit })) || []
 }
 
 export async function getBySlug<T>(

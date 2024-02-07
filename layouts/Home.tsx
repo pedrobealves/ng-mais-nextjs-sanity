@@ -33,8 +33,8 @@ export function Home({
         <Header title={title} social={social} hero={hero} level={1} />
         <main className="w-full p-2 mx-auto justify-center -m-14 gap-10 mb-20">
           <InputNewsletter />
-          <section className="container grid-cols-12 grid justify-center lg:flex-nowrap flex-wrap mx-auto gap-4">
-            <section className="flex flex-col w-full gap-4 lg:col-span-9 col-span-full ">
+          <section className="container grid-cols-12 grid justify-center lg:flex-nowrap flex-wrap mx-auto sm:gap-4 gap-2">
+            <section className="flex flex-col w-full sm:gap-4 gap-2 lg:col-span-9 col-span-full ">
               {main}
             </section>
             <Sidebar>{sidebar}</Sidebar>

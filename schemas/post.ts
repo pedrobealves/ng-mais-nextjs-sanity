@@ -72,13 +72,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'game',
-      title: 'Game',
-      description: 'Se possui, selecione o jogo que este post pertence',
-      type: 'reference',
-      to: [{ type: gameType.name }],
-    }),
-    defineField({
       title: 'Category',
       name: 'category',
       type: 'reference',

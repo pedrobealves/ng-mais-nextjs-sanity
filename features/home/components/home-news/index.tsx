@@ -13,7 +13,7 @@ export function HomeNews({ news, categories }: NewsProps) {
     <Section.Root>
       <Section.Title>Notícias</Section.Title>
       <Section.Container>
-        <div className="flex flex-wrap md:gap-2 gap-1  py-4 md:text-base text-sm">
+        <div className="flex flex-wrap md:gap-2 gap-1 sm:py-4 py-2 md:text-base text-sm">
           <Link href="/news">
             <button className="md:px-4 px-3 md:py-3 py-2 rounded-full bg-primary-8 font-bold text-white">
               Todas notícias
@@ -32,7 +32,7 @@ export function HomeNews({ news, categories }: NewsProps) {
               </Link>
             ))}
         </div>
-        <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 gap-4">
+        <div className="flex flex-col sm:auto-rows-fr lg:grid-cols-3 sm:grid sm:grid-cols-2 sm:gap-4 gap-2">
           {news?.map((item) => (
             <Card.Root slug={item.slug} type={item._type} key={item._id}>
               <Card.Cover picture={item.coverImage} title={item.title} />

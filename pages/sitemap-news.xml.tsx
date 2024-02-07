@@ -1,4 +1,4 @@
-import { getAll, getClient } from 'lib/sanity.client'
+import { getAllByType, getClient } from 'lib/sanity.client'
 import { urlSimpleForImage } from 'lib/sanity.image'
 import { Post, Tag } from 'lib/sanity.queries'
 
@@ -64,7 +64,7 @@ export async function getServerSideProps({ res }) {
   const client = getClient()
 
   // Get list of Post urls
-  const [posts = []] = await Promise.all([getAll<Post>(client, 'news')])
+  const [posts = []] = await Promise.all([getAllByType<Post>(client, 'news')])
   const postUrls: SitemapLocation[] = posts
     .filter(({ slug = '' }) => slug)
     .map((post) => {

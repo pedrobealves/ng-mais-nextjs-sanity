@@ -15,7 +15,7 @@ export function CardCover({ picture, title }: CardProps) {
             ? urlForImage(picture).fit('crop').url()
             : 'https://source.unsplash.com/96x96/?face'
         }
-        className="h-[140px] w-full object-cover"
+        className="sm:h-[140px] h-32 w-full object-cover"
         height={140}
         width={270}
         alt={picture?.alt ?? title}

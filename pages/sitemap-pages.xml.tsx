@@ -1,4 +1,4 @@
-import { getAll, getClient } from 'lib/sanity.client'
+import { getAllByType, getClient } from 'lib/sanity.client'
 import { Category, Tag } from 'lib/sanity.queries'
 
 const contentTypes = [
@@ -67,7 +67,9 @@ async function getUrls<T extends { slug?: string; _updatedAt?: string }>(
     changefreq: string
   },
 ) {
-  const [items = []] = await Promise.all([getAll<T>(client, contentType.type)])
+  const [items = []] = await Promise.all([
+    getAllByType<T>(client, contentType.type),
+  ])
   return items
     .filter(({ slug = '' }) => slug)
     .map((item) => {
