@@ -200,7 +200,6 @@ async function queryStalePostRoutes(
 
     return [
       '/',
-      '/feed',
       ...(category ? [`/${category.slug}`] : []),
       ...slugs.map((slug) => `/${type}/${slug}`),
       ...(tagSlugs ? tagSlugs.map((tag) => `/tag/${tag.slug}`) : []),
