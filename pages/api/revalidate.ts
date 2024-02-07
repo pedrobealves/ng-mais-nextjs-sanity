@@ -103,7 +103,7 @@ async function queryStaleRoutes(
       return await queryAllRoutes(client, TYPES)
     case 'category':
       return await queryStaleCategoryRoutes(client, body._id, 'category')
-    case 'category':
+    case 'tag':
       return await queryStaleCategoryRoutes(client, body._id, 'tag')
     default:
       throw new TypeError(`Unknown type: ${body._type}`)
