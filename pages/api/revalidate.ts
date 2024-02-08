@@ -64,7 +64,6 @@ async function queryStaleRoutes(
   // Handle possible deletions
   if (body._type in TYPES) {
     let type = body._type
-    console.log('Checking if document exists', body, type)
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
@@ -82,7 +81,7 @@ async function queryStaleRoutes(
       if (moreStories < 3) {
         return [
           ...new Set([
-            ...(await queryAllPostRoutes(client, type)),
+            ...(await queryAllRoutes(client, TYPES)),
             ...staleRoutes,
           ]),
         ]
