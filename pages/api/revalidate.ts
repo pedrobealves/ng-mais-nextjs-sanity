@@ -62,18 +62,17 @@ async function queryStaleRoutes(
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
 
   // Handle possible deletions
-  if (body._type in TYPES) {
-    let type = body._type
+  if (body._type === 'news') {
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`/${type}/${(body.slug as any).current}`)
+        staleRoutes.push(`/news/${(body.slug as any).current}`)
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
         groq`count(
-          *[_type == "${type}"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
+          *[_type == "news"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
         )`,
         { date: body.date },
       )
@@ -81,9 +80,10 @@ async function queryStaleRoutes(
       if (moreStories < 3) {
         return [
           ...new Set([
-            ...(await queryAllRoutes(client, TYPES)),
+            ...(await queryAllRoutes(client, ['news'])),
             ...staleRoutes,
           ]),
+          '/',
         ]
       }
       return staleRoutes
