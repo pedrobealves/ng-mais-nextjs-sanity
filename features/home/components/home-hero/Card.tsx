@@ -15,8 +15,8 @@ const item = tv({
     CardLink: 'sm:h-80 h-44',
     CardInfoSection:
       'absolute bottom-0 flex flex-col items-start justify-between self-stretch',
-    CardTitle: 'font-bold',
-    CardSubtitle: 'text-lg leading-6',
+    CardTitle: 'font-bold text-balance',
+    CardSubtitle: 'text-lg leading-6 text-balance',
   },
   variants: {
     type: {

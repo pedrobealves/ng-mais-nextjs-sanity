@@ -5,7 +5,9 @@ type CardProps = {
 export function CardTitle({ title }: CardProps) {
   return (
     <div className="flex items-center justify-between">
-      <h3 className="text-2xl text-primary-8 font-bold">{title}</h3>
+      <h3 className="text-2xl text-primary-8 font-bold text-balance">
+        {title}
+      </h3>
     </div>
   )
 }

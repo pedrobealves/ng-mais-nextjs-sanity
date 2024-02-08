@@ -63,7 +63,7 @@ async function queryStaleRoutes(
 
   // Handle possible deletions
   if (body._type in TYPES) {
-    let type = body._type as (typeof TYPES)[number]
+    let type = body._type
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']

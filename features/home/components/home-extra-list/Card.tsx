@@ -17,7 +17,9 @@ export function Card({ title, picture, slug }: CardProps) {
       >
         <div className="flex flex-col gap-2 px-2 justify-center w-full">
           <hr className="w-5 h-[2px] border-0 bg-primary-8" />
-          <h1 className="text-primary-8 font-bold text-base">{title}</h1>
+          <h1 className="text-primary-8 font-bold text-base text-pretty">
+            {title}
+          </h1>
         </div>
         <Image
           src={

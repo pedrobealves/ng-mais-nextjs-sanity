@@ -37,7 +37,9 @@ export function Card({
           {index + 1}
         </span>
         <div className="flex flex-col">
-          <p className="text-base font-normal text-primary-8">{title}</p>
+          <p className="text-base font-normal text-primary-8 text-pretty">
+            {title}
+          </p>
           {genre && (
             <small className="hidden font-normal text-xs text-neutral-600">
               {genre}

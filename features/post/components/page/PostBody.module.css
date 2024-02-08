@@ -55,7 +55,7 @@
 }
 
 .portableText h1, .portableText h2, .portableText h3, .portableText h4, .portableText h5, .portableText h6 {
-  @apply mb-4 mt-8 font-bold leading-snug sm:break-normal break-words break-all;
+  @apply mb-4 mt-8 font-bold leading-snug text-pretty;
 }
 
 .portableText h1 {

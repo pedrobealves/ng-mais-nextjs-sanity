@@ -2,6 +2,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
 import { codeInput } from '@sanity/code-input'
+import { debugSecrets } from '@sanity/preview-url-secret/sanity-plugin-debug-secrets'
 import { scheduledPublishing } from '@sanity/scheduled-publishing'
 import { visionTool } from '@sanity/vision'
 import {
@@ -14,8 +15,8 @@ import { locate } from 'plugins/locate'
 import { previewDocumentNode } from 'plugins/previewPane'
 import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
 import { presentationTool } from 'sanity/presentation'
+import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from 'schemas/author'
 import blockContentType from 'schemas/blockContent'
@@ -64,7 +65,7 @@ export default defineConfig({
     ],
   },
   plugins: [
-    deskTool({
+    structureTool({
       structure: settingsStructure(settingsType),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode(),
@@ -82,9 +83,12 @@ export default defineConfig({
     codeInput(),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
+    // The remaining plugins are only loaded in dev mode
+    process.env.NODE_ENV !== 'production' && debugSecrets(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
+    process.env.NODE_ENV !== 'production' &&
+      visionTool({ defaultApiVersion: apiVersion }),
     scheduledPublishing(),
   ],
 })
