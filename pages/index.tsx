@@ -1,5 +1,5 @@
-import { CompleteGrid, MinimalGrid } from 'features/grid'
-import { HomeExtraList, HomeHero, HomeNews, HomeTopList } from 'features/home'
+import { CompleteGrid, MinimalGrid, StandardGrid } from 'features/grid'
+import { HomeExtraList, HomeHero, HomeTopList } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
 import { Home } from 'layouts/Home'
 import { readToken } from 'lib/sanity.api'
@@ -60,7 +60,7 @@ export default function Page(props: PageProps) {
       hero={<HomeHero posts={defaultPosts} reviews={reviews} />}
       main={
         <>
-          <HomeNews news={news} categories={category} />
+          <StandardGrid title="Notícias" news={news} categories={category} />
           <CompleteGrid title="Especiais" news={specialPosts} type="home" />
           <MinimalGrid title="Cronologia" news={chronologyPosts} type="home" />
         </>

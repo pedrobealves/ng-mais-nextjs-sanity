@@ -2,15 +2,15 @@
 import {
   getClientWithToken,
   getPostsAndSettings,
-  Page,
   PageProps,
+  Pagination,
   Query,
 } from 'features/pagination'
 import { readToken } from 'lib/sanity.api'
 import { getAllPostsSlugs, getTitleBySlugs } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
 
-export default Page
+export default Pagination
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { params = {} } = ctx

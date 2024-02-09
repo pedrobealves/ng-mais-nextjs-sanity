@@ -5,6 +5,7 @@ import IndexPageHead from 'components/IndexPageHead'
 import { CardList } from 'features/pagination'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
+import { Page } from 'layouts/Page'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getPostsPagination, getSettings } from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
@@ -26,24 +27,19 @@ export interface Query {
 
 const POSTS_IN_INDEX_PAGE = 8
 
-export function Page(props: PageProps) {
+export function Pagination(props: PageProps) {
   const { settings, initialPosts, type, title, filter, sub = '' } = props
   return (
-    <>
-      <IndexPageHead settings={settings} text={title} />
-      <Header social={settings.social} level={2} />
-      <main className="w-full md:pt-28 pt-32 px-4 mb-14">
-        <section className="max-w-screen-xl mx-auto rounded-3xl bg-gray-200">
-          <HeadCard title={title} />
-          <CardList
-            posts={initialPosts}
-            type={`${sub}${type}`}
-            pageQuery={postsPaginationFilterQuery(filter)}
-          />
-        </section>
-      </main>
-      <Footer settings={settings} />
-    </>
+    <Page title={title} settings={settings}>
+      <section className="max-w-screen-xl mx-auto rounded-3xl bg-gray-200">
+        <HeadCard title={title} />
+        <CardList
+          posts={initialPosts}
+          type={`${sub}${type}`}
+          pageQuery={postsPaginationFilterQuery(filter)}
+        />
+      </section>
+    </Page>
   )
 }
 

@@ -1,5 +1,5 @@
-import { MinimalGrid } from 'features/grid'
-import { HomeExtraList, HomeHero, HomeNews, HomeTopList } from 'features/home'
+import { CompleteGrid, MinimalGrid, StandardGrid } from 'features/grid'
+import { HomeExtraList, HomeHero, HomeTopList } from 'features/home'
 import { Home } from 'layouts/Home'
 import {
   type Category,
@@ -53,8 +53,16 @@ export default function PreviewIndexPage(props: PageProps) {
       hero={<HomeHero posts={specialPosts || []} reviews={reviews || []} />}
       main={
         <>
-          <HomeNews news={news || []} categories={category} />
-          <MinimalGrid title="Artigos" news={defaultPosts || []} type="home" />
+          <StandardGrid
+            title="Notícias"
+            news={news || []}
+            categories={category}
+          />
+          <CompleteGrid
+            title="Especiais"
+            news={specialPosts || []}
+            type="home"
+          />
           <MinimalGrid
             title="Cronologia"
             news={chronologyPosts || []}

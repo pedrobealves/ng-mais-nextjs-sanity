@@ -1,17 +1,19 @@
-import { Card } from 'components/Card'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
 import type { Category, Post } from 'lib/sanity.queries'
 
-type NewsProps = {
+import { Card } from './Card'
+
+type StandardGridProps = {
+  title: string
   news: Post[]
   categories: Category[]
 }
 
-export function HomeNews({ news, categories }: NewsProps) {
+export function StandardGrid({ title, news, categories }: StandardGridProps) {
   return (
     <Section.Root>
-      <Section.Title>Notícias</Section.Title>
+      <Section.Title>{title}</Section.Title>
       <Section.Container>
         <div className="flex flex-wrap md:gap-2 gap-1 sm:py-4 py-2 md:text-base text-sm">
           <Link href="/news">

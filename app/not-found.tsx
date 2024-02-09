@@ -31,7 +31,7 @@ export default async function NotFoundPage() {
 
   return (
     <>
-      <IndexPageHead settings={settings} text="linktree" />
+      <IndexPageHead settings={settings} text="404" />
       <Header title={title} social={social} level={2} />
       <NotFound />
     </>

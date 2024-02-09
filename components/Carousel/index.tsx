@@ -1,18 +1,14 @@
 'use client'
 
-import useEmblaCarousel, {
-  type EmblaCarouselType as CarouselApi,
-  type EmblaOptionsType as CarouselOptions,
-  type EmblaPluginType as CarouselPlugin,
-} from 'embla-carousel-react'
+import useEmblaCarousel from 'embla-carousel-react'
 import { cn } from 'lib/utils'
 import * as React from 'react'
 
 type CarouselProps = {
-  opts?: CarouselOptions
-  plugins?: CarouselPlugin[]
+  opts?: any
+  plugins?: any[]
   orientation?: 'horizontal' | 'vertical'
-  setApi?: (api: CarouselApi) => void
+  setApi?: (api: any) => void
 }
 
 type CarouselContextProps = {
@@ -64,7 +60,7 @@ const Carousel = React.forwardRef<
     const [selectedIndex, setSelectedIndex] = React.useState(0)
     const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
 
-    const onSelect = React.useCallback((api: CarouselApi) => {
+    const onSelect = React.useCallback((api: any) => {
       if (!api) {
         return
       }
@@ -74,7 +70,7 @@ const Carousel = React.forwardRef<
       setCanScrollNext(api.canScrollNext())
     }, [])
 
-    const onInit = React.useCallback((api: CarouselApi) => {
+    const onInit = React.useCallback((api: any) => {
       setScrollSnaps(api.scrollSnapList())
     }, [])
 
@@ -215,4 +211,4 @@ const CarouselItem = React.forwardRef<
 })
 CarouselItem.displayName = 'CarouselItem'
 
-export { Carousel, type CarouselApi, CarouselContent, CarouselItem }
+export { Carousel, CarouselContent, CarouselItem }
