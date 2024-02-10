@@ -1,6 +1,8 @@
 import Link from 'components/Link'
-import headerNavLinks from 'data/headerNavLinks'
+import { headerNavLinks, subMenuHeaderNavLinks } from 'data/headerNavLinks'
 import { useState } from 'react'
+
+import { Accordion } from './Accordion'
 
 type NavType = {
   level: 1 | 2
@@ -84,6 +86,10 @@ export function NavMobile({ level }: NavType) {
               </Link>
             </div>
           ))}
+          <Accordion
+            content={subMenuHeaderNavLinks}
+            onToggleNav={onToggleNav}
+          />
           <div className="px-12 py-4">
             <Link
               href="/search"

@@ -63,22 +63,17 @@ export const newsDropPaginationQuery = groq`
 
 //Posts
 
-const typeFields = groq`
+export const typeQuery = (type: string) => groq`
+*[_type == "${type}"] | order(date desc, _updatedAt desc) {
   ...,
   "slug": slug.current,
-  tag[]->{title, "slug": slug.current, _type},
-  coverImage,
-  "author": author->{name, picture, bio, social},
-`
-
-export const typeQuery = (type: string) => groq`
-*[_type == "${type}" && !(_id in path('drafts.**')) ] | order(date desc, _updatedAt desc) {
-  ${typeFields}
+  ${['news', 'post', 'review'].includes(type) ? postFields : ''}
 }`
 
 export const typesQuery = (types: string[]) => groq`
-*[_type in ${JSON.stringify(types)} && !(_id in path('drafts.**'))] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
-  ${typeFields}
+*[_type in ${JSON.stringify(types)}] | order(date desc, _updatedAt desc) {
+  ...,
+  "slug": slug.current,
 }`
 
 export const postsByTagPaginationQuery = (tag: string) => groq`
@@ -98,6 +93,7 @@ export const postsPaginationQuery = (type: string) => groq`
 
 export const postsPaginationFilterQuery = (filter: string) => groq`
 *[${filter}] | order(date desc, _updatedAt desc)[$pageIndex...$limit] {
+  ...,
   ${postFields}
 }`
 

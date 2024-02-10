@@ -15,7 +15,7 @@ export function HomeHero({ reviews, posts }: HeroProps) {
       <Section>
         <Carousel className="">
           <CarouselContent>
-            {posts.slice(0, 3).map((post, index) => (
+            {posts.slice(0, 4).map((post, index) => (
               <CarouselItem key={post._id}>
                 <Card
                   key={post.slug}

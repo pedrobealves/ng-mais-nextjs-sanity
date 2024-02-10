@@ -1,4 +1,4 @@
-const headerNavLinks = [
+export const headerNavLinks = [
   {
     name: 'Notícias',
     slug: '/news',
@@ -11,10 +11,37 @@ const headerNavLinks = [
     name: 'Análises',
     slug: '/review',
   },
-  {
-    name: 'Especiais',
-    slug: '/special',
-  },
 ]
 
-export default headerNavLinks
+export const subMenuHeaderNavLinks = [
+  {
+    name: 'Nossas Categorias',
+    submenu: [
+      {
+        name: 'Especiais',
+        slug: '/special',
+      },
+      {
+        name: 'Cronologia',
+        slug: '/chronology',
+      },
+      {
+        name: 'Extra',
+        slug: '/extra',
+      },
+    ],
+  },
+  {
+    name: 'Nosso Institucional',
+    submenu: [
+      {
+        name: 'Nossa equipe',
+        slug: '/author',
+      },
+      {
+        name: 'Quem somos',
+        slug: '/',
+      },
+    ],
+  },
+]

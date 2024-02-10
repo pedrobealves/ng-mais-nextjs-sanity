@@ -68,7 +68,7 @@ export function CardList({ pageQuery, posts: initialPosts, type }: PageProps) {
           </div>
         )}
         {posts && (
-          <div className="mt-12 flex flex-row gap-4 [&>*]:basis-[285.83px] flex-wrap justify-center">
+          <div className="mt-12 columns-1 sm:columns-2 md:columns-3 gap-4 lg:columns-4 justify-center items-center">
             {posts?.map((item) => (
               <ItemCard.Root slug={item.slug} type={item._type} key={item._id}>
                 <ItemCard.Cover picture={item.coverImage} title={item.title} />

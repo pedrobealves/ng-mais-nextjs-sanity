@@ -243,5 +243,5 @@ async function queryStaleCategoryRoutes(
     }
   }
 
-  return ['/', ...slugsRoute]
+  return ['/', '/author', ...slugsRoute]
 }

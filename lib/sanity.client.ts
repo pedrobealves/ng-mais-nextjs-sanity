@@ -13,6 +13,7 @@ import {
   postsByCategoryPaginationQuery,
   postsByTagPaginationQuery,
   postSlugsQuery,
+  postsPaginationFilterQuery,
   postsPaginationQuery,
   postTitleBySlugQuery,
   type Settings,
@@ -88,6 +89,23 @@ export async function getPostsPagination(
   )
 }
 
+export async function getPostsPaginationByTypes(
+  client: SanityClient,
+  types: string[],
+  pageIndex: number = 0,
+  limit: number,
+): Promise<Post[]> {
+  return (
+    (await client.fetch(
+      postsPaginationFilterQuery(`_type in ${JSON.stringify(types)}`),
+      {
+        pageIndex,
+        limit,
+      },
+    )) || []
+  )
+}
+
 export async function getAllPostsSlugs(
   type: string,
 ): Promise<Pick<Post, 'slug'>[]> {
@@ -113,10 +131,8 @@ export async function getAllByType<T>(
 export async function getAllByTypes<T>(
   client: SanityClient,
   types: string[],
-  pageIndex: number = 0,
-  limit: number,
 ): Promise<T[]> {
-  return (await client.fetch(typesQuery(types), { pageIndex, limit })) || []
+  return (await client.fetch(typesQuery(types))) || []
 }
 
 export async function getBySlug<T>(

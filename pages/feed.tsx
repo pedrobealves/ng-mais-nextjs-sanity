@@ -1,5 +1,9 @@
 import { Feed, FeedOptions, Item } from 'feed'
-import { getAllByTypes, getClient, getSettings } from 'lib/sanity.client'
+import {
+  getClient,
+  getPostsPaginationByTypes,
+  getSettings,
+} from 'lib/sanity.client'
 import { urlSimpleForImage } from 'lib/sanity.image'
 import { Post, Settings } from 'lib/sanity.queries'
 import { toHtml, toPlainText } from 'lib/utils'
@@ -55,7 +59,7 @@ export async function getServerSideProps({ res }) {
   // Return the default urls, combined with dynamic urls above
   const postsLocations = []
 
-  const posts = await getAllByTypes<Post>(client, contentTypes, 0, 9)
+  const posts = await getPostsPaginationByTypes(client, contentTypes, 0, 9)
 
   postsLocations.push(...posts)
 

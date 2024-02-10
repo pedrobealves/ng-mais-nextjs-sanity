@@ -3,10 +3,13 @@ import Link from 'components/Link'
 import { Logo } from 'components/Logo'
 import { Search } from 'components/Search'
 import { socialIconMap } from 'components/SocialIcon'
-import headerNavLinks from 'data/headerNavLinks'
+import { headerNavLinks, subMenuHeaderNavLinks } from 'data/headerNavLinks'
 import { Media } from 'lib/sanity.queries'
 import { tv } from 'tailwind-variants'
 
+import { Dropdown } from './Dropdown'
+import { DropdownContent } from './DropdownContent'
+import { MenuItem } from './MenuItem'
 import { NavMobile } from './NavMobile'
 
 type NavType = {
@@ -17,56 +20,36 @@ type NavType = {
 const item = tv({
   slots: {
     Nav: 'flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3 z-40',
-    Menu: 'hidden lg:flex text-primary-8 font-bold text-base gap-4',
-    MenuList:
-      'block py-2 px-2 rounded-md decoration-[3px] hover:underline underline-offset-[4px] transition-all duration-300 ease-in-out',
-    IconColor: 'text-primary-8',
-    IconHoverColor: 'hover:text-secundary-5',
-    LogoHeight: '',
-    SymbolHeight: '',
   },
   variants: {
     level: {
       1: {
         Nav: 'container',
-        Menu: '',
-        MenuList: '',
-        IconColor: '',
-        IconHoverColor: '',
       },
       2: {
         Nav: 'max-w-screen-xl',
-        Menu: '',
-        MenuList: '',
-        IconColor: '',
-        IconHoverColor: '',
       },
     },
   },
 })
 
 export function NavBar({ level, social }: NavType) {
-  const {
-    Nav,
-    Menu,
-    MenuList,
-    IconColor,
-    IconHoverColor,
-    LogoHeight,
-    SymbolHeight,
-  } = item({
+  const { Nav } = item({
     level,
   })
 
   return (
     <nav className={Nav()}>
       <Logo />
-      <ul className={Menu()}>
+      <ul className="hidden lg:flex text-primary-8 font-bold text-base gap-4">
         {headerNavLinks?.map((item, index) => (
-          <li key={index} className={MenuList()}>
-            <Link href={item.slug}>{item.name}</Link>
-          </li>
+          <MenuItem key={index} href={item.slug}>
+            {item.name}
+          </MenuItem>
         ))}
+        <Dropdown content={<DropdownContent menu={subMenuHeaderNavLinks} />}>
+          Mais
+        </Dropdown>
       </ul>
       <div className="hidden lg:flex items-center gap-6">
         <div className="flex gap-3">
@@ -78,8 +61,8 @@ export function NavBar({ level, social }: NavType) {
             >
               <Icon
                 icon={socialIconMap(item.media)}
-                color={IconColor()}
-                hoverColor={IconHoverColor()}
+                color="text-primary-8"
+                hoverColor="hover:text-secundary-5"
                 size={16}
               />
             </Link>
