@@ -83,7 +83,10 @@ export function InputNewsletter() {
             setEmailInput(e.target.value)
           }
         />
-        <button className="bg-secundary-4 text-white font-bold sm:px-9 px-5 py-5 rounded-full hover:bg-secundary-5 m-2">
+        <button
+          aria-label="Inscrever no newsletter"
+          className="bg-secundary-4 text-white font-bold sm:px-9 px-5 py-5 rounded-full hover:bg-secundary-5 m-2"
+        >
           <p className="sm:block hidden">Inscreva-se</p>
           <p className="sm:hidden block">
             <IoSend size={24} />

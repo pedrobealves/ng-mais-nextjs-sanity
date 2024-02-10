@@ -10,7 +10,7 @@ export function MenuItem({ children, href }: MenuItemProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="flex justify-center py-2 px-2">
+    <li className="flex justify-center py-2 px-2">
       <div
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -26,6 +26,6 @@ export function MenuItem({ children, href }: MenuItemProps) {
           />
         </Link>
       </div>
-    </div>
+    </li>
   )
 }

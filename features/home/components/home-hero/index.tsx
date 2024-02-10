@@ -24,6 +24,7 @@ export function HomeHero({ reviews, posts }: HeroProps) {
                   subtitle={post.excerpt}
                   picture={post.coverImage}
                   slug={post.slug}
+                  index={index}
                 />
               </CarouselItem>
             ))}
@@ -33,7 +34,7 @@ export function HomeHero({ reviews, posts }: HeroProps) {
       <Section>
         {reviews
           ?.slice(0, 3)
-          .map((post) => (
+          .map((post, index) => (
             <Card
               key={post.slug}
               type="review"
@@ -41,6 +42,7 @@ export function HomeHero({ reviews, posts }: HeroProps) {
               subtitle={post.excerpt}
               picture={post.coverImage}
               slug={post.slug}
+              index={index}
             />
           ))}
       </Section>

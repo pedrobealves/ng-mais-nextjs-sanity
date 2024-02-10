@@ -53,12 +53,12 @@ export function Card({
             <Image
               src={
                 cover?.asset?._ref
-                  ? urlForImage(cover).fit('crop').url()
+                  ? urlForImage(cover).fit('crop').width(92).height(132).url()
                   : 'https://source.unsplash.com/96x96/?face'
               }
               className="max-h-full object-cover w-24 h-[8.5rem] rounded-xl  border-primary-8 border-2"
-              width={192}
-              height={272}
+              width={92}
+              height={132}
               alt={cover?.alt ?? title}
             />
             <div className="flex flex-col gap-3">

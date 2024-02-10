@@ -13,7 +13,7 @@ export function Dropdown({ children, content }: DropdownProps) {
   const show = content && open
 
   return (
-    <div className="flex justify-center py-2 px-2">
+    <li className="flex justify-center py-2 px-2">
       <div
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -56,6 +56,6 @@ export function Dropdown({ children, content }: DropdownProps) {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </li>
   )
 }

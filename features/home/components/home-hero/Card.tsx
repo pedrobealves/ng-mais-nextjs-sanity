@@ -8,6 +8,7 @@ type CardProps = {
   subtitle?: string
   picture: any
   slug: string
+  index: number
 } & VariantProps<typeof item>
 
 const item = tv({
@@ -37,24 +38,37 @@ const item = tv({
   },
 })
 
-export function Card({ type, title, subtitle, picture, slug }: CardProps) {
+export function Card({
+  type,
+  title,
+  subtitle,
+  picture,
+  slug,
+  index,
+}: CardProps) {
   const { CardInfoSection, CardTitle, CardSubtitle, CardLink } = item({
     type,
   })
+
+  const widthCover = type === 'review' ? 288 : 592
 
   return (
     <Link href={`/${type}/${slug}`} className={CardLink()}>
       <Image
         src={
           picture?.asset?._ref
-            ? urlForImage(picture).fit('crop').url()
+            ? urlForImage(picture)
+                .fit('crop')
+                .width(widthCover)
+                .height(320)
+                .url()
             : 'https://source.unsplash.com/96x96/?face'
         }
         className="object-cover w-full h-full"
-        width={560}
+        width={widthCover}
         height={320}
-        priority={true}
-        sizes="(max-width: 56,px) 100vw, 33vw"
+        priority={type === 'post' && index == 1}
+        quality={80}
         alt={`Imagem de ${picture?.alt ?? title}`}
       />
       <div className="absolute inset-0 [background:rgba(87,_23,_149,_0.30)]"></div>
