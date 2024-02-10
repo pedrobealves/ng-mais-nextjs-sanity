@@ -1,7 +1,6 @@
 import { Icon } from 'components/Icon'
 import Link from 'components/Link'
 import { Logo } from 'components/Logo'
-import { Social } from 'components/Social'
 import { socialIconMap } from 'components/SocialIcon'
 import type { Settings } from 'lib/sanity.queries'
 
@@ -21,7 +20,7 @@ export default function Footer({ settings }: FooterProps) {
                 Seu ponto analítico e informativo do mundo dos games.
               </p>
             </div>
-            <div className="flex gap-3 sm:mt-0">
+            <div className="flex sm:justify-normal justify-around gap-3 sm:mt-0">
               {settings?.social?.map((item) => (
                 <Link
                   key={item._key}
@@ -32,7 +31,15 @@ export default function Footer({ settings }: FooterProps) {
                     icon={socialIconMap(item.media)}
                     color="text-primary-8"
                     hoverColor="hover:text-secundary-5"
+                    className="hidden sm:block"
                     size={16}
+                  />
+                  <Icon
+                    icon={socialIconMap(item.media)}
+                    color="text-primary-8"
+                    hoverColor="hover:text-secundary-5"
+                    className="block sm:hidden"
+                    size={24}
                   />
                 </Link>
               ))}
