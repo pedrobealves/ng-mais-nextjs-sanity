@@ -38,7 +38,7 @@ export function HomeHero({ reviews, posts }: HeroProps) {
             <Card
               key={post.slug}
               type="review"
-              title={post.game?.title}
+              title={`Review / ${post.game?.title}`}
               subtitle={post.excerpt}
               picture={post.coverImage}
               slug={post.slug}
