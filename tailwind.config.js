@@ -81,7 +81,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-newsletter':
-          'radial-gradient(circle closest-corner at 50% 220%, #8c20f8, #100919)',
+          'radial-gradient(circle closest-corner at 50% 220%, #240046, #100919)',
       },
     },
   },

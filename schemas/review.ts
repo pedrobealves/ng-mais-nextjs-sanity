@@ -120,8 +120,8 @@ export default defineType({
       name: 'category',
       type: 'reference',
       to: [{ type: 'category' }],
-      initialValue: { _ref: 'aa385b46-ef54-4519-8172-06c8a1dbdfbf' },
       hidden: true,
+      initialValue: { _ref: 'f50cc333-29f6-4c69-92c2-2ceddf38a33c' },
     }),
     defineField({
       name: 'drop',
