@@ -17,7 +17,7 @@ export function Accordion({ content, onToggleNav }) {
         onChange={() => setIsOpen(!isOpen)}
       />
       <label htmlFor={'game'}>
-        <div className="flex flex-row items-center px-12 pt-4 text-2xl font-bold tracking-widest dark:text-gray-100 cursor-pointer text-white gap-2">
+        <div className="flex flex-row items-center px-12 pt-4 text-2xl font-bold tracking-widest cursor-pointer text-white gap-2">
           Mais
           <span
             className={`${
@@ -35,7 +35,7 @@ export function Accordion({ content, onToggleNav }) {
               <div key={subitem.name} className="px-16 py-2">
                 <Link
                   href={subitem.slug}
-                  className="text-2xl font-medium tracking-widest text-gray-900 dark:text-gray-100"
+                  className="text-2xl font-medium tracking-widest text-gray-100"
                   onClick={onToggleNav}
                 >
                   {subitem.name}

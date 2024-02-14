@@ -24,10 +24,8 @@ export function Dropdown({ children, content }: DropdownProps) {
             {children}
             <span
               className={`${
-                open
-                  ? `rotate-[-180deg] -mr-1`
-                  : `rotate-0 fill-[#212529]  dark:fill-white`
-              } fill-primary-8 transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300`}
+                open ? `rotate-[-180deg] -mr-1` : `rotate-0 fill-white`
+              } fill-primary-8 transition-transform duration-200 ease-in-out motion-reduce:transition-none `}
             >
               <FaChevronDown size={10} />
             </span>
