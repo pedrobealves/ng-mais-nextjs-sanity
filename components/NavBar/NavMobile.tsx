@@ -50,7 +50,7 @@ export function NavMobile({ level }: NavType) {
         </svg>
       </button>
       <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transform bg-white opacity-95 duration-300 ease-in-out dark:bg-primary-8 dark:opacity-[0.98] ${
+        className={`fixed left-0 top-0 z-10 h-full w-full transform duration-300 ease-in-out bg-primary-8 opacity-[0.98] ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -64,7 +64,7 @@ export function NavMobile({ level }: NavType) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
+              className="text-gray-100"
             >
               <path
                 fillRule="evenodd"
@@ -79,7 +79,7 @@ export function NavMobile({ level }: NavType) {
             <div key={link.name} className="px-12 py-4">
               <Link
                 href={link.slug}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                className="text-2xl font-bold tracking-widest text-gray-100"
                 onClick={onToggleNav}
               >
                 {link.name}
@@ -93,7 +93,7 @@ export function NavMobile({ level }: NavType) {
           <div className="px-12 py-4">
             <Link
               href="/search"
-              className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+              className="text-2xl font-bold tracking-widest text-gray-100"
               onClick={onToggleNav}
             >
               Pesquisar
