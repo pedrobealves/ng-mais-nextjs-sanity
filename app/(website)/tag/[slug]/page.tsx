@@ -28,7 +28,7 @@ export default async function Pagination({ params }) {
     </Page>
   )
 }
-export const dynamicParams = true
+export const dynamicParams = false
 
 export async function generateStaticParams() {
   const slugs = await getAllPostsSlugs('tag')
