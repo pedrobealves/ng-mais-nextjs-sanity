@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 

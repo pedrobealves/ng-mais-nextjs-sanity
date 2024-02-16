@@ -1,3 +1,5 @@
+'use client'
+
 import { Icon } from 'components/Icon'
 import { FacebookShareButton, TwitterShareButton } from 'next-share'
 import { FaFacebook, FaLink, FaTwitter } from 'react-icons/fa'

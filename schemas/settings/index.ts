@@ -150,5 +150,15 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'privacyPolicy',
+      title: 'Privacy Policy',
+      type: 'blockContent',
+    }),
+    defineField({
+      name: 'termsConditions',
+      title: 'Terms and Conditions',
+      type: 'blockContent',
+    }),
   ],
 })

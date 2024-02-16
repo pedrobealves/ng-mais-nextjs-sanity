@@ -52,9 +52,9 @@ export default function Footer({ settings }: FooterProps) {
               </h2>
               <ul className="flex flex-col gap-4 text-primary-8 font-bold">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link href="/author" className="hover:underline">
                     Sobre Nós
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -64,9 +64,14 @@ export default function Footer({ settings }: FooterProps) {
               </h2>
               <ul className="flex flex-col gap-4 text-primary-8 font-bold">
                 <li>
-                  <a href="" className="hover:underline">
-                    Utilização
-                  </a>
+                  <Link href="/privacy-policy" className="hover:underline">
+                    Privacidade
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms-of-use" className="hover:underline">
+                    Termos
+                  </Link>
                 </li>
               </ul>
             </div>

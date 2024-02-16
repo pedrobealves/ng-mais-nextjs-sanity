@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * This component uses Portable Text to render a post body.
  *
@@ -21,8 +23,8 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import Zoom from 'react-medium-image-zoom'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 
+import { SpoilerButton } from '../page/SpoilerButton'
 import styles from './PostBody.module.css'
-import { SpoilerButton } from './SpoilerButton'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
@@ -83,7 +85,7 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   },
 }
 
-export default function PostBody({ content }) {
+export function PostBody({ content }) {
   return (
     <div className={`${styles.portableText}`}>
       <PortableText value={content} components={myPortableTextComponents} />

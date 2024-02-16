@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { IoSend } from 'react-icons/io5'
 import { toast, ToastContainer } from 'react-toastify'

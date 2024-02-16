@@ -1,3 +1,5 @@
+'use client'
+
 import { DiscussionEmbed } from 'disqus-react'
 
 interface CommentsProps {

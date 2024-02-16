@@ -49,11 +49,7 @@ const generateRssFeed = (posts: Post[], settings: Settings) => {
   return feed.rss2()
 }
 
-export default function Rss() {
-  // getServerSideProps will do the heavy lifting
-}
-
-export async function getServerSideProps({ res }) {
+export async function GET() {
   const client = getClient()
 
   // Return the default urls, combined with dynamic urls above
@@ -65,12 +61,10 @@ export async function getServerSideProps({ res }) {
 
   const settings = await getSettings(client)
 
-  // Set response to XML
-  res.setHeader('Content-Type', 'text/xml')
-  res.write(generateRssFeed(postsLocations, settings))
-  res.end()
-
-  return {
-    props: {},
-  }
+  return new Response(generateRssFeed(postsLocations, settings), {
+    status: 200,
+    headers: {
+      'content-type': 'application/xml',
+    },
+  })
 }

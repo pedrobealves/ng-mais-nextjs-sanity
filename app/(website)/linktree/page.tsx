@@ -1,4 +1,3 @@
-'use client'
 import { Icon } from 'components/Icon'
 import IndexPageHead from 'components/IndexPageHead'
 import Link from 'components/Link'
@@ -6,23 +5,31 @@ import { socialIconMap } from 'components/SocialIcon'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getSettings } from 'lib/sanity.client'
 import { Settings } from 'lib/sanity.queries'
-import { GetStaticProps } from 'next'
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import type { SharedPageProps } from 'pages/_app'
 import logotype from 'public/logotype.svg'
 import symbol from 'public/og.svg'
-import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa'
 
 interface PageProps extends SharedPageProps {
   settings: Settings
 }
 
-interface Query {
-  [key: string]: string
+async function getSettingsProps(): Promise<PageProps> {
+  const isDraftMode = await draftMode().isEnabled
+  const client = getClient(isDraftMode ? { token: readToken } : undefined)
+
+  const [settings] = await Promise.all([getSettings(client)])
+
+  return {
+    settings,
+    draftMode: isDraftMode,
+    token: isDraftMode ? readToken : '',
+  }
 }
 
-export default function Search(props: PageProps) {
-  const { settings } = props
+export default async function Search(props: PageProps) {
+  const { settings } = await getSettingsProps()
 
   return (
     <>
@@ -70,17 +77,6 @@ export default function Search(props: PageProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
-  const { draftMode = false } = ctx
-  const client = getClient(draftMode ? { token: readToken } : undefined)
-
-  const [settings] = await Promise.all([getSettings(client)])
-
-  return {
-    props: {
-      settings,
-      draftMode,
-      token: draftMode ? readToken : '',
-    },
-  }
+export async function generateMetadata() {
+  return { title: `linktree | ng+` }
 }

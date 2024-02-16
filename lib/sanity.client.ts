@@ -24,6 +24,7 @@ import {
   typesQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
+import revalidate from 'pages/api/revalidate'
 
 export function getClient(preview?: { token: string }): SanityClient {
   const client = createClient({
@@ -54,12 +55,12 @@ export function getClient(preview?: { token: string }): SanityClient {
 export const getSanityImageConfig = () => getClient()
 
 export async function getSettings(client: SanityClient): Promise<Settings> {
-  return (await client.fetch(settingsQuery)) || {}
+  return (await client.fetch(settingsQuery, {}, { cache: 'no-store' })) || {}
 }
 
 export async function getFetcher([query, params]) {
   const client = getClient()
-  return await client.fetch(query, params)
+  return await client.fetch(query, params, { cache: 'no-store' })
 }
 
 export async function getPostsPagination(
@@ -84,10 +85,14 @@ export async function getPostsPagination(
       query = postsPaginationQuery(type)
   }
   return (
-    (await client.fetch(query, {
-      pageIndex,
-      limit,
-    })) || []
+    (await client.fetch(
+      query,
+      {
+        pageIndex,
+        limit,
+      },
+      { cache: 'no-store' },
+    )) || []
   )
 }
 
@@ -104,6 +109,7 @@ export async function getPostsPaginationByTypes(
         pageIndex,
         limit,
       },
+      { cache: 'no-store' },
     )) || []
   )
 }
@@ -112,7 +118,12 @@ export async function getAllPostsSlugs(
   type: string,
 ): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
-  const slugs = (await client.fetch<string[]>(postSlugsQuery(type))) || []
+  const slugs =
+    (await client.fetch<string[]>(
+      postSlugsQuery(type),
+      {},
+      { cache: 'no-store' },
+    )) || []
   return slugs.map((slug) => ({ slug }))
 }
 
@@ -120,21 +131,29 @@ export async function getTitleBySlugs(
   client: SanityClient,
   slug: string,
 ): Promise<string> {
-  return (await client.fetch(postTitleBySlugQuery(), { slug })) || ({} as any)
+  return (
+    (await client.fetch(
+      postTitleBySlugQuery(),
+      { slug },
+      { cache: 'no-store' },
+    )) || ({} as any)
+  )
 }
 
 export async function getAllByType<T>(
   client: SanityClient,
   type: string,
 ): Promise<T[]> {
-  return (await client.fetch(typeQuery(type))) || []
+  return (await client.fetch(typeQuery(type), {}, { cache: 'no-store' })) || []
 }
 
 export async function getAllByTypes<T>(
   client: SanityClient,
   types: string[],
 ): Promise<T[]> {
-  return (await client.fetch(typesQuery(types))) || []
+  return (
+    (await client.fetch(typesQuery(types), {}, { cache: 'no-store' })) || []
+  )
 }
 
 export async function getBySlug<T>(
@@ -142,7 +161,13 @@ export async function getBySlug<T>(
   slug: string,
   type: string,
 ): Promise<T> {
-  return (await client.fetch(typeBySlugQuery(type), { slug })) || ({} as any)
+  return (
+    (await client.fetch(
+      typeBySlugQuery(type),
+      { slug },
+      { cache: 'no-store' },
+    )) || ({} as any)
+  )
 }
 
 export async function getPostAndMoreStories(
@@ -150,7 +175,11 @@ export async function getPostAndMoreStories(
   slug: string,
   type: string,
 ): Promise<{ post: Post }> {
-  return await client.fetch(postAndMoreStoriesQuery(type), { slug })
+  return await client.fetch(
+    postAndMoreStoriesQuery(type),
+    { slug },
+    { cache: 'no-store' },
+  )
 }
 
 export async function getIndexInfo(
@@ -168,8 +197,12 @@ export async function getIndexInfo(
   category: Category[]
   top: Post[]
 }> {
-  return await client.fetch(indexQuery, {
-    pageIndex,
-    limit,
-  })
+  return await client.fetch(
+    indexQuery,
+    {
+      pageIndex,
+      limit,
+    },
+    { cache: 'no-store' },
+  )
 }

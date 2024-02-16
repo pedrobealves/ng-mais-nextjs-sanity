@@ -16,7 +16,7 @@ const postFields = groq`
   "slug": slug.current,
 `
 
-export const settingsQuery = groq`*[_type == "settings"][0]`
+export const settingsQuery = groq`*[_type == "settings"][0]{...}`
 
 const related = (type: string, filter: string) => groq`
 "related": *[_type == "${type}" && ${filter} && slug.current != ^.slug.current] | order(publishedAt desc, _createdAt desc) [0..2] {
@@ -65,7 +65,8 @@ export const newsDropPaginationQuery = groq`
 
 export const typeQuery = (type: string) => groq`
 *[_type == "${type}"] | order(date desc, _updatedAt desc) {
-  ...,
+  _createdAt,
+  _updatedAt,
   "slug": slug.current,
   ${['news', 'post', 'review'].includes(type) ? postFields : ''}
 }`
@@ -216,4 +217,6 @@ export interface Settings {
   }
   social?: Media[]
   linktree?: LinkTree[]
+  privacyPolicy?: any
+  termsConditions?: any
 }

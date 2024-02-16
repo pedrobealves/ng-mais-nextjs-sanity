@@ -1,3 +1,5 @@
+'use client'
+
 import AlertBanner from 'components/AlertBanner'
 
 export default function BlogLayout({
