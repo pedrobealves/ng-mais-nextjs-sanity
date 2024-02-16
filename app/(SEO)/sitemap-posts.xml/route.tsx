@@ -77,7 +77,6 @@ export async function GET() {
   const locations = [...postUrls]
 
   return new Response(createSitemap(locations), {
-    status: 200,
     headers: {
       'content-type': 'application/xml',
     },

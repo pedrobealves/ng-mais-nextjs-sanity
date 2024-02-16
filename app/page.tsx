@@ -130,7 +130,9 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [
         {
           url: `${
-            process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+            process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
+              ? 'https://' + process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
+              : ''
           }/api/og?${new URLSearchParams({ title: ogImageTitle })}`, // Must be an absolute URL
         },
       ],
@@ -143,7 +145,9 @@ export async function generateMetadata(): Promise<Metadata> {
       creator: '@newgame_mais',
       images: [
         `${
-          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+          process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
+            ? 'https://' + process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
+            : ''
         }/api/og?${new URLSearchParams({ title: ogImageTitle })}`,
       ],
     },

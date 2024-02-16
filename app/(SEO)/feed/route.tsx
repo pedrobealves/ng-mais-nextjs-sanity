@@ -62,7 +62,6 @@ export async function GET() {
   const settings = await getSettings(client)
 
   return new Response(generateRssFeed(postsLocations, settings), {
-    status: 200,
     headers: {
       'content-type': 'application/xml',
     },
