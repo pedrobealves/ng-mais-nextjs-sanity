@@ -1,6 +1,3 @@
-import { getAll, getClient } from 'lib/sanity.client'
-import { Category, Tag } from 'lib/sanity.queries'
-
 type Sitemap = {
   url: string
 }

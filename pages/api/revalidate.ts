@@ -46,7 +46,6 @@ export default async function revalidate(
 }
 
 type StaleRoute =
-  | '/'
   | `/${string}`
   | `/post/${string}`
   | `/news/${string}`
@@ -66,7 +65,7 @@ async function queryStaleRoutes(
     let type = body._type
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
-      let staleRoutes: StaleRoute[] = ['/']
+      let staleRoutes: StaleRoute[] = []
       if ((body.slug as any)?.current) {
         staleRoutes.push(`/${type}/${(body.slug as any).current}`)
       }
@@ -133,7 +132,7 @@ async function queryAllRoutes(
     slugs = [...slugs, ...mappedSlugs]
   }
 
-  return ['/', '/linktree', '/feed', ...slugs]
+  return ['/linktree', '/feed', ...slugs]
 }
 
 async function queryAllPostRoutes(
@@ -142,11 +141,7 @@ async function queryAllPostRoutes(
 ): Promise<StaleRoute[]> {
   const slugs = await _queryAllPostRoutes(client, type)
 
-  return [
-    '/',
-    '/feed',
-    ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute),
-  ]
+  return ['/feed', ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute)]
 }
 
 async function mergeWithMorePostStories(
@@ -201,7 +196,6 @@ async function queryStalePostRoutes(
     slugs = await mergeWithMorePostStories(client, slugs, type)
 
     return [
-      '/',
       ...(category ? [`/${category.slug}`] : []),
       ...slugs.map((slug) => `/${type}/${slug}`),
       ...(tagSlugs ? tagSlugs.map((tag) => `/tag/${tag.slug}`) : []),
@@ -243,5 +237,5 @@ async function queryStaleCategoryRoutes(
     }
   }
 
-  return ['/', '/author', ...slugsRoute]
+  return ['/author', ...slugsRoute]
 }
