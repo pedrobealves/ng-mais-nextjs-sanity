@@ -123,16 +123,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: title,
       description: toPlainText(description),
-      url: process.env.NEXT_PUBLIC_NEXTJS_SITE_URL,
+      url: process.env.VERCEL_URL,
       siteName: title,
       locale: 'pt_BR',
       type: 'website',
       images: [
         {
           url: `${
-            process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
-              ? 'https://' + process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
-              : ''
+            process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
           }/api/og?${new URLSearchParams({ title: ogImageTitle })}`, // Must be an absolute URL
         },
       ],
@@ -145,9 +143,7 @@ export async function generateMetadata(): Promise<Metadata> {
       creator: '@newgame_mais',
       images: [
         `${
-          process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
-            ? 'https://' + process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
-            : ''
+          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
         }/api/og?${new URLSearchParams({ title: ogImageTitle })}`,
       ],
     },

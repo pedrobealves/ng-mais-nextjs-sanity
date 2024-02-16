@@ -57,6 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImageTitle = ogImage?.title
 
   return {
+    metadataBase: new URL('https://www.newgamemais.com/'),
     title: {
       template: `%s | ${title}`,
       default: title, // a default is required when creating a template
@@ -99,7 +100,7 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: '/favicon/site.webmanifest',
     alternates: {
       types: {
-        'application/rss+xml': `${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/feed`,
+        'application/rss+xml': `${process.env.VERCEL_URL}/feed`,
       },
     },
   }

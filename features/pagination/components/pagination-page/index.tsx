@@ -1,5 +1,3 @@
-'use client'
-
 import { HeadCard } from 'components/HeadCard'
 import IndexPageHead from 'components/IndexPageHead'
 import { CardList } from 'features/pagination'
@@ -7,9 +5,17 @@ import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'
 import { Page } from 'layouts/Page'
 import { readToken } from 'lib/sanity.api'
-import { getClient, getPostsPagination, getSettings } from 'lib/sanity.client'
+import {
+  getClient,
+  getPostsPagination,
+  getSettings,
+  getTitleBySlugs,
+} from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
 import { postsPaginationFilterQuery, Settings } from 'lib/sanity.queries'
+import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import type { SharedPageProps } from 'pages/_app'
 
 export interface PageProps extends SharedPageProps {
@@ -27,22 +33,6 @@ export interface Query {
 
 const POSTS_IN_INDEX_PAGE = 8
 
-export function Pagination(props: PageProps) {
-  const { settings, initialPosts, type, title, filter, sub = '' } = props
-  return (
-    <Page title={title} settings={settings}>
-      <section className="max-w-screen-xl mx-auto rounded-3xl bg-gray-200">
-        <HeadCard title={title} />
-        <CardList
-          posts={initialPosts}
-          type={`${sub}${type}`}
-          pageQuery={postsPaginationFilterQuery(filter)}
-        />
-      </section>
-    </Page>
-  )
-}
-
 // Função para obter o cliente
 export function getClientWithToken(ctx: any) {
   const { draftMode = false } = ctx
@@ -50,10 +40,43 @@ export function getClientWithToken(ctx: any) {
 }
 
 // Função para obter posts e configurações
-export async function getPostsAndSettings(client: any, type: string, ctx: any) {
-  const { params = {} } = ctx
+export async function getPostsAndSettings(
+  client: any,
+  type: string,
+  params: any,
+) {
   return await Promise.all([
     getPostsPagination(client, 0, POSTS_IN_INDEX_PAGE, type, params.slug),
     getSettings(client),
   ])
+}
+
+export async function getPost(params, type): Promise<PageProps> {
+  const slug = params.slug
+
+  const client = getClientWithToken(readToken)
+  const [initialPosts = [], settings] = await getPostsAndSettings(
+    client,
+    type,
+    params,
+  )
+
+  if (initialPosts.length === 0) {
+    notFound()
+  }
+
+  const title = await getTitleBySlugs(client, slug)
+
+  return {
+    initialPosts,
+    settings,
+    type: slug,
+    title,
+    filter:
+      type === 'tag'
+        ? `"${slug}" in tag[]->slug.current`
+        : `"${slug}" == category->slug.current`,
+    draftMode: draftMode().isEnabled || false,
+    token: draftMode().isEnabled ? readToken : '',
+  }
 }
