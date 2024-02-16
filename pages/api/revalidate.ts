@@ -132,7 +132,7 @@ async function queryAllRoutes(
     slugs = [...slugs, ...mappedSlugs]
   }
 
-  return ['/linktree', '/feed', ...slugs]
+  return ['/linktree', '/feed', '/feed2', ...slugs]
 }
 
 async function queryAllPostRoutes(
@@ -141,7 +141,11 @@ async function queryAllPostRoutes(
 ): Promise<StaleRoute[]> {
   const slugs = await _queryAllPostRoutes(client, type)
 
-  return ['/feed', ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute)]
+  return [
+    '/feed',
+    '/feed2',
+    ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute),
+  ]
 }
 
 async function mergeWithMorePostStories(
