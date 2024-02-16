@@ -1,6 +1,5 @@
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { revalidatePath } from 'next/cache'
 import {
   createClient,
   groq,
@@ -33,8 +32,6 @@ export default async function revalidate(
       console.error(invalidId, { body })
       return res.status(400).send(invalidId)
     }
-
-    revalidatePath('/feed')
 
     const staleRoutes = await queryStaleRoutes(body as any)
     await Promise.all(staleRoutes.map((route) => res.revalidate(route)))
@@ -136,7 +133,7 @@ async function queryAllRoutes(
     slugs = [...slugs, ...mappedSlugs]
   }
 
-  return ['/', '/linktree', ...slugs]
+  return ['/', '/linktree', '/feed', ...slugs]
 }
 
 async function queryAllPostRoutes(
@@ -145,7 +142,11 @@ async function queryAllPostRoutes(
 ): Promise<StaleRoute[]> {
   const slugs = await _queryAllPostRoutes(client, type)
 
-  return ['/', ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute)]
+  return [
+    '/',
+    '/feed',
+    ...slugs.map((slug) => `/${type}/${slug}` as StaleRoute),
+  ]
 }
 
 async function mergeWithMorePostStories(

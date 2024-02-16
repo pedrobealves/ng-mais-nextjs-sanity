@@ -1,7 +1,12 @@
-import { MetadataRoute } from 'next'
+import { getAll, getClient } from 'lib/sanity.client'
+import { Category, Tag } from 'lib/sanity.queries'
+
+type Sitemap = {
+  url: string
+}
 
 // Use this to manually add routes to the sitemap
-const defaultUrls: MetadataRoute.Sitemap = [
+const defaultUrls: Sitemap[] = [
   {
     url: '/sitemap-news.xml',
   },
@@ -13,7 +18,7 @@ const defaultUrls: MetadataRoute.Sitemap = [
   },
 ]
 
-const createSitemap = (locations: MetadataRoute.Sitemap) => {
+const createSitemap = (locations: Sitemap[]) => {
   const baseUrl = process.env.NEXT_PUBLIC_NEXTJS_SITE_URL // Make sure to configure this
   return `<?xml version="1.0" encoding="UTF-8"?>
   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -30,12 +35,19 @@ const createSitemap = (locations: MetadataRoute.Sitemap) => {
         `
 }
 
-export async function GET() {
+export default function SiteMap() {
+  // getServerSideProps will do the heavy lifting
+}
+
+export async function getServerSideProps({ res }) {
   const locations = [...defaultUrls]
 
-  return new Response(createSitemap(locations), {
-    headers: {
-      'content-type': 'application/xml',
-    },
-  })
+  // Set response to XML
+  res.setHeader('Content-Type', 'text/xml')
+  res.write(createSitemap(locations))
+  res.end()
+
+  return {
+    props: {},
+  }
 }

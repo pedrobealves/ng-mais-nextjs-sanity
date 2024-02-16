@@ -40,6 +40,9 @@ const createSitemap = (locations: SitemapLocation[]) => {
   `
 }
 
+export default function SiteMap() {
+  // getServerSideProps will do the heavy lifting
+}
 // Função para obter URLs
 async function getUrls<T extends { slug?: string; _updatedAt?: string }>(
   client: any,
@@ -63,7 +66,7 @@ async function getUrls<T extends { slug?: string; _updatedAt?: string }>(
     })
 }
 
-export async function GET() {
+export async function getServerSideProps({ res }) {
   const client = getClient()
 
   // Return the default urls, combined with dynamic urls above
@@ -76,9 +79,12 @@ export async function GET() {
 
   const locations = [...postUrls]
 
-  return new Response(createSitemap(locations), {
-    headers: {
-      'content-type': 'application/xml',
-    },
-  })
+  // Set response to XML
+  res.setHeader('Content-Type', 'text/xml')
+  res.write(createSitemap(locations))
+  res.end()
+
+  return {
+    props: {},
+  }
 }
