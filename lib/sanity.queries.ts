@@ -16,6 +16,16 @@ const postFields = groq`
   "slug": slug.current,
 `
 
+const authorFields = groq`
+  _id,
+  _type,
+  name,
+  picture,
+  bio,
+  social,
+  "slug": slug.current,
+`
+
 export const settingsQuery = groq`*[_type == "settings"][0]{...}`
 
 const related = (type: string, filter: string) => groq`
@@ -69,6 +79,7 @@ export const typeQuery = (type: string) => groq`
   _updatedAt,
   "slug": slug.current,
   ${['news', 'post', 'review'].includes(type) ? postFields : ''}
+  ${['author'].includes(type) ? authorFields : ''}
 }`
 
 export const typesQuery = (types: string[]) => groq`
