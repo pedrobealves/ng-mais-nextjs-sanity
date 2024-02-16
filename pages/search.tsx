@@ -1,4 +1,5 @@
 'use client'
+
 import { HeadCard } from 'components/HeadCard'
 import { Icon } from 'components/Icon'
 import IndexPageHead from 'components/IndexPageHead'

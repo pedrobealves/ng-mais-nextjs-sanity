@@ -1,3 +1,5 @@
+'use client'
+
 import { CompleteGrid, MinimalGrid, StandardGrid } from 'features/grid'
 import { HomeExtraList, HomeHero, HomeTopList } from 'features/home'
 import { Home } from 'layouts/Home'

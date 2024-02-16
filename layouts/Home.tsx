@@ -28,7 +28,6 @@ export function Home({
   const { title = demo.title, social } = settings || {}
   return (
     <>
-      <IndexPageHead settings={settings} />
       <Layout preview={preview} loading={loading}>
         <Header title={title} social={social} hero={hero} level={1} />
         <main className="w-full p-2 mx-auto justify-center -m-14 gap-10 mb-20">

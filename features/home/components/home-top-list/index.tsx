@@ -1,3 +1,5 @@
+'use client'
+
 import { Section } from 'components/Section'
 import { Post } from 'lib/sanity.queries'
 import { useState } from 'react'
