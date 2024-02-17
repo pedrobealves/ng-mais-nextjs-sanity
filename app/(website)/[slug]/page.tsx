@@ -46,7 +46,13 @@ export async function generateMetadata({ params }) {
 
   const title = await getTitleBySlugs(client, params.slug)
 
+  if (title && title.length > 0) {
+    return {
+      title: `${title?.charAt(0) + title?.slice(1).toLowerCase()}`,
+    }
+  }
+
   return {
-    title: `${title.charAt(0) + title.slice(1).toLowerCase()}`,
+    title,
   }
 }

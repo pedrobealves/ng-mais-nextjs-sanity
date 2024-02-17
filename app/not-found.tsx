@@ -56,3 +56,9 @@ export default async function NotFoundPage() {
     </>
   )
 }
+
+export async function generateMetadata() {
+  return {
+    title: '404',
+  }
+}
