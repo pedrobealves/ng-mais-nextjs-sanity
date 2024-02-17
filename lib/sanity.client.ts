@@ -1,3 +1,4 @@
+import { is } from 'date-fns/locale'
 import {
   apiVersion,
   dataset,
@@ -24,7 +25,6 @@ import {
   typesQuery,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
-import revalidate from 'pages/api/revalidate'
 
 export function getClient(preview?: { token: string }): SanityClient {
   const client = createClient({
@@ -182,6 +182,8 @@ export async function getPostAndMoreStories(
   )
 }
 
+const isCache = process.env.NODE_ENV === 'production'
+
 export async function getIndexInfo(
   client: SanityClient,
   pageIndex: number = 0,
@@ -203,6 +205,6 @@ export async function getIndexInfo(
       pageIndex,
       limit,
     },
-    { cache: 'no-store' },
+    { next: { tags: ['home'] } },
   )
 }
