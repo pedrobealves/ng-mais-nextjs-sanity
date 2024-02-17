@@ -15,6 +15,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@next/third-parties": "^14.1.0",
     "@portabletext/react": "3.0.11",
     "@portabletext/to-html": "^2.0.5",
     "@sanity/client": "6.12.4",
