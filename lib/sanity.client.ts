@@ -55,7 +55,10 @@ export function getClient(preview?: { token: string }): SanityClient {
 export const getSanityImageConfig = () => getClient()
 
 export async function getSettings(client: SanityClient): Promise<Settings> {
-  return (await client.fetch(settingsQuery, {}, { cache: 'no-store' })) || {}
+  return (
+    (await client.fetch(settingsQuery, {}, { next: { tags: ['settings'] } })) ||
+    {}
+  )
 }
 
 export async function getFetcher([query, params]) {
@@ -91,7 +94,7 @@ export async function getPostsPagination(
         pageIndex,
         limit,
       },
-      { cache: 'no-store' },
+      { next: { tags: [`${type}`] } },
     )) || []
   )
 }
@@ -109,7 +112,7 @@ export async function getPostsPaginationByTypes(
         pageIndex,
         limit,
       },
-      { cache: 'no-store' },
+      { next: { tags: ['home'] } },
     )) || []
   )
 }
@@ -122,7 +125,7 @@ export async function getAllPostsSlugs(
     (await client.fetch<string[]>(
       postSlugsQuery(type),
       {},
-      { cache: 'no-store' },
+      { next: { tags: [`${type}`] } },
     )) || []
   return slugs.map((slug) => ({ slug }))
 }
@@ -135,7 +138,7 @@ export async function getTitleBySlugs(
     (await client.fetch(
       postTitleBySlugQuery(),
       { slug },
-      { cache: 'no-store' },
+      { next: { tags: ['home'] } },
     )) || ({} as any)
   )
 }
@@ -144,7 +147,10 @@ export async function getAllByType<T>(
   client: SanityClient,
   type: string,
 ): Promise<T[]> {
-  return (await client.fetch(typeQuery(type), {}, { cache: 'no-store' })) || []
+  return (
+    (await client.fetch(typeQuery(type), {}, { next: { tags: ['home'] } })) ||
+    []
+  )
 }
 
 export async function getAllByTypes<T>(
@@ -152,7 +158,8 @@ export async function getAllByTypes<T>(
   types: string[],
 ): Promise<T[]> {
   return (
-    (await client.fetch(typesQuery(types), {}, { cache: 'no-store' })) || []
+    (await client.fetch(typesQuery(types), {}, { next: { tags: ['home'] } })) ||
+    []
   )
 }
 
@@ -165,7 +172,7 @@ export async function getBySlug<T>(
     (await client.fetch(
       typeBySlugQuery(type),
       { slug },
-      { cache: 'no-store' },
+      { next: { tags: ['home'] } },
     )) || ({} as any)
   )
 }
@@ -178,7 +185,7 @@ export async function getPostAndMoreStories(
   return await client.fetch(
     postAndMoreStoriesQuery(type),
     { slug },
-    { cache: 'no-store' },
+    { next: { tags: ['home'] } },
   )
 }
 

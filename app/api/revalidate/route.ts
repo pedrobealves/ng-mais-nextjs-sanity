@@ -41,6 +41,8 @@ export async function POST(req: NextRequest) {
       return new Response('Bad Request', { status: 400 })
     }
 
+    revalidateTag(body._type)
+
     revalidateTag('home')
 
     return NextResponse.json({
