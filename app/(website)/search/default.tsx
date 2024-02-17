@@ -1,5 +1,6 @@
 'use client'
 
+import type { SharedPageProps } from 'app/layout'
 import { HeadCard } from 'components/HeadCard'
 import { Icon } from 'components/Icon'
 import IndexPageHead from 'components/IndexPageHead'
@@ -15,22 +16,17 @@ import { getClient, getSettings } from 'lib/sanity.client'
 import { searchQuery } from 'lib/sanity.queries'
 import { Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
+import { draftMode } from 'next/headers'
 import { useRouter, useSearchParams } from 'next/navigation'
-import type { SharedPageProps } from 'pages/_app'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
 import useSWR, { SWRConfig } from 'swr'
 
-interface PageProps extends SharedPageProps {
+type SearchPageProps = {
   settings: Settings
 }
 
-interface Query {
-  [key: string]: string
-}
-
-export default function Search(props: PageProps) {
-  const { settings } = props
+export function Search({ settings }: SearchPageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const query = searchParams.get('q') || null
@@ -93,19 +89,4 @@ export default function Search(props: PageProps) {
       </section>
     </Page>
   )
-}
-
-export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
-  const { draftMode = false } = ctx
-  const client = getClient(draftMode ? { token: readToken } : undefined)
-
-  const [settings] = await Promise.all([getSettings(client)])
-
-  return {
-    props: {
-      settings,
-      draftMode,
-      token: draftMode ? readToken : '',
-    },
-  }
 }

@@ -25,6 +25,11 @@ const open_sans = Open_Sans({
   variable: '--font-open-sans',
 })
 
+export interface SharedPageProps {
+  draftMode: boolean
+  token: string
+}
+
 export default function RootLayout({
   children,
 }: {

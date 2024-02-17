@@ -1,5 +1,4 @@
-'use client'
-
+import type { SharedPageProps } from 'app/layout'
 import { HeadCard } from 'components/HeadCard'
 import { Icon } from 'components/Icon'
 import { socialIconMap } from 'components/SocialIcon'
@@ -9,21 +8,17 @@ import { getAllByType, getClient, getSettings } from 'lib/sanity.client'
 import { urlForImage } from 'lib/sanity.image'
 import { Author, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
   settings: Settings
   authors: Author[]
 }
 
-interface Query {
-  [key: string]: string
-}
-
-export default function Search(props: PageProps) {
-  const { settings, authors } = props
+export default async function Search() {
+  const { settings, authors } = await getAuthors()
 
   return (
     <Page title="Autores" settings={settings}>
@@ -69,9 +64,9 @@ export default function Search(props: PageProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
-  const { draftMode = false } = ctx
-  const client = getClient(draftMode ? { token: readToken } : undefined)
+async function getAuthors(): Promise<PageProps> {
+  const isDraftMode = await draftMode().isEnabled
+  const client = getClient(isDraftMode ? { token: readToken } : undefined)
 
   const [settings, authors] = await Promise.all([
     getSettings(client),
@@ -79,11 +74,13 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   ])
 
   return {
-    props: {
-      settings,
-      authors,
-      draftMode,
-      token: draftMode ? readToken : '',
-    },
+    settings,
+    authors,
+    draftMode: isDraftMode,
+    token: isDraftMode ? readToken : '',
   }
+}
+
+export async function generateMetadata() {
+  return { title: `Autores` }
 }

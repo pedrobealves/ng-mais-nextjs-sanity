@@ -1,3 +1,4 @@
+import type { SharedPageProps } from 'app/layout'
 import { Icon } from 'components/Icon'
 import IndexPageHead from 'components/IndexPageHead'
 import Link from 'components/Link'
@@ -7,25 +8,11 @@ import { getClient, getSettings } from 'lib/sanity.client'
 import { Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
 import Image from 'next/image'
-import type { SharedPageProps } from 'pages/_app'
 import logotype from 'public/logotype.svg'
 import symbol from 'public/og.svg'
 
 interface PageProps extends SharedPageProps {
   settings: Settings
-}
-
-async function getSettingsProps(): Promise<PageProps> {
-  const isDraftMode = await draftMode().isEnabled
-  const client = getClient(isDraftMode ? { token: readToken } : undefined)
-
-  const [settings] = await Promise.all([getSettings(client)])
-
-  return {
-    settings,
-    draftMode: isDraftMode,
-    token: isDraftMode ? readToken : '',
-  }
 }
 
 export default async function Search(props: PageProps) {
@@ -75,6 +62,19 @@ export default async function Search(props: PageProps) {
       </main>
     </>
   )
+}
+
+async function getSettingsProps(): Promise<PageProps> {
+  const isDraftMode = await draftMode().isEnabled
+  const client = getClient(isDraftMode ? { token: readToken } : undefined)
+
+  const [settings] = await Promise.all([getSettings(client)])
+
+  return {
+    settings,
+    draftMode: isDraftMode,
+    token: isDraftMode ? readToken : '',
+  }
 }
 
 export async function generateMetadata() {

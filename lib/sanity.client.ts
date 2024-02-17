@@ -172,7 +172,7 @@ export async function getBySlug<T>(
     (await client.fetch(
       typeBySlugQuery(type),
       { slug },
-      { cache: 'no-store' },
+      { next: { tags: ['home'] } },
     )) || ({} as any)
   )
 }
@@ -185,7 +185,7 @@ export async function getPostAndMoreStories(
   return await client.fetch(
     postAndMoreStoriesQuery(type),
     { slug },
-    { cache: 'no-store' },
+    { next: { tags: ['home'] } },
   )
 }
 

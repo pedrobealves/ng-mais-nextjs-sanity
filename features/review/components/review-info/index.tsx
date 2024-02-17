@@ -1,11 +1,13 @@
-import { Review } from 'lib/sanity.queries'
+'use client'
+
+import { Post } from 'lib/sanity.queries'
 import { FaCheck, FaXmark } from 'react-icons/fa6'
 import { IconContext } from 'react-icons/lib'
 
 import { Card } from './Card'
 
 type ReviewProps = {
-  review: Review
+  review: Post
 }
 
 export function Review({ review }: ReviewProps) {

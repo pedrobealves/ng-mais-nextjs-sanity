@@ -2,6 +2,7 @@ import {
   PortableText,
   type PortableTextReactComponents,
 } from '@portabletext/react'
+import type { SharedPageProps } from 'app/layout'
 import IndexPageHead from 'components/IndexPageHead'
 import { PostBody } from 'features/post'
 import Header from 'layouts/Header'
@@ -10,7 +11,6 @@ import { readToken } from 'lib/sanity.api'
 import { getClient, getSettings } from 'lib/sanity.client'
 import { Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
-import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
   settings: Settings
