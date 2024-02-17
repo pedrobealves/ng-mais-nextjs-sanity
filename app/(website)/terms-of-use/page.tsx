@@ -47,5 +47,5 @@ export default async function PrivacyPolicy() {
 }
 
 export async function generateMetadata() {
-  return { title: `Termos e Condições | ng+` }
+  return { title: `Termos e Condições` }
 }

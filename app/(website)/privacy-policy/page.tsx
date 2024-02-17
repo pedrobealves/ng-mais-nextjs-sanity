@@ -47,5 +47,5 @@ export default async function PrivacyPolicy() {
 }
 
 export async function generateMetadata() {
-  return { title: `Política de Privacidade | ng+` }
+  return { title: `Política de Privacidade` }
 }

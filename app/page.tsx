@@ -1,4 +1,5 @@
 import { toPlainText } from '@portabletext/react'
+import type { SharedPageProps } from 'app/layout'
 import { CompleteGrid, MinimalGrid, StandardGrid } from 'features/grid'
 import { HomeExtraList, HomeHero, HomeTopList } from 'features/home'
 import PreviewIndexPage from 'features/preview/components/PreviewIndexPage'
@@ -9,7 +10,6 @@ import { Category, Post, Settings } from 'lib/sanity.queries'
 import type { Metadata } from 'next'
 import { GetStaticProps } from 'next'
 import { draftMode } from 'next/headers'
-import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
   specialPosts: Post[]

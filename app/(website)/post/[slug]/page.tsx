@@ -8,6 +8,7 @@ import {
   getPostAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
+import { urlForImage } from 'lib/sanity.image'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { draftMode } from 'next/headers'
@@ -16,10 +17,6 @@ import { notFound } from 'next/navigation'
 interface PageProps extends SharedPageProps {
   post: Post
   settings?: Settings
-}
-
-interface Query {
-  [key: string]: string
 }
 
 export default async function ProjectSlugRoute({ params }) {
@@ -63,4 +60,61 @@ export async function generateStaticParams() {
   const slugs = await getAllPostsSlugs('post')
 
   return slugs?.map(({ slug }) => `/post/${slug}`) || []
+}
+
+// or Dynamic metadata
+export async function generateMetadata({ params }) {
+  const client = getClient(
+    draftMode().isEnabled ? { token: readToken } : undefined,
+  )
+
+  const [{ post }, settings] = await Promise.all([
+    getPostAndMoreStories(client, params.slug, 'post'),
+    getSettings(client),
+  ])
+
+  return {
+    title: post?.title,
+    description: post?.excerpt,
+    openGraph: {
+      title: post?.title,
+      description: post?.excerpt,
+      site_name: settings?.title,
+      type: 'article',
+      locale: 'pt_BR',
+      section: post?.category.title,
+      tags: post?.tag?.map((tag) => tag.title),
+      images: [
+        {
+          url:
+            post &&
+            urlForImage(post?.coverImage)
+              .width(1280)
+              .height(720)
+              .fit('crop')
+              .url(),
+          with: 1280,
+          height: 720,
+          type: 'image/jpeg',
+        },
+      ],
+      published_time: post?.date,
+      modified_time: post?._updatedAt ? post?._updatedAt : post?.date,
+      publisher: settings?.title,
+      author: post?.author?.name,
+    },
+    category: post?._type,
+    twitter: {
+      title: post?.title,
+      description: post?.excerpt,
+      images: [
+        post &&
+          urlForImage(post?.coverImage)
+            .width(1280)
+            .height(720)
+            .fit('crop')
+            .url(),
+      ],
+    },
+  }
 }

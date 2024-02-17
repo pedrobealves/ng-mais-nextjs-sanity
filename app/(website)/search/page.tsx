@@ -33,3 +33,9 @@ async function getSettingsProps(): Promise<PageProps> {
     token: isDraftMode ? readToken : '',
   }
 }
+
+export async function generateMetadata() {
+  return {
+    title: 'Pesquisa',
+  }
+}

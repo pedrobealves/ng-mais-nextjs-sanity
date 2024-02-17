@@ -27,8 +27,6 @@ export function Article({
 
   return (
     <>
-      <PostPageHead settings={settings} post={post} />
-
       <Layout preview={preview} loading={loading}>
         <Header title={title} social={social} level={2} />
         {preview && !post ? (

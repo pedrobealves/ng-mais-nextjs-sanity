@@ -2,8 +2,10 @@ import { HeadCard } from 'components/HeadCard'
 import { getPost } from 'features/pagination'
 import { CardList } from 'features/pagination'
 import { Page } from 'layouts/Page'
-import { getAllPostsSlugs, getTitleBySlugs } from 'lib/sanity.client'
+import { readToken } from 'lib/sanity.api'
+import { getAllPostsSlugs, getClient, getTitleBySlugs } from 'lib/sanity.client'
 import { postsPaginationFilterQuery } from 'lib/sanity.queries'
+import { draftMode } from 'next/headers'
 
 export default async function Pagination({ params }) {
   const {
@@ -35,4 +37,16 @@ export async function generateStaticParams() {
   const slugs = await getAllPostsSlugs('category')
 
   return slugs?.map(({ slug }) => `/${slug}`) || []
+}
+
+export async function generateMetadata({ params }) {
+  const client = getClient(
+    draftMode().isEnabled ? { token: readToken } : undefined,
+  )
+
+  const title = await getTitleBySlugs(client, params.slug)
+
+  return {
+    title: `${title.charAt(0) + title.slice(1).toLowerCase()}`,
+  }
 }

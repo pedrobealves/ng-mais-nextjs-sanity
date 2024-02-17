@@ -1,3 +1,4 @@
+import type { SharedPageProps } from 'app/layout'
 import { HeadCard } from 'components/HeadCard'
 import IndexPageHead from 'components/IndexPageHead'
 import { CardList } from 'features/pagination'
@@ -16,7 +17,6 @@ import { postsPaginationFilterQuery, Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import type { SharedPageProps } from 'pages/_app'
 
 export interface PageProps extends SharedPageProps {
   settings: Settings
