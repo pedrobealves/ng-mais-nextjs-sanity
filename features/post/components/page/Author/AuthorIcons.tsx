@@ -1,3 +1,5 @@
+'use client'
+
 import { IconContext } from 'react-icons'
 
 interface AuthorProps {

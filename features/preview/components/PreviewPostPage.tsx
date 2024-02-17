@@ -1,3 +1,5 @@
+'use client'
+
 import { PostPage, PostPageProps } from 'features/post'
 import {
   type Post,

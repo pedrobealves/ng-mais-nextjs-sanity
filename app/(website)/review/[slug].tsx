@@ -1,5 +1,5 @@
 import { PostPage } from 'features/post'
-import { PreviewNewsPage } from 'features/preview'
+import { PreviewReviewPage } from 'features/preview'
 import { readToken } from 'lib/sanity.api'
 import {
   getAllPostsSlugs,
@@ -25,11 +25,23 @@ export default function ProjectSlugRoute(props: PageProps) {
 
   if (draftMode) {
     return (
-      <PreviewNewsPage post={post} news={post.related} settings={settings} />
+      <PreviewReviewPage
+        news={post.related}
+        reviewDetails={post}
+        post={post}
+        settings={settings}
+      />
     )
   }
 
-  return <PostPage post={post} settings={settings} news={post.related} />
+  return (
+    <PostPage
+      post={post}
+      reviewDetails={post}
+      settings={settings}
+      news={post.related}
+    />
+  )
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
@@ -38,7 +50,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   const [settings, { post }] = await Promise.all([
     getSettings(client),
-    getPostAndMoreStories(client, params.slug, 'news'),
+    getPostAndMoreStories(client, params.slug, 'review'),
   ])
 
   if (!post) {
@@ -58,10 +70,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs('news')
+  const slugs = await getAllPostsSlugs('review')
 
   return {
-    paths: slugs?.map(({ slug }) => `/news/${slug}`) || [],
+    paths: slugs?.map(({ slug }) => `/review/${slug}`) || [],
     fallback: 'blocking',
   }
 }
