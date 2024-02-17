@@ -3,6 +3,7 @@ import { readToken } from 'lib/sanity.api'
 import { getClient, getSettings } from 'lib/sanity.client'
 import { Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
+import { Suspense } from 'react'
 
 import { Search } from './default'
 
@@ -13,7 +14,11 @@ interface PageProps extends SharedPageProps {
 export default async function SearchPage() {
   const { settings } = await getSettingsProps()
 
-  return <Search settings={settings} />
+  return (
+    <Suspense>
+      <Search settings={settings} />
+    </Suspense>
+  )
 }
 
 async function getSettingsProps(): Promise<PageProps> {
