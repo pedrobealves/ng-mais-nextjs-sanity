@@ -1,6 +1,5 @@
 import type { SharedPageProps } from 'app/layout'
 import { Icon } from 'components/Icon'
-import IndexPageHead from 'components/IndexPageHead'
 import Link from 'components/Link'
 import { socialIconMap } from 'components/SocialIcon'
 import { readToken } from 'lib/sanity.api'
@@ -20,7 +19,6 @@ export default async function Search(props: PageProps) {
 
   return (
     <>
-      <IndexPageHead settings={settings} text="linktree" />
       <main className="w-full h-full bg-gray-200 px-6 mb-12">
         <div className="flex flex-col justify-center items-center pt-16 gap-3">
           <Image height={96} priority src={symbol} alt="Logosymbol" />
@@ -78,5 +76,5 @@ async function getSettingsProps(): Promise<PageProps> {
 }
 
 export async function generateMetadata() {
-  return { title: `linktree | ng+` }
+  return { title: `linktree` }
 }

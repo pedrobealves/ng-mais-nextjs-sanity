@@ -1,6 +1,4 @@
 import Layout from 'components/BlogLayout'
-import IndexPageHead from 'components/IndexPageHead'
-import { MinimalGrid } from 'features/grid'
 import { InputNewsletter } from 'features/newsletter'
 import Footer from 'layouts/Footer'
 import Header from 'layouts/Header'

@@ -1,6 +1,4 @@
 import Layout from 'components/BlogLayout'
-import IndexPageHead from 'components/IndexPageHead'
-import PostPageHead from 'features/post/components/page/PostPageHead'
 import PostTitle from 'features/post/components/page/PostTitle'
 import * as demo from 'lib/demo.data'
 import { Post, Settings } from 'lib/sanity.queries'

@@ -1,4 +1,4 @@
-import IndexPageHead from 'components/IndexPageHead'
+import type { SharedPageProps } from 'app/layout'
 import Link from 'components/Link'
 import Header from 'layouts/Header'
 import { readToken } from 'lib/sanity.api'
@@ -6,7 +6,6 @@ import { getClient, getSettings } from 'lib/sanity.client'
 import { Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
 import Image from 'next/image'
-import type { SharedPageProps } from 'pages/_app'
 import BackgroundImage from 'public/404.png'
 import { FaChevronLeft } from 'react-icons/fa6'
 
@@ -34,7 +33,6 @@ export default async function NotFoundPage() {
 
   return (
     <>
-      <IndexPageHead settings={settings} text="404" />
       <Header title={title} social={social} level={2} />
       <main className="relative w-full h-screen">
         <Image

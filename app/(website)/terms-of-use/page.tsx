@@ -3,7 +3,6 @@ import {
   type PortableTextReactComponents,
 } from '@portabletext/react'
 import type { SharedPageProps } from 'app/layout'
-import IndexPageHead from 'components/IndexPageHead'
 import { PostBody } from 'features/post'
 import Header from 'layouts/Header'
 import { Page } from 'layouts/Page'

@@ -1,10 +1,4 @@
 import type { SharedPageProps } from 'app/layout'
-import { HeadCard } from 'components/HeadCard'
-import IndexPageHead from 'components/IndexPageHead'
-import { CardList } from 'features/pagination'
-import Footer from 'layouts/Footer'
-import Header from 'layouts/Header'
-import { Page } from 'layouts/Page'
 import { readToken } from 'lib/sanity.api'
 import {
   getClient,
@@ -13,10 +7,9 @@ import {
   getTitleBySlugs,
 } from 'lib/sanity.client'
 import { Post } from 'lib/sanity.queries'
-import { postsPaginationFilterQuery, Settings } from 'lib/sanity.queries'
+import { Settings } from 'lib/sanity.queries'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
-import { useRouter } from 'next/navigation'
 
 export interface PageProps extends SharedPageProps {
   settings: Settings

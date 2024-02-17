@@ -3,7 +3,6 @@
 import type { SharedPageProps } from 'app/layout'
 import { HeadCard } from 'components/HeadCard'
 import { Icon } from 'components/Icon'
-import IndexPageHead from 'components/IndexPageHead'
 import { ItemCard } from 'components/ItemCard'
 import { set } from 'date-fns'
 import { Card } from 'features/grid/components/standard-grid/Card'
