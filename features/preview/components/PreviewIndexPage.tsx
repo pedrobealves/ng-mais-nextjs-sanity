@@ -52,7 +52,7 @@ export default function PreviewIndexPage(props: PageProps) {
     <Home
       preview
       settings={settings}
-      hero={<HomeHero posts={specialPosts || []} reviews={reviews || []} />}
+      hero={<HomeHero posts={defaultPosts || []} reviews={reviews || []} />}
       main={
         <>
           <StandardGrid
