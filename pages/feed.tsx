@@ -38,7 +38,7 @@ const generateRssFeed = (posts: Post[], settings: Settings) => {
       link: `${site_url}/${post._type}/${post.slug}`,
       description: post.excerpt,
       date: new Date(post._createdAt),
-      content: toHtml(post.content),
+      content: `<img src="${urlSimpleForImage(post.coverImage).url()}" /><br/>${toHtml(post.content)}`,
       author: [{ name: post.author?.name }],
       category: post.tag?.map((item) => {
         return { name: `<![CDATA[ ${item.title} ]]>` }
