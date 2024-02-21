@@ -56,8 +56,11 @@ export const getSanityImageConfig = () => getClient()
 
 export async function getSettings(client: SanityClient): Promise<Settings> {
   return (
-    (await client.fetch(settingsQuery, {}, { next: { tags: ['settings'] } })) ||
-    {}
+    (await client.fetch(
+      settingsQuery,
+      {},
+      { next: { revalidate: getRevalidateOptions(), tags: ['settings'] } },
+    )) || {}
   )
 }
 
@@ -94,7 +97,7 @@ export async function getPostsPagination(
         pageIndex,
         limit,
       },
-      { next: { tags: [`${type}`] } },
+      { next: { revalidate: getRevalidateOptions(), tags: [`${type}`] } },
     )) || []
   )
 }
@@ -112,7 +115,7 @@ export async function getPostsPaginationByTypes(
         pageIndex,
         limit,
       },
-      { next: { tags: ['home'] } },
+      { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
     )) || []
   )
 }
@@ -125,7 +128,7 @@ export async function getAllPostsSlugs(
     (await client.fetch<string[]>(
       postSlugsQuery(type),
       {},
-      { next: { tags: [`${type}`] } },
+      { next: { revalidate: getRevalidateOptions(), tags: [`${type}`] } },
     )) || []
   return slugs.map((slug) => ({ slug }))
 }
@@ -138,7 +141,7 @@ export async function getTitleBySlugs(
     (await client.fetch(
       postTitleBySlugQuery(),
       { slug },
-      { next: { tags: ['home'] } },
+      { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
     )) || ({} as any)
   )
 }
@@ -148,8 +151,11 @@ export async function getAllByType<T>(
   type: string,
 ): Promise<T[]> {
   return (
-    (await client.fetch(typeQuery(type), {}, { next: { tags: ['home'] } })) ||
-    []
+    (await client.fetch(
+      typeQuery(type),
+      {},
+      { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
+    )) || []
   )
 }
 
@@ -158,8 +164,11 @@ export async function getAllByTypes<T>(
   types: string[],
 ): Promise<T[]> {
   return (
-    (await client.fetch(typesQuery(types), {}, { next: { tags: ['home'] } })) ||
-    []
+    (await client.fetch(
+      typesQuery(types),
+      {},
+      { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
+    )) || []
   )
 }
 
@@ -172,7 +181,7 @@ export async function getBySlug<T>(
     (await client.fetch(
       typeBySlugQuery(type),
       { slug },
-      { next: { tags: ['home'] } },
+      { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
     )) || ({} as any)
   )
 }
@@ -185,7 +194,7 @@ export async function getPostAndMoreStories(
   return await client.fetch(
     postAndMoreStoriesQuery(type),
     { slug },
-    { next: { tags: ['home'] } },
+    { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
   )
 }
 
@@ -204,18 +213,17 @@ export async function getIndexInfo(
   category: Category[]
   top: Post[]
 }> {
-  const revalidate = getFetchOptions()
   return await client.fetch(
     indexQuery,
     {
       pageIndex,
       limit,
     },
-    { next: { revalidate, tags: ['home'] } },
+    { next: { revalidate: getRevalidateOptions(), tags: ['home'] } },
   )
 }
 
-function getFetchOptions() {
+function getRevalidateOptions() {
   let revalidate: NextFetchRequestConfig['revalidate'] = false
 
   if (process.env.NODE_ENV === 'development') {

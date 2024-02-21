@@ -1,3 +1,5 @@
+'use client'
+
 import { intlFormatDistance } from 'date-fns'
 import React, { Children } from 'react'
 
