@@ -189,8 +189,6 @@ export async function getPostAndMoreStories(
   )
 }
 
-const isCache = process.env.NODE_ENV === 'production'
-
 export async function getIndexInfo(
   client: SanityClient,
   pageIndex: number = 0,
@@ -206,12 +204,23 @@ export async function getIndexInfo(
   category: Category[]
   top: Post[]
 }> {
+  const revalidate = getFetchOptions()
   return await client.fetch(
     indexQuery,
     {
       pageIndex,
       limit,
     },
-    { next: { tags: ['home'] } },
+    { next: { revalidate, tags: ['home'] } },
   )
+}
+
+function getFetchOptions() {
+  let revalidate: NextFetchRequestConfig['revalidate'] = false
+
+  if (process.env.NODE_ENV === 'development') {
+    revalidate = 0
+  }
+
+  return revalidate
 }

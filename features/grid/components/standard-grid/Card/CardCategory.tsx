@@ -1,3 +1,5 @@
+'use client'
+
 import { intlFormatDistance } from 'date-fns'
 
 type CardProps = {
