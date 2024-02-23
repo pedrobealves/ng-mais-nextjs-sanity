@@ -31,8 +31,8 @@ const item = tv({
       post: {
         CardLink: '',
         CardInfoSection: 'py-8 px-8',
-        CardTitle: 'sm:text-4xl sm:pb-0 text-2xl pb-5',
-        CardSubtitle: 'sm:block hidden',
+        CardTitle: 'sm:text-4xl sm:pb-0 text-2xl pb-5 line-clamp-4',
+        CardSubtitle: 'sm:block hidden line-clamp-3',
       },
     },
   },
