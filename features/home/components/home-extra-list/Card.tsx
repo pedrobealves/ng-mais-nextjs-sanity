@@ -31,6 +31,7 @@ export function Card({ title, picture, slug }: CardProps) {
           height={160}
           quality={80}
           alt={`Imagem de ${picture?.alt ?? title}`}
+          loading="lazy"
         />
       </Link>
     </li>

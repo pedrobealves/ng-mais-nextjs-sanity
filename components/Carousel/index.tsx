@@ -152,7 +152,7 @@ const Carousel = React.forwardRef<
                 aria-label={`Vá para o slide ${index + 1}`}
                 key={index}
                 onClick={() => scrollTo(index)}
-                className={`sm:w-4 sm:h-4 w-5 h-5 opacity-50 sm:mx-1 mx-2 rounded-[50%] outline-none text-center leading-[16px] text-xs indent-[-999em] transition-[box-shadow_0.3s_ease] ${
+                className={`sm:w-4 sm:h-4 w-6 h-6 opacity-50 sm:mx-1 mx-[6px] rounded-[50%] outline-none text-center leading-[16px] text-xs indent-[-999em] transition-[box-shadow_0.3s_ease] ${
                   index === selectedIndex
                     ? 'bg-white shadow-[inset_0_0_0_8px_white]'
                     : 'shadow-[inset_0_0_0_2px_white] bg-transparent'

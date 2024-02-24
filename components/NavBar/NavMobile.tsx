@@ -28,7 +28,8 @@ export function NavMobile({ level }: NavType) {
       <button
         aria-label="Toggle Menu"
         onClick={onToggleNav}
-        className="lg:hidden"
+        className="lg:hidden py-4 px-2"
+        type="button"
       >
         <svg
           width="32"

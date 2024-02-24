@@ -10,7 +10,7 @@ type LogoProps = {
   justify?: 'justify-start' | 'justify-center' | 'justify-end'
 }
 
-export function Logo({ height = 47, justify = 'justify-center' }: LogoProps) {
+export function Logo({ height = 48, justify = 'justify-center' }: LogoProps) {
   return (
     <Link
       href="/"
@@ -18,14 +18,12 @@ export function Logo({ height = 47, justify = 'justify-center' }: LogoProps) {
     >
       <Image
         height={height}
-        priority
         src={logo}
         alt="Logo"
         className="hidden md:block"
       />
       <Image
         height={height}
-        priority
         src={logoMobile}
         alt="Logo"
         className="block md:hidden"

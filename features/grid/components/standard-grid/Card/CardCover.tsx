@@ -20,6 +20,7 @@ export function CardCover({ picture, title }: CardProps) {
         width={286}
         quality={80}
         alt={picture?.alt ?? title}
+        loading="lazy"
       />
     </>
   )

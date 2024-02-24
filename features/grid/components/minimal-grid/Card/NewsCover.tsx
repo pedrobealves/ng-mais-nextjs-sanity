@@ -20,6 +20,7 @@ export default function News({ picture, title }: NewsProps) {
         height={288}
         quality={80}
         alt={picture?.alt ?? title}
+        loading="lazy"
       />
       <div className="absolute inset-0 [background-image:linear-gradient(180deg,_rgba(11,_0,_29,_0),_rgba(11,_0,_29,_0.86)_86%,_rgba(11,_0,_29,_1))]"></div>
       <div className="absolute inset-0 bg-[#0B001D1A]"></div>
