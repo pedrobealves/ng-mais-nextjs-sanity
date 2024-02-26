@@ -31,7 +31,7 @@ export default async function Search() {
         </div>
         <div className="flex flex-col mx-auto justify-center items-center gap-3 pt-10 max-w-xl">
           <h1 className="font-bold text-primary-8 uppercase pb-1">
-            Redes Sociai
+            Redes Sociais
           </h1>
           {settings.social.map((item) => (
             <Link
