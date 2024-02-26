@@ -14,7 +14,7 @@ interface PageProps extends SharedPageProps {
   settings: Settings
 }
 
-export default async function Search(props: PageProps) {
+export default async function Search() {
   const { settings } = await getSettingsProps()
 
   return (
