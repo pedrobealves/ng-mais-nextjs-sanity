@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm install && npm install -g @lhci/cli@0.12.0
+          node-version: 20
+      - run: npm install && npm install -g @lhci/cli
       - run: npm run build && lhci collect && lhci upload
         env:
           # If you app has any environment variables that
