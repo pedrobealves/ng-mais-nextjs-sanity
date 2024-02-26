@@ -8,9 +8,7 @@
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "npm run format && npm run lint -- --fix",
     "start": "next start",
-    "type-check": "tsc --noEmit",
-    "lhci:mobile": "lhci autorun",
-    "lhci:desktop": "lhci autorun --collect.settings.preset=desktop"
+    "type-check": "tsc --noEmit"
   },
   "prettier": {
     "semi": false,
@@ -57,7 +55,6 @@
     "tailwind-variants": "^0.2.0"
   },
   "devDependencies": {
-    "@lhci/cli": "^0.13.0",
     "@types/react": "18.2.55",
     "@types/styled-components": "5.1.34",
     "autoprefixer": "10.4.17",
