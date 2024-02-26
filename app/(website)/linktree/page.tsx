@@ -16,7 +16,6 @@ interface PageProps extends SharedPageProps {
 
 export default async function Search() {
   const { settings } = await getSettingsProps()
-
   return (
     <>
       <main className="w-full h-full bg-gray-200 px-6 mb-12">
