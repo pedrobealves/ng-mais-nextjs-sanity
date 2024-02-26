@@ -31,7 +31,7 @@ async function getSettingsProps(): Promise<PageProps> {
 export default async function PrivacyPolicy() {
   const { settings } = await getSettingsProps()
 
-  const { title, social, termsConditions } = settings || {}
+  const { termsConditions } = settings || {}
 
   return (
     <Page title="Privacy Policy" settings={settings}>
