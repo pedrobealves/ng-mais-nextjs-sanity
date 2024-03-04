@@ -24,6 +24,7 @@ import Zoom from 'react-medium-image-zoom'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 
 import { SpoilerButton } from '../page/SpoilerButton'
+import { IntersectionObserver } from './IntersectionObserver'
 import styles from './PostBody.module.css'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
@@ -48,22 +49,30 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     },
     image: ({ value }) => {
       return (
-        <Zoom>
-          <SanityImage {...value} />
-        </Zoom>
+        <IntersectionObserver>
+          <Zoom>
+            <SanityImage {...value} loading="lazy" />
+          </Zoom>
+        </IntersectionObserver>
       )
     },
     imageEmbed: ({ value }) => {
       return (
-        <Zoom>
-          <EmbedImage {...value} />
-        </Zoom>
+        <IntersectionObserver>
+          <Zoom>
+            <EmbedImage {...value} loading="lazy" />
+          </Zoom>
+        </IntersectionObserver>
       )
     },
     youtube: ({ value }) => {
       const { url } = value
       const id = getYouTubeId(url)
-      return <LiteYouTubeEmbed title={url} id={id} />
+      return (
+        <IntersectionObserver>
+          <LiteYouTubeEmbed title={url} id={id} />{' '}
+        </IntersectionObserver>
+      )
     },
     twitter: ({ value }) => {
       const { id } = value || {}
@@ -77,9 +86,9 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       }
 
       return (
-        <div>
+        <IntersectionObserver>
           <TwitterTweetEmbed options={{ align: 'center' }} tweetId={id} />
-        </div>
+        </IntersectionObserver>
       )
     },
   },

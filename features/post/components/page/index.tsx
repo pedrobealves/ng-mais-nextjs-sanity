@@ -13,6 +13,7 @@ import { notFound } from 'next/navigation'
 
 import { Author } from './Author'
 import PostHeader from './PostHeader'
+import { RelatedPosts } from './RelatedPosts'
 import { Tag } from './Tag'
 
 export interface PostPageProps {
@@ -97,14 +98,7 @@ export function PostPage(props: PostPageProps) {
           <SubscribeNewsletter />
         </article>
       </main>
-      {news?.length > 0 && (
-        <aside
-          aria-label="Related articles"
-          className="max-w-screen-xl mx-auto pt-12"
-        >
-          <MinimalGrid title="Relacionados" news={news} type="post" />
-        </aside>
-      )}
+      <RelatedPosts news={news} />
       <Section.Root className="items-start max-w-screen-xl mx-auto w-full pt-12 pb-24 px-4">
         <Section.Title>Comentários</Section.Title>
         <hr className="h-4 bg-gray-200 w-full rounded-bl-3xl rounded-r-3xl" />

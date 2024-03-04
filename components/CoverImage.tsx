@@ -18,6 +18,7 @@ export default function CoverImage(props: CoverImageProps) {
       alt={`Cover Image for ${title}`}
       src={urlForImage(source).url()}
       sizes="100vw"
+      quality={80}
       priority={priority}
     />
   ) : (
