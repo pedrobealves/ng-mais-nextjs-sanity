@@ -7,7 +7,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/private/', '/search'],
+        disallow: [
+          '/private/',
+          '/search',
+          '/sitemap-posts.xml',
+          '/sitemap-pages.xml',
+        ],
       },
       {
         userAgent: 'GPTBot',
