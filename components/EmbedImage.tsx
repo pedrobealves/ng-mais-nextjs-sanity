@@ -21,6 +21,7 @@ export const EmbedImage = (props: Props) => {
         alt={alt}
         width={800}
         height={800}
+        loading="lazy"
         sizes="(max-width: 800px) 100vw, 800px"
       />
       {caption && (

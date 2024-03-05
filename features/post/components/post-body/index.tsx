@@ -31,10 +31,12 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     html: ({ value }) => {
       return (
-        <div
-          className={`${styles.bodyHtml}`}
-          dangerouslySetInnerHTML={{ __html: value.code }}
-        ></div>
+        <IntersectionObserver>
+          <div
+            className={`${styles.bodyHtml}`}
+            dangerouslySetInnerHTML={{ __html: value.code }}
+          ></div>
+        </IntersectionObserver>
       )
     },
     spoilerContent: ({ value }) => {
@@ -49,20 +51,16 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     },
     image: ({ value }) => {
       return (
-        <IntersectionObserver>
-          <Zoom>
-            <SanityImage {...value} loading="lazy" />
-          </Zoom>
-        </IntersectionObserver>
+        <Zoom>
+          <SanityImage {...value} />
+        </Zoom>
       )
     },
     imageEmbed: ({ value }) => {
       return (
-        <IntersectionObserver>
-          <Zoom>
-            <EmbedImage {...value} loading="lazy" />
-          </Zoom>
-        </IntersectionObserver>
+        <Zoom>
+          <EmbedImage {...value} />
+        </Zoom>
       )
     },
     youtube: ({ value }) => {
