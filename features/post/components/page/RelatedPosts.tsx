@@ -16,7 +16,7 @@ export function RelatedPosts({ news }: RelatedPostsProps) {
           aria-label="Related articles"
           className="max-w-screen-xl mx-auto pt-12"
         >
-          <InView triggerOnce threshold={1}>
+          <InView triggerOnce rootMargin="400px">
             {({ inView, ref }) => (
               <div ref={ref}>
                 {inView && (

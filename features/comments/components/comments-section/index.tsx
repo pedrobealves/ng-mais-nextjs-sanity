@@ -12,7 +12,7 @@ interface CommentsProps {
 
 export function Comments({ slug, identifier, type, title }: CommentsProps) {
   return (
-    <InView triggerOnce>
+    <InView triggerOnce rootMargin="400px">
       {({ ref, inView }) => (
         <Suspense>
           <div ref={ref}>

@@ -6,7 +6,7 @@ type IntersectionObserverProps = {
 
 export function IntersectionObserver({ children }: IntersectionObserverProps) {
   return (
-    <InView triggerOnce threshold={0.0}>
+    <InView triggerOnce rootMargin="400px">
       {({ inView, ref }) => <div ref={ref}>{inView && children}</div>}
     </InView>
   )
