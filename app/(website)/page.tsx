@@ -123,14 +123,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: title,
       description: toPlainText(description),
-      url: process.env.VERCEL_URL,
+      url: process.env.NEXT_PUBLIC_NEXTJS_SITE_URL,
       siteName: title,
       locale: 'pt_BR',
       type: 'website',
       images: [
         {
           url: `${
-            process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
+            process.env.NEXT_PUBLIC_NEXTJS_SITE_URL
           }/api/og?${new URLSearchParams({ title: ogImageTitle })}`, // Must be an absolute URL
           width: 1200,
           height: 630,
@@ -139,6 +139,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
+    alternates: {
+      canonical: '/',
+    },
     twitter: {
       site: '@newgame_mais',
       card: 'summary_large_image',
@@ -146,9 +149,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: toPlainText(description),
       creator: '@newgame_mais',
       images: [
-        `${
-          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`,
+        `${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/api/og?${new URLSearchParams({ title: ogImageTitle })}`,
       ],
     },
   }

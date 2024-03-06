@@ -40,11 +40,6 @@ export async function generateMetadata(): Promise<Metadata> {
       default: title, // a default is required when creating a template
     },
     description: toPlainText(description),
-    openGraph: {
-      images: `${
-        process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-      }/api/og?${new URLSearchParams({ title: ogImageTitle })}`,
-    },
     robots: {
       index: true,
       follow: true,
@@ -77,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: '/favicon/site.webmanifest',
     alternates: {
       types: {
-        'application/rss+xml': `${process.env.VERCEL_URL}/feed`,
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/feed`,
       },
     },
   }
