@@ -105,9 +105,10 @@ export async function generateMetadata({ params }) {
               .height(720)
               .fit('crop')
               .url(),
-          with: 1280,
+          width: 1280,
           height: 720,
           type: 'image/jpeg',
+          alt: post?.title,
         },
       ],
       published_time: post?.date,

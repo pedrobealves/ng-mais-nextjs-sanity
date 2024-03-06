@@ -132,6 +132,10 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${
             process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
           }/api/og?${new URLSearchParams({ title: ogImageTitle })}`, // Must be an absolute URL
+          width: 1200,
+          height: 630,
+          alt: ogImageTitle,
+          type: 'image/jpeg',
         },
       ],
     },
