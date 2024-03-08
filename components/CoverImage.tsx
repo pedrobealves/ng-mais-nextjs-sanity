@@ -17,7 +17,7 @@ export default function CoverImage(props: CoverImageProps) {
       alt={`Cover Image for ${title}`}
       src={urlForImage(source).url()}
       quality={80}
-      priority
+      priority={true}
     />
   ) : (
     <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />
