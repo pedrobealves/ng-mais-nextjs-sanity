@@ -48,9 +48,7 @@ export default function PostHeader(
           url={`${process.env.NEXT_PUBLIC_NEXTJS_SITE_URL}/${_type}/${slug}`}
         />
       </div>
-      {showCover && (
-        <CoverImage title={title} image={coverImage} priority slug={slug} />
-      )}
+      {showCover && <CoverImage title={title} image={coverImage} slug={slug} />}
     </>
   )
 }
