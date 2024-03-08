@@ -12,13 +12,12 @@ export default function CoverImage(props: CoverImageProps) {
   const image = source?.asset?._ref ? (
     <Image
       className="rounded-xl"
-      width={2000}
+      width={760}
       height={1000}
       alt={`Cover Image for ${title}`}
       src={urlForImage(source).url()}
-      sizes="100vw"
       quality={80}
-      loading="lazy"
+      priority
     />
   ) : (
     <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />

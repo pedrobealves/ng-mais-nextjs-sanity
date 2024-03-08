@@ -23,15 +23,25 @@ export function Card({ title, picture, slug }: CardProps) {
         <Image
           src={
             picture?.asset?._ref
-              ? urlForImage(picture).fit('crop').width(96).height(160).url()
+              ? urlForImage(picture)
+                  .fit('crop')
+                  .width(96)
+                  .quality(80)
+                  .height(160)
+                  .url()
               : 'https://source.unsplash.com/96x96/?face'
           }
           className="min-h-[10rem] w-24 max-h-full object-cover rounded-2xl"
           width={96}
           height={160}
-          quality={80}
           alt={`Imagem de ${picture?.alt ?? title}`}
           loading="lazy"
+          placeholder="blur"
+          blurDataURL={
+            picture?.asset?._ref
+              ? urlForImage(picture).width(20).quality(10).blur(50).url()
+              : 'https://source.unsplash.com/96x96/?face'
+          }
         />
       </Link>
     </li>

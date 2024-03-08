@@ -19,7 +19,7 @@ export const SanityImage = (props: Props) => {
     <figure>
       <Image
         {...imageProps}
-        alt={alt}
+        alt={alt || 'Image from Post'}
         sizes="(max-width: 800px) 100vw, 800px"
         loading="lazy"
       />
