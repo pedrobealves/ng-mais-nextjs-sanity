@@ -67,7 +67,7 @@ export function Card({
         className="object-cover w-full h-full"
         width={widthCover}
         height={320}
-        priority={true}
+        priority={index == 0 || type === 'review'}
         quality={80}
         alt={`Imagem de ${picture?.alt ?? title}`}
       />
