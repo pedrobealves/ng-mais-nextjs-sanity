@@ -13,7 +13,7 @@ type CardProps = {
 
 const item = tv({
   slots: {
-    CardLink: 'sm:h-80',
+    CardLink: 'sm:h-80 h-44',
     CardInfoSection:
       'absolute bottom-0 flex flex-col items-start justify-between self-stretch',
     CardTitle: 'font-bold text-balance',
@@ -23,13 +23,13 @@ const item = tv({
     type: {
       review: {
         CardLink:
-          'w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg h-44',
+          'w-full font-inter flex-col items-start justify-end gap-2.5 overflow-clip rounded-r-3xl rounded-tl-3xl drop-shadow-lg ',
         CardInfoSection: 'py-3 px-4',
         CardTitle: 'text-xl',
         CardSubtitle: 'hidden',
       },
       post: {
-        CardLink: 'h-52',
+        CardLink: '',
         CardInfoSection: 'py-8 sm:px-8 px-4',
         CardTitle: 'sm:text-4xl sm:mb-0 text-xl mb-6 line-clamp-4',
         CardSubtitle: 'sm:block hidden sm:line-clamp-3',
