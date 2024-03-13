@@ -1,10 +1,10 @@
-import { toPlainText } from '@portabletext/react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getSettings } from 'lib/sanity.client'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
+import { toPlainText } from 'next-sanity'
 import { VisualEditing } from 'next-sanity'
 
 export default function RootLayout({

@@ -1,10 +1,5 @@
-import {
-  PortableText,
-  type PortableTextReactComponents,
-} from '@portabletext/react'
 import type { SharedPageProps } from 'app/layout'
 import { PostBody } from 'features/post'
-import Header from 'layouts/Header'
 import { Page } from 'layouts/Page'
 import { readToken } from 'lib/sanity.api'
 import { getClient, getSettings } from 'lib/sanity.client'

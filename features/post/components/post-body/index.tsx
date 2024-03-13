@@ -12,13 +12,10 @@
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 import 'react-medium-image-zoom/dist/styles.css'
 
-import {
-  PortableText,
-  type PortableTextReactComponents,
-} from '@portabletext/react'
 import { EmbedImage } from 'components/EmbedImage'
 import { SanityImage } from 'components/SanityImage'
 import getYouTubeId from 'get-youtube-id'
+import { PortableText, type PortableTextReactComponents } from 'next-sanity'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import Zoom from 'react-medium-image-zoom'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
