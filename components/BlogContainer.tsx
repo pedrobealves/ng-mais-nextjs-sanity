@@ -1,3 +1,3 @@
 export default function BlogContainer({ children }) {
-  return <div className="container mx-auto px-4">{children}</div>
+  return <div className="max-w-screen-xl mx-auto px-4">{children}</div>
 }

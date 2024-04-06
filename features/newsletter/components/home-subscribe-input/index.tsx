@@ -67,7 +67,7 @@ export function InputNewsletter() {
   }
 
   return (
-    <section className="container mx-auto sm:pb-10 sm:bg-transparent bg-gray-200 sm:mb-0 mb-4 rounded-[32px] sm:rounded-none">
+    <section className="max-w-screen-xl mx-auto sm:pb-10 sm:bg-transparent bg-gray-200 sm:mb-0 mb-4 rounded-[32px] sm:rounded-none">
       <form
         name="email-form"
         data-name="Email Form"

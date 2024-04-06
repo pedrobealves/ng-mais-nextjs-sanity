@@ -19,15 +19,15 @@ type NavType = {
 
 const item = tv({
   slots: {
-    Nav: 'flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3 z-40',
+    Nav: 'max-w-screen-xl flex items-center justify-between mx-auto rounded-[48px] bg-white px-4 py-3 z-40',
   },
   variants: {
     level: {
       1: {
-        Nav: 'container',
+        Nav: '',
       },
       2: {
-        Nav: 'max-w-screen-xl',
+        Nav: '',
       },
     },
   },
