@@ -4,7 +4,6 @@
  */
 import { codeInput } from '@sanity/code-input'
 import { debugSecrets } from '@sanity/preview-url-secret/sanity-plugin-debug-secrets'
-import { scheduledPublishing } from '@sanity/scheduled-publishing'
 import { visionTool } from '@sanity/vision'
 import {
   apiVersion,
@@ -90,6 +89,5 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     process.env.NODE_ENV !== 'production' &&
       visionTool({ defaultApiVersion: apiVersion }),
-    scheduledPublishing(),
   ],
 })
